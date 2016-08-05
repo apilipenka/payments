@@ -5,16 +5,19 @@ import java.util.Date;
 /**
  * Created by apilipenka on 8/5/2016.
  */
-public class ExchangeRateVO {
-    private int id;
+public class ExchangeRateVO extends EntityVO {
     private Date rateDate;
     private float rate;
     private int currencyID;
     private String currencyMnemoCode;
     private String currencyCode;
 
+    public ExchangeRateVO() {
+        super();
+    }
+
     public ExchangeRateVO(int id, Date rateDate, float rate, int currencyID, String currencyMnemoCode, String currencyCode) {
-        this.id = id;
+        super(id);
         this.rateDate = rateDate;
         this.rate = rate;
         this.currencyID = currencyID;
@@ -22,14 +25,6 @@ public class ExchangeRateVO {
         this.currencyCode = currencyCode;
     }
 
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public Date getRateDate() {
         return rateDate;

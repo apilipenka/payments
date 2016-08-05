@@ -5,8 +5,7 @@ import java.util.Date;
 /**
  * Created by apilipenka on 8/5/2016.
  */
-public class UserVO {
-    private int id;
+public class UserVO extends EntityVO {
     private String personalNumber;
     private String firstName;
     private String lastName;
@@ -16,8 +15,12 @@ public class UserVO {
     private int userRoleID;
     private int userRoleName;
 
+    public UserVO() {
+        super();
+    }
+
     public UserVO(int id, String personalNumber, String firstName, String lastName, Date birthDate, String login, String password, int userRoleID, int userRoleName) {
-        this.id = id;
+        super(id);
         this.personalNumber = personalNumber;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -26,14 +29,6 @@ public class UserVO {
         this.password = password;
         this.userRoleID = userRoleID;
         this.userRoleName = userRoleName;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getPersonalNumber() {

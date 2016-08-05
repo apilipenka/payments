@@ -3,9 +3,8 @@ package by.pwt.plipenko.payments.model.VO;
 /**
  * Created by apilipenka on 8/5/2016.
  */
-public class AccountVO {
+public class AccountVO extends EntityVO {
 
-    private int id;
     private String number;
     private double amount;
     private int agreementID;
@@ -16,9 +15,12 @@ public class AccountVO {
     private String currencyMnemoCode;
     private String currencyCode;
 
+    public AccountVO() {
+        super();
+    }
 
     public AccountVO(int id, String number, double amount, int agreementID, String agreementNumber, String agreementBankName, String agreementBankUNN, int currencyID, String currencyMnemocode, String currencyCode) {
-        this.id = id;
+        super(id);
         this.number = number;
         this.amount = amount;
         this.agreementID = agreementID;
@@ -30,15 +32,6 @@ public class AccountVO {
         this.currencyMnemoCode = currencyMnemocode;
 
         this.currencyCode = currencyCode;
-    }
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNumber() {

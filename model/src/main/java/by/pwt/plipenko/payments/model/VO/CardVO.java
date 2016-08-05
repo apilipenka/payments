@@ -5,8 +5,7 @@ import java.util.Date;
 /**
  * Created by apilipenka on 8/5/2016.
  */
-public class CardVO {
-    private int id;
+public class CardVO extends EntityVO {
     private String number;
     private String name;
     private Date validToDate;
@@ -17,9 +16,12 @@ public class CardVO {
     private String accountAgreementBankUNN;
     private String accountCurrencyMnemoCode;
 
+    public CardVO() {
+        super();
+    }
 
     public CardVO(int id, String number, String name, Date validToDate, int accountID, String accountNumber, String accountAgreementNumber, String accountAgreementBankName, String accountAgreementBankUNN, String accountCurrencyMnemoCode) {
-        this.id = id;
+        super(id);
         this.number = number;
         this.name = name;
         this.validToDate = validToDate;
@@ -31,14 +33,6 @@ public class CardVO {
         this.accountCurrencyMnemoCode = accountCurrencyMnemoCode;
     }
 
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getNumber() {
         return number;

@@ -10,7 +10,7 @@ public class User extends Entity {
     private Date birthDate;
     private String login;
     private String password;
-    private Type userRole;
+    private UserRole userRole;
 
     public User() {
         super();
@@ -18,7 +18,7 @@ public class User extends Entity {
     }
 
     public User(int id, String login, String firstName, String lastName, String password, String personalNumber,
-                Type userRole, Date birthDate) {
+                UserRole userRole, Date birthDate) {
         super(id);
         this.login = login;
         this.firstName = firstName;
@@ -72,11 +72,11 @@ public class User extends Entity {
         this.personalNumber = personalNumber;
     }
 
-    public Type getUserRole() {
+    public UserRole getUserRole() {
         return userRole;
     }
 
-    public void setUserRole(Type userRole) {
+    public void setUserRole(UserRole userRole) {
         this.userRole = userRole;
     }
 
