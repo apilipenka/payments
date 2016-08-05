@@ -1,120 +1,152 @@
 package by.pwt.plipenko.payments.model.entities;
 
-import java.util.Date;
+import java.util.*;
 
 public class Agreement extends Entity {
 
-	private String number;
-	private Date validFromDate;
-	private Date validToDate;
-	private Bank bank;
-	private Client client;
+    private String number;
+    private Date validFromDate;
+    private Date validToDate;
+    private Bank bank;
+    private User client;
 
-	public Agreement() {
-	}
+    private Set<Account> accounts;
 
-	public Agreement(int id, String number, Date validFromDate, Date validToDate, Bank bank, Client client) {
-		super(id);
-		this.number = number;
-		this.validFromDate = validFromDate;
-		this.validToDate = validToDate;
-		this.bank = bank;
-		this.client = client;
-	}
+    public Agreement() {
+        super();
+        accounts = new HashSet<Account>();
+    }
 
-	public String getNumber() {
-		return number;
-	}
+    public Agreement(int id, String number, Date validFromDate, Date validToDate, Bank bank, User client) {
+        super(id);
+        this.number = number;
+        this.validFromDate = validFromDate;
+        this.validToDate = validToDate;
+        this.bank = bank;
+        this.client = client;
 
-	public void setNumber(String number) {
-		this.number = number;
-	}
+        accounts = new HashSet<Account>();
 
-	public Date getValidFromDate() {
-		return validFromDate;
-	}
+    }
 
-	public void setValidFromDate(Date validFromDate) {
-		this.validFromDate = validFromDate;
-	}
+    public String getNumber() {
+        return number;
+    }
 
-	public Date getValidToDate() {
-		return validToDate;
-	}
+    public void setNumber(String number) {
+        this.number = number;
+    }
 
-	public void setValidToDate(Date validToDate) {
-		this.validToDate = validToDate;
-	}
+    public Date getValidFromDate() {
+        return validFromDate;
+    }
 
-	public Bank getBank() {
-		return bank;
-	}
+    public void setValidFromDate(Date validFromDate) {
+        this.validFromDate = validFromDate;
+    }
 
-	public void setBank(Bank bank) {
-		this.bank = bank;
-	}
+    public Date getValidToDate() {
+        return validToDate;
+    }
 
-	public Client getClient() {
-		return client;
-	}
+    public void setValidToDate(Date validToDate) {
+        this.validToDate = validToDate;
+    }
 
-	public void setClient(Client client) {
-		this.client = client;
-	}
+    public Bank getBank() {
+        return bank;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((bank == null) ? 0 : bank.hashCode());
-		result = prime * result + ((client == null) ? 0 : client.hashCode());
-		result = prime * result + ((number == null) ? 0 : number.hashCode());
-		result = prime * result + ((validFromDate == null) ? 0 : validFromDate.hashCode());
-		result = prime * result + ((validToDate == null) ? 0 : validToDate.hashCode());
-		return result;
-	}
+    public void setBank(Bank bank) {
+        this.bank = bank;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Agreement other = (Agreement) obj;
-		if (bank == null) {
-			if (other.bank != null)
-				return false;
-		} else if (!bank.equals(other.bank))
-			return false;
-		if (client == null) {
-			if (other.client != null)
-				return false;
-		} else if (!client.equals(other.client))
-			return false;
-		if (number == null) {
-			if (other.number != null)
-				return false;
-		} else if (!number.equals(other.number))
-			return false;
-		if (validFromDate == null) {
-			if (other.validFromDate != null)
-				return false;
-		} else if (!validFromDate.equals(other.validFromDate))
-			return false;
-		if (validToDate == null) {
-			if (other.validToDate != null)
-				return false;
-		} else if (!validToDate.equals(other.validToDate))
-			return false;
-		return true;
-	}
+    public User getClient() {
+        return client;
+    }
 
-	@Override
-	public String toString() {
-		return "Agreement [id=" + getId() + ", number=" + number + ", validFromDate=" + validFromDate + ", validToDate="
-				+ validToDate + ", bank=" + bank + ", client=" + client + "]";
-	}
+    public void setClient(User client) {
+        this.client = client;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + ((bank == null) ? 0 : bank.hashCode());
+        result = prime * result + ((client == null) ? 0 : client.hashCode());
+        result = prime * result + ((number == null) ? 0 : number.hashCode());
+        result = prime * result + ((validFromDate == null) ? 0 : validFromDate.hashCode());
+        result = prime * result + ((validToDate == null) ? 0 : validToDate.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Agreement other = (Agreement) obj;
+        if (bank == null) {
+            if (other.bank != null)
+                return false;
+        } else if (!bank.equals(other.bank))
+            return false;
+        if (client == null) {
+            if (other.client != null)
+                return false;
+        } else if (!client.equals(other.client))
+            return false;
+        if (number == null) {
+            if (other.number != null)
+                return false;
+        } else if (!number.equals(other.number))
+            return false;
+        if (validFromDate == null) {
+            if (other.validFromDate != null)
+                return false;
+        } else if (!validFromDate.equals(other.validFromDate))
+            return false;
+        if (validToDate == null) {
+            if (other.validToDate != null)
+                return false;
+        } else if (!validToDate.equals(other.validToDate))
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Agreement [id=" + getId() + ", number=" + number + ", validFromDate=" + validFromDate + ", validToDate="
+                + validToDate + ", bank=" + bank + ", client=" + client + ", accounts=" + accounts + "]";
+    }
+
+    public Set<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(Set<Account> accounts) {
+        this.accounts = accounts;
+    }
+
+    public void addAccounts(Set<Account> accounts) {
+        this.accounts.addAll(accounts);
+    }
+
+    public void addAccount(Account account) {
+        accounts.add(account);
+    }
+
+    public List<Account> findAccounts(Account account) {
+        List<Account> finded = new ArrayList<Account>();
+        for (Account iaccount : accounts) {
+            if ((account.getCurrency() != null && account.getCurrency().equals(iaccount.getCurrency())) && (account.getNumber() != null && account.getNumber().equals(iaccount.getNumber())))
+                finded.add(iaccount);
+        }
+        return finded;
+    }
 
 }

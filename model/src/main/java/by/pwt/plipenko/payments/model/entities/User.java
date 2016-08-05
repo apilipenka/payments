@@ -1,20 +1,20 @@
 package by.pwt.plipenko.payments.model.entities;
 
-import java.util.Date;
+import java.util.*;
 
 public class User extends Entity {
+    private Set<Agreement> agreements;
     private String personalNumber;
     private String firstName;
     private String lastName;
     private Date birthDate;
-
-
     private String login;
     private String password;
     private Type userRole;
 
     public User() {
         super();
+        agreements = new HashSet<Agreement>();
     }
 
     public User(int id, String login, String firstName, String lastName, String password, String personalNumber,
@@ -27,6 +27,9 @@ public class User extends Entity {
         this.personalNumber = personalNumber;
         this.userRole = userRole;
         this.birthDate = birthDate;
+
+        agreements = new HashSet<Agreement>();
+
     }
 
     public String getLogin() {
@@ -161,7 +164,7 @@ public class User extends Entity {
     @Override
     public String toString() {
         return "User [id=" + getId() + ", login=" + login + ", firstName=" + firstName + ", lastName=" + lastName
-                + ", password=" + password + ", personalNumber=" + personalNumber + ", userRole=" + userRole + ", birthDate=" + birthDate +  "]";
+                + ", password=" + password + ", personalNumber=" + personalNumber + ", userRole=" + userRole + ", birthDate=" + birthDate + ", acreements=" + agreements + "]";
     }
 
     public Date getBirthDate() {
@@ -171,4 +174,26 @@ public class User extends Entity {
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
+
+    public Set<Agreement> getAgreements() {
+        return agreements;
+    }
+
+    public void setAgreements(Set<Agreement> agreements) {
+        this.agreements = agreements;
+    }
+
+    public void addAgreements(Set<Agreement> agreements) {
+        this.agreements.addAll(agreements);
+    }
+
+    public List<Agreement> findAccounts(Agreement agreement) {
+        List<Agreement> finded = new ArrayList<Agreement>();
+        for (Agreement iagreement : agreements) {
+            if ((agreement.getNumber() != null && agreement.getNumber().equals(iagreement.getNumber())))
+                finded.add(iagreement);
+        }
+        return finded;
+    }
+
 }

@@ -6,51 +6,51 @@ import java.util.Map;
 
 public class Currency extends Entity {
 
-	private String mnemoCode;
-	private int code;
-	private String name;
-
+    private String mnemoCode;
+    private int code;
+    private String name;
 
 
     private Map<Date, ExchangeRate> rates;
 
-	public Currency() {
-		super();
-	}
+    public Currency() {
+        super();
+        rates = new HashMap<Date, ExchangeRate>();
+    }
 
-	public Currency(int id, String mnemoCode, int code, String name) {
-		super(id);
-		this.mnemoCode = mnemoCode;
-		this.code = code;
-		this.name = name;
+    public Currency(int id, String mnemoCode, int code, String name) {
+        super(id);
+        this.mnemoCode = mnemoCode;
+        this.code = code;
+        this.name = name;
 
         rates = new HashMap<Date, ExchangeRate>();
 
-	}
+    }
 
-	public String getMnemoCode() {
-		return mnemoCode;
-	}
+    public String getMnemoCode() {
+        return mnemoCode;
+    }
 
-	public void setMnemoCode(String mnemoCode) {
-		this.mnemoCode = mnemoCode;
-	}
+    public void setMnemoCode(String mnemoCode) {
+        this.mnemoCode = mnemoCode;
+    }
 
-	public int getCode() {
-		return code;
-	}
+    public int getCode() {
+        return code;
+    }
 
-	public void setCode(int code) {
-		this.code = code;
-	}
+    public void setCode(int code) {
+        this.code = code;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Map<Date, ExchangeRate> getRates() {
         return rates;
@@ -61,52 +61,52 @@ public class Currency extends Entity {
     }
 
     public ExchangeRate getExchangeRate(Date date) {
-        if (rates!=null)
+        if (rates != null)
             return rates.get(date);
         return null;
     }
 
-    public  void addExchangeRate(Date date, ExchangeRate exchangeRate) {
+    public void addExchangeRate(Date date, ExchangeRate exchangeRate) {
         rates.put(date, exchangeRate);
     }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + code;
-		result = prime * result + ((mnemoCode == null) ? 0 : mnemoCode.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
-	}
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + code;
+        result = prime * result + ((mnemoCode == null) ? 0 : mnemoCode.hashCode());
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        return result;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Currency other = (Currency) obj;
-		if (code != other.code)
-			return false;
-		if (mnemoCode == null) {
-			if (other.mnemoCode != null)
-				return false;
-		} else if (!mnemoCode.equals(other.mnemoCode))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		return true;
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Currency other = (Currency) obj;
+        if (code != other.code)
+            return false;
+        if (mnemoCode == null) {
+            if (other.mnemoCode != null)
+                return false;
+        } else if (!mnemoCode.equals(other.mnemoCode))
+            return false;
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
+        return true;
+    }
 
-	@Override
-	public String toString() {
-		return "currency [id=" + getId() + ", mnemoCode=" + mnemoCode + ", code=" + code + ", name=" + name + ", rates=" + rates + "]";
-	}
+    @Override
+    public String toString() {
+        return "currency [id=" + getId() + ", mnemoCode=" + mnemoCode + ", code=" + code + ", name=" + name + ", rates=" + rates + "]";
+    }
 
 }
