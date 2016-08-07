@@ -1,12 +1,12 @@
-package by.pwt.pilipenko.payments.dao.resource;
+package by.pwt.pilipenko.payments.dao.resources;
 
 import java.util.ResourceBundle;
 
-public class QueriesManager {
-    private final static ResourceBundle resourceBundle = ResourceBundle.getBundle("queries");
+public class ConfigurationManager {
+    private final static ResourceBundle resourceBundle = ResourceBundle.getBundle("config");
 
     // класс извлекает информацию из файла config. properties
-    private QueriesManager() {
+    private ConfigurationManager() {
     }
 
     public static String getProperty(String key) {

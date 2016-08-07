@@ -1,7 +1,5 @@
 package by.pwt.plipenko.payments.model.VO;
 
-import java.util.Date;
-
 /**
  * Created by apilipenka on 8/5/2016.
  */
@@ -9,17 +7,17 @@ public class UserVO extends EntityVO {
     private String personalNumber;
     private String firstName;
     private String lastName;
-    private Date birthDate;
+    private String birthDate;
     private String login;
     private String password;
     private int userRoleID;
-    private int userRoleName;
+    private String userRoleName;
 
     public UserVO() {
         super();
     }
 
-    public UserVO(int id, String personalNumber, String firstName, String lastName, Date birthDate, String login, String password, int userRoleID, int userRoleName) {
+    public UserVO(int id, String personalNumber, String firstName, String lastName, String birthDate, String login, String password, int userRoleID, String userRoleName) {
         super(id);
         this.personalNumber = personalNumber;
         this.firstName = firstName;
@@ -55,11 +53,11 @@ public class UserVO extends EntityVO {
         this.lastName = lastName;
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -87,11 +85,11 @@ public class UserVO extends EntityVO {
         this.userRoleID = userRoleID;
     }
 
-    public int getUserRoleName() {
+    public String getUserRoleName() {
         return userRoleName;
     }
 
-    public void setUserRoleName(int userRoleName) {
+    public void setUserRoleName(String userRoleName) {
         this.userRoleName = userRoleName;
     }
 }

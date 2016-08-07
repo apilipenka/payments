@@ -1,4 +1,4 @@
-package by.pwt.plipenko.payments;
+package by.pwt.pilipenko.payments.services;
 
 /**
  * Hello world!

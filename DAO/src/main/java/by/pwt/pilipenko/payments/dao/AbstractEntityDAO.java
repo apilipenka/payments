@@ -1,6 +1,6 @@
 package by.pwt.pilipenko.payments.dao;
 
-import by.pwt.pilipenko.payments.dao.resource.QueriesManager;
+import by.pwt.pilipenko.payments.dao.resources.QueriesManager;
 import by.pwt.plipenko.payments.model.entities.Entity;
 
 import javax.naming.NamingException;

@@ -16,6 +16,7 @@
           <element id="archive" name="services-1.0.jar">
             <element id="module-output" name="services" />
           </element>
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:6.0.3" />
         </element>
       </element>
       <element id="directory" name="META-INF">

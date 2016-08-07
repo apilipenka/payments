@@ -44,9 +44,6 @@ public class DAOFactory {
         return localInstance;
     }
 
-    public TypeDAO createUserRoleDAO() throws SQLException {
-        return createTypeDAO("type", "user_roles");
-    }
 
     public TypeDAO createAddressTypeDAO() throws SQLException {
 
@@ -165,5 +162,17 @@ public class DAOFactory {
         return cardDAO;
     }
 
+
+    public UserRoleDAO createUserRoleDAO() throws SQLException {
+        UserRoleDAO userRoleDAO;
+        try {
+            userRoleDAO = new UserRoleDAO(dataSource.getConnection(), "userrole", "user_roles");
+        } catch (SQLException e) {
+            // e.printStackTrace();
+            // return null;
+            throw e;
+        }
+        return userRoleDAO;
+    }
 
 }

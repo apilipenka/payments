@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 public class UserDAO extends AbstractEntityDAO<User> {
 
@@ -25,8 +26,11 @@ public class UserDAO extends AbstractEntityDAO<User> {
         user.setPassword(resultSet.getString("password"));
         user.setPersonalNumber(resultSet.getString("personal_number"));
 
+        Date birthDate = resultSet.getDate("birth_date");
+        user.setBirthDate(birthDate);
+
         int roleId = resultSet.getInt("user_role_id");
-        TypeDAO typeDao = DAOFactory.getInstance().createUserRoleDAO();
+        UserRoleDAO typeDao = DAOFactory.getInstance().createUserRoleDAO();
         UserRole userRole = (UserRole) typeDao.findEntityById(roleId);
         user.setUserRole(userRole);
 
@@ -58,6 +62,9 @@ public class UserDAO extends AbstractEntityDAO<User> {
         statement.setString(4, entity.getPassword());
         statement.setString(5, entity.getPersonalNumber());
         statement.setInt(6, entity.getUserRole().getId());
+        statement.setDate(7, new java.sql.Date(entity.getBirthDate().getTime()));
+
+
         return statement;
     }
 
@@ -69,7 +76,8 @@ public class UserDAO extends AbstractEntityDAO<User> {
         statement.setString(4, entity.getPassword());
         statement.setString(5, entity.getPersonalNumber());
         statement.setInt(6, entity.getUserRole().getId());
-        statement.setInt(7, entity.getId());
+        statement.setDate(7, new java.sql.Date(entity.getBirthDate().getTime()));
+        statement.setInt(8, entity.getId());
         return statement;
     }
 

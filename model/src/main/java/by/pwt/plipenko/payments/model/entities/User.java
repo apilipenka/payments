@@ -1,5 +1,9 @@
 package by.pwt.plipenko.payments.model.entities;
 
+import by.pwt.plipenko.payments.model.VO.UserVO;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class User extends Entity {
@@ -164,7 +168,7 @@ public class User extends Entity {
     @Override
     public String toString() {
         return "User [id=" + getId() + ", login=" + login + ", firstName=" + firstName + ", lastName=" + lastName
-                + ", password=" + password + ", personalNumber=" + personalNumber + ", userRole=" + userRole + ", birthDate=" + birthDate + ", acreements=" + agreements + "]";
+                + ", password=" + password + ", personalNumber=" + personalNumber + ", userRole=" + userRole + ", birthDate=" + birthDate + ", agreements=" + agreements + "]";
     }
 
     public Date getBirthDate() {
@@ -194,6 +198,26 @@ public class User extends Entity {
                 finded.add(iagreement);
         }
         return finded;
+    }
+
+    public UserVO createUserVO() {
+        UserVO userVO = new UserVO();
+
+        userVO.setId(getId());
+        userVO.setPersonalNumber(personalNumber);
+        userVO.setFirstName(firstName);
+        userVO.setLastName(lastName);
+
+        DateFormat df = new SimpleDateFormat("dd.mm.yyyy");
+
+        userVO.setBirthDate(df.format(birthDate));
+
+        userVO.setLogin(login);
+        userVO.setPassword(password);
+        userVO.setUserRoleID(userRole.getId());
+        userVO.setUserRoleName(userRole.getName());
+
+        return userVO;
     }
 
 }

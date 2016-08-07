@@ -1,4 +1,4 @@
-package by.pwt.pilipenko.payments.dao.resource;
+package by.pwt.pilipenko.payments.dao.resources;
 
 import java.util.ResourceBundle;
 

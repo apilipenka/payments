@@ -29,11 +29,11 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="DAO" target="1.5" />
-      <module name="model" target="1.5" />
-      <module name="payments" target="1.5" />
-      <module name="services" target="1.5" />
-      <module name="web" target="1.5" />
+      <module name="DAO" target="1.8" />
+      <module name="model" target="1.8" />
+      <module name="payments" target="1.8" />
+      <module name="services" target="1.8" />
+      <module name="web" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
