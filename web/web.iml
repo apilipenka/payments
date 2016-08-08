@@ -38,6 +38,7 @@
     <orderEntry type="module" module-name="model" />
     <orderEntry type="module" module-name="DAO" />
     <orderEntry type="module" module-name="services" />
+    <orderEntry type="library" name="Maven: javax.servlet:jstl:1.2" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:6.0.3" level="project" />
   </component>
 </module>
