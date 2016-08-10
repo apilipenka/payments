@@ -15,7 +15,7 @@ public class UpdateCurrencyCommand implements ActionCommand {
         String page = null;
         try {
             String id = request.getParameter("id");
-            int code = new Integer(request.getParameter("code"));
+            String code = request.getParameter("code");
             String mnemoCode = request.getParameter("mnemoCode");
             String name = request.getParameter("name");
 

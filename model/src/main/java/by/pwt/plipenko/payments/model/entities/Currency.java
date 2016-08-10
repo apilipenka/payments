@@ -7,7 +7,7 @@ import java.util.Map;
 public class Currency extends Entity {
 
     private String mnemoCode;
-    private int code;
+    private String code;
     private String name;
 
 
@@ -18,7 +18,7 @@ public class Currency extends Entity {
         rates = new HashMap<Date, ExchangeRate>();
     }
 
-    public Currency(int id, String mnemoCode, int code, String name) {
+    public Currency(int id, String mnemoCode, String code, String name) {
         super(id);
         this.mnemoCode = mnemoCode;
         this.code = code;
@@ -36,11 +36,11 @@ public class Currency extends Entity {
         this.mnemoCode = mnemoCode;
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
@@ -74,7 +74,7 @@ public class Currency extends Entity {
     public int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
-        result = prime * result + code;
+        result = prime * result + ((code == null) ? 0 : code.hashCode());
         result = prime * result + ((mnemoCode == null) ? 0 : mnemoCode.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         return result;
@@ -89,10 +89,13 @@ public class Currency extends Entity {
         if (getClass() != obj.getClass())
             return false;
         Currency other = (Currency) obj;
-        if (code != other.code)
+        if (code == null) {
+            if (other.code != null)
+                return false;
+        } else if (!code.equals(other.code))
             return false;
-        if (mnemoCode == null) {
-            if (other.mnemoCode != null)
+        if (code == null) {
+            if (other.code != null)
                 return false;
         } else if (!mnemoCode.equals(other.mnemoCode))
             return false;

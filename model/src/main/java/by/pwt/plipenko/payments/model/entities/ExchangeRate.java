@@ -1,5 +1,7 @@
 package by.pwt.plipenko.payments.model.entities;
 
+import by.pwt.plipenko.payments.model.VO.ExchangeRateVO;
+
 import java.util.Date;
 
 public class ExchangeRate extends Entity {
@@ -80,6 +82,17 @@ public class ExchangeRate extends Entity {
     public String toString() {
         return "ExchangeRate [id=" + getId() + ", rateDate=" + rateDate + ", rate=" + rate + ", currency=" + currency
                 + "]";
+    }
+
+    public ExchangeRateVO createExchangeRateVO() {
+        ExchangeRateVO exchangeRateVO = new ExchangeRateVO();
+        exchangeRateVO.setCurrencyID(getId());
+        exchangeRateVO.setRateDate(rateDate);
+        exchangeRateVO.setRate(rate);
+        exchangeRateVO.setCurrencyID(currency.getId());
+        exchangeRateVO.setCurrencyCode(currency.getCode());
+        exchangeRateVO.setCurrencyMnemoCode(currency.getMnemoCode());
+        return exchangeRateVO;
     }
 
 }

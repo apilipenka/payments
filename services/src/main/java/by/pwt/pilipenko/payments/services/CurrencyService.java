@@ -15,18 +15,8 @@ public class CurrencyService extends AbstractEntitySevice<Currency> {
 
         Currency entity = new Currency();
         if (name != null && name != "") {
-            try {
-                entity.setCode(new Integer(name));
-            }
-            catch (NumberFormatException e) {
-                // name may contain not number
-                ;
-            }
-        }
-        if (name != null && name != "") {
+            entity.setCode(name);
             entity.setMnemoCode(name);
-        }
-        if (name != null && name != "") {
             entity.setName(name);
         }
 

@@ -15,7 +15,7 @@ public class AddCurrencyCommand implements ActionCommand {
         Currency currency = null;
         String page = null;
         try {
-            int code = new Integer(request.getParameter("code"));
+            String code = request.getParameter("code");
             String mnemoCode = request.getParameter("mnemoCode");
             String name = request.getParameter("name");
 
