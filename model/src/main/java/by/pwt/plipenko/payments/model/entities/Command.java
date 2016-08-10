@@ -1,5 +1,7 @@
 package by.pwt.plipenko.payments.model.entities;
 
+import by.pwt.plipenko.payments.model.VO.CommandVO;
+
 /**
  * Created by apilipenka on 8/5/2016.
  */
@@ -9,7 +11,6 @@ public class Command extends Entity {
     private String url;
     private String label;
     private String comment;
-    private UserRole userRole;
 
     public Command() {
         super();
@@ -21,7 +22,6 @@ public class Command extends Entity {
         this.url = url;
         this.label = label;
         this.comment = comment;
-        this.userRole = userRole;
     }
 
 
@@ -57,13 +57,6 @@ public class Command extends Entity {
         this.comment = comment;
     }
 
-    public Type getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -77,8 +70,7 @@ public class Command extends Entity {
         if (command != null ? !command.equals(that.command) : that.command != null) return false;
         if (url != null ? !url.equals(that.url) : that.url != null) return false;
         if (label != null ? !label.equals(that.label) : that.label != null) return false;
-        if (comment != null ? !comment.equals(that.comment) : that.comment != null) return false;
-        return userRole != null ? userRole.equals(that.userRole) : that.userRole == null;
+        return comment != null ? comment.equals(that.comment) : that.comment != null;
 
     }
 
@@ -89,7 +81,6 @@ public class Command extends Entity {
         result = 31 * result + (url != null ? url.hashCode() : 0);
         result = 31 * result + (label != null ? label.hashCode() : 0);
         result = 31 * result + (comment != null ? comment.hashCode() : 0);
-        result = 31 * result + (userRole != null ? userRole.hashCode() : 0);
         return result;
     }
 
@@ -101,7 +92,16 @@ public class Command extends Entity {
                 ", url=" + url +
                 ", label=" + label +
                 ", comment=" + comment +
-                ", userRole=" + userRole +
                 ']';
+    }
+
+    public CommandVO createCommandVO() {
+        CommandVO commandVO = new CommandVO();
+        commandVO.setId(getId());
+        commandVO.setCommand(command);
+        commandVO.setUrl(url);
+        commandVO.setLabel(label);
+        commandVO.setComment(comment);
+        return commandVO;
     }
 }

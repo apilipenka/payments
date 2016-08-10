@@ -77,5 +77,35 @@
         <url-pattern>/jsp/userRole-list.jsp</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>CommandsFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.CommandsFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CommandsFilter</filter-name>
+        <url-pattern>/command-list.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CommandsFilter</filter-name>
+        <url-pattern>/jsp/command-list.jsp</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>BanksFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.BanksFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>BanksFilter</filter-name>
+        <url-pattern>/bank-list.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>BanksFilter</filter-name>
+        <url-pattern>/jsp/bank-list.jsp</url-pattern>
+    </filter-mapping>
+
 
 </web-app>

@@ -8,8 +8,6 @@ public class CommandVO extends EntityVO {
     private String url;
     private String label;
     private String comment;
-    private int userRoleId;
-    private String userRoleName;
 
     public CommandVO() {
         super();
@@ -21,8 +19,6 @@ public class CommandVO extends EntityVO {
         this.url = url;
         this.label = label;
         this.comment = comment;
-        this.userRoleId = userRoleId;
-        this.userRoleName = userRoleName;
     }
 
     public String getCommand() {
@@ -57,19 +53,4 @@ public class CommandVO extends EntityVO {
         this.comment = comment;
     }
 
-    public int getUserRoleId() {
-        return userRoleId;
-    }
-
-    public void setUserRoleId(int userRoleId) {
-        this.userRoleId = userRoleId;
-    }
-
-    public String getUserRoleName() {
-        return userRoleName;
-    }
-
-    public void setUserRoleName(String userRoleName) {
-        this.userRoleName = userRoleName;
-    }
 }

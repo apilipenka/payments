@@ -208,7 +208,7 @@ public class User extends Entity {
         userVO.setFirstName(firstName);
         userVO.setLastName(lastName);
 
-        DateFormat df = new SimpleDateFormat("dd.mm.yyyy");
+        DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
 
         userVO.setBirthDate(df.format(birthDate));
 

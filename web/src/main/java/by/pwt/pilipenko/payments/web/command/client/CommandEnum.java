@@ -72,6 +72,70 @@ public enum CommandEnum {
         {
             this.command = new DeleteUserRoleCommand();
         }
+    },
+    NEWCOMMAND {
+        {
+            this.command = new NewCommandCommand();
+        }
+    },
+    ADDCOMMAND {
+        {
+            this.command = new AddCommandCommand();
+        }
+    },
+    COMMANDLIST {
+        {
+            this.command = new CommandListCommand();
+        }
+    },
+    EDITCOMMAND {
+        {
+            this.command = new EditCommandCommand();
+        }
+    },
+    UPDATECOMMAND {
+        {
+            this.command = new UpdateCommandCommand();
+        }
+    },
+    REMOVECOMMAND {
+        {
+            this.command = new DeleteCommandCommand();
+        }
+
+
+    },
+    NEWBANK {
+        {
+            this.command = new NewBankCommand();
+        }
+    },
+    ADDBANK {
+        {
+            this.command = new AddBankCommand();
+        }
+    },
+    BANKLIST {
+        {
+            this.command = new BankListCommand();
+        }
+    },
+    EDITBANK {
+        {
+            this.command = new EditBankCommand();
+        }
+    },
+    UPDATEBANK {
+        {
+            this.command = new UpdateBankCommand();
+        }
+    },
+    REMOVEBANK {
+        {
+            this.command = new DeleteBankCommand();
+        }
+
+
     };
     ActionCommand command;
 

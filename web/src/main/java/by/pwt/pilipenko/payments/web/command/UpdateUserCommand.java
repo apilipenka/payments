@@ -39,7 +39,7 @@ public class UpdateUserCommand implements ActionCommand {
             }
 
             String birthDateStr = request.getParameter("birthDate");
-            DateFormat format = new SimpleDateFormat("dd.mm.yyyy");
+            DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
             Date birthDate = format.parse(birthDateStr);
 
             user = new User();

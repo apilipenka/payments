@@ -8,8 +8,16 @@ ${user}, hello!
 <hr/>
 Links for admin...<br/>
 Debug info - session = ${sessionScope}
+<br></br>
 <a href="${pageContext.request.contextPath}/controller?command=USERROLELIST">Edit user roles</a>
+<br></br>
 <a href="${pageContext.request.contextPath}/controller?command=USERLIST">Edit users</a>
+<br></br>
+<a href="${pageContext.request.contextPath}/controller?command=COMMANDLIST">Edit commands</a>
+<br></br>
+<a href="${pageContext.request.contextPath}/controller?command=BANKLIST">Edit banks</a>
+<br></br>
 <a href="${pageContext.request.contextPath}/controller?command=logout">Logout</a>
+<br></br>
 </body>
 </html>

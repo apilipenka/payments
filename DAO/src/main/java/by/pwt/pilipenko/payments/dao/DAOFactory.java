@@ -175,4 +175,16 @@ public class DAOFactory {
         return userRoleDAO;
     }
 
+    public CommandDAO createCommandDAO() throws SQLException {
+        CommandDAO commandDAO;
+        try {
+            commandDAO = new CommandDAO(dataSource.getConnection(), "command", "commands");
+        } catch (SQLException e) {
+            // e.printStackTrace();
+            // return null;
+            throw e;
+        }
+        return commandDAO;
+    }
+
 }

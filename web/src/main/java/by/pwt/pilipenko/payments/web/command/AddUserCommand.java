@@ -29,7 +29,7 @@ public class AddUserCommand implements ActionCommand {
             String personalNumber = request.getParameter("personalNumber");
             String role = request.getParameter("role");
             String birthDateStr = request.getParameter("birthDate");
-            DateFormat format = new SimpleDateFormat("dd.mm.yyyy");
+            DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
             Date birthDate = format.parse(birthDateStr);
 
 

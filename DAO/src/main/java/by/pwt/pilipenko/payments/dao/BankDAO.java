@@ -18,6 +18,8 @@ public class BankDAO extends AbstractEntityDAO<Bank> {
 
         Bank bank = new Bank();
         bank.setId(resultSet.getInt("id"));
+        bank.setName(resultSet.getString("name"));
+        bank.setUNN(resultSet.getString("unn"));
 
         return bank;
     }
@@ -35,6 +37,7 @@ public class BankDAO extends AbstractEntityDAO<Bank> {
             throws SQLException {
 
         statement.setString(1, entity.getName());
+        statement.setString(2, entity.getUNN());
         return statement;
     }
 
@@ -42,6 +45,7 @@ public class BankDAO extends AbstractEntityDAO<Bank> {
     protected PreparedStatement prepareInsertStatement(Bank entity, PreparedStatement statement) throws SQLException {
 
         statement.setString(1, entity.getName());
+        statement.setString(2, entity.getUNN());
         return statement;
     }
 
@@ -49,7 +53,8 @@ public class BankDAO extends AbstractEntityDAO<Bank> {
     protected PreparedStatement prepareUpdateStatement(Bank entity, PreparedStatement statement) throws SQLException {
 
         statement.setString(1, entity.getName());
-        statement.setInt(2, entity.getId());
+        statement.setString(2, entity.getUNN());
+        statement.setInt(3, entity.getId());
 
         return statement;
     }

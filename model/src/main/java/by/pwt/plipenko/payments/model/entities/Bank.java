@@ -1,5 +1,7 @@
 package by.pwt.plipenko.payments.model.entities;
 
+import by.pwt.plipenko.payments.model.VO.BankVO;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -97,5 +99,11 @@ public class Bank extends Entity {
         return finded;
     }
 
-
+    public BankVO createBankVO() {
+        BankVO bankVO = new BankVO();
+        bankVO.setId(getId());
+        bankVO.setUNN(UNN);
+        bankVO.setName(name);
+        return bankVO;
+    }
 }
