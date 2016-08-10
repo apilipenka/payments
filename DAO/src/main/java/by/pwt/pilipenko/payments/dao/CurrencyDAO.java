@@ -19,6 +19,8 @@ public class CurrencyDAO extends AbstractEntityDAO<Currency> {
     protected Currency getEntity(ResultSet resultSet) throws SQLException {
         Currency currency = new Currency();
         currency.setId(resultSet.getInt("id"));
+        currency.setCode(new Integer(resultSet.getInt("code")));
+        currency.setMnemoCode(resultSet.getString("mnemo_code"));
         currency.setName(resultSet.getString("name"));
         return currency;
     }
@@ -40,15 +42,19 @@ public class CurrencyDAO extends AbstractEntityDAO<Currency> {
     @Override
     protected PreparedStatement prepareInsertStatement(Currency entity, PreparedStatement statement)
             throws SQLException {
-        statement.setString(1, entity.getName());
+        statement.setInt(1, entity.getCode());
+        statement.setString(2, entity.getMnemoCode());
+        statement.setString(3, entity.getName());
         return statement;
     }
 
     @Override
     protected PreparedStatement prepareUpdateStatement(Currency entity, PreparedStatement statement)
             throws SQLException {
-        statement.setString(1, entity.getName());
-        statement.setInt(3, entity.getId());
+        statement.setInt(1, entity.getCode());
+        statement.setString(2, entity.getMnemoCode());
+        statement.setString(3, entity.getName());
+        statement.setInt(4, entity.getId());
         return statement;
     }
 

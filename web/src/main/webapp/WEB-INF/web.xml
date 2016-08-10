@@ -107,5 +107,20 @@
         <url-pattern>/jsp/bank-list.jsp</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>CurrenciesFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.CurrenciesFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CurrenciesFilter</filter-name>
+        <url-pattern>/currency-list.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CurrenciesFilter</filter-name>
+        <url-pattern>/jsp/currency-list.jsp</url-pattern>
+    </filter-mapping>
+
 
 </web-app>

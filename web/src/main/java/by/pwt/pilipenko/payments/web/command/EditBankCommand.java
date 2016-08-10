@@ -3,7 +3,6 @@ package by.pwt.pilipenko.payments.web.command;
 
 import by.pwt.pilipenko.payments.dao.resources.ConfigurationManager;
 import by.pwt.pilipenko.payments.services.BankService;
-import by.pwt.pilipenko.payments.services.UserRoleService;
 
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;

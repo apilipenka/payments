@@ -17,6 +17,8 @@ Debug info - session = ${sessionScope}
 <br></br>
 <a href="${pageContext.request.contextPath}/controller?command=BANKLIST">Edit banks</a>
 <br></br>
+<a href="${pageContext.request.contextPath}/controller?command=CURRENCYLIST">Edit currencies</a>
+<br></br>
 <a href="${pageContext.request.contextPath}/controller?command=logout">Logout</a>
 <br></br>
 </body>

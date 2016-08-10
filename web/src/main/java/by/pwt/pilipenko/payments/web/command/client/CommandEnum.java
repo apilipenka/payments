@@ -136,6 +136,38 @@ public enum CommandEnum {
         }
 
 
+    },
+    NEWCURRENCY {
+        {
+            this.command = new NewCurrencyCommand();
+        }
+    },
+    ADDCURRENCY {
+        {
+            this.command = new AddCurrencyCommand();
+        }
+    },
+    CURRENCYLIST {
+        {
+            this.command = new CurrencyListCommand();
+        }
+    },
+    EDITCURRENCY {
+        {
+            this.command = new EditCurrencyCommand();
+        }
+    },
+    UPDATECURRENCY {
+        {
+            this.command = new UpdateCurrencyCommand();
+        }
+    },
+    REMOVECURRENCY {
+        {
+            this.command = new DeleteCurrencyCommand();
+        }
+
+
     };
     ActionCommand command;
 
