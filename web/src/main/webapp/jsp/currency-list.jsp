@@ -8,7 +8,7 @@
 
 <body>
 <div class="container">
-    <h2>Banks</h2>
+    <h2>Currencies</h2>
     <!--Search Form -->
     <form action="controller" method="get" id="seachCurrencyForm" role="form">
         <input type="hidden" id="command" name="command" value="CURRENCYLIST">
