@@ -51,6 +51,12 @@
     <hr/>
     Links for guest...
     <br/> Debug info - session = ${sessionScope}
+
+
+
+
 </div>
+
+
 </body>
 </html>

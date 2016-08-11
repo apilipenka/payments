@@ -86,7 +86,7 @@ public class ExchangeRate extends Entity {
 
     public ExchangeRateVO createExchangeRateVO() {
         ExchangeRateVO exchangeRateVO = new ExchangeRateVO();
-        exchangeRateVO.setCurrencyID(getId());
+        exchangeRateVO.setId(getId());
         exchangeRateVO.setRateDate(rateDate);
         exchangeRateVO.setRate(rate);
         exchangeRateVO.setCurrencyID(currency.getId());
@@ -94,5 +94,6 @@ public class ExchangeRate extends Entity {
         exchangeRateVO.setCurrencyMnemoCode(currency.getMnemoCode());
         return exchangeRateVO;
     }
+
 
 }

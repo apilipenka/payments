@@ -26,6 +26,7 @@
                 <li class="divider"></li>
                 <li><a href="${pageContext.request.contextPath}/controller?command=BANKLIST">Edit banks</a></li>
                 <li><a href="${pageContext.request.contextPath}/controller?command=CURRENCYLIST">Edit currencies</a></li>
+                <li><a href="${pageContext.request.contextPath}/controller?command=EXCHANGERATELIST">Edit exchange rates</a></li>
                 <li class="divider"></li>
                 <li><a href="${pageContext.request.contextPath}/controller?command=logout">Logout</a></li>
             </ul>

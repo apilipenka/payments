@@ -168,6 +168,38 @@ public enum CommandEnum {
         }
 
 
+    },
+    NEWEXCHANGERATE {
+        {
+            this.command = new NewExchangeRateCommand();
+        }
+    },
+    ADDEXCHANGERATE {
+        {
+            this.command = new AddExchangeRateCommand();
+        }
+    },
+    EXCHANGERATELIST {
+        {
+            this.command = new ExchangeRateListCommand();
+        }
+    },
+    EDITEXCHANGERATE {
+        {
+            this.command = new EditExchangeRateCommand();
+        }
+    },
+    UPDATEEXCHANGERATE {
+        {
+            this.command = new UpdateExchangeRateCommand();
+        }
+    },
+    REMOVEEXCHANGERATE {
+        {
+            this.command = new DeleteExchangeRateCommand();
+        }
+
+
     };
     ActionCommand command;
 
