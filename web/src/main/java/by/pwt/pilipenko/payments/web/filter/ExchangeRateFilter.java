@@ -1,8 +1,6 @@
 package by.pwt.pilipenko.payments.web.filter;
 
 import by.pwt.pilipenko.payments.services.CurrencyService;
-import by.pwt.pilipenko.payments.services.ExchangeRateService;
-import by.pwt.pilipenko.payments.services.UserRoleService;
 
 import javax.naming.NamingException;
 import javax.servlet.*;
@@ -14,7 +12,7 @@ public class ExchangeRateFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
             throws IOException, ServletException {
 
-       CurrencyService currencyService = new CurrencyService();
+        CurrencyService currencyService = new CurrencyService();
 
         try {
             req.setAttribute("currencies", currencyService.getAllEntities());

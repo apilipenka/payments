@@ -53,8 +53,6 @@
     <br/> Debug info - session = ${sessionScope}
 
 
-
-
 </div>
 
 

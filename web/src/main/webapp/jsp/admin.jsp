@@ -20,19 +20,21 @@
         <li class="dropdown" style="list-style: none;">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu <b class="caret"></b></a>
             <ul class="dropdown-menu">
-                <li><a href="${pageContext.request.contextPath}/controller?command=USERROLELIST">Edit user roles</a></li>
+                <li><a href="${pageContext.request.contextPath}/controller?command=USERROLELIST">Edit user roles</a>
+                </li>
                 <li><a href="${pageContext.request.contextPath}/controller?command=USERLIST">Edit users</a></li>
                 <li><a href="${pageContext.request.contextPath}/controller?command=COMMANDLIST">Edit commands</a></li>
                 <li class="divider"></li>
                 <li><a href="${pageContext.request.contextPath}/controller?command=BANKLIST">Edit banks</a></li>
-                <li><a href="${pageContext.request.contextPath}/controller?command=CURRENCYLIST">Edit currencies</a></li>
-                <li><a href="${pageContext.request.contextPath}/controller?command=EXCHANGERATELIST">Edit exchange rates</a></li>
+                <li><a href="${pageContext.request.contextPath}/controller?command=CURRENCYLIST">Edit currencies</a>
+                </li>
+                <li><a href="${pageContext.request.contextPath}/controller?command=EXCHANGERATELIST">Edit exchange
+                    rates</a></li>
                 <li class="divider"></li>
                 <li><a href="${pageContext.request.contextPath}/controller?command=logout">Logout</a></li>
             </ul>
         </li>
     </ul>
-
 
 
 </div>

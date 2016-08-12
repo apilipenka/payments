@@ -1,11 +1,10 @@
-
 package by.pwt.pilipenko.payments.web.command;
 
 
-        import by.pwt.pilipenko.payments.dao.resources.ConfigurationManager;
-        import by.pwt.pilipenko.payments.services.ExchangeRateService;
+import by.pwt.pilipenko.payments.dao.resources.ConfigurationManager;
+import by.pwt.pilipenko.payments.services.ExchangeRateService;
 
-        import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 public class DeleteExchangeRateCommand implements ActionCommand {
     @Override

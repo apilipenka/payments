@@ -11,6 +11,9 @@ public class ExchangeRateVO extends EntityVO {
     private int currencyID;
     private String currencyMnemoCode;
     private String currencyCode;
+    private int targetCurrencyID;
+    private String targetCurrencyMnemoCode;
+    private String targetCurrencyCode;
 
     public ExchangeRateVO() {
         super();
@@ -64,5 +67,29 @@ public class ExchangeRateVO extends EntityVO {
 
     public void setCurrencyCode(String currencyCode) {
         this.currencyCode = currencyCode;
+    }
+
+    public int getTargetCurrencyID() {
+        return targetCurrencyID;
+    }
+
+    public void setTargetCurrencyID(int targetCurrencyID) {
+        this.targetCurrencyID = targetCurrencyID;
+    }
+
+    public String getTargetCurrencyMnemoCode() {
+        return targetCurrencyMnemoCode;
+    }
+
+    public void setTargetCurrencyMnemoCode(String targetCurrencyMnemoCode) {
+        this.targetCurrencyMnemoCode = targetCurrencyMnemoCode;
+    }
+
+    public String getTargetCurrencyCode() {
+        return targetCurrencyCode;
+    }
+
+    public void setTargetCurrencyCode(String targetCurrencyCode) {
+        this.targetCurrencyCode = targetCurrencyCode;
     }
 }

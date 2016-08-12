@@ -63,7 +63,6 @@
     </filter-mapping>
 
 
-
     <filter>
         <filter-name>UsersFilter</filter-name>
         <filter-class>

@@ -50,6 +50,43 @@ public class ExchangeRateService extends AbstractEntitySevice<ExchangeRate> {
 
     }
 
+    public List<ExchangeRate> searchEntityParent(Integer currencyId, Integer targetCurrencyId) throws Exception {
+
+        ExchangeRate entity = new ExchangeRate();
+        if (currencyId != null) {
+
+            CurrencyService currencyService = new CurrencyService();
+            Currency currency = currencyService.getEntity(currencyId);
+            if (currency != null) {
+                entity.setCurrency(currency);
+            }
+
+
+        }
+
+        if (targetCurrencyId != null) {
+
+            CurrencyService currencyService = new CurrencyService();
+            Currency currency = currencyService.getEntity(targetCurrencyId);
+            if (currency != null) {
+                entity.setTargetCurrency(currency);
+            }
+
+
+        }
+
+
+        AbstractEntityDAO<ExchangeRate> exchangeRateDAO = getEntityDAO();
+
+
+        List<ExchangeRate> list = ((ExchangeRateDAO) exchangeRateDAO).findEntityByEntity(entity);
+        exchangeRateDAO.closeConnection();
+
+        return list;
+
+    }
+
+
     @Override
     public AbstractEntityDAO<ExchangeRate> getEntityDAO() throws NamingException, SQLException {
         ExchangeRateDAO exchangeRateDAO = DAOFactory.getInstance().createExchangeRateDAO();
