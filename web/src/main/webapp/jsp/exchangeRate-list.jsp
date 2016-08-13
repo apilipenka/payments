@@ -61,7 +61,7 @@
                             <td>${exchangeRate.currencyMnemoCode}</td>
                             <td>${exchangeRate.targetCurrencyMnemoCode}</td>
                             <td>
-                                <a href="${pageContext.request.contextPath}/controller?command=REMOVEXCHANGERATE&exchangeRateID=${exchangeRate.id}">
+                                <a href="${pageContext.request.contextPath}/controller?command=REMOVEEXCHANGERATE&exchangeRateID=${exchangeRate.id}">
                                     <span class="glyphicon glyphicon-trash"/>
                                 </a>
 
