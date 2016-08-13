@@ -1,6 +1,11 @@
 package by.pwt.pilipenko.payments.web.command.client;
 
 import by.pwt.pilipenko.payments.web.command.*;
+import by.pwt.pilipenko.payments.web.command.bank.*;
+import by.pwt.pilipenko.payments.web.command.currency.*;
+import by.pwt.pilipenko.payments.web.command.exchangerate.*;
+import by.pwt.pilipenko.payments.web.command.user.*;
+import by.pwt.pilipenko.payments.web.command.userrole.*;
 
 public enum CommandEnum {
     LOGIN {
