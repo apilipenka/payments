@@ -57,12 +57,12 @@ public class Controller extends HttpServlet {
         if (page != null) {
 
             Object success = request.getSession().getAttribute("success");
-
+            //TODO Вернуть логику назад
             if (success != null && success.toString().equalsIgnoreCase("true")) {
                 response.sendRedirect(request.getContextPath() + page);
             } else {
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
-                // вызов страницы ответа на запрос
+                //вызов страницы ответа на запрос
                 dispatcher.forward(request, response);
             }
 

@@ -3,6 +3,7 @@ package by.pwt.pilipenko.payments.web.command.client;
 import by.pwt.pilipenko.payments.web.command.*;
 import by.pwt.pilipenko.payments.web.command.bank.*;
 import by.pwt.pilipenko.payments.web.command.currency.*;
+import by.pwt.pilipenko.payments.web.command.currencyext.*;
 import by.pwt.pilipenko.payments.web.command.exchangerate.*;
 import by.pwt.pilipenko.payments.web.command.user.*;
 import by.pwt.pilipenko.payments.web.command.userrole.*;
@@ -202,6 +203,38 @@ public enum CommandEnum {
     REMOVEEXCHANGERATE {
         {
             this.command = new DeleteExchangeRateCommand();
+        }
+
+
+    },
+    NEWCURRENCYEXT {
+        {
+            this.command = new NewCurrencyExtCommand();
+        }
+    },
+    ADDCURRENCYEXT {
+        {
+            this.command = new AddCurrencyExtCommand();
+        }
+    },
+    CURRENCYEXTLIST {
+        {
+            this.command = new CurrencyExtListCommand();
+        }
+    },
+    EDITCURRENCYEXT {
+        {
+            this.command = new EditCurrencyExtCommand();
+        }
+    },
+    UPDATECURRENCYEXT {
+        {
+            this.command = new UpdateCurrencyExtCommand();
+        }
+    },
+    REMOVECURRENCYEXT {
+        {
+            this.command = new DeleteCurrencyExtCommand();
         }
 
 

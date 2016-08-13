@@ -138,6 +138,21 @@
         <url-pattern>/jsp/currency-list.jsp</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>CurrenciesExtFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.CurrenciesExtFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CurrenciesExtFilter</filter-name>
+        <url-pattern>/currencyext-list.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CurrenciesExtFilter</filter-name>
+        <url-pattern>/jsp/currencyext-list.jsp</url-pattern>
+    </filter-mapping>
+
 
     <filter>
         <filter-name>ExchangeRatesFilter</filter-name>
@@ -152,6 +167,22 @@
     <filter-mapping>
         <filter-name>ExchangeRatesFilter</filter-name>
         <url-pattern>/jsp/exchangeRate-list.jsp</url-pattern>
+    </filter-mapping>
+
+
+    <filter>
+        <filter-name>ExchangeRatesExtFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.ExchangeRatesExtFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ExchangeRatesExtFilter</filter-name>
+        <url-pattern>/new-currencyext.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>ExchangeRatesExtFilter</filter-name>
+        <url-pattern>/jsp/new-currencyext.jsp</url-pattern>
     </filter-mapping>
 
 </web-app>

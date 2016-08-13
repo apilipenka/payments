@@ -84,7 +84,12 @@ public class ExchangeRateDAO extends AbstractEntityDAO<ExchangeRate> {
             throws SQLException {
 
         statement.setInt(1, entity.getCurrency().getId());
-        statement.setInt(1, entity.getTargetCurrency().getId());
+        if (entity.getTargetCurrency()!=null) {
+            statement.setInt(2, entity.getTargetCurrency().getId());
+        }
+        else {
+            statement.setNull(2, java.sql.Types.INTEGER);
+        }
 
         return statement;
     }

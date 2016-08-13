@@ -31,6 +31,10 @@
                 <li><a href="${pageContext.request.contextPath}/controller?command=EXCHANGERATELIST">Edit exchange
                     rates</a></li>
                 <li class="divider"></li>
+                <li><a href="${pageContext.request.contextPath}/controller?command=CURRENCYEXTLIST">Ext Edit
+                    currencies</a>
+                </li>
+                <li class="divider"></li>
                 <li><a href="${pageContext.request.contextPath}/controller?command=logout">Logout</a></li>
             </ul>
         </li>
