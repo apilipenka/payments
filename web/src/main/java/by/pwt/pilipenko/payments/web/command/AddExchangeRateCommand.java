@@ -28,6 +28,8 @@ public class AddExchangeRateCommand implements ActionCommand {
             Date rateDate = format.parse(rateDateStr);
             float rate = new Float(request.getParameter("rate"));
             String currencyStr = request.getParameter("currencyId");
+            String targetCurrencyStr = request.getParameter("targetCurrencyId");
+
 
             CurrencyService currencyService = new CurrencyService();
 
@@ -38,11 +40,19 @@ public class AddExchangeRateCommand implements ActionCommand {
                 throw e;
             }
 
+            Currency targetCurrency = null;
+            try {
+                targetCurrency = currencyService.getEntity(Integer.parseInt(targetCurrencyStr));
+            } catch (Exception e) {
+                throw e;
+            }
+
             exchangeRate = new ExchangeRate();
 
             exchangeRate.setRateDate(rateDate);
             exchangeRate.setRate(rate);
             exchangeRate.setCurrency(currency);
+            exchangeRate.setTargetCurrency(targetCurrency);
 
             ExchangeRateService exchangeRateService = new ExchangeRateService();
 

@@ -43,6 +43,7 @@
                         <td>Rate date</td>
                         <td>Rate</td>
                         <td>Currency</td>
+                        <td>Target currency</td>
                         <td></td>
                     </tr>
                     </thead>
@@ -58,6 +59,7 @@
                             <td>${exchangeRate.rateDate}</td>
                             <td>${exchangeRate.rate}</td>
                             <td>${exchangeRate.currencyMnemoCode}</td>
+                            <td>${exchangeRate.targetCurrencyMnemoCode}</td>
                             <td>
                                 <a href="${pageContext.request.contextPath}/controller?command=REMOVEXCHANGERATE&exchangeRateID=${exchangeRate.id}">
                                     <span class="glyphicon glyphicon-trash"/>
@@ -78,7 +80,7 @@
     </form>
     <form action="${pageContext.request.contextPath}/jsp/new-exchangeRate.jsp?source=exchangeRateList">
         <br></br>
-        <button type="submit" class="btn btn-primary  btn-md">New user</button>
+        <button type="submit" class="btn btn-primary  btn-md">New exchange rate</button>
     </form>
 </div>
 </body>

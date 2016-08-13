@@ -1,6 +1,7 @@
 package by.pwt.pilipenko.payments.web.command;
 
 import by.pwt.pilipenko.payments.dao.resources.ConfigurationManager;
+import by.pwt.pilipenko.payments.services.CurrencyService;
 import by.pwt.pilipenko.payments.services.ExchangeRateService;
 import by.pwt.pilipenko.payments.services.UserRoleService;
 import by.pwt.plipenko.payments.model.entities.ExchangeRate;
@@ -41,8 +42,13 @@ public class EditExchangeRateCommand implements ActionCommand {
             request.setAttribute("exchangeRate", exchangeRate.createExchangeRateVO());
         }
 
-        request.setAttribute("command", "UPDATEXCHANGERATE");
-        request.setAttribute("roles", new UserRoleService().getAllEntities());
+        request.setAttribute("test1", exchangeRate.createExchangeRateVO().getCurrencyID());
+        request.setAttribute("test2", exchangeRate.createExchangeRateVO().getTargetCurrencyID());
+
+        request.setAttribute("currencies", new CurrencyService().getAllEntities());
+
+        request.setAttribute("command", "UPDATEEXCHANGERATE");
+        //request.setAttribute("roles", new UserRoleService().getAllEntities());
         request.setAttribute("source", request.getParameter("source"));
         return page;
     }

@@ -36,12 +36,9 @@ public class ExchangeRateService extends AbstractEntitySevice<ExchangeRate> {
             Currency currency1 = currencyService.getEntityByPK(currency);
             if (currency1 != null) {
                 entity.setCurrency(currency1);
+                entity.setTargetCurrency(currency1);
             }
-
-
         }
-
-
         AbstractEntityDAO<ExchangeRate> exchangeRateDAO = getEntityDAO();
         List<ExchangeRate> list = exchangeRateDAO.findEntityByEntity(entity);
         exchangeRateDAO.closeConnection();
@@ -53,33 +50,26 @@ public class ExchangeRateService extends AbstractEntitySevice<ExchangeRate> {
     public List<ExchangeRate> searchEntityParent(Integer currencyId, Integer targetCurrencyId) throws Exception {
 
         ExchangeRate entity = new ExchangeRate();
-        if (currencyId != null) {
+        CurrencyService currencyService = new CurrencyService();
 
-            CurrencyService currencyService = new CurrencyService();
+
+        if (currencyId != null) {
             Currency currency = currencyService.getEntity(currencyId);
             if (currency != null) {
                 entity.setCurrency(currency);
             }
-
-
         }
 
         if (targetCurrencyId != null) {
-
-            CurrencyService currencyService = new CurrencyService();
             Currency currency = currencyService.getEntity(targetCurrencyId);
             if (currency != null) {
                 entity.setTargetCurrency(currency);
             }
-
-
         }
 
 
         AbstractEntityDAO<ExchangeRate> exchangeRateDAO = getEntityDAO();
-
-
-        List<ExchangeRate> list = ((ExchangeRateDAO) exchangeRateDAO).findEntityByEntity(entity);
+        List<ExchangeRate> list = ((ExchangeRateDAO) exchangeRateDAO).findEntityByParent(entity);
         exchangeRateDAO.closeConnection();
 
         return list;

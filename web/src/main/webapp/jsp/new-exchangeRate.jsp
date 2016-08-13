@@ -59,9 +59,18 @@
             <select name="currencyId"
                     id="currencyId" class="form-control">
                 <c:forEach items="${currencies}" var="currencies">
-                    <option value="${currencies.getId()}">${currencies.getName()}</option>
+                    <option value="${currencies.getId()}" ${currencies.getId() == exchangeRate.targetCurrencyID ? 'selected="selected"' : ''}>${currencies.getName()}</option>
                 </c:forEach>
-            </select> <br></br>
+            </select>
+            <label for="targetCurrencyId"
+                   class="control-label col-xs-6">Target currency:</label>
+            <select name="targetCurrencyId"
+                    id="targetCurrencyId" class="form-control">
+                <c:forEach items="${currencies}" var="currencies">
+                    <option value="${currencies.getId()}" ${currencies.getId() == exchangeRate.currencyID ? 'selected="selected"' : ''}>${currencies.getName()}</option>
+                </c:forEach>
+            </select>
+            <br></br>
             <button type="submit" class="btn btn-primary  btn-md">Accept</button>
         </div>
     </form>

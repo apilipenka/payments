@@ -31,6 +31,7 @@ public class UpdateExchangeRateCommand implements ActionCommand {
             Date rateDate = format.parse(rateDateStr);
             float rate = new Float(request.getParameter("rate"));
             String currencyStr = request.getParameter("currencyId");
+            String targetCurrencyStr = request.getParameter("targetCurrencyId");
 
             CurrencyService currencyService = new CurrencyService();
 
@@ -41,11 +42,19 @@ public class UpdateExchangeRateCommand implements ActionCommand {
                 throw e;
             }
 
+            Currency targetCurrency = null;
+            try {
+                targetCurrency = currencyService.getEntity(Integer.parseInt(targetCurrencyStr));
+            } catch (Exception e) {
+                throw e;
+            }
+
             exchangeRate = new ExchangeRate();
             exchangeRate.setId(Integer.parseInt(id));
             exchangeRate.setRateDate(rateDate);
             exchangeRate.setRate(rate);
             exchangeRate.setCurrency(currency);
+            exchangeRate.setTargetCurrency(targetCurrency);
 
             ExchangeRateService exchangeRateService = new ExchangeRateService();
             boolean flag = exchangeRateService.updateEntity(exchangeRate);
@@ -73,7 +82,7 @@ public class UpdateExchangeRateCommand implements ActionCommand {
             }
 
             request.setAttribute("error", error);
-            request.setAttribute("command", "UPDATEXCHANGERATE");
+            request.setAttribute("command", "UPDATEEXCHANGERATE");
             request.getSession().setAttribute("success", "false");
 
             page = ConfigurationManager.getProperty("path.page.newexchangeRate");

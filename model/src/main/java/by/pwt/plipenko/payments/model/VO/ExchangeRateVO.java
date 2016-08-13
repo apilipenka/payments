@@ -1,12 +1,10 @@
 package by.pwt.plipenko.payments.model.VO;
 
-import java.util.Date;
-
 /**
  * Created by apilipenka on 8/5/2016.
  */
 public class ExchangeRateVO extends EntityVO {
-    private Date rateDate;
+    private String rateDate;
     private float rate;
     private int currencyID;
     private String currencyMnemoCode;
@@ -19,21 +17,25 @@ public class ExchangeRateVO extends EntityVO {
         super();
     }
 
-    public ExchangeRateVO(int id, Date rateDate, float rate, int currencyID, String currencyMnemoCode, String currencyCode) {
+    public ExchangeRateVO(int id, String rateDate, float rate, int currencyID, String currencyMnemoCode, String currencyCode, int targetCurrencyID, String targetCurrencyMnemoCode, String targetCurrencyCode) {
         super(id);
         this.rateDate = rateDate;
         this.rate = rate;
         this.currencyID = currencyID;
         this.currencyMnemoCode = currencyMnemoCode;
         this.currencyCode = currencyCode;
+        this.targetCurrencyID = targetCurrencyID;
+        this.targetCurrencyMnemoCode = targetCurrencyMnemoCode;
+        this.targetCurrencyCode = targetCurrencyCode;
+
     }
 
 
-    public Date getRateDate() {
+    public String getRateDate() {
         return rateDate;
     }
 
-    public void setRateDate(Date rateDate) {
+    public void setRateDate(String rateDate) {
         this.rateDate = rateDate;
     }
 

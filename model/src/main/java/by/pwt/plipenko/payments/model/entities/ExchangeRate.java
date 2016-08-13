@@ -2,6 +2,8 @@ package by.pwt.plipenko.payments.model.entities;
 
 import by.pwt.plipenko.payments.model.VO.ExchangeRateVO;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ExchangeRate extends Entity {
@@ -103,7 +105,10 @@ public class ExchangeRate extends Entity {
     public ExchangeRateVO createExchangeRateVO() {
         ExchangeRateVO exchangeRateVO = new ExchangeRateVO();
         exchangeRateVO.setId(getId());
-        exchangeRateVO.setRateDate(rateDate);
+
+        DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+
+        exchangeRateVO.setRateDate(df.format(rateDate));
         exchangeRateVO.setRate(rate);
         exchangeRateVO.setCurrencyID(currency.getId());
         exchangeRateVO.setCurrencyCode(currency.getCode());

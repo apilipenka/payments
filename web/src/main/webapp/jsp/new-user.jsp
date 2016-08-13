@@ -81,8 +81,11 @@
             <select name="role"
                     id="role" class="form-control">
                 <c:forEach items="${roles}" var="roles">
-                    <option value="${roles.getId()}">${roles.getDescription()}</option>
+
+                    <option value="${roles.getId()}" ${roles.getId() == user.userRoleID ? 'selected="selected"' : ''}>${roles.getDescription()}</option>
+
                 </c:forEach>
+
             </select> <br></br>
             <button type="submit" class="btn btn-primary  btn-md">Accept</button>
         </div>
