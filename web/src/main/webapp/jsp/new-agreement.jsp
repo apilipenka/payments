@@ -29,7 +29,7 @@
         <input type="hidden" id="command" name="command" value="${command}">
         <input type="hidden" id="agreementID" name="agreementID" value="${agreement.id}">
         <input type="hidden" id="source" name="source" value="${source}">
-        <h2>Card</h2>
+        <h2>Agreement</h2>
         <c:if test="${not empty error}">
             <div class="alert alert-success">
                     ${error}

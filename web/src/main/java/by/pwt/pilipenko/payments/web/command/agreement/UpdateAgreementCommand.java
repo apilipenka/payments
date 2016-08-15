@@ -26,6 +26,8 @@ public class UpdateAgreementCommand implements ActionCommand {
         String page = null;
         try {
 
+            int id = new Integer(request.getParameter("id"));
+
             String number = request.getParameter("number");
 
             DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
@@ -59,6 +61,7 @@ public class UpdateAgreementCommand implements ActionCommand {
             }
 
             agreement = new Agreement();
+            agreement.setId(id);
             agreement.setNumber(number);
             agreement.setValidFromDate(validFromDate);
             agreement.setValidToDate(validToDate);

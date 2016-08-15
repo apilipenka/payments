@@ -23,7 +23,7 @@ public class UpdateCardCommand implements ActionCommand {
         Card card = null;
         String page = null;
         try {
-
+            int id = new Integer(request.getParameter("id"));
             String number = request.getParameter("number");
             String name = request.getParameter("name");
             DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
