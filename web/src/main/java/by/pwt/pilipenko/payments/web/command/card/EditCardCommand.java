@@ -1,34 +1,34 @@
-package by.pwt.pilipenko.payments.web.command.user;
+package by.pwt.pilipenko.payments.web.command.card;
 
 import by.pwt.pilipenko.payments.dao.resources.ConfigurationManager;
-import by.pwt.pilipenko.payments.services.UserRoleService;
-import by.pwt.pilipenko.payments.services.UserService;
+import by.pwt.pilipenko.payments.services.AccountService;
+import by.pwt.pilipenko.payments.services.CardService;
 import by.pwt.pilipenko.payments.web.command.ActionCommand;
-import by.pwt.plipenko.payments.model.entities.User;
+import by.pwt.plipenko.payments.model.entities.Card;
 
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 
-public class EditUserCommand implements ActionCommand {
+public class EditCardCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws SQLException, NamingException {
-        String page = ConfigurationManager.getProperty("path.page.newuser");
+        String page = ConfigurationManager.getProperty("path.page.newcard");
 
-        UserService userService = new UserService();
-        Object name = request.getAttribute("userID");
+        CardService cardService = new CardService();
+        Object name = request.getAttribute("cardID");
 
-        User user = new User();
+        Card card = new Card();
 
         try {
             if (name != null) {
 
-                user = userService.getEntity(Integer.parseInt(name.toString()));
+                card = cardService.getEntity(Integer.parseInt(name.toString()));
 
             } else {
-                name = request.getParameter("userID");
+                name = request.getParameter("cardID");
                 if (name != null) {
-                    user = userService.getEntity(Integer.parseInt(name.toString()));
+                    card = cardService.getEntity(Integer.parseInt(name.toString()));
                 }
             }
         } catch (NumberFormatException e) {
@@ -38,12 +38,12 @@ public class EditUserCommand implements ActionCommand {
         }
 
 
-        if (user != null) {
-            request.setAttribute("user", user.createUserVO());
+        if (card != null) {
+            request.setAttribute("card", card.createCardVO());
         }
 
-        request.setAttribute("command", "UPDATEUSER");
-        request.setAttribute("roles", new UserRoleService().getAllEntities());
+        request.setAttribute("command", "UPDATECARD");
+        request.setAttribute("accounts", new AccountService().getAllEntities());
         request.setAttribute("source", request.getParameter("source"));
         return page;
     }

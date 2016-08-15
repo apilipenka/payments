@@ -3,15 +3,21 @@ package by.pwt.pilipenko.payments.web.command.agreement;
 import by.pwt.pilipenko.payments.dao.resources.ConfigurationManager;
 import by.pwt.pilipenko.payments.services.AgreementService;
 import by.pwt.pilipenko.payments.services.BankService;
-import by.pwt.pilipenko.payments.services.UserRoleService;
 import by.pwt.pilipenko.payments.services.UserService;
 import by.pwt.pilipenko.payments.web.command.ActionCommand;
+import by.pwt.plipenko.payments.model.VO.BankVO;
+import by.pwt.plipenko.payments.model.VO.UserVO;
 import by.pwt.plipenko.payments.model.entities.Agreement;
+import by.pwt.plipenko.payments.model.entities.Bank;
 import by.pwt.plipenko.payments.model.entities.User;
 
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import static by.pwt.pilipenko.payments.web.command.agreement.AgreementUtil.fillAgreementParent;
 
 public class EditAgreementCommand implements ActionCommand {
     @Override
@@ -29,7 +35,7 @@ public class EditAgreementCommand implements ActionCommand {
                 agreement = agreementService.getEntity(Integer.parseInt(name.toString()));
 
             } else {
-                name = request.getParameter("userID");
+                name = request.getParameter("agreementID");
                 if (name != null) {
                     agreement = agreementService.getEntity(Integer.parseInt(name.toString()));
                 }
@@ -42,14 +48,13 @@ public class EditAgreementCommand implements ActionCommand {
 
 
         if (agreement != null) {
-            request.setAttribute("user", agreement.createAgreementVO());
+            request.setAttribute("agreement", agreement.createAgreementVO());
         }
 
         request.setAttribute("command", "UPDATEAGREEMENT");
 
 
-        request.setAttribute("banks", new BankService().getAllEntities());
-        request.setAttribute("clients", new UserService().getAllEntities());
+        fillAgreementParent(request);
 
         request.setAttribute("source", request.getParameter("source"));
         return page;

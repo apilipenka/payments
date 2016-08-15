@@ -163,7 +163,7 @@ public class Account extends Entity {
         accountVO.setAgreementBankUNN(agreement.getBank().getUNN());
         accountVO.setCurrencyID(currency.getId());
         accountVO.setCurrencyMnemocode(currency.getMnemoCode());
-        return  accountVO;
+        return accountVO;
 
 
     }

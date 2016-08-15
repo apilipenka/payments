@@ -92,4 +92,9 @@ public class UserVO extends EntityVO {
     public void setUserRoleName(String userRoleName) {
         this.userRoleName = userRoleName;
     }
+
+    public String getDescription() {
+        return personalNumber + ' ' + firstName + ' ' + lastName;
+    }
+
 }

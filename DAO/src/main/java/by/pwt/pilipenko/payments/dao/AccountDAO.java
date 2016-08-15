@@ -30,7 +30,7 @@ public class AccountDAO extends AbstractEntityDAO<Account> {
         Agreement bank = agrremntDao.findEntityById(agrremntId);
         account.setAgreement(bank);
 
-        int currencyId = resultSet.getInt("cuurency_id");
+        int currencyId = resultSet.getInt("currency_id");
         CurrencyDAO currencyDAO = DAOFactory.getInstance().createCurrencyDAO();
         Currency currency = currencyDAO.findEntityById(currencyId);
         account.setCurrency(currency);

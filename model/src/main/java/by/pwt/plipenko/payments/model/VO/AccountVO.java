@@ -105,4 +105,9 @@ public class AccountVO extends EntityVO {
     public void setAgreementBankid(int agreementBankid) {
         this.agreementBankid = agreementBankid;
     }
+
+    public String getDescription() {
+        return number + ' ' + agreementBankName + ' ' + currencyMnemoCode;
+    }
+
 }

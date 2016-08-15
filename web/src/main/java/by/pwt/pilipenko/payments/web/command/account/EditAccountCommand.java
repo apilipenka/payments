@@ -1,8 +1,8 @@
 package by.pwt.pilipenko.payments.web.command.account;
 
 import by.pwt.pilipenko.payments.dao.resources.ConfigurationManager;
-import by.pwt.pilipenko.payments.services.AgreementService;
 import by.pwt.pilipenko.payments.services.AccountService;
+import by.pwt.pilipenko.payments.services.AgreementService;
 import by.pwt.pilipenko.payments.services.CurrencyService;
 import by.pwt.pilipenko.payments.web.command.ActionCommand;
 import by.pwt.plipenko.payments.model.entities.Account;
@@ -10,6 +10,8 @@ import by.pwt.plipenko.payments.model.entities.Account;
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
+
+import static by.pwt.pilipenko.payments.web.command.account.AccountUtil.fillAccountParent;
 
 public class EditAccountCommand implements ActionCommand {
     @Override
@@ -44,8 +46,7 @@ public class EditAccountCommand implements ActionCommand {
         }
 
         request.setAttribute("command", "UPDATEACCOUNT");
-        request.setAttribute("agreements", new AgreementService().getAllEntities());
-        request.setAttribute("currencies", new CurrencyService().getAllEntities());
+        fillAccountParent(request);
         request.setAttribute("source", request.getParameter("source"));
         return page;
     }

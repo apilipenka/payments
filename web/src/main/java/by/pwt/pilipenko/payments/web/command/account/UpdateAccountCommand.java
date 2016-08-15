@@ -1,16 +1,19 @@
 package by.pwt.pilipenko.payments.web.command.account;
 
 import by.pwt.pilipenko.payments.dao.resources.ConfigurationManager;
-import by.pwt.pilipenko.payments.services.*;
+import by.pwt.pilipenko.payments.services.AccountService;
+import by.pwt.pilipenko.payments.services.AgreementService;
+import by.pwt.pilipenko.payments.services.CurrencyService;
 import by.pwt.pilipenko.payments.web.command.ActionCommand;
-import by.pwt.plipenko.payments.model.entities.*;
+import by.pwt.plipenko.payments.model.entities.Account;
+import by.pwt.plipenko.payments.model.entities.Agreement;
+import by.pwt.plipenko.payments.model.entities.Currency;
 
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
+import static by.pwt.pilipenko.payments.web.command.account.AccountUtil.fillAccountParent;
 
 public class UpdateAccountCommand implements ActionCommand {
     @Override
@@ -69,25 +72,7 @@ public class UpdateAccountCommand implements ActionCommand {
             request.setAttribute("source", request.getParameter("source"));
             request.setAttribute("account", account.createAccountVO());
 
-            try {
-                request.setAttribute("agreements", new AgreementService().getAllEntities());
-            } catch (NamingException e1) {
-                error += "<br/>" + e1.getMessage();
-
-            } catch (SQLException e1) {
-                error += "<br/>" + e1.getMessage();
-
-            }
-
-            try {
-                request.setAttribute("currencies", new CurrencyService().getAllEntities());
-            } catch (NamingException e1) {
-                error += "<br/>" + e1.getMessage();
-
-            } catch (SQLException e1) {
-                error += "<br/>" + e1.getMessage();
-
-            }
+            fillAccountParent(request);
 
             request.setAttribute("error", error);
             request.setAttribute("command", "UPDATEACCOUNT");

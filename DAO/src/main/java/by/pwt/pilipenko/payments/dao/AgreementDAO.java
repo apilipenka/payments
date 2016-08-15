@@ -30,7 +30,7 @@ public class AgreementDAO extends AbstractEntityDAO<Agreement> {
         Bank bank = bankDao.findEntityById(bankId);
         agreement.setBank(bank);
 
-        int clientId = resultSet.getInt("client_id");
+        int clientId = resultSet.getInt("user_id");
         UserDAO userDAO = DAOFactory.getInstance().createUserDAO();
         User user = userDAO.findEntityById(clientId);
         agreement.setClient(user);

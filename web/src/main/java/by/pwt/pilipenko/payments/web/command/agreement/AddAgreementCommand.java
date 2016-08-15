@@ -3,26 +3,28 @@ package by.pwt.pilipenko.payments.web.command.agreement;
 import by.pwt.pilipenko.payments.dao.resources.ConfigurationManager;
 import by.pwt.pilipenko.payments.services.AgreementService;
 import by.pwt.pilipenko.payments.services.BankService;
-import by.pwt.pilipenko.payments.services.UserRoleService;
 import by.pwt.pilipenko.payments.services.UserService;
 import by.pwt.pilipenko.payments.web.command.ActionCommand;
+import by.pwt.plipenko.payments.model.VO.BankVO;
+import by.pwt.plipenko.payments.model.VO.UserVO;
 import by.pwt.plipenko.payments.model.entities.Agreement;
 import by.pwt.plipenko.payments.model.entities.Bank;
 import by.pwt.plipenko.payments.model.entities.User;
-import by.pwt.plipenko.payments.model.entities.UserRole;
 
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import static by.pwt.pilipenko.payments.web.command.agreement.AgreementUtil.fillAgreementParent;
 
 
 public class AddAgreementCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
-
-
 
 
         String error = null;
@@ -43,7 +45,6 @@ public class AddAgreementCommand implements ActionCommand {
 
             String bankStr = request.getParameter("bank");
             String userStr = request.getParameter("client");
-
 
 
             BankService bankService = new BankService();
@@ -85,25 +86,7 @@ public class AddAgreementCommand implements ActionCommand {
             request.setAttribute("source", request.getParameter("source"));
             request.setAttribute("agreement", agreement.createAgreementVO());
 
-            try {
-                request.setAttribute("banks", new BankService().getAllEntities());
-            } catch (NamingException e1) {
-                error += "<br/>" + e1.getMessage();
-
-            } catch (SQLException e1) {
-                error += "<br/>" + e1.getMessage();
-
-            }
-
-            try {
-                request.setAttribute("clients", new UserService().getAllEntities());
-            } catch (NamingException e1) {
-                error += "<br/>" + e1.getMessage();
-
-            } catch (SQLException e1) {
-                error += "<br/>" + e1.getMessage();
-
-            }
+            fillAgreementParent(request);
 
             request.setAttribute("error", error);
             request.getSession().setAttribute("success", "false");

@@ -1,44 +1,44 @@
-package by.pwt.pilipenko.payments.web.command.user;
+package by.pwt.pilipenko.payments.web.command.card;
 
 
 import by.pwt.pilipenko.payments.dao.resources.ConfigurationManager;
-import by.pwt.pilipenko.payments.services.UserService;
+import by.pwt.pilipenko.payments.services.CardService;
 import by.pwt.pilipenko.payments.web.command.ActionCommand;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class DeleteUserCommand implements ActionCommand {
+public class DeleteCardCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
-        UserService userService = new UserService();
-        Object name = request.getAttribute("userID");
+        CardService cardService = new CardService();
+        Object name = request.getAttribute("cardID");
         String error = null;
         String page = null;
         try {
             if (name != null) {
 
-                userService.deleteEntity((Integer.parseInt(name.toString())));
+                cardService.deleteEntity((Integer.parseInt(name.toString())));
 
             } else {
-                name = request.getParameter("userID");
+                name = request.getParameter("cardID");
                 if (name != null) {
-                    userService.deleteEntity((Integer.parseInt(name.toString())));
+                    cardService.deleteEntity((Integer.parseInt(name.toString())));
                 }
             }
 
             request.getSession().setAttribute("success", "true");
 
-            page = ConfigurationManager.getProperty("path.page.userlist");
+            page = ConfigurationManager.getProperty("path.page.cardlist");
 
-            request.getSession().setAttribute("message", "The user has been successfully deleted.");
+            request.getSession().setAttribute("message", "Card has been successfully deleted.");
 
         } catch (NumberFormatException e) {
             e.printStackTrace();
         } catch (Exception e) {
             error = e.getMessage();
-            page = ConfigurationManager.getProperty("path.page.userlist");
+            page = ConfigurationManager.getProperty("path.page.cardlist");
             request.setAttribute("error", error);
-            request.setAttribute("command", "USERLIST");
+            request.setAttribute("command", "CARDLIST");
             request.getSession().setAttribute("success", "false");
         }
 

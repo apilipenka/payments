@@ -2,6 +2,8 @@ package by.pwt.plipenko.payments.model.entities;
 
 import by.pwt.plipenko.payments.model.VO.AgreementVO;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Agreement extends Entity {
@@ -155,8 +157,11 @@ public class Agreement extends Entity {
         AgreementVO agreementVO = new AgreementVO();
         agreementVO.setId(getId());
         agreementVO.setNumber(number);
-        agreementVO.setValidFromDate(validFromDate);
-        agreementVO.setValidToDate(validToDate);
+
+        DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+
+        agreementVO.setValidFromDate(df.format(validFromDate));
+        agreementVO.setValidToDate(df.format(validToDate));
         agreementVO.setBankID(bank.getId());
         agreementVO.setBankName(bank.getName());
         agreementVO.setBankUNN(bank.getUNN());

@@ -2,12 +2,9 @@ package by.pwt.pilipenko.payments.web.command.agreement;
 
 import by.pwt.pilipenko.payments.dao.resources.ConfigurationManager;
 import by.pwt.pilipenko.payments.services.AgreementService;
-import by.pwt.pilipenko.payments.services.UserService;
 import by.pwt.pilipenko.payments.web.command.ActionCommand;
 import by.pwt.plipenko.payments.model.VO.AgreementVO;
-import by.pwt.plipenko.payments.model.VO.UserVO;
 import by.pwt.plipenko.payments.model.entities.Agreement;
-import by.pwt.plipenko.payments.model.entities.User;
 
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +17,7 @@ public class AgreementListCommand implements ActionCommand {
     public String execute(HttpServletRequest request) throws SQLException, NamingException {
         String page = ConfigurationManager.getProperty("path.page.agreementlist");
 
-       AgreementService agreementService = new AgreementService();
+        AgreementService agreementService = new AgreementService();
         Object name = request.getAttribute("agreementName");
 
         List<Agreement> agreementList = new ArrayList<Agreement>();

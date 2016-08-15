@@ -3,7 +3,6 @@ package by.pwt.pilipenko.payments.web.command.agreement;
 
 import by.pwt.pilipenko.payments.dao.resources.ConfigurationManager;
 import by.pwt.pilipenko.payments.services.AgreementService;
-import by.pwt.pilipenko.payments.services.UserService;
 import by.pwt.pilipenko.payments.web.command.ActionCommand;
 
 import javax.servlet.http.HttpServletRequest;

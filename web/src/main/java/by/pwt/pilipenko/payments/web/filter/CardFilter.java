@@ -1,7 +1,6 @@
 package by.pwt.pilipenko.payments.web.filter;
 
 import by.pwt.pilipenko.payments.services.AccountService;
-import by.pwt.pilipenko.payments.services.AgreementService;
 
 import javax.naming.NamingException;
 import javax.servlet.*;

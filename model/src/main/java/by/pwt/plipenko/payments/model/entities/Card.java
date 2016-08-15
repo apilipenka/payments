@@ -2,6 +2,8 @@ package by.pwt.plipenko.payments.model.entities;
 
 import by.pwt.plipenko.payments.model.VO.CardVO;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Card extends Entity {
@@ -110,7 +112,11 @@ public class Card extends Entity {
         cardVO.setId(getId());
         cardVO.setNumber(number);
         cardVO.setName(name);
-        cardVO.setValidToDate(validToDate);
+
+        DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+
+        cardVO.setValidToDate(df.format(validToDate));
+
         cardVO.setAccountID(account.getId());
         cardVO.setAccountNumber(account.getNumber());
         cardVO.setAccountAgreementId(account.getAgreement().getId());

@@ -24,7 +24,7 @@ public class CardDAO extends AbstractEntityDAO<Card> {
         card.setName(resultSet.getString("name"));
         card.setValidToDate(resultSet.getDate("valid_to_date"));
 
-        int accountId = resultSet.getInt("account_id");
+        int accountId = resultSet.getInt("accounts_id");
         AccountDAO accountDAO = DAOFactory.getInstance().createAccountDAO();
         Account account = accountDAO.findEntityById(accountId);
         card.setAccount(account);

@@ -1,11 +1,11 @@
-package by.pwt.pilipenko.payments.web.command.user;
+package by.pwt.pilipenko.payments.web.command.card;
 
 import by.pwt.pilipenko.payments.dao.resources.ConfigurationManager;
-import by.pwt.pilipenko.payments.services.UserRoleService;
-import by.pwt.pilipenko.payments.services.UserService;
+import by.pwt.pilipenko.payments.services.AccountService;
+import by.pwt.pilipenko.payments.services.CardService;
 import by.pwt.pilipenko.payments.web.command.ActionCommand;
-import by.pwt.plipenko.payments.model.entities.User;
-import by.pwt.plipenko.payments.model.entities.UserRole;
+import by.pwt.plipenko.payments.model.entities.Account;
+import by.pwt.plipenko.payments.model.entities.Card;
 
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,62 +14,58 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class UpdateUserCommand implements ActionCommand {
+public class UpdateCardCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
 
         String error = null;
-        User user = null;
+        Card card1 = null;
+        Card card = null;
         String page = null;
         try {
-            String id = request.getParameter("id");
-            String login = request.getParameter("login");
-            String firstName = request.getParameter("firstName");
-            String lastName = request.getParameter("lastName");
-            String password = request.getParameter("password");
-            String personalNumber = request.getParameter("personalNumber");
-            String role = request.getParameter("role");
 
-            UserRoleService userRoleService = new UserRoleService();
+            String number = request.getParameter("number");
+            String name = request.getParameter("name");
+            DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+            String validToDateStr = request.getParameter("validToDate");
+            Date validToDate = format.parse(validToDateStr);
+            String accountStr = request.getParameter("account");
 
-            UserRole userRole = null;
+            AccountService accountService = new AccountService();
+
+            Account account = null;
             try {
-                userRole = userRoleService.getEntity(Integer.parseInt(role));
+                account = accountService.getEntity(Integer.parseInt(accountStr));
             } catch (Exception e) {
                 throw e;
             }
 
-            String birthDateStr = request.getParameter("birthDate");
-            DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-            Date birthDate = format.parse(birthDateStr);
+            card = new Card();
 
-            user = new User();
-            user.setId(Integer.parseInt(id));
-            user.setLogin(login);
-            user.setFirstName(firstName);
-            user.setLastName(lastName);
-            user.setPassword(password);
-            user.setPersonalNumber(personalNumber);
-            user.setUserRole(userRole);
-            user.setBirthDate(birthDate);
+            card.setNumber(number);
+            card.setName(name);
+            card.setValidToDate(validToDate);
+            card.setAccount(account);
 
-            UserService userService = new UserService();
-            boolean flag = userService.updateEntity(user);
+            CardService cardService = new CardService();
+
+            boolean flag = cardService.updateEntity(card);
+
             if (flag) {
                 request.getSession().setAttribute("success", "true");
 
-                page = ConfigurationManager.getProperty("path.page.userlist");
+                page = ConfigurationManager.getProperty("path.page.cardlist");
 
-                request.getSession().setAttribute("message", "The user has been successfully updated.");
+                request.getSession().setAttribute("message", "Card has been successfully updated.");
             }
 
         } catch (Exception e) {
             error = e.getMessage();
             request.setAttribute("source", request.getParameter("source"));
-            request.setAttribute("user", user.createUserVO());
+            request.setAttribute("card", card.createCardVO());
 
             try {
-                request.setAttribute("roles", new UserRoleService().getAllEntities());
+                request.setAttribute("accounts", new AccountService().getAllEntities());
             } catch (NamingException e1) {
                 error += "<br/>" + e1.getMessage();
 
@@ -79,10 +75,10 @@ public class UpdateUserCommand implements ActionCommand {
             }
 
             request.setAttribute("error", error);
-            request.setAttribute("command", "UPDATEUSER");
+            request.setAttribute("command", "UPDATECARD");
             request.getSession().setAttribute("success", "false");
 
-            page = ConfigurationManager.getProperty("path.page.newuser");
+            page = ConfigurationManager.getProperty("path.page.newcard");
 
         }
         return page;

@@ -2,12 +2,9 @@ package by.pwt.pilipenko.payments.web.command.account;
 
 import by.pwt.pilipenko.payments.dao.resources.ConfigurationManager;
 import by.pwt.pilipenko.payments.services.AccountService;
-import by.pwt.pilipenko.payments.services.UserService;
 import by.pwt.pilipenko.payments.web.command.ActionCommand;
 import by.pwt.plipenko.payments.model.VO.AccountVO;
-import by.pwt.plipenko.payments.model.VO.UserVO;
 import by.pwt.plipenko.payments.model.entities.Account;
-import by.pwt.plipenko.payments.model.entities.User;
 
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
@@ -46,7 +43,7 @@ public class AccountListCommand implements ActionCommand {
             }
 
             if (accountVOList != null)
-                request.setAttribute("userList", accountVOList);
+                request.setAttribute("accountList", accountVOList);
         }
         return page;
     }

@@ -1,7 +1,10 @@
 package by.pwt.pilipenko.payments.web.command.client;
 
 import by.pwt.pilipenko.payments.web.command.*;
+import by.pwt.pilipenko.payments.web.command.account.*;
+import by.pwt.pilipenko.payments.web.command.agreement.*;
 import by.pwt.pilipenko.payments.web.command.bank.*;
+import by.pwt.pilipenko.payments.web.command.card.*;
 import by.pwt.pilipenko.payments.web.command.currency.*;
 import by.pwt.pilipenko.payments.web.command.currencyext.*;
 import by.pwt.pilipenko.payments.web.command.exchangerate.*;
@@ -235,6 +238,102 @@ public enum CommandEnum {
     REMOVECURRENCYEXT {
         {
             this.command = new DeleteCurrencyExtCommand();
+        }
+
+
+    },
+    NEWAGREEMENT {
+        {
+            this.command = new NewAgreementCommand();
+        }
+    },
+    ADDAGREEMENT {
+        {
+            this.command = new AddAgreementCommand();
+        }
+    },
+    AGREEMENTLIST {
+        {
+            this.command = new AgreementListCommand();
+        }
+    },
+    EDITAGREEMENT {
+        {
+            this.command = new EditAgreementCommand();
+        }
+    },
+    UPDATEAGREEMENT {
+        {
+            this.command = new UpdateAgreementCommand();
+        }
+    },
+    REMOVEAGREEMENT {
+        {
+            this.command = new DeleteAgreementCommand();
+        }
+
+
+    },
+    NEWACCOUNT {
+        {
+            this.command = new NewAccountCommand();
+        }
+    },
+    ADDACCOUNT {
+        {
+            this.command = new AddAccountCommand();
+        }
+    },
+    ACCOUNTLIST {
+        {
+            this.command = new AccountListCommand();
+        }
+    },
+    EDITACCOUNT {
+        {
+            this.command = new EditAccountCommand();
+        }
+    },
+    UPDATEACCOUNT {
+        {
+            this.command = new UpdateAccountCommand();
+        }
+    },
+    REMOVEACCOUNT {
+        {
+            this.command = new DeleteAccountCommand();
+        }
+
+
+    },
+    NEWCARD {
+        {
+            this.command = new NewCardCommand();
+        }
+    },
+    ADDCARD {
+        {
+            this.command = new AddCardCommand();
+        }
+    },
+    CARDLIST {
+        {
+            this.command = new CardListCommand();
+        }
+    },
+    EDITCARD {
+        {
+            this.command = new EditCardCommand();
+        }
+    },
+    UPDATECARD {
+        {
+            this.command = new UpdateCardCommand();
+        }
+    },
+    REMOVECARD {
+        {
+            this.command = new DeleteCardCommand();
         }
 
 

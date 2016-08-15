@@ -3,13 +3,11 @@ package by.pwt.pilipenko.payments.web.command.agreement;
 import by.pwt.pilipenko.payments.dao.resources.ConfigurationManager;
 import by.pwt.pilipenko.payments.services.AgreementService;
 import by.pwt.pilipenko.payments.services.BankService;
-import by.pwt.pilipenko.payments.services.UserRoleService;
 import by.pwt.pilipenko.payments.services.UserService;
 import by.pwt.pilipenko.payments.web.command.ActionCommand;
 import by.pwt.plipenko.payments.model.entities.Agreement;
 import by.pwt.plipenko.payments.model.entities.Bank;
 import by.pwt.plipenko.payments.model.entities.User;
-import by.pwt.plipenko.payments.model.entities.UserRole;
 
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +38,6 @@ public class UpdateAgreementCommand implements ActionCommand {
 
             String bankStr = request.getParameter("bank");
             String userStr = request.getParameter("client");
-
 
 
             BankService bankService = new BankService();

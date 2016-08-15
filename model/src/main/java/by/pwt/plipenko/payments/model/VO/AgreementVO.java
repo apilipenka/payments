@@ -7,8 +7,8 @@ import java.util.Date;
  */
 public class AgreementVO extends EntityVO {
     private String number;
-    private Date validFromDate;
-    private Date validToDate;
+    private String validFromDate;
+    private String validToDate;
     private int bankID;
     private String bankName;
     private String bankUNN;
@@ -21,7 +21,7 @@ public class AgreementVO extends EntityVO {
         super();
     }
 
-    public AgreementVO(int id, String number, Date validFromDate, Date validToDate, int bankID, String bankName, String bankUNN, int userID, String userFirstName, String userLastName, String userPersonanumber) {
+    public AgreementVO(int id, String number, String validFromDate, String validToDate, int bankID, String bankName, String bankUNN, int userID, String userFirstName, String userLastName, String userPersonanumber) {
         super(id);
         this.number = number;
         this.validFromDate = validFromDate;
@@ -43,19 +43,19 @@ public class AgreementVO extends EntityVO {
         this.number = number;
     }
 
-    public Date getValidFromDate() {
+    public String getValidFromDate() {
         return validFromDate;
     }
 
-    public void setValidFromDate(Date validFromDate) {
+    public void setValidFromDate(String validFromDate) {
         this.validFromDate = validFromDate;
     }
 
-    public Date getValidToDate() {
+    public String getValidToDate() {
         return validToDate;
     }
 
-    public void setValidToDate(Date validToDate) {
+    public void setValidToDate(String validToDate) {
         this.validToDate = validToDate;
     }
 
@@ -114,4 +114,9 @@ public class AgreementVO extends EntityVO {
     public void setUserPersonanumber(String userPersonanumber) {
         this.userPersonanumber = userPersonanumber;
     }
+
+    public String getDescription() {
+        return number + ' ' + bankName;
+    }
+
 }

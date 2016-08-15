@@ -1,10 +1,10 @@
-package by.pwt.pilipenko.payments.web.command.user;
+package by.pwt.pilipenko.payments.web.command.card;
 
 import by.pwt.pilipenko.payments.dao.resources.ConfigurationManager;
-import by.pwt.pilipenko.payments.services.UserService;
+import by.pwt.pilipenko.payments.services.CardService;
 import by.pwt.pilipenko.payments.web.command.ActionCommand;
-import by.pwt.plipenko.payments.model.VO.UserVO;
-import by.pwt.plipenko.payments.model.entities.User;
+import by.pwt.plipenko.payments.model.VO.CardVO;
+import by.pwt.plipenko.payments.model.entities.Card;
 
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,38 +12,38 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserListCommand implements ActionCommand {
+public class CardListCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws SQLException, NamingException {
-        String page = ConfigurationManager.getProperty("path.page.userlist");
+        String page = ConfigurationManager.getProperty("path.page.cardlist");
 
-        UserService userService = new UserService();
-        Object name = request.getAttribute("userName");
+        CardService cardService = new CardService();
+        Object name = request.getAttribute("cardName");
 
-        List<User> userList = new ArrayList<User>();
+        List<Card> cardList = new ArrayList<Card>();
 
 
         if (name != null) {
-            userList = userService.searchEntityByName(name.toString());
+            cardList = cardService.searchEntityByName(name.toString());
         } else {
-            name = request.getParameter("userName");
+            name = request.getParameter("cardName");
             if (name != null) {
-                userList = userService.searchEntityByName(name.toString());
+                cardList = cardService.searchEntityByName(name.toString());
             } else {
-                userList = userService.getAllEntities();
+                cardList = cardService.getAllEntities();
             }
         }
 
 
-        if (userList != null) {
-            List<UserVO> userVOList = new ArrayList<UserVO>();
+        if (cardList != null) {
+            List<CardVO> cardVOList = new ArrayList<CardVO>();
 
-            for (User user : userList) {
-                userVOList.add(user.createUserVO());
+            for (Card card : cardList) {
+                cardVOList.add(card.createCardVO());
             }
 
-            if (userVOList != null)
-                request.setAttribute("userList", userVOList);
+            if (cardVOList != null)
+                request.setAttribute("cardList", cardVOList);
         }
         return page;
     }

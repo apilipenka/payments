@@ -8,7 +8,7 @@ import java.util.Date;
 public class CardVO extends EntityVO {
     private String number;
     private String name;
-    private Date validToDate;
+    private String validToDate;
     private int accountID;
     private String accountNumber;
     private int accountAgreementId;
@@ -23,7 +23,7 @@ public class CardVO extends EntityVO {
         super();
     }
 
-    public CardVO(int id, String number, String name, Date validToDate, int accountID, String accountNumber, int accountAgreementId, String accountAgreementNumber, int accountAgreementBankId, String accountAgreementBankName, String accountAgreementBankUNN, int accountCurrencyId, String accountCurrencyMnemoCode) {
+    public CardVO(int id, String number, String name, String validToDate, int accountID, String accountNumber, int accountAgreementId, String accountAgreementNumber, int accountAgreementBankId, String accountAgreementBankName, String accountAgreementBankUNN, int accountCurrencyId, String accountCurrencyMnemoCode) {
         super(id);
         this.number = number;
         this.name = name;
@@ -79,11 +79,11 @@ public class CardVO extends EntityVO {
         this.name = name;
     }
 
-    public Date getValidToDate() {
+    public String getValidToDate() {
         return validToDate;
     }
 
-    public void setValidToDate(Date validToDate) {
+    public void setValidToDate(String validToDate) {
         this.validToDate = validToDate;
     }
 
