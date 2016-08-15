@@ -9,29 +9,29 @@ public class AccountVO extends EntityVO {
     private double amount;
     private int agreementID;
     private String agreementNumber;
+    private int agreementBankid;
     private String agreementBankName;
     private String agreementBankUNN;
     private int currencyID;
     private String currencyMnemoCode;
-    private String currencyCode;
 
     public AccountVO() {
         super();
     }
 
-    public AccountVO(int id, String number, double amount, int agreementID, String agreementNumber, String agreementBankName, String agreementBankUNN, int currencyID, String currencyMnemocode, String currencyCode) {
+    public AccountVO(int id, String number, double amount, int agreementID, String agreementNumber, int agreementBankid, String agreementBankName, String agreementBankUNN, int currencyID, String currencyMnemocode, String currencyCode) {
         super(id);
         this.number = number;
         this.amount = amount;
         this.agreementID = agreementID;
         this.agreementNumber = agreementNumber;
+        this.agreementBankid = agreementBankid;
         this.agreementBankName = agreementBankName;
         this.agreementBankUNN = agreementBankUNN;
 
         this.currencyID = currencyID;
         this.currencyMnemoCode = currencyMnemocode;
 
-        this.currencyCode = currencyCode;
     }
 
     public String getNumber() {
@@ -82,14 +82,6 @@ public class AccountVO extends EntityVO {
         this.currencyMnemoCode = currencyMnemocode;
     }
 
-    public String getCurrencyCode() {
-        return currencyCode;
-    }
-
-    public void setCurrencyCode(String currencyCode) {
-        this.currencyCode = currencyCode;
-    }
-
     public String getAgreementBankName() {
         return agreementBankName;
     }
@@ -104,5 +96,13 @@ public class AccountVO extends EntityVO {
 
     public void setAgreementBankUNN(String agreementBankUNN) {
         this.agreementBankUNN = agreementBankUNN;
+    }
+
+    public int getAgreementBankid() {
+        return agreementBankid;
+    }
+
+    public void setAgreementBankid(int agreementBankid) {
+        this.agreementBankid = agreementBankid;
     }
 }

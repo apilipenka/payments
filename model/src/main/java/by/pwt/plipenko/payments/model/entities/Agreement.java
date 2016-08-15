@@ -1,5 +1,7 @@
 package by.pwt.plipenko.payments.model.entities;
 
+import by.pwt.plipenko.payments.model.VO.AgreementVO;
+
 import java.util.*;
 
 public class Agreement extends Entity {
@@ -149,4 +151,19 @@ public class Agreement extends Entity {
         return finded;
     }
 
+    public AgreementVO createAgreementVO() {
+        AgreementVO agreementVO = new AgreementVO();
+        agreementVO.setId(getId());
+        agreementVO.setNumber(number);
+        agreementVO.setValidFromDate(validFromDate);
+        agreementVO.setValidToDate(validToDate);
+        agreementVO.setBankID(bank.getId());
+        agreementVO.setBankName(bank.getName());
+        agreementVO.setBankUNN(bank.getUNN());
+        agreementVO.setUserID(client.getId());
+        agreementVO.setUserFirstName(client.getFirstName());
+        agreementVO.setUserLastName(client.getLastName());
+        agreementVO.setUserPersonanumber(client.getPersonalNumber());
+        return agreementVO;
+    }
 }

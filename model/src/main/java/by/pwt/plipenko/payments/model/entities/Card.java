@@ -1,5 +1,7 @@
 package by.pwt.plipenko.payments.model.entities;
 
+import by.pwt.plipenko.payments.model.VO.CardVO;
+
 import java.util.Date;
 
 public class Card extends Entity {
@@ -102,4 +104,23 @@ public class Card extends Entity {
                 + ", account=" + account + "]";
     }
 
+    public CardVO createCardVO() {
+
+        CardVO cardVO = new CardVO();
+        cardVO.setId(getId());
+        cardVO.setNumber(number);
+        cardVO.setName(name);
+        cardVO.setValidToDate(validToDate);
+        cardVO.setAccountID(account.getId());
+        cardVO.setAccountNumber(account.getNumber());
+        cardVO.setAccountAgreementId(account.getAgreement().getId());
+        cardVO.setAccountAgreementNumber(account.getAgreement().getNumber());
+        cardVO.setAccountAgreementBankId(account.getAgreement().getBank().getId());
+        cardVO.setAccountAgreementBankName(account.getAgreement().getBank().getName());
+        cardVO.setAccountAgreementBankUNN(account.getAgreement().getBank().getUNN());
+        cardVO.setAccountCurrencyId(account.getCurrency().getId());
+        cardVO.setAccountCurrencyMnemoCode(account.getCurrency().getMnemoCode());
+        return cardVO;
+
+    }
 }

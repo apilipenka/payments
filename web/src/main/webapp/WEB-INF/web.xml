@@ -48,6 +48,52 @@
     </filter-mapping>
 
     <filter>
+        <filter-name>CardFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.CardFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CardFilter</filter-name>
+        <url-pattern>/new-card.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CardFilter</filter-name>
+        <url-pattern>/jsp/new-card.jsp</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>AccountFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.AccountFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AccountFilter</filter-name>
+        <url-pattern>/new-account.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AccountFilter</filter-name>
+        <url-pattern>/jsp/new-account.jsp</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>AgreemntFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.AgreementFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AgreemntFilter</filter-name>
+        <url-pattern>/new-agreement.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AgreemntFilter</filter-name>
+        <url-pattern>/jsp/new-agreement.jsp</url-pattern>
+    </filter-mapping>
+
+
+    <filter>
         <filter-name>ExchangeRateFilter</filter-name>
         <filter-class>
             by.pwt.pilipenko.payments.web.filter.ExchangeRateFilter
@@ -76,6 +122,51 @@
     <filter-mapping>
         <filter-name>UsersFilter</filter-name>
         <url-pattern>/jsp/user-list.jsp</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>CardsFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.CardsFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CardsFilter</filter-name>
+        <url-pattern>/card-list.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CardsFilter</filter-name>
+        <url-pattern>/jsp/card-list.jsp</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>AccountsFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.AccountsFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AccountsFilter</filter-name>
+        <url-pattern>/account-list.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AccountsFilter</filter-name>
+        <url-pattern>/jsp/account-list.jsp</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>AgreementsFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.AgreementsFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AgreementsFilter</filter-name>
+        <url-pattern>/agreement-list.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AgreementsFilter</filter-name>
+        <url-pattern>/jsp/agreement-list.jsp</url-pattern>
     </filter-mapping>
 
     <filter>

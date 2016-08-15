@@ -1,5 +1,7 @@
 package by.pwt.plipenko.payments.model.entities;
 
+import by.pwt.plipenko.payments.model.VO.AccountVO;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -146,4 +148,23 @@ public class Account extends Entity {
     }
 
 
+    public AccountVO createAccountVO() {
+
+        AccountVO accountVO = new AccountVO();
+
+        accountVO.setId(getId());
+        accountVO.setNumber(number);
+        accountVO.setAmount(amount);
+
+        accountVO.setAgreementID(agreement.getId());
+        accountVO.setAgreementNumber(agreement.getNumber());
+        accountVO.setAgreementBankid(agreement.getBank().getId());
+        accountVO.setAgreementBankName(agreement.getBank().getName());
+        accountVO.setAgreementBankUNN(agreement.getBank().getUNN());
+        accountVO.setCurrencyID(currency.getId());
+        accountVO.setCurrencyMnemocode(currency.getMnemoCode());
+        return  accountVO;
+
+
+    }
 }

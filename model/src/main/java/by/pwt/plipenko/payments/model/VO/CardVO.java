@@ -11,28 +11,57 @@ public class CardVO extends EntityVO {
     private Date validToDate;
     private int accountID;
     private String accountNumber;
+    private int accountAgreementId;
     private String accountAgreementNumber;
+    private int accountAgreementBankId;
     private String accountAgreementBankName;
     private String accountAgreementBankUNN;
+    private int accountCurrencyId;
     private String accountCurrencyMnemoCode;
 
     public CardVO() {
         super();
     }
 
-    public CardVO(int id, String number, String name, Date validToDate, int accountID, String accountNumber, String accountAgreementNumber, String accountAgreementBankName, String accountAgreementBankUNN, String accountCurrencyMnemoCode) {
+    public CardVO(int id, String number, String name, Date validToDate, int accountID, String accountNumber, int accountAgreementId, String accountAgreementNumber, int accountAgreementBankId, String accountAgreementBankName, String accountAgreementBankUNN, int accountCurrencyId, String accountCurrencyMnemoCode) {
         super(id);
         this.number = number;
         this.name = name;
         this.validToDate = validToDate;
         this.accountID = accountID;
         this.accountNumber = accountNumber;
+        this.accountAgreementId = accountAgreementId;
         this.accountAgreementNumber = accountAgreementNumber;
+        this.accountAgreementBankId = accountAgreementBankId;
         this.accountAgreementBankName = accountAgreementBankName;
         this.accountAgreementBankUNN = accountAgreementBankUNN;
+        this.accountCurrencyId = accountCurrencyId;
         this.accountCurrencyMnemoCode = accountCurrencyMnemoCode;
     }
 
+    public int getAccountAgreementBankId() {
+        return accountAgreementBankId;
+    }
+
+    public void setAccountAgreementBankId(int accountAgreementBankId) {
+        this.accountAgreementBankId = accountAgreementBankId;
+    }
+
+    public int getAccountCurrencyId() {
+        return accountCurrencyId;
+    }
+
+    public void setAccountCurrencyId(int accountCurrencyId) {
+        this.accountCurrencyId = accountCurrencyId;
+    }
+
+    public int getAccountAgreementId() {
+        return accountAgreementId;
+    }
+
+    public void setAccountAgreementId(int accountAgreementId) {
+        this.accountAgreementId = accountAgreementId;
+    }
 
     public String getNumber() {
         return number;
