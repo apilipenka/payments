@@ -116,7 +116,7 @@ public class AgreementVO extends EntityVO {
     }
 
     public String getDescription() {
-        return number + ' ' + bankName;
+        return number + ' ' + bankName + ' ' + userFirstName + ' ' + userLastName;
     }
 
 }

@@ -8,7 +8,7 @@
 
 <body>
 <div class="container">
-    <h2>User roles</h2>
+    <h2>Commands</h2>
     <!--Search Form -->
     <form action="controller" method="get" id="seachCommandForm" role="form">
         <input type="hidden" id="command" name="command" value="COMMANDLIST">

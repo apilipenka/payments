@@ -19,12 +19,12 @@ public class EditCommandCommand implements ActionCommand {
         try {
             if (name != null) {
 
-                request.setAttribute("command", commandService.getEntity(Integer.parseInt(name.toString())));
+                request.setAttribute("commando", commandService.getEntity(Integer.parseInt(name.toString())));
 
             } else {
                 name = request.getParameter("commandID");
                 if (name != null) {
-                    request.setAttribute("command", commandService.getEntity(Integer.parseInt(name.toString())));
+                    request.setAttribute("commando", commandService.getEntity(Integer.parseInt(name.toString())));
                 }
             }
         } catch (NumberFormatException e) {

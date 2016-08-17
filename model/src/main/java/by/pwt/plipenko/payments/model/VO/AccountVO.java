@@ -14,12 +14,13 @@ public class AccountVO extends EntityVO {
     private String agreementBankUNN;
     private int currencyID;
     private String currencyMnemoCode;
+    private String agreementDescription;
 
     public AccountVO() {
         super();
     }
 
-    public AccountVO(int id, String number, double amount, int agreementID, String agreementNumber, int agreementBankid, String agreementBankName, String agreementBankUNN, int currencyID, String currencyMnemocode, String currencyCode) {
+    public AccountVO(int id, String number, double amount, int agreementID, String agreementNumber, int agreementBankid, String agreementBankName, String agreementBankUNN, int currencyID, String currencyMnemocode, String currencyCode, String agreementDescription) {
         super(id);
         this.number = number;
         this.amount = amount;
@@ -32,6 +33,7 @@ public class AccountVO extends EntityVO {
         this.currencyID = currencyID;
         this.currencyMnemoCode = currencyMnemocode;
 
+        this.agreementDescription = agreementDescription;
     }
 
     public String getNumber() {

@@ -58,13 +58,13 @@ public class Controller extends HttpServlet {
 
             Object success = request.getSession().getAttribute("success");
             //TODO Вернуть логику назад
-            if (success != null && success.toString().equalsIgnoreCase("true")) {
+           // if (success != null && success.toString().equalsIgnoreCase("true")) {
                 response.sendRedirect(request.getContextPath() + page);
-            } else {
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
-                //вызов страницы ответа на запрос
-                dispatcher.forward(request, response);
-            }
+           // } else {
+          //      RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
+           //     //вызов страницы ответа на запрос
+          ///      dispatcher.forward(request, response);
+           // }
 
         } else {
             // установка страницы c cообщением об ошибке
