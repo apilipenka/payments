@@ -11,7 +11,7 @@
 
 <body>
 <div class="container">
-    <h2>Cards</h2>
+    <h2>Agreements</h2>
     <!--Search Form -->
     <form action="controller" method="get" id="seachAgreementForm" role="form">
         <input type="hidden" id="command" name="command" value="AGREEMENTLIST">

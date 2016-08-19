@@ -23,6 +23,7 @@ public class UpdateAccountCommand implements ActionCommand {
         Account account = null;
         String page = null;
         try {
+            int id = new Integer(request.getParameter("id"));
             String number = request.getParameter("number");
             String amount = request.getParameter("amount");
             String agreementstr = request.getParameter("agreement");
@@ -49,7 +50,7 @@ public class UpdateAccountCommand implements ActionCommand {
 
 
             account = new Account();
-
+            account.setId(id);
             account.setNumber(number);
             account.setAmount(new Double(amount));
             account.setAgreement(agreemnet);
