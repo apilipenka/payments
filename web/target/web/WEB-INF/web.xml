@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         id="WebApp_ID" version="3.1">
+    <display-name>BankAccountsWEB</display-name>
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.htm</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>default.html</welcome-file>
+        <welcome-file>default.htm</welcome-file>
+        <welcome-file>default.jsp</welcome-file>
+    </welcome-file-list>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/jsp/error/error.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.RuntimeException</exception-type>
+        <location>/jsp/error/error.jsp</location>
+    </error-page>
+    <session-config>
+        <session-timeout>1</session-timeout>
+    </session-config>
+
+    <resource-ref>
+        <description>DB Connection</description>
+        <res-ref-name>jdbc/mysqldb</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
+
+
+    <filter>
+        <filter-name>UserFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.UserFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UserFilter</filter-name>
+        <url-pattern>/new-user.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>UserFilter</filter-name>
+        <url-pattern>/jsp/new-user.jsp</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>CardFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.CardFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CardFilter</filter-name>
+        <url-pattern>/new-card.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CardFilter</filter-name>
+        <url-pattern>/jsp/new-card.jsp</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>AccountFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.AccountFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AccountFilter</filter-name>
+        <url-pattern>/new-account.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AccountFilter</filter-name>
+        <url-pattern>/jsp/new-account.jsp</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>AgreemntFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.AgreementFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AgreemntFilter</filter-name>
+        <url-pattern>/new-agreement.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AgreemntFilter</filter-name>
+        <url-pattern>/jsp/new-agreement.jsp</url-pattern>
+    </filter-mapping>
+
+
+    <filter>
+        <filter-name>ExchangeRateFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.ExchangeRateFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ExchangeRateFilter</filter-name>
+        <url-pattern>/new-exchangeRate.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>ExchangeRateFilter</filter-name>
+        <url-pattern>/jsp/new-exchangeRate.jsp</url-pattern>
+    </filter-mapping>
+
+
+    <filter>
+        <filter-name>UsersFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.UsersFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UsersFilter</filter-name>
+        <url-pattern>/user-list.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>UsersFilter</filter-name>
+        <url-pattern>/jsp/user-list.jsp</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>CardsFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.CardsFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CardsFilter</filter-name>
+        <url-pattern>/card-list.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CardsFilter</filter-name>
+        <url-pattern>/jsp/card-list.jsp</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>AccountsFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.AccountsFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AccountsFilter</filter-name>
+        <url-pattern>/account-list.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AccountsFilter</filter-name>
+        <url-pattern>/jsp/account-list.jsp</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>AgreementsFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.AgreementsFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AgreementsFilter</filter-name>
+        <url-pattern>/agreement-list.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AgreementsFilter</filter-name>
+        <url-pattern>/jsp/agreement-list.jsp</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>UserRolesFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.UserRolesFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UserRolesFilter</filter-name>
+        <url-pattern>/userRole-list.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>UserRolesFilter</filter-name>
+        <url-pattern>/jsp/userRole-list.jsp</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>CommandsFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.CommandsFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CommandsFilter</filter-name>
+        <url-pattern>/command-list.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CommandsFilter</filter-name>
+        <url-pattern>/jsp/command-list.jsp</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>BanksFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.BanksFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>BanksFilter</filter-name>
+        <url-pattern>/bank-list.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>BanksFilter</filter-name>
+        <url-pattern>/jsp/bank-list.jsp</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>CurrenciesFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.CurrenciesFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CurrenciesFilter</filter-name>
+        <url-pattern>/currency-list.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CurrenciesFilter</filter-name>
+        <url-pattern>/jsp/currency-list.jsp</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>CurrenciesExtFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.CurrenciesExtFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CurrenciesExtFilter</filter-name>
+        <url-pattern>/currencyext-list.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CurrenciesExtFilter</filter-name>
+        <url-pattern>/jsp/currencyext-list.jsp</url-pattern>
+    </filter-mapping>
+
+
+    <filter>
+        <filter-name>ExchangeRatesFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.ExchangeRatesFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ExchangeRatesFilter</filter-name>
+        <url-pattern>/exchangeRate-list.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>ExchangeRatesFilter</filter-name>
+        <url-pattern>/jsp/exchangeRate-list.jsp</url-pattern>
+    </filter-mapping>
+
+
+    <filter>
+        <filter-name>ExchangeRatesExtFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.ExchangeRatesExtFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ExchangeRatesExtFilter</filter-name>
+        <url-pattern>/new-currencyext.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>ExchangeRatesExtFilter</filter-name>
+        <url-pattern>/jsp/new-currencyext.jsp</url-pattern>
+    </filter-mapping>
+
+</web-app>

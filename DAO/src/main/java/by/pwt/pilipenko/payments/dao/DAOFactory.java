@@ -25,6 +25,14 @@ public class DAOFactory {
 
     }
 
+    public DAOFactory(DataSource dataSource) throws NamingException {
+        super();
+
+        this.dataSource = dataSource;
+
+    }
+
+
     public static DAOFactory getInstance() throws NamingException {
 
         DAOFactory localInstance = instance;
