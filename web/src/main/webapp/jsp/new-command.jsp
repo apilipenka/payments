@@ -44,7 +44,11 @@
             <label for="commandf" class="control-label col-xs-6">Command:</label>
             <input
                     type="text" name="commandf" id="commandf" class="form-control"
-                    value="${commando.name}" required="true"/>
+                    value="${commando.command}" required="true"/>
+            <label
+                    for="url" class="control-label col-xs-6">Label:</label>
+            <input type="text" name="url" id="url"
+                   class="form-control" value="${commando.url}" required="true"/>
             <label
                     for="label" class="control-label col-xs-6">Label:</label>
             <input type="text" name="label" id="label"

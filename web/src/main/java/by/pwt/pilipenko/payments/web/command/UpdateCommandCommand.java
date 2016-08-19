@@ -15,13 +15,15 @@ public class UpdateCommandCommand implements ActionCommand {
         String page = null;
         try {
             String id = request.getParameter("id");
-            String command = request.getParameter("command");
+            String command = request.getParameter("commandf");
+            String url=request.getParameter("url");
             String label = request.getParameter("label");
             String comment = request.getParameter("comment");
 
             command1 = new Command();
             command1.setId(Integer.parseInt(id));
             command1.setCommand(command);
+            command1.setUrl(url);
             command1.setLabel(label);
             command1.setComment(comment);
 
@@ -38,7 +40,7 @@ public class UpdateCommandCommand implements ActionCommand {
         } catch (Exception e) {
             error = e.getMessage();
             request.setAttribute("source", request.getParameter("source"));
-            request.setAttribute("command", command1);
+            request.setAttribute("commando", command1);
 
             request.setAttribute("error", error);
             request.setAttribute("command", "UPDATECOMMAND");

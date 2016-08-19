@@ -33,7 +33,7 @@ public class CurrencyDaoTest
     @BeforeClass
     public static void intit() throws NamingException, ClassNotFoundException, SQLException {
 
-        Class.forName("com.mysql.cj.jdbc.Driver");
+        Class.forName("com.mysql.jdbc.Driver");
 
         DriverManagerConnectionFactory connectionFactory = new DriverManagerConnectionFactory("jdbc:mysql://localhost:3306/payments?autoReconnect=true&useSSL=false", "root", "awp1977");
         PoolableConnectionFactory poolableConnectionFactory = new PoolableConnectionFactory(connectionFactory,
