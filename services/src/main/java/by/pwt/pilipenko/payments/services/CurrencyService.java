@@ -2,7 +2,8 @@ package by.pwt.pilipenko.payments.services;
 
 import by.pwt.pilipenko.payments.dao.AbstractEntityDAO;
 import by.pwt.pilipenko.payments.dao.CurrencyDAO;
-import by.pwt.pilipenko.payments.dao.DAOFactory;
+import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
+import by.pwt.pilipenko.payments.dao.JDBCDAOFactory;
 import by.pwt.plipenko.payments.model.entities.Currency;
 
 import javax.naming.NamingException;
@@ -10,6 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class CurrencyService extends AbstractEntitySevice<Currency> {
+
 
     public List<Currency> searchEntityByName(String name) throws SQLException, NamingException {
 
@@ -28,9 +30,9 @@ public class CurrencyService extends AbstractEntitySevice<Currency> {
 
     }
 
-    @Override
     public AbstractEntityDAO<Currency> getEntityDAO() throws NamingException, SQLException {
-        CurrencyDAO currencyDAO = DAOFactory.getInstance().createCurrencyDAO();
+
+        CurrencyDAO currencyDAO = DaoFactoryFactory.getInstance().createCurrencyDAO();
         return currencyDAO;
     }
 

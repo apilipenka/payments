@@ -23,11 +23,11 @@ public class AgreementUtil {
 
         try {
 
-            List<Bank> banks =  bankService.getAllEntities();
-            if (banks!=null) {
+            List<Bank> banks = bankService.getAllEntities();
+            if (banks != null) {
                 List<BankVO> banksVO = new ArrayList<BankVO>();
-                for (Bank bank:banks)
-                { banksVO.add(bank.createBankVO());
+                for (Bank bank : banks) {
+                    banksVO.add(bank.createBankVO());
 
                 }
                 request.setAttribute("banks", banksVO);
@@ -41,10 +41,10 @@ public class AgreementUtil {
 
         try {
             List<User> users = userService.getAllEntities();
-            if (users!=null) {
+            if (users != null) {
                 List<UserVO> usersVO = new ArrayList<UserVO>();
-                for (User user:users)
-                { usersVO.add(user.createUserVO());
+                for (User user : users) {
+                    usersVO.add(user.createUserVO());
 
                 }
                 request.setAttribute("clients", usersVO);

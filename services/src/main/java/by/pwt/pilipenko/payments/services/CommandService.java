@@ -2,7 +2,8 @@ package by.pwt.pilipenko.payments.services;
 
 import by.pwt.pilipenko.payments.dao.AbstractEntityDAO;
 import by.pwt.pilipenko.payments.dao.CommandDAO;
-import by.pwt.pilipenko.payments.dao.DAOFactory;
+import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
+import by.pwt.pilipenko.payments.dao.JDBCDAOFactory;
 import by.pwt.plipenko.payments.model.entities.Command;
 
 import javax.naming.NamingException;
@@ -27,7 +28,7 @@ public class CommandService extends AbstractEntitySevice<Command> {
 
     @Override
     public AbstractEntityDAO<Command> getEntityDAO() throws SQLException, NamingException {
-        CommandDAO commandDAO = DAOFactory.getInstance().createCommandDAO();
+        CommandDAO commandDAO = DaoFactoryFactory.getInstance().createCommandDAO();
         return commandDAO;
     }
 

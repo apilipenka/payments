@@ -34,6 +34,6 @@ public class BankVO extends EntityVO {
     }
 
     public String getDescription() {
-        return name+' '+UNN;
+        return name + ' ' + UNN;
     }
 }

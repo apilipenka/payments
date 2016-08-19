@@ -2,7 +2,8 @@ package by.pwt.pilipenko.payments.services;
 
 import by.pwt.pilipenko.payments.dao.AbstractEntityDAO;
 import by.pwt.pilipenko.payments.dao.AgreementDAO;
-import by.pwt.pilipenko.payments.dao.DAOFactory;
+import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
+import by.pwt.pilipenko.payments.dao.JDBCDAOFactory;
 import by.pwt.plipenko.payments.model.entities.Agreement;
 
 import javax.naming.NamingException;
@@ -25,9 +26,9 @@ public class AgreementService extends AbstractEntitySevice<Agreement> {
         return list;
     }
 
-    @Override
-    public AbstractEntityDAO<Agreement> getEntityDAO() throws SQLException, NamingException {
-        AgreementDAO agreementDAO = DAOFactory.getInstance().createAgreementDAO();
+    public AbstractEntityDAO<Agreement> getEntityDAO() throws NamingException, SQLException {
+
+        AgreementDAO agreementDAO = DaoFactoryFactory.getInstance().createAgreementDAO();
         return agreementDAO;
     }
 

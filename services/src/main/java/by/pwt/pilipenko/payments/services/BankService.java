@@ -2,7 +2,8 @@ package by.pwt.pilipenko.payments.services;
 
 import by.pwt.pilipenko.payments.dao.AbstractEntityDAO;
 import by.pwt.pilipenko.payments.dao.BankDAO;
-import by.pwt.pilipenko.payments.dao.DAOFactory;
+import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
+import by.pwt.pilipenko.payments.dao.JDBCDAOFactory;
 import by.pwt.plipenko.payments.model.entities.Bank;
 
 import javax.naming.NamingException;
@@ -28,7 +29,7 @@ public class BankService extends AbstractEntitySevice<Bank> {
 
     @Override
     public AbstractEntityDAO<Bank> getEntityDAO() throws NamingException, SQLException {
-        BankDAO bankDAO = DAOFactory.getInstance().createBankDAO();
+        BankDAO bankDAO = DaoFactoryFactory.getInstance().createBankDAO();
         return bankDAO;
     }
 

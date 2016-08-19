@@ -28,14 +28,14 @@ public class CurrencyDAO extends AbstractEntityDAO<Currency> {
     @Override
     protected PreparedStatement prepareSelectByPKStatement(Currency entity, PreparedStatement statement)
             throws SQLException {
-        statement.setString(1, entity.getName());
+        statement.setString(1, entity.getMnemoCode());
         return statement;
     }
 
     @Override
     protected PreparedStatement prepareSelectByEntityStatement(Currency entity, PreparedStatement statement)
             throws SQLException {
-        statement.setString(1, entity.getName());
+        statement.setString(1, entity.getMnemoCode());
         return statement;
     }
 

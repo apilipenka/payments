@@ -26,12 +26,12 @@ public class AgreementDAO extends AbstractEntityDAO<Agreement> {
         agreement.setValidToDate(resultSet.getDate("valid_to_date"));
 
         int bankId = resultSet.getInt("bank_id");
-        BankDAO bankDao = DAOFactory.getInstance().createBankDAO();
+        BankDAO bankDao = DaoFactoryFactory.getInstance().createBankDAO();
         Bank bank = bankDao.findEntityById(bankId);
         agreement.setBank(bank);
 
         int clientId = resultSet.getInt("user_id");
-        UserDAO userDAO = DAOFactory.getInstance().createUserDAO();
+        UserDAO userDAO = DaoFactoryFactory.getInstance().createUserDAO();
         User user = userDAO.findEntityById(clientId);
         agreement.setClient(user);
 

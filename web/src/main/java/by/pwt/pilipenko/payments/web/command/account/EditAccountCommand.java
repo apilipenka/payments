@@ -2,8 +2,6 @@ package by.pwt.pilipenko.payments.web.command.account;
 
 import by.pwt.pilipenko.payments.dao.resources.ConfigurationManager;
 import by.pwt.pilipenko.payments.services.AccountService;
-import by.pwt.pilipenko.payments.services.AgreementService;
-import by.pwt.pilipenko.payments.services.CurrencyService;
 import by.pwt.pilipenko.payments.web.command.ActionCommand;
 import by.pwt.plipenko.payments.model.entities.Account;
 

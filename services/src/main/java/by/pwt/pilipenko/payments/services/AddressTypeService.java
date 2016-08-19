@@ -1,7 +1,8 @@
 package by.pwt.pilipenko.payments.services;
 
 import by.pwt.pilipenko.payments.dao.AbstractEntityDAO;
-import by.pwt.pilipenko.payments.dao.DAOFactory;
+import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
+import by.pwt.pilipenko.payments.dao.JDBCDAOFactory;
 import by.pwt.pilipenko.payments.dao.TypeDAO;
 import by.pwt.plipenko.payments.model.entities.Type;
 
@@ -11,6 +12,10 @@ import java.util.List;
 
 
 public class AddressTypeService extends AbstractEntitySevice<Type> {
+
+
+
+
 
     public List<Type> searchEntityByName(String name) throws SQLException, NamingException {
 
@@ -25,10 +30,10 @@ public class AddressTypeService extends AbstractEntitySevice<Type> {
         return list;
     }
 
-    @Override
     public AbstractEntityDAO<Type> getEntityDAO() throws NamingException, SQLException {
-        TypeDAO addressTypeDAO = DAOFactory.getInstance().createAddressTypeDAO();
-        return addressTypeDAO;
+
+        TypeDAO addressDAO = DaoFactoryFactory.getInstance().createAddressTypeDAO();
+        return addressDAO;
     }
 
 }

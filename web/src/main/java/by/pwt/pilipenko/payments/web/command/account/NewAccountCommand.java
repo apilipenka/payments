@@ -2,8 +2,6 @@ package by.pwt.pilipenko.payments.web.command.account;
 
 
 import by.pwt.pilipenko.payments.dao.resources.ConfigurationManager;
-import by.pwt.pilipenko.payments.services.AgreementService;
-import by.pwt.pilipenko.payments.services.CurrencyService;
 import by.pwt.pilipenko.payments.web.command.ActionCommand;
 
 import javax.naming.NamingException;

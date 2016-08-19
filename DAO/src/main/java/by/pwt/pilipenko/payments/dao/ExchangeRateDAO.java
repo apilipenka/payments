@@ -32,7 +32,7 @@ public class ExchangeRateDAO extends AbstractEntityDAO<ExchangeRate> {
         exchangeRate.setRate(resultSet.getFloat("rate"));
         int currencyId = resultSet.getInt("currency_id");
         int targetCurrencyId = resultSet.getInt("target_currency_id");
-        CurrencyDAO currencyDao = DAOFactory.getInstance().createCurrencyDAO();
+        CurrencyDAO currencyDao = DaoFactoryFactory.getInstance().createCurrencyDAO();
         Currency currency = currencyDao.findEntityById(currencyId);
         exchangeRate.setCurrency(currency);
         currency = currencyDao.findEntityById(targetCurrencyId);

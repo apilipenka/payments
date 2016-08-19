@@ -30,7 +30,7 @@ public class UserDAO extends AbstractEntityDAO<User> {
         user.setBirthDate(birthDate);
 
         int roleId = resultSet.getInt("user_role_id");
-        UserRoleDAO typeDao = DAOFactory.getInstance().createUserRoleDAO();
+        UserRoleDAO typeDao = DaoFactoryFactory.getInstance().createUserRoleDAO();
         UserRole userRole = (UserRole) typeDao.findEntityById(roleId);
         user.setUserRole(userRole);
 

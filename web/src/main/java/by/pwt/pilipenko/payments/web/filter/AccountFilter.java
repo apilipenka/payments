@@ -1,13 +1,8 @@
 package by.pwt.pilipenko.payments.web.filter;
 
-import by.pwt.pilipenko.payments.services.AgreementService;
-import by.pwt.pilipenko.payments.services.CurrencyService;
-
-import javax.naming.NamingException;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.sql.SQLException;
 
 import static by.pwt.pilipenko.payments.web.command.account.AccountUtil.fillAccountParent;
 

@@ -2,7 +2,8 @@ package by.pwt.pilipenko.payments.services;
 
 import by.pwt.pilipenko.payments.dao.AbstractEntityDAO;
 import by.pwt.pilipenko.payments.dao.AccountDAO;
-import by.pwt.pilipenko.payments.dao.DAOFactory;
+import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
+import by.pwt.pilipenko.payments.dao.JDBCDAOFactory;
 import by.pwt.plipenko.payments.model.entities.Account;
 
 import javax.naming.NamingException;
@@ -11,7 +12,8 @@ import java.util.List;
 
 public class AccountService extends AbstractEntitySevice<Account> {
 
-    public List<Account> searchEntityByName(String name) throws SQLException, NamingException {
+
+  public List<Account> searchEntityByName(String name) throws SQLException, NamingException {
 
         Account entity = new Account();
         if (name != null && name != "") {
@@ -25,10 +27,11 @@ public class AccountService extends AbstractEntitySevice<Account> {
         return list;
     }
 
-    @Override
-    public AbstractEntityDAO<Account> getEntityDAO() throws SQLException, NamingException {
-        AccountDAO accountDAO = DAOFactory.getInstance().createAccountDAO();
+    public AbstractEntityDAO<Account> getEntityDAO() throws NamingException, SQLException {
+
+        AccountDAO accountDAO = DaoFactoryFactory.getInstance().createAccountDAO();
         return accountDAO;
     }
+
 
 }

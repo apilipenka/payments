@@ -64,4 +64,7 @@ public abstract class AbstractEntitySevice<T extends Entity> {
 
     public abstract AbstractEntityDAO<T> getEntityDAO() throws NamingException, SQLException;
 
+
+
+
 }

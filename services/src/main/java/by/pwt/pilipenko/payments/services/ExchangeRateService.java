@@ -1,7 +1,8 @@
 package by.pwt.pilipenko.payments.services;
 
 import by.pwt.pilipenko.payments.dao.AbstractEntityDAO;
-import by.pwt.pilipenko.payments.dao.DAOFactory;
+import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
+import by.pwt.pilipenko.payments.dao.JDBCDAOFactory;
 import by.pwt.pilipenko.payments.dao.ExchangeRateDAO;
 import by.pwt.plipenko.payments.model.entities.Currency;
 import by.pwt.plipenko.payments.model.entities.ExchangeRate;
@@ -79,7 +80,7 @@ public class ExchangeRateService extends AbstractEntitySevice<ExchangeRate> {
 
     @Override
     public AbstractEntityDAO<ExchangeRate> getEntityDAO() throws NamingException, SQLException {
-        ExchangeRateDAO exchangeRateDAO = DAOFactory.getInstance().createExchangeRateDAO();
+        ExchangeRateDAO exchangeRateDAO = DaoFactoryFactory.getInstance().createExchangeRateDAO();
         return exchangeRateDAO;
     }
 

@@ -1,17 +1,10 @@
 package by.pwt.pilipenko.payments.web.command.account;
 
 import by.pwt.pilipenko.payments.services.AgreementService;
-import by.pwt.pilipenko.payments.services.BankService;
 import by.pwt.pilipenko.payments.services.CurrencyService;
-import by.pwt.pilipenko.payments.services.UserService;
 import by.pwt.plipenko.payments.model.VO.AgreementVO;
-import by.pwt.plipenko.payments.model.VO.BankVO;
-import by.pwt.plipenko.payments.model.VO.CurrencyVO;
-import by.pwt.plipenko.payments.model.VO.UserVO;
 import by.pwt.plipenko.payments.model.entities.Agreement;
-import by.pwt.plipenko.payments.model.entities.Bank;
 import by.pwt.plipenko.payments.model.entities.Currency;
-import by.pwt.plipenko.payments.model.entities.User;
 
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
@@ -29,11 +22,11 @@ public class AccountUtil {
 
         try {
 
-            List<Agreement> agreements =  agreementService.getAllEntities();
-            if (agreements!=null) {
+            List<Agreement> agreements = agreementService.getAllEntities();
+            if (agreements != null) {
                 List<AgreementVO> agreementsVO = new ArrayList<AgreementVO>();
-                for (Agreement agreement:agreements)
-                { agreementsVO.add(agreement.createAgreementVO());
+                for (Agreement agreement : agreements) {
+                    agreementsVO.add(agreement.createAgreementVO());
 
                 }
                 request.setAttribute("agreements", agreementsVO);
@@ -47,7 +40,7 @@ public class AccountUtil {
 
         try {
             List<Currency> currencies = currencyService.getAllEntities();
-            if (currencies!=null) {
+            if (currencies != null) {
                 request.setAttribute("currencies", currencies);
             }
         } catch (SQLException | NamingException e) {

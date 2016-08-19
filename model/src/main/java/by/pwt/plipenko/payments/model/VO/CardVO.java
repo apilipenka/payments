@@ -1,7 +1,5 @@
 package by.pwt.plipenko.payments.model.VO;
 
-import java.util.Date;
-
 /**
  * Created by apilipenka on 8/5/2016.
  */

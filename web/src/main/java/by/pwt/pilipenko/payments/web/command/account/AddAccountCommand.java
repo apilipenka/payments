@@ -9,9 +9,7 @@ import by.pwt.plipenko.payments.model.entities.Account;
 import by.pwt.plipenko.payments.model.entities.Agreement;
 import by.pwt.plipenko.payments.model.entities.Currency;
 
-import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
-import java.sql.SQLException;
 
 import static by.pwt.pilipenko.payments.web.command.account.AccountUtil.fillAccountParent;
 
