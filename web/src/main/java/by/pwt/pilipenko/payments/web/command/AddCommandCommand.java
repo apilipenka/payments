@@ -15,7 +15,7 @@ public class AddCommandCommand implements ActionCommand {
         Command command1 = null;
         String page = null;
         try {
-            String command = request.getParameter("command");
+            String command = request.getParameter("commandf");
             String url = request.getParameter("url");
             String label = request.getParameter("label");
             String comment = request.getParameter("comment");

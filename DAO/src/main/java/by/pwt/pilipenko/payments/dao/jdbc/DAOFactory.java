@@ -1,4 +1,7 @@
-package by.pwt.pilipenko.payments.dao;
+package by.pwt.pilipenko.payments.dao.jdbc;
+
+import by.pwt.pilipenko.payments.dao.AbstractDAOFactory;
+import by.pwt.pilipenko.payments.dao.jdbc.*;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -6,11 +9,11 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
-public class JDBCDAOFactory extends AbstractDAOFactory{
+public class DAOFactory extends AbstractDAOFactory {
 
 
 
-    public JDBCDAOFactory() throws NamingException {
+    public DAOFactory() throws NamingException {
         super();
 
         Context initContext;
@@ -25,7 +28,7 @@ public class JDBCDAOFactory extends AbstractDAOFactory{
 
     }
 
-    public JDBCDAOFactory(DataSource dataSource) throws NamingException {
+    public DAOFactory(DataSource dataSource) throws NamingException {
         super();
 
         this.setDataSource(dataSource);

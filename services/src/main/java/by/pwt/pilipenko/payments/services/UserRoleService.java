@@ -2,8 +2,7 @@ package by.pwt.pilipenko.payments.services;
 
 import by.pwt.pilipenko.payments.dao.AbstractEntityDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
-import by.pwt.pilipenko.payments.dao.JDBCDAOFactory;
-import by.pwt.pilipenko.payments.dao.UserRoleDAO;
+import by.pwt.pilipenko.payments.dao.jdbc.UserRoleDAO;
 import by.pwt.plipenko.payments.model.entities.UserRole;
 
 import javax.naming.NamingException;

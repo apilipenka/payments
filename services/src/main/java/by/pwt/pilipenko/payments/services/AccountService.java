@@ -1,9 +1,8 @@
 package by.pwt.pilipenko.payments.services;
 
 import by.pwt.pilipenko.payments.dao.AbstractEntityDAO;
-import by.pwt.pilipenko.payments.dao.AccountDAO;
+import by.pwt.pilipenko.payments.dao.jdbc.AccountDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
-import by.pwt.pilipenko.payments.dao.JDBCDAOFactory;
 import by.pwt.plipenko.payments.model.entities.Account;
 
 import javax.naming.NamingException;

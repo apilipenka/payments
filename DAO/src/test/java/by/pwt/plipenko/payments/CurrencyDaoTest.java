@@ -1,7 +1,7 @@
 package by.pwt.plipenko.payments;
 
-import by.pwt.pilipenko.payments.dao.CurrencyDAO;
-import by.pwt.pilipenko.payments.dao.JDBCDAOFactory;
+import by.pwt.pilipenko.payments.dao.jdbc.CurrencyDAO;
+import by.pwt.pilipenko.payments.dao.jdbc.DAOFactory;
 import by.pwt.plipenko.payments.model.entities.Currency;
 import org.apache.commons.dbcp2.DriverManagerConnectionFactory;
 import org.apache.commons.dbcp2.PoolableConnection;
@@ -26,7 +26,7 @@ public class CurrencyDaoTest
         extends Assert {
 
     private static PoolingDataSource<PoolableConnection> ds;
-    private static JDBCDAOFactory df;
+    private static DAOFactory df;
     private static CurrencyDAO currencyDAO;
     private static Currency currency;
 
@@ -42,7 +42,7 @@ public class CurrencyDaoTest
         poolableConnectionFactory.setPool(connectionPool);
         ds = new PoolingDataSource<>(connectionPool);
 
-        df = new JDBCDAOFactory((DataSource) ds);
+        df = new DAOFactory((DataSource) ds);
 
         currencyDAO = df.createCurrencyDAO();
 

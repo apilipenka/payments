@@ -1,5 +1,7 @@
-package by.pwt.pilipenko.payments.dao;
+package by.pwt.pilipenko.payments.dao.jdbc;
 
+import by.pwt.pilipenko.payments.dao.AbstractEntityDAO;
+import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.plipenko.payments.model.entities.User;
 import by.pwt.plipenko.payments.model.entities.UserRole;
 
