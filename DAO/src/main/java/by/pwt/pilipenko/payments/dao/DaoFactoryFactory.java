@@ -10,6 +10,8 @@ import javax.naming.NamingException;
 public class DaoFactoryFactory {
     private static AbstractDAOFactory instance;
 
+
+
     public static AbstractDAOFactory getInstance() throws NamingException {
 
         AbstractDAOFactory localInstance = instance;
@@ -29,11 +31,12 @@ public class DaoFactoryFactory {
         return localInstance;
     }
 
-    public void DaoFactoryFactory() {
+    public DaoFactoryFactory() {
     }
 
-    public void DaoFactoryFactory(AbstractDAOFactory instance) {
+    public DaoFactoryFactory(AbstractDAOFactory instance) {
         this.instance = instance;
     }
+
 
 }
