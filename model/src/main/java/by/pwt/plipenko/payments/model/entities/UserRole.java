@@ -10,6 +10,7 @@ import java.util.Set;
  */
 public class UserRole extends Type {
 
+    private static final long serialVersionUID = -2060426102854785438L;
     Set<Command> commands;
 
     public UserRole() {

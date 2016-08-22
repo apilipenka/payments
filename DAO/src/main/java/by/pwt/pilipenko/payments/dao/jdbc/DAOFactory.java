@@ -1,7 +1,6 @@
 package by.pwt.pilipenko.payments.dao.jdbc;
 
 import by.pwt.pilipenko.payments.dao.AbstractDAOFactory;
-import by.pwt.pilipenko.payments.dao.jdbc.*;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -10,7 +9,6 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 
 public class DAOFactory extends AbstractDAOFactory {
-
 
 
     public DAOFactory() throws NamingException {
@@ -34,9 +32,6 @@ public class DAOFactory extends AbstractDAOFactory {
         this.setDataSource(dataSource);
 
     }
-
-
-
 
 
     public TypeDAO createAddressTypeDAO() throws SQLException {
@@ -179,6 +174,19 @@ public class DAOFactory extends AbstractDAOFactory {
             throw e;
         }
         return commandDAO;
+    }
+
+    @Override
+    public UserRoleCommandDAO createUserRoleCommandDAO() throws SQLException {
+        UserRoleCommandDAO userRoleCommandDAO;
+        try {
+            userRoleCommandDAO = new UserRoleCommandDAO(getDataSource().getConnection(), "userrolecommand", "user_role_commands");
+        } catch (SQLException e) {
+            // e.printStackTrace();
+            // return null;
+            throw e;
+        }
+        return userRoleCommandDAO;
     }
 
 }

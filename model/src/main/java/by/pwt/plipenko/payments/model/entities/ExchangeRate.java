@@ -8,6 +8,7 @@ import java.util.Date;
 
 public class ExchangeRate extends Entity {
 
+    private static final long serialVersionUID = 873223002647108557L;
     private Date rateDate;
     private float rate;
     private Currency currency;

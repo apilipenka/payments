@@ -13,9 +13,6 @@ import java.util.List;
 public class AddressTypeService extends AbstractEntitySevice<Type> {
 
 
-
-
-
     public List<Type> searchEntityByName(String name) throws SQLException, NamingException {
 
         Type entity = new Type();

@@ -24,6 +24,8 @@
                 </li>
                 <li><a href="${pageContext.request.contextPath}/controller?command=USERLIST">Edit users</a></li>
                 <li><a href="${pageContext.request.contextPath}/controller?command=COMMANDLIST">Edit commands</a></li>
+                <li><a href="${pageContext.request.contextPath}/controller?command=USERROLECOMMANDLIST">Edit user role
+                    commands</a></li>
                 <li class="divider"></li>
                 <li><a href="${pageContext.request.contextPath}/controller?command=BANKLIST">Edit banks</a></li>
                 <li><a href="${pageContext.request.contextPath}/controller?command=CURRENCYLIST">Edit currencies</a>

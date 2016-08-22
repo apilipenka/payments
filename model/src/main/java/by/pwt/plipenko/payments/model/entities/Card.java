@@ -8,6 +8,7 @@ import java.util.Date;
 
 public class Card extends Entity {
 
+    private static final long serialVersionUID = 7078093543381864816L;
     private String number;
     private String name;
     private Date validToDate;

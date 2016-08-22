@@ -157,14 +157,14 @@ CREATE TABLE IF NOT EXISTS `user_roles` (
 -- Dumping structure for table payments.user_role_commands
 CREATE TABLE IF NOT EXISTS `user_role_commands` (
   `command_ID` int(11) NOT NULL,
-  `ueser_role_id` int(11) NOT NULL,
+  `user_role_id` int(11) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `user_role_commands_uk` (`command_ID`,`ueser_role_id`),
-  KEY `fk_Commands_has_Ueser_Roles_Ueser_Roles1_idx` (`ueser_role_id`),
+  UNIQUE KEY `user_role_commands_uk` (`command_ID`,`user_role_id`),
+  KEY `fk_Commands_has_Ueser_Roles_Ueser_Roles1_idx` (`user_role_id`),
   KEY `fk_Commands_has_Ueser_Roles_Commands_idx` (`command_ID`),
   CONSTRAINT `fk_Commands_has_Ueser_Roles_Commands` FOREIGN KEY (`command_ID`) REFERENCES `commands` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Commands_has_Ueser_Roles_Ueser_Roles1` FOREIGN KEY (`ueser_role_id`) REFERENCES `user_roles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_Commands_has_Ueser_Roles_Ueser_Roles1` FOREIGN KEY (`user_role_id`) REFERENCES `user_roles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.

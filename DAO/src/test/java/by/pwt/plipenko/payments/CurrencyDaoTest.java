@@ -145,7 +145,7 @@ public class CurrencyDaoTest
 
         List<Currency> currencyList2 = currencyDAO.findEntityByEntity(currency);
 
-        assertEquals(currencyList2.size(),0);
+        assertEquals(currencyList2.size(), 0);
 
 
     }

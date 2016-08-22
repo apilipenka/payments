@@ -4,6 +4,7 @@ package by.pwt.plipenko.payments.model.VO;
  * Created by apilipenka on 8/5/2016.
  */
 public class ExchangeRateVO extends EntityVO {
+    private static final long serialVersionUID = -6317606056252046349L;
     private String rateDate;
     private float rate;
     private int currencyID;

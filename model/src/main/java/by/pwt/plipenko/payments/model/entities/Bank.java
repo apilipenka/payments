@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Bank extends Entity {
+    private static final long serialVersionUID = 4713651234377737733L;
     private Set<Agreement> agreements;
     private String UNN;
     private String name;

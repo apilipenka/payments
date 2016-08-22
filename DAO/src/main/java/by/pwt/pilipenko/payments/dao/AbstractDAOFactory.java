@@ -8,7 +8,7 @@ import java.sql.SQLException;
 /**
  * Created by apilipenka on 8/19/2016.
  */
-public abstract class  AbstractDAOFactory {
+public abstract class AbstractDAOFactory {
     private DataSource dataSource;
 
     public DataSource getDataSource() {
@@ -21,13 +21,13 @@ public abstract class  AbstractDAOFactory {
 
     public abstract TypeDAO createAddressTypeDAO() throws SQLException;
 
-    public  abstract TypeDAO createPhoneTypeDAO() throws SQLException;
+    public abstract TypeDAO createPhoneTypeDAO() throws SQLException;
 
     public abstract TypeDAO createDocumentTypeDAO() throws SQLException;
 
     public abstract UserDAO createUserDAO() throws SQLException;
 
-    public abstract TypeDAO createTypeDAO(String entityName, String tableName) throws SQLException ;
+    public abstract TypeDAO createTypeDAO(String entityName, String tableName) throws SQLException;
 
 
     public abstract BankDAO createBankDAO() throws SQLException;
@@ -47,7 +47,7 @@ public abstract class  AbstractDAOFactory {
 
     public abstract CommandDAO createCommandDAO() throws SQLException;
 
-
+    public abstract UserRoleCommandDAO createUserRoleCommandDAO() throws SQLException;
 }
 
 

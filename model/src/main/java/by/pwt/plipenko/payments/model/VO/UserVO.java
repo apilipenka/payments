@@ -4,6 +4,7 @@ package by.pwt.plipenko.payments.model.VO;
  * Created by apilipenka on 8/5/2016.
  */
 public class UserVO extends EntityVO {
+    private static final long serialVersionUID = -7212663851796971517L;
     private String personalNumber;
     private String firstName;
     private String lastName;

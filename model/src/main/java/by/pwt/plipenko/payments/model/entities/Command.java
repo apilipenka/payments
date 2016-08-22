@@ -7,6 +7,7 @@ import by.pwt.plipenko.payments.model.VO.CommandVO;
  */
 public class Command extends Entity {
 
+    private static final long serialVersionUID = -8644285246360859740L;
     private String command;
     private String url;
     private String label;

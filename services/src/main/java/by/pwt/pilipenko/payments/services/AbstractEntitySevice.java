@@ -21,7 +21,7 @@ public abstract class AbstractEntitySevice<T extends Entity> {
         return list;
     }
 
-    public abstract List<T> searchEntityByName(String name) throws SQLException, NamingException;
+    public abstract List<T> searchEntityByName(String name) throws Exception;
 
     public T getEntity(int id) throws Exception {
         AbstractEntityDAO<T> entityDAO = getEntityDAO();
@@ -63,8 +63,6 @@ public abstract class AbstractEntitySevice<T extends Entity> {
     }
 
     public abstract AbstractEntityDAO<T> getEntityDAO() throws NamingException, SQLException;
-
-
 
 
 }

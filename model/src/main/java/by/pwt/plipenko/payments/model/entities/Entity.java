@@ -1,6 +1,9 @@
 package by.pwt.plipenko.payments.model.entities;
 
-public abstract class Entity {
+import java.io.Serializable;
+
+public abstract class Entity implements Serializable {
+    private static final long serialVersionUID = -3079361923938103521L;
     private int id;
 
     public Entity() {

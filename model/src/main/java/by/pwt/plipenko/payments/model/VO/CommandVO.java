@@ -4,6 +4,7 @@ package by.pwt.plipenko.payments.model.VO;
  * Created by apilipenka on 8/5/2016.
  */
 public class CommandVO extends EntityVO {
+    private static final long serialVersionUID = -2656180060811361869L;
     private String command;
     private String url;
     private String label;

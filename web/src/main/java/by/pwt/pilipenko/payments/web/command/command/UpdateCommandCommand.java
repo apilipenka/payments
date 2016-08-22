@@ -1,7 +1,8 @@
-package by.pwt.pilipenko.payments.web.command;
+package by.pwt.pilipenko.payments.web.command.command;
 
 import by.pwt.pilipenko.payments.dao.resources.ConfigurationManager;
 import by.pwt.pilipenko.payments.services.CommandService;
+import by.pwt.pilipenko.payments.web.command.ActionCommand;
 import by.pwt.plipenko.payments.model.entities.Command;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +17,7 @@ public class UpdateCommandCommand implements ActionCommand {
         try {
             String id = request.getParameter("id");
             String command = request.getParameter("commandf");
-            String url=request.getParameter("url");
+            String url = request.getParameter("url");
             String label = request.getParameter("label");
             String comment = request.getParameter("comment");
 

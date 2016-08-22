@@ -8,6 +8,7 @@ import java.util.*;
 
 public class Agreement extends Entity {
 
+    private static final long serialVersionUID = -4425454817261521342L;
     private String number;
     private Date validFromDate;
     private Date validToDate;

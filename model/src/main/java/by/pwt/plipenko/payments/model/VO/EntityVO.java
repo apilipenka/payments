@@ -1,9 +1,12 @@
 package by.pwt.plipenko.payments.model.VO;
 
+import java.io.Serializable;
+
 /**
  * Created by apilipenka on 8/5/2016.
  */
-public abstract class EntityVO {
+public abstract class EntityVO implements Serializable {
+    private static final long serialVersionUID = 341009622048171603L;
     int id;
 
     public EntityVO() {

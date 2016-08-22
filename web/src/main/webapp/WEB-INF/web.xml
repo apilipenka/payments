@@ -184,6 +184,38 @@
         <url-pattern>/jsp/userRole-list.jsp</url-pattern>
     </filter-mapping>
 
+
+    <filter>
+        <filter-name>UserRoleCommandsFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.UserRoleCommandsFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UserRoleCommandsFilter</filter-name>
+        <url-pattern>/userRoleCommand-list.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>UserRoleCommandsFilter</filter-name>
+        <url-pattern>/jsp/userRoleCommand-list.jsp</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>UserRoleCommandFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.UserRoleCommandFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UserRoleCommandFilter</filter-name>
+        <url-pattern>/new-userRoleCommand.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>UserRoleCommandFilter</filter-name>
+        <url-pattern>/jsp/new-userRoleCommand.jsp</url-pattern>
+    </filter-mapping>
+
+
     <filter>
         <filter-name>CommandsFilter</filter-name>
         <filter-class>

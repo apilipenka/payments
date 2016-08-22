@@ -5,6 +5,7 @@ package by.pwt.plipenko.payments.model.VO;
  */
 public class CurrencyVO extends EntityVO {
 
+    private static final long serialVersionUID = 3561250473466586712L;
     private String mnemoCode;
     private int code;
     private String name;

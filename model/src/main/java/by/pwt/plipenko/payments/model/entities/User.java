@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class User extends Entity {
+    private static final long serialVersionUID = 2450506525357642771L;
     private Set<Agreement> agreements;
     private String personalNumber;
     private String firstName;

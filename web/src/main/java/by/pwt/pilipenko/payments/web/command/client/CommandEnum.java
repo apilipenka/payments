@@ -1,15 +1,19 @@
 package by.pwt.pilipenko.payments.web.command.client;
 
-import by.pwt.pilipenko.payments.web.command.*;
+import by.pwt.pilipenko.payments.web.command.ActionCommand;
+import by.pwt.pilipenko.payments.web.command.LoginCommand;
+import by.pwt.pilipenko.payments.web.command.LogoutCommand;
 import by.pwt.pilipenko.payments.web.command.account.*;
 import by.pwt.pilipenko.payments.web.command.agreement.*;
 import by.pwt.pilipenko.payments.web.command.bank.*;
 import by.pwt.pilipenko.payments.web.command.card.*;
+import by.pwt.pilipenko.payments.web.command.command.*;
 import by.pwt.pilipenko.payments.web.command.currency.*;
 import by.pwt.pilipenko.payments.web.command.currencyext.*;
 import by.pwt.pilipenko.payments.web.command.exchangerate.*;
 import by.pwt.pilipenko.payments.web.command.user.*;
 import by.pwt.pilipenko.payments.web.command.userrole.*;
+import by.pwt.pilipenko.payments.web.command.userrolecommand.*;
 
 public enum CommandEnum {
     LOGIN {
@@ -334,6 +338,38 @@ public enum CommandEnum {
     REMOVECARD {
         {
             this.command = new DeleteCardCommand();
+        }
+
+
+    },
+    NEWUSERROLECOMMAND {
+        {
+            this.command = new NewUserRoleCommandCommand();
+        }
+    },
+    ADDUSERROLECOMMAND {
+        {
+            this.command = new AddUserRoleCommandCommand();
+        }
+    },
+    USERROLECOMMANDLIST {
+        {
+            this.command = new UserRoleCommandListCommand();
+        }
+    },
+    EDITUSERROLECOMMAND {
+        {
+            this.command = new EditUserRoleCommandCommand();
+        }
+    },
+    UPDATEUSERROLECOMMAND {
+        {
+            this.command = new UpdateUserRoleCommandCommand();
+        }
+    },
+    REMOVEUSERROLECOMMAND {
+        {
+            this.command = new DeleteUserRoleCommandCommand();
         }
 
 

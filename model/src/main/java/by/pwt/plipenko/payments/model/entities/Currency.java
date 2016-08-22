@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class Currency extends Entity {
 
+    private static final long serialVersionUID = -6049197255924255456L;
     private String mnemoCode;
     private String code;
     private String name;

@@ -1,6 +1,7 @@
 package by.pwt.plipenko.payments.model.entities;
 
 public class Type extends Entity {
+    private static final long serialVersionUID = 3392012103334697756L;
     private String name;
     private String description;
 

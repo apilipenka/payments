@@ -9,6 +9,7 @@ import java.util.Set;
 
 public class Account extends Entity {
 
+    private static final long serialVersionUID = -8860337032933235611L;
     private String number;
     private double amount;
     private Agreement agreement;

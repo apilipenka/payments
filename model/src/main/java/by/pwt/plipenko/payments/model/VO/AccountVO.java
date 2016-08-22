@@ -5,6 +5,7 @@ package by.pwt.plipenko.payments.model.VO;
  */
 public class AccountVO extends EntityVO {
 
+    private static final long serialVersionUID = -1598908592281617665L;
     private String number;
     private double amount;
     private int agreementID;
