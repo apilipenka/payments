@@ -1,5 +1,6 @@
-package by.pwt.plipenko.payments;
+package by.pwt.plipenko.payments.jdbc;
 
+import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.dao.jdbc.CurrencyDAO;
 import by.pwt.pilipenko.payments.dao.jdbc.DAOFactory;
 import by.pwt.plipenko.payments.model.entities.Currency;
@@ -29,13 +30,14 @@ public class CurrencyDaoTest
     private static DAOFactory df;
     private static CurrencyDAO currencyDAO;
     private static Currency currency;
+    private static DaoFactoryFactory dff;
 
     @BeforeClass
     public static void intit() throws NamingException, ClassNotFoundException, SQLException {
 
         Class.forName("com.mysql.jdbc.Driver");
 
-        DriverManagerConnectionFactory connectionFactory = new DriverManagerConnectionFactory("jdbc:mysql://localhost:3306/payments?autoReconnect=true&useSSL=false", "root", "awp1977");
+        DriverManagerConnectionFactory connectionFactory = new DriverManagerConnectionFactory("jdbc:mysql://localhost:3306/payments?autoReconnect=true&useSSL=false&autocommit=1", "root", "awp1977");
         PoolableConnectionFactory poolableConnectionFactory = new PoolableConnectionFactory(connectionFactory,
                 null);
         ObjectPool<PoolableConnection> connectionPool = new GenericObjectPool<>(poolableConnectionFactory);
@@ -43,8 +45,9 @@ public class CurrencyDaoTest
         ds = new PoolingDataSource<>(connectionPool);
 
         df = new DAOFactory((DataSource) ds);
+        dff= new DaoFactoryFactory(df);
 
-        currencyDAO = df.createCurrencyDAO();
+        currencyDAO = DaoFactoryFactory.getInstance().createCurrencyDAO();
 
 
     }
@@ -52,10 +55,12 @@ public class CurrencyDaoTest
     @AfterClass
     public static void tearDownToHexStringData() throws SQLException {
 
+        currencyDAO.closeConnection();
         currencyDAO = null;
-
+        dff = null;
         df = null;
         ds = null;
+
 
     }
 
