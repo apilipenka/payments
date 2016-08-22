@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
--- Хост:                         127.0.0.1
--- Версия сервера:               5.7.12 - MySQL Community Server (GPL)
--- ОС Сервера:                   Win64
--- HeidiSQL Версия:              9.3.0.4984
+-- Host:                         127.0.0.1
+-- Server version:               5.7.12 - MySQL Community Server (GPL)
+-- Server OS:                    Win32
+-- HeidiSQL Version:             9.3.0.4984
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -10,12 +10,12 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- Дамп структуры базы данных payments
+-- Dumping database structure for payments
 CREATE DATABASE IF NOT EXISTS `payments` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `payments`;
 
 
--- Дамп структуры для таблица payments.accounts
+-- Dumping structure for table payments.accounts
 CREATE TABLE IF NOT EXISTS `accounts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `number` varchar(45) NOT NULL,
@@ -26,17 +26,14 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   UNIQUE KEY `number_UNIQUE` (`number`),
   KEY `fk_Accounts_Currencies1_idx` (`currency_id`),
   KEY `fk_Accounts_Agreements1_idx` (`agreement_id`),
-  CONSTRAINT `fk_Accounts_Agreements1` FOREIGN KEY (`agreement_id`) REFERENCES `agreements` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_Accounts_Currencies1` FOREIGN KEY (`currency_id`) REFERENCES `currencies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_Accounts_Agreements1` FOREIGN KEY (`agreement_id`) REFERENCES `agreements` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Accounts_Currencies1` FOREIGN KEY (`currency_id`) REFERENCES `currencies` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы payments.accounts: ~0 rows (приблизительно)
-DELETE FROM `accounts`;
-/*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
-/*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
+-- Data exporting was unselected.
 
 
--- Дамп структуры для таблица payments.agreements
+-- Dumping structure for table payments.agreements
 CREATE TABLE IF NOT EXISTS `agreements` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `number` varchar(45) DEFAULT NULL,
@@ -49,34 +46,26 @@ CREATE TABLE IF NOT EXISTS `agreements` (
   UNIQUE KEY `uk_agreements` (`bank_id`,`number`),
   KEY `fk_Agreements_Banks1_idx` (`bank_id`),
   KEY `fk_Agreements_Users1_idx` (`user_ID`),
-  CONSTRAINT `fk_Agreements_Banks1` FOREIGN KEY (`bank_id`) REFERENCES `banks` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_Agreements_Users1` FOREIGN KEY (`user_ID`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_Agreements_Banks1` FOREIGN KEY (`bank_id`) REFERENCES `banks` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Agreements_Users1` FOREIGN KEY (`user_ID`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы payments.agreements: ~0 rows (приблизительно)
-DELETE FROM `agreements`;
-/*!40000 ALTER TABLE `agreements` DISABLE KEYS */;
-/*!40000 ALTER TABLE `agreements` ENABLE KEYS */;
+-- Data exporting was unselected.
 
 
--- Дамп структуры для таблица payments.banks
+-- Dumping structure for table payments.banks
 CREATE TABLE IF NOT EXISTS `banks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `unn` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNN_UNIQUE` (`unn`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы payments.banks: ~2 rows (приблизительно)
-DELETE FROM `banks`;
-/*!40000 ALTER TABLE `banks` DISABLE KEYS */;
-INSERT INTO `banks` (`id`, `name`, `unn`) VALUES
-	(1, 'belarus', '1234');
-/*!40000 ALTER TABLE `banks` ENABLE KEYS */;
+-- Data exporting was unselected.
 
 
--- Дамп структуры для таблица payments.cards
+-- Dumping structure for table payments.cards
 CREATE TABLE IF NOT EXISTS `cards` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `number` varchar(45) NOT NULL,
@@ -86,16 +75,13 @@ CREATE TABLE IF NOT EXISTS `cards` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `number_UNIQUE` (`number`),
   KEY `fk_Cards_Accounts1_idx` (`accounts_id`),
-  CONSTRAINT `fk_Cards_Accounts1` FOREIGN KEY (`accounts_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_Cards_Accounts1` FOREIGN KEY (`accounts_id`) REFERENCES `accounts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы payments.cards: ~0 rows (приблизительно)
-DELETE FROM `cards`;
-/*!40000 ALTER TABLE `cards` DISABLE KEYS */;
-/*!40000 ALTER TABLE `cards` ENABLE KEYS */;
+-- Data exporting was unselected.
 
 
--- Дамп структуры для таблица payments.commands
+-- Dumping structure for table payments.commands
 CREATE TABLE IF NOT EXISTS `commands` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `command` varchar(45) NOT NULL,
@@ -104,54 +90,40 @@ CREATE TABLE IF NOT EXISTS `commands` (
   `comment` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `COMMAND_UNIQUE` (`command`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы payments.commands: ~0 rows (приблизительно)
-DELETE FROM `commands`;
-/*!40000 ALTER TABLE `commands` DISABLE KEYS */;
-INSERT INTO `commands` (`id`, `command`, `url`, `label`, `comment`) VALUES
-	(1, 'test', 'test', 'test', 'test');
-/*!40000 ALTER TABLE `commands` ENABLE KEYS */;
+-- Data exporting was unselected.
 
 
--- Дамп структуры для таблица payments.currencies
+-- Dumping structure for table payments.currencies
 CREATE TABLE IF NOT EXISTS `currencies` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(45) NOT NULL,
   `mnemo_code` varchar(45) NOT NULL,
-  `name` varchar(45) NOT NULL,
+  `name` varchar(200) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `currency_uk` (`mnemo_code`,`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы payments.currencies: ~0 rows (приблизительно)
-DELETE FROM `currencies`;
-/*!40000 ALTER TABLE `currencies` DISABLE KEYS */;
-/*!40000 ALTER TABLE `currencies` ENABLE KEYS */;
+-- Data exporting was unselected.
 
 
--- Дамп структуры для таблица payments.exchange_rates
+-- Dumping structure for table payments.exchange_rates
 CREATE TABLE IF NOT EXISTS `exchange_rates` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `rate_date` date NOT NULL,
   `rate` float NOT NULL,
   `currency_id` int(11) NOT NULL,
-  `target_currency_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `exchange_rate_uk` (`currency_id`,`target_currency_id`,`rate_date`),
+  UNIQUE KEY `exchange_rate_uk` (`currency_id`,`rate_date`),
   KEY `fk_exchange_rates_Curremcies1_idx` (`currency_id`),
-  KEY `fk_exchange_rates_Curremcies2` (`target_currency_id`),
-  CONSTRAINT `fk_exchange_rates_Curremcies1` FOREIGN KEY (`currency_id`) REFERENCES `currencies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_exchange_rates_Curremcies2` FOREIGN KEY (`target_currency_id`) REFERENCES `currencies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_exchange_rates_Curremcies1` FOREIGN KEY (`currency_id`) REFERENCES `currencies` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы payments.exchange_rates: ~0 rows (приблизительно)
-DELETE FROM `exchange_rates`;
-/*!40000 ALTER TABLE `exchange_rates` DISABLE KEYS */;
-/*!40000 ALTER TABLE `exchange_rates` ENABLE KEYS */;
+-- Data exporting was unselected.
 
 
--- Дамп структуры для таблица payments.users
+-- Dumping structure for table payments.users
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `personal_number` varchar(45) NOT NULL,
@@ -164,52 +136,38 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `personal_number_UNIQUE` (`personal_number`),
   KEY `fk_Users_User_Roles1_idx` (`user_role_id`),
-  CONSTRAINT `FK_users_user_roles` FOREIGN KEY (`user_role_id`) REFERENCES `user_roles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  CONSTRAINT `fk_Users_User_Roles1` FOREIGN KEY (`user_role_id`) REFERENCES `user_roles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы payments.users: ~2 rows (приблизительно)
-DELETE FROM `users`;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` (`id`, `personal_number`, `first_name`, `last_name`, `birth_date`, `login`, `password`, `user_role_id`) VALUES
-	(1, '122334433221', 'Alexander', 'Pilipenko', '1977-01-10', 'admin', '12345', 1),
-	(2, '12213113', 'Dima', '&#1055;&#1080;&#1083;&#1080;&#1087;&#1077;&#1085;&#1082;&#1086;', '1976-06-14', 'manager', '123456', 1);
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+-- Data exporting was unselected.
 
 
--- Дамп структуры для таблица payments.user_roles
+-- Dumping structure for table payments.user_roles
 CREATE TABLE IF NOT EXISTS `user_roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `description` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы payments.user_roles: ~3 rows (приблизительно)
-DELETE FROM `user_roles`;
-/*!40000 ALTER TABLE `user_roles` DISABLE KEYS */;
-INSERT INTO `user_roles` (`id`, `name`, `description`) VALUES
-	(1, 'ADMIN', 'ADMIN'),
-	(2, 'MANAGER', 'MANAGER'),
-	(3, 'CLIENT', '&#1050;&#1083;&#1080;&#1077;&#1085;&#1090;');
-/*!40000 ALTER TABLE `user_roles` ENABLE KEYS */;
+-- Data exporting was unselected.
 
 
--- Дамп структуры для таблица payments.user_role_commands
+-- Dumping structure for table payments.user_role_commands
 CREATE TABLE IF NOT EXISTS `user_role_commands` (
   `command_ID` int(11) NOT NULL,
   `ueser_role_id` int(11) NOT NULL,
-  PRIMARY KEY (`command_ID`,`ueser_role_id`),
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_role_commands_uk` (`command_ID`,`ueser_role_id`),
   KEY `fk_Commands_has_Ueser_Roles_Ueser_Roles1_idx` (`ueser_role_id`),
   KEY `fk_Commands_has_Ueser_Roles_Commands_idx` (`command_ID`),
-  CONSTRAINT `fk_Commands_has_Ueser_Roles_Commands` FOREIGN KEY (`command_ID`) REFERENCES `commands` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_Commands_has_Ueser_Roles_Ueser_Roles1` FOREIGN KEY (`ueser_role_id`) REFERENCES `user_roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_Commands_has_Ueser_Roles_Commands` FOREIGN KEY (`command_ID`) REFERENCES `commands` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Commands_has_Ueser_Roles_Ueser_Roles1` FOREIGN KEY (`ueser_role_id`) REFERENCES `user_roles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы payments.user_role_commands: ~0 rows (приблизительно)
-DELETE FROM `user_role_commands`;
-/*!40000 ALTER TABLE `user_role_commands` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user_role_commands` ENABLE KEYS */;
+-- Data exporting was unselected.
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
