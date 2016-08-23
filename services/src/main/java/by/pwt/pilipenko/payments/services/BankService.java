@@ -11,7 +11,7 @@ import java.util.List;
 
 public class BankService extends AbstractEntitySevice<Bank> {
 
-    public List<Bank> searchEntityByName(String name) throws SQLException, NamingException {
+    public List<Bank> searchEntityByName(String name) throws SQLException, NamingException, ClassNotFoundException {
 
         Bank entity = new Bank();
         if (name != null && name != "") {
@@ -27,7 +27,7 @@ public class BankService extends AbstractEntitySevice<Bank> {
     }
 
     @Override
-    public AbstractEntityDAO<Bank> getEntityDAO() throws NamingException, SQLException {
+    public AbstractEntityDAO<Bank> getEntityDAO() throws NamingException, SQLException, ClassNotFoundException {
         BankDAO bankDAO = DaoFactoryFactory.getInstance().createBankDAO();
         return bankDAO;
     }

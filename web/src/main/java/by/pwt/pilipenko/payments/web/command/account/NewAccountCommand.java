@@ -12,7 +12,7 @@ import static by.pwt.pilipenko.payments.web.command.account.AccountUtil.fillAcco
 
 public class NewAccountCommand implements ActionCommand {
     @Override
-    public String execute(HttpServletRequest request) throws SQLException, NamingException {
+    public String execute(HttpServletRequest request) throws SQLException, NamingException, ClassNotFoundException {
         String page = ConfigurationManager.getProperty("path.page.newaccount");
 
         fillAccountParent(request);

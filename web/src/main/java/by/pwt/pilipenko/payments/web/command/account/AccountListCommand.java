@@ -14,7 +14,7 @@ import java.util.List;
 
 public class AccountListCommand implements ActionCommand {
     @Override
-    public String execute(HttpServletRequest request) throws SQLException, NamingException {
+    public String execute(HttpServletRequest request) throws SQLException, NamingException, ClassNotFoundException {
         String page = ConfigurationManager.getProperty("path.page.accountlist");
 
         AccountService accountService = new AccountService();

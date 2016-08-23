@@ -22,6 +22,8 @@ public class UserRoleCommandFilter implements Filter {
             e.printStackTrace();
         } catch (NamingException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
 
 
@@ -32,6 +34,8 @@ public class UserRoleCommandFilter implements Filter {
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (NamingException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 

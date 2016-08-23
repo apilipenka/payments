@@ -19,7 +19,7 @@ import java.util.Date;
  */
 public class UpdateExchangeRateCommand implements ActionCommand {
     @Override
-    public String execute(HttpServletRequest request) {
+    public String execute(HttpServletRequest request) throws ClassNotFoundException {
 
         String error = null;
         ExchangeRate exchangeRate = null;

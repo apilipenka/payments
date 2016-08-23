@@ -13,7 +13,7 @@ import static by.pwt.pilipenko.payments.web.command.agreement.AgreementUtil.fill
 
 public class EditAgreementCommand implements ActionCommand {
     @Override
-    public String execute(HttpServletRequest request) throws SQLException, NamingException {
+    public String execute(HttpServletRequest request) throws SQLException, NamingException, ClassNotFoundException {
         String page = ConfigurationManager.getProperty("path.page.newagreement");
 
         AgreementService agreementService = new AgreementService();

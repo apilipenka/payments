@@ -28,28 +28,16 @@ import java.util.List;
 public class CurrencyServiceTest
         extends Assert {
 
-    private static PoolingDataSource<PoolableConnection> ds;
-    private static AbstractDAOFactory df;
-    private static DaoFactoryFactory dff;
+    //private static PoolingDataSource<PoolableConnection> ds;
+    //private static AbstractDAOFactory df;
+    //private static DaoFactoryFactory dff;
     //private static CurrencyDAO currencyDAO;
     private static CurrencyService currencyService;
     private static Currency currency;
 
     @BeforeClass
-    public static void intit() throws NamingException, ClassNotFoundException, SQLException {
+    public static void init() throws NamingException, ClassNotFoundException, SQLException {
 
-        Class.forName("com.mysql.jdbc.Driver");
-
-        DriverManagerConnectionFactory connectionFactory = new DriverManagerConnectionFactory("jdbc:mysql://localhost:3306/payments?autoReconnect=true&useSSL=false", "root", "awp1977");
-        PoolableConnectionFactory poolableConnectionFactory = new PoolableConnectionFactory(connectionFactory,
-                null);
-        ObjectPool<PoolableConnection> connectionPool = new GenericObjectPool<>(poolableConnectionFactory);
-        poolableConnectionFactory.setPool(connectionPool);
-        ds = new PoolingDataSource<>(connectionPool);
-
-        df = new DAOFactory((DataSource) ds);
-
-        dff = new DaoFactoryFactory(df);
         currencyService = new CurrencyService();
 
     }
@@ -57,9 +45,6 @@ public class CurrencyServiceTest
     @AfterClass
     public static void tearDownToHexStringData() throws SQLException {
         currencyService = null;
-        dff = null;
-        df = null;
-        ds = null;
 
     }
 
@@ -80,7 +65,7 @@ public class CurrencyServiceTest
     }
 
    @Test
-    public void test2FindByEntity() throws SQLException, NamingException {
+    public void test2FindByEntity() throws SQLException, NamingException, ClassNotFoundException {
 
         List<Currency> currencyList1 = new ArrayList<Currency>();
         currencyList1.add(currency);
@@ -93,7 +78,7 @@ public class CurrencyServiceTest
     }
 
      @Test
-    public void test6FindEntityByPK() throws SQLException, NamingException {
+    public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
 
         Currency currency2 = currencyService.getEntityByPK(currency);
         assertEquals(currency, currency2);

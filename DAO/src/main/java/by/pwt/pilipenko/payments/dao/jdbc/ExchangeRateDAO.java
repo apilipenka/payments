@@ -27,7 +27,7 @@ public class ExchangeRateDAO extends AbstractEntityDAO<ExchangeRate> {
     }
 
     @Override
-    protected ExchangeRate getEntity(ResultSet resultSet) throws SQLException, NamingException {
+    protected ExchangeRate getEntity(ResultSet resultSet) throws SQLException, NamingException, ClassNotFoundException {
         ExchangeRate exchangeRate = new ExchangeRate();
         exchangeRate.setId(resultSet.getInt("id"));
         exchangeRate.setRateDate(resultSet.getDate("rate_date"));
@@ -95,7 +95,7 @@ public class ExchangeRateDAO extends AbstractEntityDAO<ExchangeRate> {
         return statement;
     }
 
-    public List<ExchangeRate> findEntityByParent(ExchangeRate entity) throws SQLException, NamingException {
+    public List<ExchangeRate> findEntityByParent(ExchangeRate entity) throws SQLException, NamingException, ClassNotFoundException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         List<ExchangeRate> entities = null;

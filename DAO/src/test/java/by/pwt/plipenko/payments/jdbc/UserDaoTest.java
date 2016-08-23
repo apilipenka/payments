@@ -34,29 +34,14 @@ import java.util.List;
 public class UserDaoTest
         extends Assert {
 
-    private static PoolingDataSource<PoolableConnection> ds;
-    private static DAOFactory df;
     private static UserDAO userDAO;
     private static UserRoleDAO userRoleDAO;
     private static User user;
     private static User user1;
     private static UserRole userRole1;
-    private static DaoFactoryFactory dff;
 
     @BeforeClass
     public static void intit() throws NamingException, ClassNotFoundException, SQLException {
-
-        Class.forName("com.mysql.jdbc.Driver");
-
-        DriverManagerConnectionFactory connectionFactory = new DriverManagerConnectionFactory("jdbc:mysql://localhost:3306/payments?autoReconnect=true&useSSL=false&autocommit=1", "root", "awp1977");
-        PoolableConnectionFactory poolableConnectionFactory = new PoolableConnectionFactory(connectionFactory,
-                null);
-        ObjectPool<PoolableConnection> connectionPool = new GenericObjectPool<>(poolableConnectionFactory);
-        poolableConnectionFactory.setPool(connectionPool);
-        ds = new PoolingDataSource<>(connectionPool);
-
-        df = new DAOFactory((DataSource) ds);
-        dff= new DaoFactoryFactory(df);
 
         userDAO = DaoFactoryFactory.getInstance().createUserDAO();
         userRoleDAO = DaoFactoryFactory.getInstance().createUserRoleDAO();
@@ -71,17 +56,15 @@ public class UserDaoTest
 
         userDAO.closeConnection();
         userDAO = null;
+
         userRoleDAO.closeConnection();
         userRoleDAO = null;
-        dff = null;
-        df = null;
-        ds = null;
 
 
     }
 
     @Test
-    public void test1FindById() throws SQLException, NamingException, ParseException {
+    public void test1FindById() throws SQLException, NamingException, ParseException, ClassNotFoundException {
 
         user = new User();
 
@@ -110,7 +93,7 @@ public class UserDaoTest
     }
 
     @Test
-    public void test2FindByEntity() throws SQLException, NamingException {
+    public void test2FindByEntity() throws SQLException, NamingException, ClassNotFoundException {
 
         List<User> userList1 = new ArrayList<User>();
         userList1.add(user);
@@ -123,20 +106,18 @@ public class UserDaoTest
     }
 
     @Test
-    public void test6FindEntityByPK() throws SQLException, NamingException {
+    public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
 
 
         User user2 = userDAO.findEntityByPK(user);
         assertEquals(user, user2);
-
-        assertEquals(user, user);
 
 
     }
 
 
     @Test
-    public void test7Update() throws SQLException, NamingException {
+    public void test7Update() throws SQLException, NamingException, ClassNotFoundException {
 
 
         user.setLogin("TestUserTest");
@@ -150,7 +131,7 @@ public class UserDaoTest
 
 
     @Test
-    public void test8DeleteById() throws SQLException, NamingException {
+    public void test8DeleteById() throws SQLException, NamingException, ClassNotFoundException {
 
 
         userDAO.delete(user.getId());
@@ -163,7 +144,7 @@ public class UserDaoTest
     }
 
     @Test
-    public void test9DeleteByEntity() throws SQLException, NamingException, ParseException {
+    public void test9DeleteByEntity() throws SQLException, NamingException, ParseException, ClassNotFoundException {
 
         user = new User();
 

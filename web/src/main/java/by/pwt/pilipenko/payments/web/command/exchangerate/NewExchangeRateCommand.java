@@ -13,7 +13,7 @@ import java.sql.SQLException;
  */
 public class NewExchangeRateCommand implements ActionCommand {
     @Override
-    public String execute(HttpServletRequest request) throws SQLException, NamingException {
+    public String execute(HttpServletRequest request) throws SQLException, NamingException, ClassNotFoundException {
         String page = ConfigurationManager.getProperty("path.page.newexchangeRate");
 
         request.setAttribute("currencies", new CurrencyService().getAllEntities());

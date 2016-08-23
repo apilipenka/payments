@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CardService extends AbstractEntitySevice<Card> {
 
-    public List<Card> searchEntityByName(String name) throws SQLException, NamingException {
+    public List<Card> searchEntityByName(String name) throws SQLException, NamingException, ClassNotFoundException {
 
         Card entity = new Card();
         if (name != null && name != "") {
@@ -26,7 +26,7 @@ public class CardService extends AbstractEntitySevice<Card> {
     }
 
     @Override
-    public AbstractEntityDAO<Card> getEntityDAO() throws SQLException, NamingException {
+    public AbstractEntityDAO<Card> getEntityDAO() throws SQLException, NamingException, ClassNotFoundException {
         CardDAO cardDAO = DaoFactoryFactory.getInstance().createCardDAO();
         return cardDAO;
     }

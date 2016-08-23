@@ -12,7 +12,7 @@ public class DaoFactoryFactory {
 
 
 
-    public static AbstractDAOFactory getInstance() throws NamingException {
+    public static AbstractDAOFactory getInstance() throws NamingException, ClassNotFoundException {
 
         AbstractDAOFactory localInstance = instance;
 

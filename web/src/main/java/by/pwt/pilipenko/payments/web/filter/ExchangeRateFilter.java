@@ -19,6 +19,8 @@ public class ExchangeRateFilter implements Filter {
         } catch (SQLException | NamingException e) {
             // e.printStackTrace();
             // TODO add error handler
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
         chain.doFilter(req, res);
     }

@@ -16,7 +16,7 @@ import java.util.Date;
 
 
 public class AddExchangeRateCommand implements ActionCommand {
-    public String execute(HttpServletRequest request) {
+    public String execute(HttpServletRequest request) throws ClassNotFoundException {
 
         String error = null;
         ExchangeRate exchangeRate1 = null;

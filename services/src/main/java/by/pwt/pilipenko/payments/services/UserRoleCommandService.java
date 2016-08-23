@@ -36,7 +36,7 @@ public class UserRoleCommandService extends AbstractEntitySevice<UserRoleCommand
     }
 
     @Override
-    public AbstractEntityDAO<UserRoleCommand> getEntityDAO() throws SQLException, NamingException {
+    public AbstractEntityDAO<UserRoleCommand> getEntityDAO() throws SQLException, NamingException, ClassNotFoundException {
         UserRoleCommandDAO userRoleCommandDAO = DaoFactoryFactory.getInstance().createUserRoleCommandDAO();
         return userRoleCommandDAO;
     }

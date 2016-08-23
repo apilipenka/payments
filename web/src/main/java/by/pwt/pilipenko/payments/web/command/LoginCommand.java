@@ -14,7 +14,7 @@ public class LoginCommand implements ActionCommand {
     private static final String PARAM_NAME_LOGIN = "login";
     private static final String PARAM_NAME_PASSWORD = "password";
 
-    public String execute(HttpServletRequest request) throws SQLException, NamingException {
+    public String execute(HttpServletRequest request) throws SQLException, NamingException, ClassNotFoundException {
         String page = null;
         // извлечение из запроса логина и пароля
         String login = request.getParameter(PARAM_NAME_LOGIN);

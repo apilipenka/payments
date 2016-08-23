@@ -24,7 +24,7 @@ public class UserRoleCommandDAO extends AbstractEntityDAO<UserRoleCommand> {
     }
 
     @Override
-    protected UserRoleCommand getEntity(ResultSet resultSet) throws SQLException, NamingException {
+    protected UserRoleCommand getEntity(ResultSet resultSet) throws SQLException, NamingException, ClassNotFoundException {
         UserRoleCommand userRoleCommand = new UserRoleCommand();
         userRoleCommand.setId(resultSet.getInt("id"));
 

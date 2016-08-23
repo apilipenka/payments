@@ -11,7 +11,11 @@ public class AccountFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
             throws IOException, ServletException {
 
-        fillAccountParent((HttpServletRequest) req);
+        try {
+            fillAccountParent((HttpServletRequest) req);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         chain.doFilter(req, res);
     }
 

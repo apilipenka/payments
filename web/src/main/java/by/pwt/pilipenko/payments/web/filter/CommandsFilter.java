@@ -28,6 +28,8 @@ public class CommandsFilter implements Filter {
                     commandList = commandService.getAllEntities();
                 } catch (SQLException | NamingException e) {
                     e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
                 }
             }
         }

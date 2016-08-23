@@ -22,6 +22,8 @@ public class UserRolesFilter implements Filter {
                     req.setAttribute("userRoleList", userRoleService.getAllEntities());
                 } catch (SQLException | NamingException e) {
                     e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
                 }
             }
         }

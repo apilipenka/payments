@@ -18,7 +18,7 @@ import static by.pwt.pilipenko.payments.web.command.agreement.AgreementUtil.fill
 
 
 public class AddAgreementCommand implements ActionCommand {
-    public String execute(HttpServletRequest request) {
+    public String execute(HttpServletRequest request) throws ClassNotFoundException {
 
 
         String error = null;

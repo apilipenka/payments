@@ -28,6 +28,8 @@ public class UserRoleCommandsFilter implements Filter {
                     userRoleCommandList = userRoleCommandService.getAllEntities();
                 } catch (SQLException | NamingException e) {
                     e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
                 }
             }
         }

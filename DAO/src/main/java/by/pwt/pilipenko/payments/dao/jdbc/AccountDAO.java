@@ -19,7 +19,7 @@ public class AccountDAO extends AbstractEntityDAO<Account> {
     }
 
     @Override
-    protected Account getEntity(ResultSet resultSet) throws SQLException, NamingException {
+    protected Account getEntity(ResultSet resultSet) throws SQLException, NamingException, ClassNotFoundException {
         Account account = new Account();
 
         account.setId(resultSet.getInt("id"));

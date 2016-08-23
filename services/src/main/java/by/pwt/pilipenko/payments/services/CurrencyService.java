@@ -12,7 +12,7 @@ import java.util.List;
 public class CurrencyService extends AbstractEntitySevice<Currency> {
 
 
-    public List<Currency> searchEntityByName(String name) throws SQLException, NamingException {
+    public List<Currency> searchEntityByName(String name) throws SQLException, NamingException, ClassNotFoundException {
 
         Currency entity = new Currency();
         if (name != null && name != "") {
@@ -29,7 +29,7 @@ public class CurrencyService extends AbstractEntitySevice<Currency> {
 
     }
 
-    public AbstractEntityDAO<Currency> getEntityDAO() throws NamingException, SQLException {
+    public AbstractEntityDAO<Currency> getEntityDAO() throws NamingException, SQLException, ClassNotFoundException {
 
         CurrencyDAO currencyDAO = DaoFactoryFactory.getInstance().createCurrencyDAO();
         return currencyDAO;

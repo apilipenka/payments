@@ -28,6 +28,8 @@ public class CardsFilter implements Filter {
                     cardList = cardService.getAllEntities();
                 } catch (SQLException | NamingException e) {
                     e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
                 }
             }
         }

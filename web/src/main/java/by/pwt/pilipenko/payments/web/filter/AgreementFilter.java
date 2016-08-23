@@ -15,7 +15,11 @@ public class AgreementFilter implements Filter {
 
         BankService bankService = new BankService();
 
-        fillAgreementParent((HttpServletRequest) req);
+        try {
+            fillAgreementParent((HttpServletRequest) req);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         chain.doFilter(req, res);
     }
 

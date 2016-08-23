@@ -12,7 +12,7 @@ import static by.pwt.pilipenko.payments.web.command.agreement.AgreementUtil.fill
 
 public class NewAgreementCommand implements ActionCommand {
     @Override
-    public String execute(HttpServletRequest request) throws SQLException, NamingException {
+    public String execute(HttpServletRequest request) throws SQLException, NamingException, ClassNotFoundException {
         String page = ConfigurationManager.getProperty("path.page.newagreemetn");
 
         fillAgreementParent(request);

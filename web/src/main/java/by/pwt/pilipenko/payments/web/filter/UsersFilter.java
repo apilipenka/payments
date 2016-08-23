@@ -15,7 +15,7 @@ public class UsersFilter implements Filter {
 
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
             throws IOException, ServletException {
-
+        String error = null;
         Object name = req.getAttribute("userList");
         UserService userService = new UserService();
 
@@ -27,7 +27,9 @@ public class UsersFilter implements Filter {
                 try {
                     userList = userService.getAllEntities();
                 } catch (SQLException | NamingException e) {
-                    e.printStackTrace();
+                    error += "<br/>" + e.getMessage();
+                } catch (ClassNotFoundException e) {
+                    error += "<br/>" + e.getMessage();
                 }
             }
         }
@@ -39,6 +41,7 @@ public class UsersFilter implements Filter {
             }
             req.setAttribute("userList", userVOList);
         }
+        req.setAttribute("error", error);
 
         chain.doFilter(req, res);
     }

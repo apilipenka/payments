@@ -15,13 +15,13 @@ public interface BaseDAO<E extends Entity> {
 
     public boolean delete(E entity) throws SQLException, NamingException;
 
-    public E findEntityById(int id) throws SQLException, NamingException;
+    public E findEntityById(int id) throws SQLException, NamingException, ClassNotFoundException;
 
-    public List<E> findEntityByEntity(E entity) throws SQLException, NamingException;
+    public List<E> findEntityByEntity(E entity) throws SQLException, NamingException, ClassNotFoundException;
 
-    public E findEntityByPK(E entity) throws SQLException, NamingException;
+    public E findEntityByPK(E entity) throws SQLException, NamingException, ClassNotFoundException;
 
-    public List<E> findAll() throws SQLException, NamingException;
+    public List<E> findAll() throws SQLException, NamingException, ClassNotFoundException;
 
     public E insert(E entity) throws SQLException, NamingException;
 

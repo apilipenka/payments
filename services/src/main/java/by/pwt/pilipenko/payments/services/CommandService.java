@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CommandService extends AbstractEntitySevice<Command> {
 
-    public List<Command> searchEntityByName(String name) throws SQLException, NamingException {
+    public List<Command> searchEntityByName(String name) throws SQLException, NamingException, ClassNotFoundException {
 
         Command entity = new Command();
         if (name != null && name != "") {
@@ -26,7 +26,7 @@ public class CommandService extends AbstractEntitySevice<Command> {
     }
 
     @Override
-    public AbstractEntityDAO<Command> getEntityDAO() throws SQLException, NamingException {
+    public AbstractEntityDAO<Command> getEntityDAO() throws SQLException, NamingException, ClassNotFoundException {
         CommandDAO commandDAO = DaoFactoryFactory.getInstance().createCommandDAO();
         return commandDAO;
     }

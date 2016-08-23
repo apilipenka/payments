@@ -28,6 +28,8 @@ public class AccountsFilter implements Filter {
                     accountList = userService.getAllEntities();
                 } catch (SQLException | NamingException e) {
                     e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
                 }
             }
         }

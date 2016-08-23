@@ -19,7 +19,7 @@ public class UserDAO extends AbstractEntityDAO<User> {
     }
 
     @Override
-    protected User getEntity(ResultSet resultSet) throws SQLException, NamingException {
+    protected User getEntity(ResultSet resultSet) throws SQLException, NamingException, ClassNotFoundException {
         User user = new User();
         user.setId(resultSet.getInt("id"));
         user.setLogin(resultSet.getString("login"));

@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 public class EditCardCommand implements ActionCommand {
     @Override
-    public String execute(HttpServletRequest request) throws SQLException, NamingException {
+    public String execute(HttpServletRequest request) throws Exception {
         String page = ConfigurationManager.getProperty("path.page.newcard");
 
         CardService cardService = new CardService();
@@ -20,7 +20,7 @@ public class EditCardCommand implements ActionCommand {
 
         Card card = new Card();
 
-        try {
+
             if (name != null) {
 
                 card = cardService.getEntity(Integer.parseInt(name.toString()));
@@ -31,11 +31,7 @@ public class EditCardCommand implements ActionCommand {
                     card = cardService.getEntity(Integer.parseInt(name.toString()));
                 }
             }
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
 
 
         if (card != null) {

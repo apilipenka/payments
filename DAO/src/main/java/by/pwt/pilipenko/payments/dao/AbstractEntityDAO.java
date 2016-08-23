@@ -130,7 +130,7 @@ public abstract class AbstractEntityDAO<T extends Entity> implements BaseDAO<T> 
         }
     }
 
-    public T findEntityById(int id) throws SQLException, NamingException {
+    public T findEntityById(int id) throws SQLException, NamingException, ClassNotFoundException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         T entity = null;
@@ -154,7 +154,7 @@ public abstract class AbstractEntityDAO<T extends Entity> implements BaseDAO<T> 
         return entity;
     }
 
-    public T findEntityByPK(T entity) throws SQLException, NamingException {
+    public T findEntityByPK(T entity) throws SQLException, NamingException, ClassNotFoundException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         T entity1 = null;
@@ -178,7 +178,7 @@ public abstract class AbstractEntityDAO<T extends Entity> implements BaseDAO<T> 
         return entity1;
     }
 
-    public List<T> findEntityByEntity(T entity) throws SQLException, NamingException {
+    public List<T> findEntityByEntity(T entity) throws SQLException, NamingException, ClassNotFoundException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         List<T> entities = null;
@@ -199,7 +199,7 @@ public abstract class AbstractEntityDAO<T extends Entity> implements BaseDAO<T> 
         return entities;
     }
 
-    public List<T> findAll() throws SQLException, NamingException {
+    public List<T> findAll() throws SQLException, NamingException, ClassNotFoundException {
         Statement statement = null;
         ResultSet resultSet = null;
         List<T> entities = null;
@@ -264,9 +264,9 @@ public abstract class AbstractEntityDAO<T extends Entity> implements BaseDAO<T> 
         }
     }
 
-    protected abstract T getEntity(ResultSet resultSet) throws SQLException, NamingException;
+    protected abstract T getEntity(ResultSet resultSet) throws SQLException, NamingException, ClassNotFoundException;
 
-    protected List<T> getEntities(ResultSet resultSet) throws SQLException, NamingException {
+    protected List<T> getEntities(ResultSet resultSet) throws SQLException, NamingException, ClassNotFoundException {
         List<T> entities = new ArrayList<T>();
         while (resultSet.next()) {
             T entity = getEntity(resultSet);

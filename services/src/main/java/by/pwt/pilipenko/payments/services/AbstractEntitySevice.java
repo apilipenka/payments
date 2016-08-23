@@ -14,7 +14,7 @@ public abstract class AbstractEntitySevice<T extends Entity> {
         super();
     }
 
-    public List<T> getAllEntities() throws SQLException, NamingException {
+    public List<T> getAllEntities() throws SQLException, NamingException, ClassNotFoundException {
         AbstractEntityDAO<T> entityDAO = getEntityDAO();
         List<T> list = entityDAO.findAll();
         entityDAO.closeConnection();
@@ -31,14 +31,14 @@ public abstract class AbstractEntitySevice<T extends Entity> {
 
     }
 
-    public T getEntityByPK(T entity) throws SQLException, NamingException {
+    public T getEntityByPK(T entity) throws SQLException, NamingException, ClassNotFoundException {
         AbstractEntityDAO<T> entityDAO = getEntityDAO();
         entity = entityDAO.findEntityByPK(entity);
         entityDAO.closeConnection();
         return entity;
     }
 
-    public boolean updateEntity(T entity) throws SQLException, NamingException {
+    public boolean updateEntity(T entity) throws SQLException, NamingException, ClassNotFoundException {
         AbstractEntityDAO<T> entityDAO = getEntityDAO();
         boolean result = entityDAO.update(entity);
         entityDAO.closeConnection();
@@ -46,7 +46,7 @@ public abstract class AbstractEntitySevice<T extends Entity> {
 
     }
 
-    public T insertEntity(T entity) throws SQLException, NamingException {
+    public T insertEntity(T entity) throws SQLException, NamingException, ClassNotFoundException {
         AbstractEntityDAO<T> entityDAO = getEntityDAO();
         entity = entityDAO.insert(entity);
         entityDAO.closeConnection();
@@ -54,7 +54,7 @@ public abstract class AbstractEntitySevice<T extends Entity> {
 
     }
 
-    public boolean deleteEntity(int id) throws SQLException, NamingException {
+    public boolean deleteEntity(int id) throws SQLException, NamingException, ClassNotFoundException {
         AbstractEntityDAO<T> entityDAO = getEntityDAO();
         boolean result = entityDAO.delete(id);
         entityDAO.closeConnection();
@@ -62,7 +62,7 @@ public abstract class AbstractEntitySevice<T extends Entity> {
 
     }
 
-    public abstract AbstractEntityDAO<T> getEntityDAO() throws NamingException, SQLException;
+    public abstract AbstractEntityDAO<T> getEntityDAO() throws NamingException, SQLException, ClassNotFoundException;
 
 
 }

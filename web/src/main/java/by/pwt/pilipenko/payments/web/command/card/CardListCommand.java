@@ -14,7 +14,7 @@ import java.util.List;
 
 public class CardListCommand implements ActionCommand {
     @Override
-    public String execute(HttpServletRequest request) throws SQLException, NamingException {
+    public String execute(HttpServletRequest request) throws SQLException, NamingException, ClassNotFoundException {
         String page = ConfigurationManager.getProperty("path.page.cardlist");
 
         CardService cardService = new CardService();

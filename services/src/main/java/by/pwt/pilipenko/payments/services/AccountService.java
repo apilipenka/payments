@@ -12,7 +12,7 @@ import java.util.List;
 public class AccountService extends AbstractEntitySevice<Account> {
 
 
-    public List<Account> searchEntityByName(String name) throws SQLException, NamingException {
+    public List<Account> searchEntityByName(String name) throws SQLException, NamingException, ClassNotFoundException {
 
         Account entity = new Account();
         if (name != null && name != "") {
@@ -26,7 +26,7 @@ public class AccountService extends AbstractEntitySevice<Account> {
         return list;
     }
 
-    public AbstractEntityDAO<Account> getEntityDAO() throws NamingException, SQLException {
+    public AbstractEntityDAO<Account> getEntityDAO() throws NamingException, SQLException, ClassNotFoundException {
 
         AccountDAO accountDAO = DaoFactoryFactory.getInstance().createAccountDAO();
         return accountDAO;

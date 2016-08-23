@@ -28,26 +28,11 @@ import java.util.List;
 public class UserRoleDaoTest
         extends Assert {
 
-    private static PoolingDataSource<PoolableConnection> ds;
-    private static DAOFactory df;
     private static UserRoleDAO userRoleDAO;
     private static UserRole userRole;
-    private static DaoFactoryFactory dff;
 
     @BeforeClass
     public static void intit() throws NamingException, ClassNotFoundException, SQLException {
-
-        Class.forName("com.mysql.jdbc.Driver");
-
-        DriverManagerConnectionFactory connectionFactory = new DriverManagerConnectionFactory("jdbc:mysql://localhost:3306/payments?autoReconnect=true&useSSL=false&autocommit=1", "root", "awp1977");
-        PoolableConnectionFactory poolableConnectionFactory = new PoolableConnectionFactory(connectionFactory,
-                null);
-        ObjectPool<PoolableConnection> connectionPool = new GenericObjectPool<>(poolableConnectionFactory);
-        poolableConnectionFactory.setPool(connectionPool);
-        ds = new PoolingDataSource<>(connectionPool);
-
-        df = new DAOFactory((DataSource) ds);
-        dff= new DaoFactoryFactory(df);
 
         userRoleDAO = DaoFactoryFactory.getInstance().createUserRoleDAO();
 
@@ -59,15 +44,11 @@ public class UserRoleDaoTest
 
         userRoleDAO.closeConnection();
         userRoleDAO = null;
-        dff = null;
-        df = null;
-        ds = null;
-
 
     }
 
     @Test
-    public void test1FindById() throws SQLException, NamingException {
+    public void test1FindById() throws SQLException, NamingException, ClassNotFoundException {
 
         userRole = new UserRole();
         userRole.setName("Agroprom");
@@ -82,7 +63,7 @@ public class UserRoleDaoTest
     }
 
     @Test
-    public void test2FindByEntity() throws SQLException, NamingException {
+    public void test2FindByEntity() throws SQLException, NamingException, ClassNotFoundException {
 
         List<UserRole> userRoleList1 = new ArrayList<UserRole>();
         userRoleList1.add(userRole);
@@ -95,7 +76,7 @@ public class UserRoleDaoTest
     }
 
     @Test
-    public void test6FindEntityByPK() throws SQLException, NamingException {
+    public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
 
 
         UserRole userRole2 = userRoleDAO.findEntityByPK(userRole);
@@ -108,7 +89,7 @@ public class UserRoleDaoTest
 
 
     @Test
-    public void test7Update() throws SQLException, NamingException {
+    public void test7Update() throws SQLException, NamingException, ClassNotFoundException {
 
 
         userRole.setDescription("Test role for update");
@@ -122,7 +103,7 @@ public class UserRoleDaoTest
 
 
     @Test
-    public void test8DeleteById() throws SQLException, NamingException {
+    public void test8DeleteById() throws SQLException, NamingException, ClassNotFoundException {
 
 
         userRoleDAO.delete(userRole.getId());
@@ -135,7 +116,7 @@ public class UserRoleDaoTest
     }
 
     @Test
-    public void test9DeleteByEntity() throws SQLException, NamingException {
+    public void test9DeleteByEntity() throws SQLException, NamingException, ClassNotFoundException {
 
         userRole = new UserRole();
         userRole.setName("agroprom");

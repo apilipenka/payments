@@ -28,29 +28,13 @@ import java.util.List;
 public class BankDaoTest
         extends Assert {
 
-    private static PoolingDataSource<PoolableConnection> ds;
-    private static DAOFactory df;
     private static BankDAO bankDAO;
     private static Bank bank;
-    private static DaoFactoryFactory dff;
 
     @BeforeClass
     public static void intit() throws NamingException, ClassNotFoundException, SQLException {
 
-        Class.forName("com.mysql.jdbc.Driver");
-
-        DriverManagerConnectionFactory connectionFactory = new DriverManagerConnectionFactory("jdbc:mysql://localhost:3306/payments?autoReconnect=true&useSSL=false&autocommit=1", "root", "awp1977");
-        PoolableConnectionFactory poolableConnectionFactory = new PoolableConnectionFactory(connectionFactory,
-                null);
-        ObjectPool<PoolableConnection> connectionPool = new GenericObjectPool<>(poolableConnectionFactory);
-        poolableConnectionFactory.setPool(connectionPool);
-        ds = new PoolingDataSource<>(connectionPool);
-
-        df = new DAOFactory((DataSource) ds);
-        dff= new DaoFactoryFactory(df);
-
         bankDAO = DaoFactoryFactory.getInstance().createBankDAO();
-
 
     }
 
@@ -59,15 +43,11 @@ public class BankDaoTest
 
         bankDAO.closeConnection();
         bankDAO = null;
-        dff = null;
-        df = null;
-        ds = null;
-
 
     }
 
     @Test
-    public void test1FindById() throws SQLException, NamingException {
+    public void test1FindById() throws SQLException, NamingException, ClassNotFoundException {
 
         bank = new Bank();
         bank.setName("Agroprom");
@@ -82,7 +62,7 @@ public class BankDaoTest
     }
 
     @Test
-    public void test2FindByEntity() throws SQLException, NamingException {
+    public void test2FindByEntity() throws SQLException, NamingException, ClassNotFoundException {
 
         List<Bank> bankList1 = new ArrayList<Bank>();
         bankList1.add(bank);
@@ -95,7 +75,7 @@ public class BankDaoTest
     }
 
     @Test
-    public void test6FindEntityByPK() throws SQLException, NamingException {
+    public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
 
 
         Bank bank2 = bankDAO.findEntityByPK(bank);
@@ -108,7 +88,7 @@ public class BankDaoTest
 
 
     @Test
-    public void test7Update() throws SQLException, NamingException {
+    public void test7Update() throws SQLException, NamingException, ClassNotFoundException {
 
 
         bank.setName("AgropromBank");
@@ -122,7 +102,7 @@ public class BankDaoTest
 
 
     @Test
-    public void test8DeleteById() throws SQLException, NamingException {
+    public void test8DeleteById() throws SQLException, NamingException, ClassNotFoundException {
 
 
         bankDAO.delete(bank.getId());
@@ -135,7 +115,7 @@ public class BankDaoTest
     }
 
     @Test
-    public void test9DeleteByEntity() throws SQLException, NamingException {
+    public void test9DeleteByEntity() throws SQLException, NamingException, ClassNotFoundException {
 
         bank = new Bank();
         bank.setName("agroprom");

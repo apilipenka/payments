@@ -11,7 +11,7 @@ import java.util.List;
 
 public class UserService extends AbstractEntitySevice<User> {
 
-    public List<User> searchEntityByName(String name) throws SQLException, NamingException {
+    public List<User> searchEntityByName(String name) throws SQLException, NamingException, ClassNotFoundException {
 
         User entity = new User();
         if (name != null && name != "") {
@@ -29,7 +29,7 @@ public class UserService extends AbstractEntitySevice<User> {
     }
 
     @Override
-    public AbstractEntityDAO<User> getEntityDAO() throws SQLException, NamingException {
+    public AbstractEntityDAO<User> getEntityDAO() throws SQLException, NamingException, ClassNotFoundException {
         UserDAO userDAO = DaoFactoryFactory.getInstance().createUserDAO();
         return userDAO;
     }

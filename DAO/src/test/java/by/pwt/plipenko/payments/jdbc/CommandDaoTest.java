@@ -28,29 +28,13 @@ import java.util.List;
 public class CommandDaoTest
         extends Assert {
 
-    private static PoolingDataSource<PoolableConnection> ds;
-    private static DAOFactory df;
     private static CommandDAO commandDAO;
     private static Command command;
-    private static DaoFactoryFactory dff;
 
     @BeforeClass
     public static void intit() throws NamingException, ClassNotFoundException, SQLException {
 
-        Class.forName("com.mysql.jdbc.Driver");
-
-        DriverManagerConnectionFactory connectionFactory = new DriverManagerConnectionFactory("jdbc:mysql://localhost:3306/payments?autoReconnect=true&useSSL=false&autocommit=1", "root", "awp1977");
-        PoolableConnectionFactory poolableConnectionFactory = new PoolableConnectionFactory(connectionFactory,
-                null);
-        ObjectPool<PoolableConnection> connectionPool = new GenericObjectPool<>(poolableConnectionFactory);
-        poolableConnectionFactory.setPool(connectionPool);
-        ds = new PoolingDataSource<>(connectionPool);
-
-        df = new DAOFactory((DataSource) ds);
-        dff= new DaoFactoryFactory(df);
-
         commandDAO = DaoFactoryFactory.getInstance().createCommandDAO();
-
 
     }
 
@@ -59,15 +43,11 @@ public class CommandDaoTest
 
         commandDAO.closeConnection();
         commandDAO = null;
-        dff = null;
-        df = null;
-        ds = null;
-
 
     }
 
     @Test
-    public void test1FindById() throws SQLException, NamingException {
+    public void test1FindById() throws SQLException, NamingException, ClassNotFoundException {
 
         command = new Command();
         command.setCommand("TESTLIST");
@@ -84,7 +64,7 @@ public class CommandDaoTest
     }
 
     @Test
-    public void test2FindByEntity() throws SQLException, NamingException {
+    public void test2FindByEntity() throws SQLException, NamingException, ClassNotFoundException {
 
         List<Command> commandList1 = new ArrayList<Command>();
         commandList1.add(command);
@@ -97,7 +77,7 @@ public class CommandDaoTest
     }
 
     @Test
-    public void test6FindEntityByPK() throws SQLException, NamingException {
+    public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
 
 
         Command command2 = commandDAO.findEntityByPK(command);
@@ -110,7 +90,7 @@ public class CommandDaoTest
 
 
     @Test
-    public void test7Update() throws SQLException, NamingException {
+    public void test7Update() throws SQLException, NamingException, ClassNotFoundException {
 
 
         command.setComment("Test role for update");
@@ -124,7 +104,7 @@ public class CommandDaoTest
 
 
     @Test
-    public void test8DeleteById() throws SQLException, NamingException {
+    public void test8DeleteById() throws SQLException, NamingException, ClassNotFoundException {
 
 
         commandDAO.delete(command.getId());
@@ -137,7 +117,7 @@ public class CommandDaoTest
     }
 
     @Test
-    public void test9DeleteByEntity() throws SQLException, NamingException {
+    public void test9DeleteByEntity() throws SQLException, NamingException, ClassNotFoundException {
 
         command = new Command();
         command.setCommand("TESTLIST");

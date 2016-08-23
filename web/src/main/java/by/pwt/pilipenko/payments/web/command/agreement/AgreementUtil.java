@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class AgreementUtil {
 
-    public static void fillAgreementParent(HttpServletRequest request) {
+    public static void fillAgreementParent(HttpServletRequest request) throws ClassNotFoundException {
         BankService bankService = new BankService();
 
         try {

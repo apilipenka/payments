@@ -76,6 +76,8 @@ public class UpdateUserCommand implements ActionCommand {
             } catch (SQLException e1) {
                 error += "<br/>" + e1.getMessage();
 
+            } catch (ClassNotFoundException e1) {
+                error += "<br/>" + e1.getMessage();
             }
 
             request.setAttribute("error", error);

@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ExchangeRateService extends AbstractEntitySevice<ExchangeRate> {
 
-    public List<ExchangeRate> searchEntityByName(String name) throws SQLException, NamingException {
+    public List<ExchangeRate> searchEntityByName(String name) throws SQLException, NamingException, ClassNotFoundException {
 
         ExchangeRate entity = new ExchangeRate();
         if (name != null && name != "") {
@@ -78,7 +78,7 @@ public class ExchangeRateService extends AbstractEntitySevice<ExchangeRate> {
 
 
     @Override
-    public AbstractEntityDAO<ExchangeRate> getEntityDAO() throws NamingException, SQLException {
+    public AbstractEntityDAO<ExchangeRate> getEntityDAO() throws NamingException, SQLException, ClassNotFoundException {
         ExchangeRateDAO exchangeRateDAO = DaoFactoryFactory.getInstance().createExchangeRateDAO();
         return exchangeRateDAO;
     }

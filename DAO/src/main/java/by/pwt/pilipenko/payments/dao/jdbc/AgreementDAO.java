@@ -19,7 +19,7 @@ public class AgreementDAO extends AbstractEntityDAO<Agreement> {
     }
 
     @Override
-    protected Agreement getEntity(ResultSet resultSet) throws SQLException, NamingException {
+    protected Agreement getEntity(ResultSet resultSet) throws SQLException, NamingException, ClassNotFoundException {
         Agreement agreement = new Agreement();
 
         agreement.setId(resultSet.getInt("id"));

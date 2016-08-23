@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 public class EditUserCommand implements ActionCommand {
     @Override
-    public String execute(HttpServletRequest request) throws SQLException, NamingException {
+    public String execute(HttpServletRequest request) throws SQLException, NamingException, ClassNotFoundException {
         String page = ConfigurationManager.getProperty("path.page.newuser");
 
         UserService userService = new UserService();

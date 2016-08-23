@@ -13,7 +13,7 @@ import java.util.List;
 public class AddressTypeService extends AbstractEntitySevice<Type> {
 
 
-    public List<Type> searchEntityByName(String name) throws SQLException, NamingException {
+    public List<Type> searchEntityByName(String name) throws SQLException, NamingException, ClassNotFoundException {
 
         Type entity = new Type();
         if (name != null && name != "") {
@@ -26,7 +26,7 @@ public class AddressTypeService extends AbstractEntitySevice<Type> {
         return list;
     }
 
-    public AbstractEntityDAO<Type> getEntityDAO() throws NamingException, SQLException {
+    public AbstractEntityDAO<Type> getEntityDAO() throws NamingException, SQLException, ClassNotFoundException {
 
         TypeDAO addressDAO = DaoFactoryFactory.getInstance().createAddressTypeDAO();
         return addressDAO;

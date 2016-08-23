@@ -22,6 +22,8 @@ public class CurrenciesExtFilter implements Filter {
                     req.setAttribute("currencyExtList", currencyService.getAllEntities());
                 } catch (SQLException | NamingException e) {
                     e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
                 }
             }
         }

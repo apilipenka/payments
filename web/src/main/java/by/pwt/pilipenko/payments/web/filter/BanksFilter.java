@@ -28,6 +28,8 @@ public class BanksFilter implements Filter {
                     bankList = bankService.getAllEntities();
                 } catch (SQLException | NamingException e) {
                     e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
                 }
             }
         }

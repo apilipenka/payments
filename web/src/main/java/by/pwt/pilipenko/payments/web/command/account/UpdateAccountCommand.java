@@ -15,7 +15,7 @@ import static by.pwt.pilipenko.payments.web.command.account.AccountUtil.fillAcco
 
 public class UpdateAccountCommand implements ActionCommand {
     @Override
-    public String execute(HttpServletRequest request) {
+    public String execute(HttpServletRequest request) throws ClassNotFoundException {
 
         String error = null;
         Account account = null;

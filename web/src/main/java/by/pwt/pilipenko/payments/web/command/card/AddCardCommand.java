@@ -16,7 +16,7 @@ import java.util.Date;
 
 
 public class AddCardCommand implements ActionCommand {
-    public String execute(HttpServletRequest request) {
+    public String execute(HttpServletRequest request) throws ClassNotFoundException {
 
         String error = null;
         Card card1 = null;

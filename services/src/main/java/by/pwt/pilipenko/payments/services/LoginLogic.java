@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class LoginLogic {
 
-    public static boolean checkAdminLogin(String enterLogin, String enterPass) throws SQLException, NamingException {
+    public static boolean checkAdminLogin(String enterLogin, String enterPass) throws SQLException, NamingException, ClassNotFoundException {
 
         User user = new User();
         user.setLogin(enterLogin);
@@ -24,7 +24,7 @@ public class LoginLogic {
         return false;
     }
 
-    public static boolean checkManagerLogin(String enterLogin, String enterPass) throws SQLException, NamingException {
+    public static boolean checkManagerLogin(String enterLogin, String enterPass) throws SQLException, NamingException, ClassNotFoundException {
 
         User user = new User();
         user.setLogin(enterLogin);
@@ -40,7 +40,7 @@ public class LoginLogic {
         return false;
     }
 
-    public static boolean checkUserLogin(String enterLogin, String enterPass) throws SQLException, NamingException {
+    public static boolean checkUserLogin(String enterLogin, String enterPass) throws SQLException, NamingException, ClassNotFoundException {
 
         User user = new User();
         user.setLogin(enterLogin);

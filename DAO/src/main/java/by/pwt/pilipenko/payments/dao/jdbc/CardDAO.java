@@ -18,7 +18,7 @@ public class CardDAO extends AbstractEntityDAO<Card> {
     }
 
     @Override
-    protected Card getEntity(ResultSet resultSet) throws SQLException, NamingException {
+    protected Card getEntity(ResultSet resultSet) throws SQLException, NamingException, ClassNotFoundException {
         Card card = new Card();
 
         card.setId(resultSet.getInt("id"));

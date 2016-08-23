@@ -16,7 +16,7 @@ import java.util.Date;
 
 public class UpdateCardCommand implements ActionCommand {
     @Override
-    public String execute(HttpServletRequest request) {
+    public String execute(HttpServletRequest request) throws ClassNotFoundException {
 
         String error = null;
         Card card1 = null;

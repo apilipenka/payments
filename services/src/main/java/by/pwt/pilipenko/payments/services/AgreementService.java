@@ -11,7 +11,7 @@ import java.util.List;
 
 public class AgreementService extends AbstractEntitySevice<Agreement> {
 
-    public List<Agreement> searchEntityByName(String name) throws SQLException, NamingException {
+    public List<Agreement> searchEntityByName(String name) throws SQLException, NamingException, ClassNotFoundException {
 
         Agreement entity = new Agreement();
         if (name != null && name != "") {
@@ -25,7 +25,7 @@ public class AgreementService extends AbstractEntitySevice<Agreement> {
         return list;
     }
 
-    public AbstractEntityDAO<Agreement> getEntityDAO() throws NamingException, SQLException {
+    public AbstractEntityDAO<Agreement> getEntityDAO() throws NamingException, SQLException, ClassNotFoundException {
 
         AgreementDAO agreementDAO = DaoFactoryFactory.getInstance().createAgreementDAO();
         return agreementDAO;

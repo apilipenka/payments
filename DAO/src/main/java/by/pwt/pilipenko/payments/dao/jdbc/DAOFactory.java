@@ -1,6 +1,13 @@
 package by.pwt.pilipenko.payments.dao.jdbc;
 
 import by.pwt.pilipenko.payments.dao.AbstractDAOFactory;
+import org.apache.commons.dbcp2.DriverManagerConnectionFactory;
+import org.apache.commons.dbcp2.PoolableConnection;
+import org.apache.commons.dbcp2.PoolableConnectionFactory;
+import org.apache.commons.dbcp2.PoolingDataSource;
+import org.apache.commons.pool2.ObjectPool;
+import org.apache.commons.pool2.impl.AbandonedConfig;
+import org.apache.commons.pool2.impl.GenericObjectPool;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -11,7 +18,7 @@ import java.sql.SQLException;
 public class DAOFactory extends AbstractDAOFactory {
 
 
-    public DAOFactory() throws NamingException {
+    public DAOFactory() throws NamingException, ClassNotFoundException {
         super();
 
         Context initContext;
@@ -19,9 +26,41 @@ public class DAOFactory extends AbstractDAOFactory {
             initContext = new InitialContext();
             setDataSource((DataSource) initContext.lookup("java:comp/env/jdbc/mysqldb"));
 
-        } catch (NamingException e) {
-            // e.printStackTrace();
-            throw e;
+        }
+        catch (NamingException e) {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                DriverManagerConnectionFactory connectionFactory = new DriverManagerConnectionFactory("jdbc:mysql://localhost:3306/payments?autoReconnect=true&useSSL=false&autocommit=1", "root", "awp1977");
+
+
+                PoolableConnectionFactory poolableConnectionFactory = new PoolableConnectionFactory(connectionFactory,
+                        null);
+
+                ObjectPool<PoolableConnection> connectionPool = new GenericObjectPool<>(poolableConnectionFactory);
+                ((GenericObjectPool)connectionPool).setMaxTotal(150);
+                ((GenericObjectPool)connectionPool).setMinIdle(10);
+                ((GenericObjectPool)connectionPool).setMaxIdle(50);
+                ((GenericObjectPool)connectionPool).setMaxWaitMillis(10000);
+                ((GenericObjectPool)connectionPool).setMinEvictableIdleTimeMillis(60000);
+                AbandonedConfig abandonedConfig = new AbandonedConfig();
+                abandonedConfig.setRemoveAbandonedTimeout(60);
+                abandonedConfig.setRemoveAbandonedOnBorrow(true);
+                abandonedConfig.setRemoveAbandonedOnMaintenance(true);
+
+                ((GenericObjectPool)connectionPool).setAbandonedConfig(abandonedConfig);
+
+
+
+
+                poolableConnectionFactory.setPool(connectionPool);
+                setDataSource((DataSource) new PoolingDataSource<>(connectionPool));
+
+
+
+            } catch (ClassNotFoundException e1) {
+                throw e1;
+            }
+
         }
 
     }

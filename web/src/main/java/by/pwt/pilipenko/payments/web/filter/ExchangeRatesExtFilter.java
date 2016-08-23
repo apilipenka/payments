@@ -28,6 +28,8 @@ public class ExchangeRatesExtFilter implements Filter {
                     exchangeRateList = exchangeRateService.getAllEntities();
                 } catch (SQLException | NamingException e) {
                     e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
                 }
             }
         }
