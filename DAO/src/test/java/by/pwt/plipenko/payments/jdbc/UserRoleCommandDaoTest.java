@@ -48,7 +48,6 @@ public class UserRoleCommandDaoTest
             commandDAO.delete(command1);
 
 
-
         } finally {
             if (userRoleDAO != null) {
                 userRoleDAO.closeConnection();
@@ -67,28 +66,28 @@ public class UserRoleCommandDaoTest
     @Test
     public void test1FindById() throws SQLException, NamingException, ParseException, ClassNotFoundException {
 
-            UserRole userRole = new UserRole();
-            userRole.setName("Test");
-            userRole.setDescription("Test userRole");
+        UserRole userRole = new UserRole();
+        userRole.setName("Test");
+        userRole.setDescription("Test userRole");
 
 
-            userRole1 = userRoleDAO.insert(userRole);
+        userRole1 = userRoleDAO.insert(userRole);
 
-            Command command = new Command();
-            command = new Command();
-            command.setCommand("TESTLIST");
-            command.setUrl("/jsp/test-list.jsp");
-            command.setLabel("Edit tests");
-            command.setComment("Edit tests");
-            command1 = commandDAO.insert(command);
+        Command command = new Command();
+        command = new Command();
+        command.setCommand("TESTLIST");
+        command.setUrl("/jsp/test-list.jsp");
+        command.setLabel("Edit tests");
+        command.setComment("Edit tests");
+        command1 = commandDAO.insert(command);
 
-            UserRoleCommand userRoleCommand = new UserRoleCommand();
-            userRoleCommand.setUserRole(userRole1);
-            userRoleCommand.setCommand(command1);
+        UserRoleCommand userRoleCommand = new UserRoleCommand();
+        userRoleCommand.setUserRole(userRole1);
+        userRoleCommand.setCommand(command1);
 
-            userRoleCommand1 = userRoleCommandDAO.insert(userRoleCommand);
-            UserRoleCommand userRoleCommand2 = userRoleCommandDAO.findEntityById(userRoleCommand1.getId());
-            assertEquals(userRoleCommand1, userRoleCommand2);
+        userRoleCommand1 = userRoleCommandDAO.insert(userRoleCommand);
+        UserRoleCommand userRoleCommand2 = userRoleCommandDAO.findEntityById(userRoleCommand1.getId());
+        assertEquals(userRoleCommand1, userRoleCommand2);
 
 
     }
@@ -96,20 +95,19 @@ public class UserRoleCommandDaoTest
     @Test
     public void test2FindByEntity() throws SQLException, NamingException, ClassNotFoundException {
 
-            List<UserRoleCommand> userRoleCommandList1 = new ArrayList<UserRoleCommand>();
-            userRoleCommandList1.add(userRoleCommand1);
+        List<UserRoleCommand> userRoleCommandList1 = new ArrayList<UserRoleCommand>();
+        userRoleCommandList1.add(userRoleCommand1);
 
-            List<UserRoleCommand> userRoleCommandList2 = userRoleCommandDAO.findEntityByEntity(userRoleCommand1);
-            assertEquals(userRoleCommandList1, userRoleCommandList2);
-
+        List<UserRoleCommand> userRoleCommandList2 = userRoleCommandDAO.findEntityByEntity(userRoleCommand1);
+        assertEquals(userRoleCommandList1, userRoleCommandList2);
 
 
     }
 
     @Test
     public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
-            UserRoleCommand userRoleCommand2 = userRoleCommandDAO.findEntityByPK(userRoleCommand1);
-            assertEquals(userRoleCommand1, userRoleCommand2);
+        UserRoleCommand userRoleCommand2 = userRoleCommandDAO.findEntityByPK(userRoleCommand1);
+        assertEquals(userRoleCommand1, userRoleCommand2);
 
     }
 
@@ -117,30 +115,30 @@ public class UserRoleCommandDaoTest
     @Test
     public void test7Update() throws SQLException, NamingException, ClassNotFoundException {
 
-            userRole3 = new UserRole();
-            userRole3.setName("Test3");
-            userRole3.setDescription("Test userRole3");
+        userRole3 = new UserRole();
+        userRole3.setName("Test3");
+        userRole3.setDescription("Test userRole3");
 
-            userRole3 = userRoleDAO.insert(userRole3);
+        userRole3 = userRoleDAO.insert(userRole3);
 
-            userRoleCommand1.setUserRole(userRole3);
+        userRoleCommand1.setUserRole(userRole3);
 
-            userRoleCommandDAO.update(userRoleCommand1);
-            UserRoleCommand userRoleCommand2 = userRoleCommandDAO.findEntityById(userRoleCommand1.getId());
+        userRoleCommandDAO.update(userRoleCommand1);
+        UserRoleCommand userRoleCommand2 = userRoleCommandDAO.findEntityById(userRoleCommand1.getId());
 
 
-            assertEquals(userRoleCommand1, userRoleCommand2);
+        assertEquals(userRoleCommand1, userRoleCommand2);
 
     }
 
 
     @Test
     public void test8DeleteById() throws SQLException, NamingException, ClassNotFoundException {
-            userRoleCommandDAO.delete(userRoleCommand1.getId());
+        userRoleCommandDAO.delete(userRoleCommand1.getId());
 
 
-            UserRoleCommand userRoleCommand2 = userRoleCommandDAO.findEntityById(userRoleCommand1.getId());
-            assertNull(userRoleCommand2);
+        UserRoleCommand userRoleCommand2 = userRoleCommandDAO.findEntityById(userRoleCommand1.getId());
+        assertNull(userRoleCommand2);
 
     }
 

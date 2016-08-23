@@ -1,8 +1,10 @@
 package by.pwt.plipenko.payments.jdbc;
 
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
-import by.pwt.pilipenko.payments.dao.jdbc.*;
-import by.pwt.plipenko.payments.model.entities.*;
+import by.pwt.pilipenko.payments.dao.jdbc.CurrencyDAO;
+import by.pwt.pilipenko.payments.dao.jdbc.ExchangeRateDAO;
+import by.pwt.plipenko.payments.model.entities.Currency;
+import by.pwt.plipenko.payments.model.entities.ExchangeRate;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 
@@ -40,7 +42,6 @@ public class ExchangeRateDaoTest
             currencyDAO.delete(currency1);
 
 
-
         } finally {
             if (currencyDAO != null) {
                 currencyDAO.closeConnection();
@@ -76,8 +77,6 @@ public class ExchangeRateDaoTest
         }
 
 
-
-
         exchangeRate1 = exchangeRateDAO.insert(exchangeRate);
         ExchangeRate exchangeRate2 = exchangeRateDAO.findEntityById(exchangeRate1.getId());
         assertEquals(exchangeRate1, exchangeRate2);
@@ -95,7 +94,6 @@ public class ExchangeRateDaoTest
         assertEquals(exchangeRateList1, exchangeRateList2);
 
 
-
     }
 
     @Test
@@ -108,7 +106,6 @@ public class ExchangeRateDaoTest
 
     @Test
     public void test7Update() throws SQLException, NamingException, ClassNotFoundException {
-
 
 
         exchangeRate1.setRate(300);

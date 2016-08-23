@@ -1,8 +1,14 @@
 package by.pwt.plipenko.payments.jdbc;
 
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
-import by.pwt.pilipenko.payments.dao.jdbc.*;
-import by.pwt.plipenko.payments.model.entities.*;
+import by.pwt.pilipenko.payments.dao.jdbc.AgreementDAO;
+import by.pwt.pilipenko.payments.dao.jdbc.BankDAO;
+import by.pwt.pilipenko.payments.dao.jdbc.UserDAO;
+import by.pwt.pilipenko.payments.dao.jdbc.UserRoleDAO;
+import by.pwt.plipenko.payments.model.entities.Agreement;
+import by.pwt.plipenko.payments.model.entities.Bank;
+import by.pwt.plipenko.payments.model.entities.User;
+import by.pwt.plipenko.payments.model.entities.UserRole;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 
@@ -131,7 +137,6 @@ public class AgreementDaoTest
         assertEquals(agreementList1, agreementList2);
 
 
-
     }
 
     @Test
@@ -144,7 +149,6 @@ public class AgreementDaoTest
 
     @Test
     public void test7Update() throws SQLException, NamingException, ClassNotFoundException {
-
 
 
         agreement1.setNumber("19777911977");

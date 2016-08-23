@@ -26,8 +26,7 @@ public class DAOFactory extends AbstractDAOFactory {
             initContext = new InitialContext();
             setDataSource((DataSource) initContext.lookup("java:comp/env/jdbc/mysqldb"));
 
-        }
-        catch (NamingException e) {
+        } catch (NamingException e) {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
                 DriverManagerConnectionFactory connectionFactory = new DriverManagerConnectionFactory("jdbc:mysql://localhost:3306/payments?autoReconnect=true&useSSL=false&autocommit=1", "root", "awp1977");
@@ -37,24 +36,21 @@ public class DAOFactory extends AbstractDAOFactory {
                         null);
 
                 ObjectPool<PoolableConnection> connectionPool = new GenericObjectPool<>(poolableConnectionFactory);
-                ((GenericObjectPool)connectionPool).setMaxTotal(150);
-                ((GenericObjectPool)connectionPool).setMinIdle(10);
-                ((GenericObjectPool)connectionPool).setMaxIdle(50);
-                ((GenericObjectPool)connectionPool).setMaxWaitMillis(10000);
-                ((GenericObjectPool)connectionPool).setMinEvictableIdleTimeMillis(60000);
+                ((GenericObjectPool) connectionPool).setMaxTotal(150);
+                ((GenericObjectPool) connectionPool).setMinIdle(10);
+                ((GenericObjectPool) connectionPool).setMaxIdle(50);
+                ((GenericObjectPool) connectionPool).setMaxWaitMillis(10000);
+                ((GenericObjectPool) connectionPool).setMinEvictableIdleTimeMillis(60000);
                 AbandonedConfig abandonedConfig = new AbandonedConfig();
                 abandonedConfig.setRemoveAbandonedTimeout(60);
                 abandonedConfig.setRemoveAbandonedOnBorrow(true);
                 abandonedConfig.setRemoveAbandonedOnMaintenance(true);
 
-                ((GenericObjectPool)connectionPool).setAbandonedConfig(abandonedConfig);
-
-
+                ((GenericObjectPool) connectionPool).setAbandonedConfig(abandonedConfig);
 
 
                 poolableConnectionFactory.setPool(connectionPool);
                 setDataSource((DataSource) new PoolingDataSource<>(connectionPool));
-
 
 
             } catch (ClassNotFoundException e1) {

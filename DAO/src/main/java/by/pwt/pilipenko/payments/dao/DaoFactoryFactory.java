@@ -11,6 +11,12 @@ public class DaoFactoryFactory {
     private static AbstractDAOFactory instance;
 
 
+    public DaoFactoryFactory() {
+    }
+
+    public DaoFactoryFactory(AbstractDAOFactory instance) {
+        this.instance = instance;
+    }
 
     public static AbstractDAOFactory getInstance() throws NamingException, ClassNotFoundException {
 
@@ -29,13 +35,6 @@ public class DaoFactoryFactory {
         }
 
         return localInstance;
-    }
-
-    public DaoFactoryFactory() {
-    }
-
-    public DaoFactoryFactory(AbstractDAOFactory instance) {
-        this.instance = instance;
     }
 
 

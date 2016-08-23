@@ -6,9 +6,7 @@ import by.pwt.pilipenko.payments.services.CardService;
 import by.pwt.pilipenko.payments.web.command.ActionCommand;
 import by.pwt.plipenko.payments.model.entities.Card;
 
-import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
-import java.sql.SQLException;
 
 public class EditCardCommand implements ActionCommand {
     @Override
@@ -21,17 +19,16 @@ public class EditCardCommand implements ActionCommand {
         Card card = new Card();
 
 
+        if (name != null) {
+
+            card = cardService.getEntity(Integer.parseInt(name.toString()));
+
+        } else {
+            name = request.getParameter("cardID");
             if (name != null) {
-
                 card = cardService.getEntity(Integer.parseInt(name.toString()));
-
-            } else {
-                name = request.getParameter("cardID");
-                if (name != null) {
-                    card = cardService.getEntity(Integer.parseInt(name.toString()));
-                }
             }
-
+        }
 
 
         if (card != null) {

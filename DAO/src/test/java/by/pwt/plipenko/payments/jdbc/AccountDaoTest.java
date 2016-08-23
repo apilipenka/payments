@@ -35,7 +35,7 @@ public class AccountDaoTest
     private static Currency currency1;
 
     @BeforeClass
-    public static void intit() throws NamingException, ClassNotFoundException, SQLException {
+    public static void init() throws NamingException, ClassNotFoundException, SQLException {
 
         bankDAO = DaoFactoryFactory.getInstance().createBankDAO();
         userRoleDAO = DaoFactoryFactory.getInstance().createUserRoleDAO();
@@ -54,7 +54,6 @@ public class AccountDaoTest
             userDAO.delete(user1);
             userRoleDAO.delete(userRole1);
             currencyDAO.delete(currency1);
-
 
 
         } finally {
@@ -161,7 +160,6 @@ public class AccountDaoTest
         assertEquals(accountList1, accountList2);
 
 
-
     }
 
     @Test
@@ -174,7 +172,6 @@ public class AccountDaoTest
 
     @Test
     public void test7Update() throws SQLException, NamingException, ClassNotFoundException {
-
 
 
         account1.setNumber("19777911977989");

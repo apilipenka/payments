@@ -2,29 +2,18 @@ package by.pwt.plipenko.payments.jdbc;
 
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.dao.jdbc.UserDAO;
-import by.pwt.pilipenko.payments.dao.jdbc.CurrencyDAO;
-import by.pwt.pilipenko.payments.dao.jdbc.DAOFactory;
 import by.pwt.pilipenko.payments.dao.jdbc.UserRoleDAO;
 import by.pwt.plipenko.payments.model.entities.User;
-import by.pwt.plipenko.payments.model.entities.Currency;
 import by.pwt.plipenko.payments.model.entities.UserRole;
-import org.apache.commons.dbcp2.DriverManagerConnectionFactory;
-import org.apache.commons.dbcp2.PoolableConnection;
-import org.apache.commons.dbcp2.PoolableConnectionFactory;
-import org.apache.commons.dbcp2.PoolingDataSource;
-import org.apache.commons.pool2.ObjectPool;
-import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 
 import javax.naming.NamingException;
-import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
