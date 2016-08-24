@@ -25,4 +25,6 @@ public interface BaseDAO<E extends Entity> {
 
     public E insert(E entity) throws SQLException, NamingException;
 
+    public void closeConnection() throws SQLException;
+
 }

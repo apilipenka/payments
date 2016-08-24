@@ -4,7 +4,6 @@ package by.pwt.pilipenko.payments.dao.jdbc;
  * Created by apilipenka on 8/22/2016.
  */
 
-import by.pwt.pilipenko.payments.dao.AbstractEntityDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.plipenko.payments.model.entities.Command;
 import by.pwt.plipenko.payments.model.entities.UserRole;

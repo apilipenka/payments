@@ -1,6 +1,7 @@
 package by.pwt.pilipenko.payments.services;
 
-import by.pwt.pilipenko.payments.dao.AbstractEntityDAO;
+import by.pwt.pilipenko.payments.dao.BaseDAO;
+import by.pwt.pilipenko.payments.dao.jdbc.AbstractEntityDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.dao.jdbc.BankDAO;
 import by.pwt.plipenko.payments.model.entities.Bank;
@@ -9,7 +10,7 @@ import javax.naming.NamingException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class BankService extends AbstractEntitySevice<Bank> {
+public class BankService extends AbstractEntityService<Bank> {
 
     public List<Bank> searchEntityByName(String name) throws SQLException, NamingException, ClassNotFoundException {
 
@@ -18,7 +19,7 @@ public class BankService extends AbstractEntitySevice<Bank> {
             entity.setName(name);
         }
 
-        AbstractEntityDAO<Bank> bankDAO = getEntityDAO();
+        BaseDAO<Bank> bankDAO = getEntityDAO();
         List<Bank> list = bankDAO.findEntityByEntity(entity);
         bankDAO.closeConnection();
 
@@ -27,7 +28,7 @@ public class BankService extends AbstractEntitySevice<Bank> {
     }
 
     @Override
-    public AbstractEntityDAO<Bank> getEntityDAO() throws NamingException, SQLException, ClassNotFoundException {
+    public BaseDAO<Bank> getEntityDAO() throws NamingException, SQLException, ClassNotFoundException {
         BankDAO bankDAO = DaoFactoryFactory.getInstance().createBankDAO();
         return bankDAO;
     }

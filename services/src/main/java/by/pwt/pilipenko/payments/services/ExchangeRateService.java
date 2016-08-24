@@ -1,6 +1,7 @@
 package by.pwt.pilipenko.payments.services;
 
-import by.pwt.pilipenko.payments.dao.AbstractEntityDAO;
+import by.pwt.pilipenko.payments.dao.BaseDAO;
+import by.pwt.pilipenko.payments.dao.jdbc.AbstractEntityDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.dao.jdbc.ExchangeRateDAO;
 import by.pwt.plipenko.payments.model.entities.Currency;
@@ -13,7 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-public class ExchangeRateService extends AbstractEntitySevice<ExchangeRate> {
+public class ExchangeRateService extends AbstractEntityService<ExchangeRate> {
 
     public List<ExchangeRate> searchEntityByName(String name) throws SQLException, NamingException, ClassNotFoundException {
 
@@ -39,7 +40,7 @@ public class ExchangeRateService extends AbstractEntitySevice<ExchangeRate> {
                 entity.setTargetCurrency(currency1);
             }
         }
-        AbstractEntityDAO<ExchangeRate> exchangeRateDAO = getEntityDAO();
+        BaseDAO<ExchangeRate> exchangeRateDAO = getEntityDAO();
         List<ExchangeRate> list = exchangeRateDAO.findEntityByEntity(entity);
         exchangeRateDAO.closeConnection();
 
@@ -68,7 +69,7 @@ public class ExchangeRateService extends AbstractEntitySevice<ExchangeRate> {
         }
 
 
-        AbstractEntityDAO<ExchangeRate> exchangeRateDAO = getEntityDAO();
+        BaseDAO<ExchangeRate> exchangeRateDAO = getEntityDAO();
         List<ExchangeRate> list = ((ExchangeRateDAO) exchangeRateDAO).findEntityByParent(entity);
         exchangeRateDAO.closeConnection();
 
@@ -78,7 +79,7 @@ public class ExchangeRateService extends AbstractEntitySevice<ExchangeRate> {
 
 
     @Override
-    public AbstractEntityDAO<ExchangeRate> getEntityDAO() throws NamingException, SQLException, ClassNotFoundException {
+    public BaseDAO<ExchangeRate> getEntityDAO() throws NamingException, SQLException, ClassNotFoundException {
         ExchangeRateDAO exchangeRateDAO = DaoFactoryFactory.getInstance().createExchangeRateDAO();
         return exchangeRateDAO;
     }

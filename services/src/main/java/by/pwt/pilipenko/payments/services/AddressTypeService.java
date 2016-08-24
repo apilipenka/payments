@@ -1,6 +1,7 @@
 package by.pwt.pilipenko.payments.services;
 
-import by.pwt.pilipenko.payments.dao.AbstractEntityDAO;
+import by.pwt.pilipenko.payments.dao.BaseDAO;
+import by.pwt.pilipenko.payments.dao.jdbc.AbstractEntityDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.dao.jdbc.TypeDAO;
 import by.pwt.plipenko.payments.model.entities.Type;
@@ -10,7 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 
-public class AddressTypeService extends AbstractEntitySevice<Type> {
+public class AddressTypeService extends AbstractEntityService<Type> {
 
 
     public List<Type> searchEntityByName(String name) throws SQLException, NamingException, ClassNotFoundException {
@@ -20,13 +21,13 @@ public class AddressTypeService extends AbstractEntitySevice<Type> {
             entity.setName(name);
         }
 
-        AbstractEntityDAO<Type> addressTypeDAO = getEntityDAO();
+        BaseDAO<Type> addressTypeDAO = getEntityDAO();
         List<Type> list = addressTypeDAO.findEntityByEntity(entity);
         addressTypeDAO.closeConnection();
         return list;
     }
 
-    public AbstractEntityDAO<Type> getEntityDAO() throws NamingException, SQLException, ClassNotFoundException {
+    public BaseDAO<Type> getEntityDAO() throws NamingException, SQLException, ClassNotFoundException {
 
         TypeDAO addressDAO = DaoFactoryFactory.getInstance().createAddressTypeDAO();
         return addressDAO;

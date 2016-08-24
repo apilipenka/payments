@@ -1,6 +1,7 @@
 package by.pwt.pilipenko.payments.services;
 
-import by.pwt.pilipenko.payments.dao.AbstractEntityDAO;
+import by.pwt.pilipenko.payments.dao.BaseDAO;
+import by.pwt.pilipenko.payments.dao.jdbc.AbstractEntityDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.dao.jdbc.UserRoleCommandDAO;
 import by.pwt.plipenko.payments.model.entities.UserRole;
@@ -10,7 +11,7 @@ import javax.naming.NamingException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class UserRoleCommandService extends AbstractEntitySevice<UserRoleCommand> {
+public class UserRoleCommandService extends AbstractEntityService<UserRoleCommand> {
 
     public List<UserRoleCommand> searchEntityByName(String name) throws Exception {
 
@@ -28,7 +29,7 @@ public class UserRoleCommandService extends AbstractEntitySevice<UserRoleCommand
 
         }
 
-        AbstractEntityDAO<UserRoleCommand> userRoleCommandDAO = getEntityDAO();
+        BaseDAO<UserRoleCommand> userRoleCommandDAO = getEntityDAO();
 
         List<UserRoleCommand> list = getEntityDAO().findEntityByEntity(entity);
         userRoleCommandDAO.closeConnection();
@@ -36,7 +37,7 @@ public class UserRoleCommandService extends AbstractEntitySevice<UserRoleCommand
     }
 
     @Override
-    public AbstractEntityDAO<UserRoleCommand> getEntityDAO() throws SQLException, NamingException, ClassNotFoundException {
+    public BaseDAO<UserRoleCommand> getEntityDAO() throws SQLException, NamingException, ClassNotFoundException {
         UserRoleCommandDAO userRoleCommandDAO = DaoFactoryFactory.getInstance().createUserRoleCommandDAO();
         return userRoleCommandDAO;
     }

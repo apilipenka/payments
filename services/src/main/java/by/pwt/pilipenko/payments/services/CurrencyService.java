@@ -1,6 +1,7 @@
 package by.pwt.pilipenko.payments.services;
 
-import by.pwt.pilipenko.payments.dao.AbstractEntityDAO;
+import by.pwt.pilipenko.payments.dao.BaseDAO;
+import by.pwt.pilipenko.payments.dao.jdbc.AbstractEntityDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.dao.jdbc.CurrencyDAO;
 import by.pwt.plipenko.payments.model.entities.Currency;
@@ -9,7 +10,7 @@ import javax.naming.NamingException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class CurrencyService extends AbstractEntitySevice<Currency> {
+public class CurrencyService extends AbstractEntityService<Currency> {
 
 
     public List<Currency> searchEntityByName(String name) throws SQLException, NamingException, ClassNotFoundException {
@@ -21,7 +22,7 @@ public class CurrencyService extends AbstractEntitySevice<Currency> {
             entity.setName(name);
         }
 
-        AbstractEntityDAO<Currency> currencyDAO = getEntityDAO();
+        BaseDAO<Currency> currencyDAO = getEntityDAO();
         List<Currency> list = currencyDAO.findEntityByEntity(entity);
         currencyDAO.closeConnection();
 
@@ -29,7 +30,7 @@ public class CurrencyService extends AbstractEntitySevice<Currency> {
 
     }
 
-    public AbstractEntityDAO<Currency> getEntityDAO() throws NamingException, SQLException, ClassNotFoundException {
+    public BaseDAO<Currency> getEntityDAO() throws NamingException, SQLException, ClassNotFoundException {
 
         CurrencyDAO currencyDAO = DaoFactoryFactory.getInstance().createCurrencyDAO();
         return currencyDAO;

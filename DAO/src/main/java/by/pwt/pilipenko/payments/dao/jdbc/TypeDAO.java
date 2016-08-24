@@ -1,6 +1,5 @@
 package by.pwt.pilipenko.payments.dao.jdbc;
 
-import by.pwt.pilipenko.payments.dao.AbstractEntityDAO;
 import by.pwt.plipenko.payments.model.entities.Type;
 
 import java.sql.Connection;
