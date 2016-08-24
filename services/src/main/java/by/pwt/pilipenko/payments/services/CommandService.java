@@ -1,9 +1,7 @@
 package by.pwt.pilipenko.payments.services;
 
 import by.pwt.pilipenko.payments.dao.BaseDAO;
-import by.pwt.pilipenko.payments.dao.jdbc.AbstractEntityDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
-import by.pwt.pilipenko.payments.dao.jdbc.CommandDAO;
 import by.pwt.plipenko.payments.model.entities.Command;
 
 import javax.naming.NamingException;
@@ -28,8 +26,7 @@ public class CommandService extends AbstractEntityService<Command> {
 
     @Override
     public BaseDAO<Command> getEntityDAO() throws SQLException, NamingException, ClassNotFoundException {
-        CommandDAO commandDAO = DaoFactoryFactory.getInstance().createCommandDAO();
-        return commandDAO;
+        return DaoFactoryFactory.getInstance().createCommandDAO();
     }
 
 }

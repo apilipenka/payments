@@ -1,7 +1,6 @@
 package by.pwt.pilipenko.payments.services;
 
 import by.pwt.pilipenko.payments.dao.BaseDAO;
-import by.pwt.pilipenko.payments.dao.jdbc.AbstractEntityDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.dao.jdbc.ExchangeRateDAO;
 import by.pwt.plipenko.payments.model.entities.Currency;
@@ -19,7 +18,7 @@ public class ExchangeRateService extends AbstractEntityService<ExchangeRate> {
     public List<ExchangeRate> searchEntityByName(String name) throws SQLException, NamingException, ClassNotFoundException {
 
         ExchangeRate entity = new ExchangeRate();
-        if (name != null && name != "") {
+        if (name != null && !name.equals("")) {
 
             DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
 
@@ -27,7 +26,7 @@ public class ExchangeRateService extends AbstractEntityService<ExchangeRate> {
                 entity.setRateDate(format.parse(name));
             } catch (ParseException e) {
                 //Name may contain not date
-                ;
+
             }
 
 
@@ -80,8 +79,7 @@ public class ExchangeRateService extends AbstractEntityService<ExchangeRate> {
 
     @Override
     public BaseDAO<ExchangeRate> getEntityDAO() throws NamingException, SQLException, ClassNotFoundException {
-        ExchangeRateDAO exchangeRateDAO = DaoFactoryFactory.getInstance().createExchangeRateDAO();
-        return exchangeRateDAO;
+        return DaoFactoryFactory.getInstance().createExchangeRateDAO();
     }
 
 }

@@ -47,10 +47,9 @@ public abstract class AbstractEntityDAO<T extends Entity> implements BaseDAO<T> 
     }
 
     public T insert(T entity) throws SQLException {
-        T entity1 = entity;
 
         PreparedStatement statement = null;
-        ResultSet rs = null;
+        ResultSet rs;
 
         try {
             statement = connection.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
@@ -61,19 +60,14 @@ public abstract class AbstractEntityDAO<T extends Entity> implements BaseDAO<T> 
 
             if (rs.next()) {
                 int last_inserted_id = rs.getInt(1);
-                entity1.setId(last_inserted_id);
+                entity.setId(last_inserted_id);
             }
 
-        } catch (SQLException e) {
-
-            // e.printStackTrace();
-            // return null;
-            throw e;
         } finally {
             closeStatement(statement);
         }
 
-        return entity1;
+        return entity;
     }
 
     public boolean update(T entity) throws SQLException {
@@ -83,10 +77,6 @@ public abstract class AbstractEntityDAO<T extends Entity> implements BaseDAO<T> 
             statement = prepareUpdateStatement(entity, statement);
             statement.executeUpdate();
 
-        } catch (SQLException e) {
-            // e.printStackTrace();
-            // return false;
-            throw e;
         } finally {
             closeStatement(statement);
         }
@@ -102,11 +92,6 @@ public abstract class AbstractEntityDAO<T extends Entity> implements BaseDAO<T> 
 
             return true;
 
-        } catch (SQLException e) {
-
-            // e.printStackTrace();
-            // return false;
-            throw e;
         } finally {
             closeStatement(statement);
         }
@@ -121,11 +106,6 @@ public abstract class AbstractEntityDAO<T extends Entity> implements BaseDAO<T> 
 
             return true;
 
-        } catch (SQLException e) {
-
-            // e.printStackTrace();
-            // return false;
-            throw e;
         } finally {
             closeStatement(statement);
         }
@@ -144,11 +124,8 @@ public abstract class AbstractEntityDAO<T extends Entity> implements BaseDAO<T> 
                 entity = getEntity(resultSet);
             }
 
-        } catch (SQLException e) {
-            // e.printStackTrace();
-            // return null;
-            throw e;
-        } finally {
+        }
+        finally {
             closeResultSet(resultSet);
             closeStatement(statement);
         }
@@ -168,11 +145,8 @@ public abstract class AbstractEntityDAO<T extends Entity> implements BaseDAO<T> 
                 entity1 = getEntity(resultSet);
             }
 
-        } catch (SQLException e) {
-            // e.printStackTrace();
-            // return null;
-            throw e;
-        } finally {
+        }
+        finally {
             closeResultSet(resultSet);
             closeStatement(statement);
         }
@@ -189,11 +163,8 @@ public abstract class AbstractEntityDAO<T extends Entity> implements BaseDAO<T> 
             resultSet = statement.executeQuery();
             entities = getEntities(resultSet);
 
-        } catch (SQLException e) {
-            // e.printStackTrace();
-            // return null;
-            throw e;
-        } finally {
+        }
+        finally {
             closeResultSet(resultSet);
             closeStatement(statement);
         }
@@ -209,11 +180,8 @@ public abstract class AbstractEntityDAO<T extends Entity> implements BaseDAO<T> 
             resultSet = statement.executeQuery(selectStatement);
             entities = getEntities(resultSet);
 
-        } catch (SQLException e) {
-            // entities = null;
-            // e.printStackTrace();
-            throw e;
-        } finally {
+        }
+        finally {
             closeResultSet(resultSet);
             closeStatement(statement);
         }
@@ -221,54 +189,34 @@ public abstract class AbstractEntityDAO<T extends Entity> implements BaseDAO<T> 
 
     }
 
-    public void closeStatement(Statement statement) throws SQLException {
-        try {
-            if (statement != null) {
-                statement.close();
-            }
-        } catch (SQLException e) {
-            // e.printStackTrace();
-            throw e;
+    void closeStatement(Statement statement) throws SQLException {
+        if (statement != null) {
+            statement.close();
         }
     }
 
     public void closePreparedStatement(PreparedStatement statement) throws SQLException {
-        try {
-            if (statement != null) {
-                statement.close();
-            }
-        } catch (SQLException e) {
-            // e.printStackTrace();
-            throw e;
+        if (statement != null) {
+            statement.close();
         }
     }
 
-    public void closeResultSet(ResultSet resultSet) throws SQLException {
+    void closeResultSet(ResultSet resultSet) throws SQLException {
         if (resultSet != null) {
-            try {
-                resultSet.close();
-            } catch (SQLException e) {
-                // e.printStackTrace();
-                throw e;
-            }
+            resultSet.close();
         }
     }
 
     public void closeConnection() throws SQLException {
         if (connection != null) {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                // e.printStackTrace();
-                throw e;
-            }
+            connection.close();
         }
     }
 
     protected abstract T getEntity(ResultSet resultSet) throws SQLException, NamingException, ClassNotFoundException;
 
-    protected List<T> getEntities(ResultSet resultSet) throws SQLException, NamingException, ClassNotFoundException {
-        List<T> entities = new ArrayList<T>();
+    List<T> getEntities(ResultSet resultSet) throws SQLException, NamingException, ClassNotFoundException {
+        List<T> entities = new ArrayList<>();
         while (resultSet.next()) {
             T entity = getEntity(resultSet);
             entities.add(entity);

@@ -1,9 +1,7 @@
 package by.pwt.pilipenko.payments.services;
 
 import by.pwt.pilipenko.payments.dao.BaseDAO;
-import by.pwt.pilipenko.payments.dao.jdbc.AbstractEntityDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
-import by.pwt.pilipenko.payments.dao.jdbc.UserRoleCommandDAO;
 import by.pwt.plipenko.payments.model.entities.UserRole;
 import by.pwt.plipenko.payments.model.entities.UserRoleCommand;
 
@@ -16,7 +14,7 @@ public class UserRoleCommandService extends AbstractEntityService<UserRoleComman
     public List<UserRoleCommand> searchEntityByName(String name) throws Exception {
 
         UserRoleCommand entity = new UserRoleCommand();
-        if (name != null && name != "") {
+        if (name != null && !name.equals("")) {
 
             UserRoleService userRoleService = new UserRoleService();
             UserRole userRole1 = new UserRole();
@@ -38,8 +36,7 @@ public class UserRoleCommandService extends AbstractEntityService<UserRoleComman
 
     @Override
     public BaseDAO<UserRoleCommand> getEntityDAO() throws SQLException, NamingException, ClassNotFoundException {
-        UserRoleCommandDAO userRoleCommandDAO = DaoFactoryFactory.getInstance().createUserRoleCommandDAO();
-        return userRoleCommandDAO;
+        return DaoFactoryFactory.getInstance().createUserRoleCommandDAO();
     }
 
 }
