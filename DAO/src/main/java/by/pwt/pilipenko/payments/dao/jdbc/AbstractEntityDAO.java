@@ -228,6 +228,10 @@ public abstract class AbstractEntityDAO<T extends Entity> implements BaseDAO<T> 
         return connection;
     }
 
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
+
     protected abstract PreparedStatement prepareSelectByPKStatement(T entity, PreparedStatement statement)
             throws SQLException;
 
