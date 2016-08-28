@@ -55,39 +55,13 @@ abstract class AbstractDAOFactory implements BaseDAOFactory {
         connection.setAutoCommit(true);
     }
 
-    public abstract TypeDAO createAddressTypeDAO() throws SQLException;
-
-    public abstract TypeDAO createPhoneTypeDAO() throws SQLException;
-
-    public abstract TypeDAO createDocumentTypeDAO() throws SQLException;
-
-    public abstract UserDAO createUserDAO() throws SQLException;
-
-    public abstract TypeDAO createTypeDAO(String entityName, String tableName) throws SQLException;
-
-
-    public abstract BankDAO createBankDAO() throws SQLException;
-
-
-    public abstract CurrencyDAO createCurrencyDAO() throws SQLException;
-
-    public abstract ExchangeRateDAO createExchangeRateDAO() throws SQLException;
-
-    public abstract AgreementDAO createAgreementDAO() throws SQLException;
-
-    public abstract AccountDAO createAccountDAO() throws SQLException;
-
-    public abstract CardDAO createCardDAO() throws SQLException;
-
-    public abstract UserRoleDAO createUserRoleDAO() throws SQLException;
-
-    public abstract CommandDAO createCommandDAO() throws SQLException;
-
-    public abstract UserRoleCommandDAO createUserRoleCommandDAO() throws SQLException;
-
     public void setConnection(Connection connection) {
         this.connection = connection;
     }
+
+
+
+
 }
 
 
