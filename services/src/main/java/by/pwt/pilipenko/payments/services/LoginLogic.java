@@ -15,13 +15,9 @@ public class LoginLogic {
 
         UserService userService = new UserService();
 
-        User findedUser = userService.getEntityByPK(user);
+        User user1 = userService.getEntityByPK(user);
 
-        if (findedUser != null) {
-            return findedUser.getPassword().equals(enterPass)
-                    && findedUser.getUserRole().getName().equalsIgnoreCase("ADMIN");
-        }
-        return false;
+        return user1 != null && user1.getPassword().equals(enterPass) && user1.getUserRole().getName().equalsIgnoreCase("ADMIN");
     }
 
     public static boolean checkManagerLogin(String enterLogin, String enterPass) throws SQLException, NamingException, ClassNotFoundException {
@@ -31,13 +27,9 @@ public class LoginLogic {
 
         UserService userService = new UserService();
 
-        User findedUser = userService.getEntityByPK(user);
+        User user1 = userService.getEntityByPK(user);
 
-        if (findedUser != null) {
-            return findedUser.getPassword().equals(enterPass)
-                    && findedUser.getUserRole().getName().equalsIgnoreCase("MANAGER");
-        }
-        return false;
+        return user1 != null && user1.getPassword().equals(enterPass) && user1.getUserRole().getName().equalsIgnoreCase("MANAGER");
     }
 
     public static boolean checkUserLogin(String enterLogin, String enterPass) throws SQLException, NamingException, ClassNotFoundException {
@@ -47,12 +39,8 @@ public class LoginLogic {
 
         UserService userService = new UserService();
 
-        User findedUser = userService.getEntityByPK(user);
+        User user1 = userService.getEntityByPK(user);
 
-        if (findedUser != null) {
-            return findedUser.getPassword().equals(enterPass)
-                    && findedUser.getUserRole().getName().equalsIgnoreCase("CLIENT");
-        }
-        return false;
+        return user1 != null && user1.getPassword().equals(enterPass) && user1.getUserRole().getName().equalsIgnoreCase("CLIENT");
     }
 }

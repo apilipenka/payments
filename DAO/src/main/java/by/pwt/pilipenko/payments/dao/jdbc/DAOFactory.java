@@ -1,6 +1,5 @@
 package by.pwt.pilipenko.payments.dao.jdbc;
 
-import by.pwt.pilipenko.payments.dao.AbstractDAOFactory;
 import org.apache.commons.dbcp2.DriverManagerConnectionFactory;
 import org.apache.commons.dbcp2.PoolableConnection;
 import org.apache.commons.dbcp2.PoolableConnectionFactory;
@@ -18,53 +17,51 @@ import java.sql.SQLException;
 public class DAOFactory extends AbstractDAOFactory {
 
 
-    public DAOFactory() throws NamingException, ClassNotFoundException {
+    public DAOFactory() throws NamingException, ClassNotFoundException, SQLException {
         super();
 
         Context initContext;
         try {
             initContext = new InitialContext();
             setDataSource((DataSource) initContext.lookup("java:comp/env/jdbc/mysqldb"));
+            setConnection(getDataSource().getConnection());
 
         } catch (NamingException e) {
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-                DriverManagerConnectionFactory connectionFactory = new DriverManagerConnectionFactory("jdbc:mysql://localhost:3306/payments?autoReconnect=true&useSSL=false&autocommit=1", "root", "awp1977");
+            Class.forName("com.mysql.jdbc.Driver");
+            DriverManagerConnectionFactory connectionFactory = new DriverManagerConnectionFactory("jdbc:mysql://localhost:3306/payments?autoReconnect=true&useSSL=false&autocommit=1", "root", "awp1977");
 
 
-                PoolableConnectionFactory poolableConnectionFactory = new PoolableConnectionFactory(connectionFactory,
-                        null);
+            PoolableConnectionFactory poolableConnectionFactory = new PoolableConnectionFactory(connectionFactory,
+                    null);
 
-                ObjectPool<PoolableConnection> connectionPool = new GenericObjectPool<>(poolableConnectionFactory);
-                ((GenericObjectPool) connectionPool).setMaxTotal(150);
-                ((GenericObjectPool) connectionPool).setMinIdle(10);
-                ((GenericObjectPool) connectionPool).setMaxIdle(50);
-                ((GenericObjectPool) connectionPool).setMaxWaitMillis(10000);
-                ((GenericObjectPool) connectionPool).setMinEvictableIdleTimeMillis(60000);
-                AbandonedConfig abandonedConfig = new AbandonedConfig();
-                abandonedConfig.setRemoveAbandonedTimeout(60);
-                abandonedConfig.setRemoveAbandonedOnBorrow(true);
-                abandonedConfig.setRemoveAbandonedOnMaintenance(true);
+            ObjectPool<PoolableConnection> connectionPool = new GenericObjectPool<>(poolableConnectionFactory);
+            ((GenericObjectPool) connectionPool).setMaxTotal(150);
+            ((GenericObjectPool) connectionPool).setMinIdle(10);
+            ((GenericObjectPool) connectionPool).setMaxIdle(50);
+            ((GenericObjectPool) connectionPool).setMaxWaitMillis(10000);
+            ((GenericObjectPool) connectionPool).setMinEvictableIdleTimeMillis(60000);
+            AbandonedConfig abandonedConfig = new AbandonedConfig();
+            abandonedConfig.setRemoveAbandonedTimeout(60);
+            abandonedConfig.setRemoveAbandonedOnBorrow(true);
+            abandonedConfig.setRemoveAbandonedOnMaintenance(true);
 
-                ((GenericObjectPool) connectionPool).setAbandonedConfig(abandonedConfig);
-
-
-                poolableConnectionFactory.setPool(connectionPool);
-                setDataSource((DataSource) new PoolingDataSource<>(connectionPool));
+            ((GenericObjectPool) connectionPool).setAbandonedConfig(abandonedConfig);
 
 
-            } catch (ClassNotFoundException e1) {
-                throw e1;
-            }
+            poolableConnectionFactory.setPool(connectionPool);
+            setDataSource((DataSource) new PoolingDataSource<>(connectionPool));
+            setConnection(getDataSource().getConnection());
 
         }
 
     }
 
-    public DAOFactory(DataSource dataSource) throws NamingException {
+    public DAOFactory(DataSource dataSource) throws NamingException, SQLException {
         super();
 
         this.setDataSource(dataSource);
+        setConnection(this.getDataSource().getConnection());
+
 
     }
 
@@ -86,13 +83,7 @@ public class DAOFactory extends AbstractDAOFactory {
 
     public UserDAO createUserDAO() throws SQLException {
         UserDAO userDAO;
-        try {
-            userDAO = new UserDAO(getDataSource().getConnection(), "user", "users");
-        } catch (SQLException e) {
-            // e.printStackTrace();
-            // return null;
-            throw e;
-        }
+        userDAO = new UserDAO(getDataSource().getConnection(), "user", "users");
 
         return userDAO;
 
@@ -100,13 +91,7 @@ public class DAOFactory extends AbstractDAOFactory {
 
     public TypeDAO createTypeDAO(String entityName, String tableName) throws SQLException {
         TypeDAO typeDAO;
-        try {
-            typeDAO = new TypeDAO(getDataSource().getConnection(), entityName, tableName);
-        } catch (SQLException e) {
-            // e.printStackTrace();
-            // return null;
-            throw e;
-        }
+        typeDAO = new TypeDAO(getDataSource().getConnection(), entityName, tableName);
 
         return typeDAO;
     }
@@ -114,13 +99,7 @@ public class DAOFactory extends AbstractDAOFactory {
 
     public BankDAO createBankDAO() throws SQLException {
         BankDAO bankDAO;
-        try {
-            bankDAO = new BankDAO(getDataSource().getConnection(), "bank", "banks");
-        } catch (SQLException e) {
-            // e.printStackTrace();
-            // return null;
-            throw e;
-        }
+        bankDAO = new BankDAO(getDataSource().getConnection(), "bank", "banks");
 
         return bankDAO;
     }
@@ -128,99 +107,51 @@ public class DAOFactory extends AbstractDAOFactory {
 
     public CurrencyDAO createCurrencyDAO() throws SQLException {
         CurrencyDAO currencyDAO;
-        try {
-            currencyDAO = new CurrencyDAO(getDataSource().getConnection(), "currency", "currencies");
-        } catch (SQLException e) {
-            // e.printStackTrace();
-            // return null;
-            throw e;
-        }
+        currencyDAO = new CurrencyDAO(getDataSource().getConnection(), "currency", "currencies");
         return currencyDAO;
     }
 
     public ExchangeRateDAO createExchangeRateDAO() throws SQLException {
         ExchangeRateDAO exchangeRateDAO;
-        try {
-            exchangeRateDAO = new ExchangeRateDAO(getDataSource().getConnection(), "exchangerate", "exchange_rates");
-        } catch (SQLException e) {
-            // e.printStackTrace();
-            // return null;
-            throw e;
-        }
+        exchangeRateDAO = new ExchangeRateDAO(getDataSource().getConnection(), "exchangerate", "exchange_rates");
         return exchangeRateDAO;
     }
 
     public AgreementDAO createAgreementDAO() throws SQLException {
         AgreementDAO agreementDAO;
-        try {
-            agreementDAO = new AgreementDAO(getDataSource().getConnection(), "agreement", "agreements");
-        } catch (SQLException e) {
-            // e.printStackTrace();
-            // return null;
-            throw e;
-        }
+        agreementDAO = new AgreementDAO(getDataSource().getConnection(), "agreement", "agreements");
         return agreementDAO;
     }
 
     public AccountDAO createAccountDAO() throws SQLException {
         AccountDAO accountDAO;
-        try {
-            accountDAO = new AccountDAO(getDataSource().getConnection(), "account", "accounts");
-        } catch (SQLException e) {
-            // e.printStackTrace();
-            // return null;
-            throw e;
-        }
+        accountDAO = new AccountDAO(getDataSource().getConnection(), "account", "accounts");
         return accountDAO;
     }
 
     public CardDAO createCardDAO() throws SQLException {
         CardDAO cardDAO;
-        try {
-            cardDAO = new CardDAO(getDataSource().getConnection(), "card", "cards");
-        } catch (SQLException e) {
-            // e.printStackTrace();
-            // return null;
-            throw e;
-        }
+        cardDAO = new CardDAO(getDataSource().getConnection(), "card", "cards");
         return cardDAO;
     }
 
 
     public UserRoleDAO createUserRoleDAO() throws SQLException {
         UserRoleDAO userRoleDAO;
-        try {
-            userRoleDAO = new UserRoleDAO(getDataSource().getConnection(), "userrole", "user_roles");
-        } catch (SQLException e) {
-            // e.printStackTrace();
-            // return null;
-            throw e;
-        }
+        userRoleDAO = new UserRoleDAO(getDataSource().getConnection(), "userrole", "user_roles");
         return userRoleDAO;
     }
 
     public CommandDAO createCommandDAO() throws SQLException {
         CommandDAO commandDAO;
-        try {
-            commandDAO = new CommandDAO(getDataSource().getConnection(), "command", "commands");
-        } catch (SQLException e) {
-            // e.printStackTrace();
-            // return null;
-            throw e;
-        }
+        commandDAO = new CommandDAO(getDataSource().getConnection(), "command", "commands");
         return commandDAO;
     }
 
     @Override
     public UserRoleCommandDAO createUserRoleCommandDAO() throws SQLException {
         UserRoleCommandDAO userRoleCommandDAO;
-        try {
-            userRoleCommandDAO = new UserRoleCommandDAO(getDataSource().getConnection(), "userrolecommand", "user_role_commands");
-        } catch (SQLException e) {
-            // e.printStackTrace();
-            // return null;
-            throw e;
-        }
+        userRoleCommandDAO = new UserRoleCommandDAO(getDataSource().getConnection(), "userrolecommand", "user_role_commands");
         return userRoleCommandDAO;
     }
 

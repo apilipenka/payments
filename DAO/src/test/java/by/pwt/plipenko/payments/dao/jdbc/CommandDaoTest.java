@@ -1,4 +1,4 @@
-package by.pwt.plipenko.payments.jdbc;
+package by.pwt.plipenko.payments.dao.jdbc;
 
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.dao.jdbc.CommandDAO;
@@ -19,7 +19,7 @@ public class CommandDaoTest
         extends Assert {
 
     private static CommandDAO commandDAO;
-    private static Command command;
+    private static Command command1;
 
     @BeforeClass
     public static void intit() throws NamingException, ClassNotFoundException, SQLException {
@@ -39,12 +39,12 @@ public class CommandDaoTest
     @Test
     public void test1FindById() throws SQLException, NamingException, ClassNotFoundException {
 
-        command = new Command();
+        Command command = new Command();
         command.setCommand("TESTLIST");
         command.setUrl("/jsp/test-list.jsp");
         command.setLabel("Edit tests");
         command.setComment("Edit tests");
-        Command command1 = commandDAO.insert(command);
+        command1 = commandDAO.insert(command);
 
 
         Command command2 = commandDAO.findEntityById(command.getId());
@@ -56,11 +56,11 @@ public class CommandDaoTest
     @Test
     public void test2FindByEntity() throws SQLException, NamingException, ClassNotFoundException {
 
-        List<Command> commandList1 = new ArrayList<Command>();
-        commandList1.add(command);
+        List<Command> commandList1 = new ArrayList<>();
+        commandList1.add(command1);
 
 
-        List<Command> commandList2 = commandDAO.findEntityByEntity(command);
+        List<Command> commandList2 = commandDAO.findEntityByEntity(command1);
         assertEquals(commandList1, commandList2);
 
 
@@ -70,10 +70,8 @@ public class CommandDaoTest
     public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
 
 
-        Command command2 = commandDAO.findEntityByPK(command);
-        assertEquals(command, command2);
-
-        assertEquals(command, command);
+        Command command2 = commandDAO.findEntityByPK(command1);
+        assertEquals(command1, command2);
 
 
     }
@@ -83,11 +81,11 @@ public class CommandDaoTest
     public void test7Update() throws SQLException, NamingException, ClassNotFoundException {
 
 
-        command.setComment("Test role for update");
-        commandDAO.update(command);
-        Command command2 = commandDAO.findEntityById(command.getId());
+        command1.setComment("Test role for update");
+        commandDAO.update(command1);
+        Command command2 = commandDAO.findEntityById(command1.getId());
 
-        assertEquals(command, command2);
+        assertEquals(command1, command2);
 
 
     }
@@ -97,9 +95,9 @@ public class CommandDaoTest
     public void test8DeleteById() throws SQLException, NamingException, ClassNotFoundException {
 
 
-        commandDAO.delete(command.getId());
+        commandDAO.delete(command1.getId());
 
-        Command command2 = commandDAO.findEntityById(command.getId());
+        Command command2 = commandDAO.findEntityById(command1.getId());
 
         assertNull(command2);
 
@@ -109,18 +107,14 @@ public class CommandDaoTest
     @Test
     public void test9DeleteByEntity() throws SQLException, NamingException, ClassNotFoundException {
 
-        command = new Command();
+        Command command = new Command();
         command.setCommand("TESTLIST");
         command.setUrl("/jsp/test-list.jsp");
         command.setLabel("Edit tests");
         command.setComment("Edit tests");
-        Command command1 = commandDAO.insert(command);
+        command1 = commandDAO.insert(command);
 
         commandDAO.delete(command);
-
-        List<Command> commandList1 = new ArrayList<Command>();
-        commandList1.add(command);
-
 
         List<Command> commandList2 = commandDAO.findEntityByEntity(command);
 

@@ -1,4 +1,4 @@
-package by.pwt.plipenko.payments.jdbc;
+package by.pwt.plipenko.payments.dao.jdbc;
 
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.dao.jdbc.UserDAO;
@@ -25,7 +25,7 @@ public class UserDaoTest
 
     private static UserDAO userDAO;
     private static UserRoleDAO userRoleDAO;
-    private static User user;
+    //private static User user;
     private static User user1;
     private static UserRole userRole1;
 
@@ -55,7 +55,7 @@ public class UserDaoTest
     @Test
     public void test1FindById() throws SQLException, NamingException, ParseException, ClassNotFoundException {
 
-        user = new User();
+        User user = new User();
 
         user.setPersonalNumber("1234567890");
         user.setFirstName("Alexander");
@@ -77,18 +77,18 @@ public class UserDaoTest
 
 
         User user2 = userDAO.findEntityById(user.getId());
-        assertEquals(user, user2);
+        assertEquals(user1, user2);
 
     }
 
     @Test
     public void test2FindByEntity() throws SQLException, NamingException, ClassNotFoundException {
 
-        List<User> userList1 = new ArrayList<User>();
-        userList1.add(user);
+        List<User> userList1 = new ArrayList<>();
+        userList1.add(user1);
 
 
-        List<User> userList2 = userDAO.findEntityByEntity(user);
+        List<User> userList2 = userDAO.findEntityByEntity(user1);
         assertEquals(userList1, userList2);
 
 
@@ -98,8 +98,8 @@ public class UserDaoTest
     public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
 
 
-        User user2 = userDAO.findEntityByPK(user);
-        assertEquals(user, user2);
+        User user2 = userDAO.findEntityByPK(user1);
+        assertEquals(user1, user2);
 
 
     }
@@ -109,11 +109,11 @@ public class UserDaoTest
     public void test7Update() throws SQLException, NamingException, ClassNotFoundException {
 
 
-        user.setLogin("TestUserTest");
-        userDAO.update(user);
-        User user2 = userDAO.findEntityById(user.getId());
+        user1.setLogin("TestUserTest");
+        userDAO.update(user1);
+        User user2 = userDAO.findEntityById(user1.getId());
 
-        assertEquals(user, user2);
+        assertEquals(user1, user2);
 
 
     }
@@ -123,7 +123,7 @@ public class UserDaoTest
     public void test8DeleteById() throws SQLException, NamingException, ClassNotFoundException {
 
 
-        userDAO.delete(user.getId());
+        userDAO.delete(user1.getId());
 
         User user2 = userDAO.findEntityById(user1.getId());
 
@@ -135,7 +135,7 @@ public class UserDaoTest
     @Test
     public void test9DeleteByEntity() throws SQLException, NamingException, ParseException, ClassNotFoundException {
 
-        user = new User();
+        User user = new User();
 
         user.setPersonalNumber("1234567890");
         user.setFirstName("Alexander");
@@ -149,13 +149,9 @@ public class UserDaoTest
 
         user1 = userDAO.insert(user);
 
-        userDAO.delete(user);
+        userDAO.delete(user1);
 
-        List<User> userList1 = new ArrayList<User>();
-        userList1.add(user);
-
-
-        List<User> userList2 = userDAO.findEntityByEntity(user);
+        List<User> userList2 = userDAO.findEntityByEntity(user1);
 
         assertEquals(userList2.size(), 0);
 

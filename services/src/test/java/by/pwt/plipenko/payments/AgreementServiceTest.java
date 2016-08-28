@@ -1,9 +1,13 @@
 package by.pwt.plipenko.payments;
 
-import by.pwt.pilipenko.payments.services.*;
+import by.pwt.pilipenko.payments.services.AgreementService;
+import by.pwt.pilipenko.payments.services.BankService;
+import by.pwt.pilipenko.payments.services.UserRoleService;
 import by.pwt.pilipenko.payments.services.UserService;
-import by.pwt.plipenko.payments.model.entities.*;
+import by.pwt.plipenko.payments.model.entities.Agreement;
+import by.pwt.plipenko.payments.model.entities.Bank;
 import by.pwt.plipenko.payments.model.entities.User;
+import by.pwt.plipenko.payments.model.entities.UserRole;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 
@@ -97,7 +101,6 @@ public class AgreementServiceTest
         }
         agreement.setBank(bank1);
         agreement.setClient(user1);
-
 
 
         agreement1 = agreementService.insertEntity(agreement);

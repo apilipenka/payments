@@ -1,4 +1,4 @@
-package by.pwt.plipenko.payments.jdbc;
+package by.pwt.plipenko.payments.dao.jdbc;
 
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.dao.jdbc.CurrencyDAO;
@@ -19,7 +19,7 @@ public class CurrencyDaoTest
         extends Assert {
 
     private static CurrencyDAO currencyDAO;
-    private static Currency currency;
+    private static Currency currency1;
 
     @BeforeClass
     public static void intit() throws NamingException, ClassNotFoundException, SQLException {
@@ -39,15 +39,15 @@ public class CurrencyDaoTest
     @Test
     public void test1FindById() throws SQLException, NamingException, ClassNotFoundException {
 
-        currency = new Currency();
+        Currency currency = new Currency();
         currency.setCode("643");
         currency.setMnemoCode("RUR");
         currency.setName("Russian rubble");
-        Currency currency1 = currencyDAO.insert(currency);
+        currency1 = currencyDAO.insert(currency);
 
 
         Currency currency2 = currencyDAO.findEntityById(currency.getId());
-        assertEquals(currency, currency2);
+        assertEquals(currency1, currency2);
 
 
     }
@@ -55,11 +55,11 @@ public class CurrencyDaoTest
     @Test
     public void test2FindByEntity() throws SQLException, NamingException, ClassNotFoundException {
 
-        List<Currency> currencyList1 = new ArrayList<Currency>();
-        currencyList1.add(currency);
+        List<Currency> currencyList1 = new ArrayList<>();
+        currencyList1.add(currency1);
 
 
-        List<Currency> currencyList2 = currencyDAO.findEntityByEntity(currency);
+        List<Currency> currencyList2 = currencyDAO.findEntityByEntity(currency1);
         assertEquals(currencyList1, currencyList2);
 
 
@@ -69,10 +69,8 @@ public class CurrencyDaoTest
     public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
 
 
-        Currency currency2 = currencyDAO.findEntityByPK(currency);
-        assertEquals(currency, currency2);
-
-        assertEquals(currency, currency2);
+        Currency currency2 = currencyDAO.findEntityByPK(currency1);
+        assertEquals(currency1, currency2);
 
 
     }
@@ -82,11 +80,11 @@ public class CurrencyDaoTest
     public void test7Update() throws SQLException, NamingException, ClassNotFoundException {
 
 
-        currency.setName("Russian rubble test");
-        currencyDAO.update(currency);
-        Currency currency2 = currencyDAO.findEntityById(currency.getId());
+        currency1.setName("Russian rubble test");
+        currencyDAO.update(currency1);
+        Currency currency2 = currencyDAO.findEntityById(currency1.getId());
 
-        assertEquals(currency, currency2);
+        assertEquals(currency1, currency2);
 
 
     }
@@ -96,9 +94,9 @@ public class CurrencyDaoTest
     public void test8DeleteById() throws SQLException, NamingException, ClassNotFoundException {
 
 
-        currencyDAO.delete(currency.getId());
+        currencyDAO.delete(currency1.getId());
 
-        Currency currency2 = currencyDAO.findEntityById(currency.getId());
+        Currency currency2 = currencyDAO.findEntityById(currency1.getId());
 
         assertNull(currency2);
 
@@ -108,17 +106,13 @@ public class CurrencyDaoTest
     @Test
     public void test9DeleteByEntity() throws SQLException, NamingException, ClassNotFoundException {
 
-        currency = new Currency();
+        Currency currency = new Currency();
         currency.setCode("643");
         currency.setMnemoCode("RUR");
         currency.setName("Russian rubble");
-        Currency currency1 = currencyDAO.insert(currency);
+        currency1 = currencyDAO.insert(currency);
 
-        currencyDAO.delete(currency);
-
-        List<Currency> currencyList1 = new ArrayList<Currency>();
-        currencyList1.add(currency);
-
+        currencyDAO.delete(currency1);
 
         List<Currency> currencyList2 = currencyDAO.findEntityByEntity(currency);
 

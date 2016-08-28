@@ -1,8 +1,14 @@
-package by.pwt.plipenko.payments.jdbc;
+package by.pwt.plipenko.payments.dao.jdbc;
 
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
-import by.pwt.pilipenko.payments.dao.jdbc.*;
-import by.pwt.plipenko.payments.model.entities.*;
+import by.pwt.pilipenko.payments.dao.jdbc.AgreementDAO;
+import by.pwt.pilipenko.payments.dao.jdbc.BankDAO;
+import by.pwt.pilipenko.payments.dao.jdbc.UserDAO;
+import by.pwt.pilipenko.payments.dao.jdbc.UserRoleDAO;
+import by.pwt.plipenko.payments.model.entities.Agreement;
+import by.pwt.plipenko.payments.model.entities.Bank;
+import by.pwt.plipenko.payments.model.entities.User;
+import by.pwt.plipenko.payments.model.entities.UserRole;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 
@@ -18,45 +24,34 @@ import java.util.List;
  * Unit test for simple App.
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class CardDaoTest
+public class AgreementDaoTest
         extends Assert {
 
-    private static AccountDAO accountDAO;
     private static AgreementDAO agreementDAO;
     private static BankDAO bankDAO;
     private static UserDAO userDAO;
     private static UserRoleDAO userRoleDAO;
-    private static CurrencyDAO currencyDAO;
-    private static CardDAO cardDAO;
     private static Bank bank1;
     private static User user1;
     private static UserRole userRole1;
     private static Agreement agreement1;
-    private static Account account1;
-    private static Currency currency1;
-    private static Card card1;
 
     @BeforeClass
-    public static void init() throws NamingException, ClassNotFoundException, SQLException {
+    public static void intit() throws NamingException, ClassNotFoundException, SQLException {
 
         bankDAO = DaoFactoryFactory.getInstance().createBankDAO();
         userRoleDAO = DaoFactoryFactory.getInstance().createUserRoleDAO();
         userDAO = DaoFactoryFactory.getInstance().createUserDAO();
         agreementDAO = DaoFactoryFactory.getInstance().createAgreementDAO();
-        currencyDAO = DaoFactoryFactory.getInstance().createCurrencyDAO();
-        accountDAO = DaoFactoryFactory.getInstance().createAccountDAO();
-        cardDAO = DaoFactoryFactory.getInstance().createCardDAO();
+
     }
 
     @AfterClass
     public static void tearDownToHexStringData() throws SQLException, NamingException {
         try {
-            accountDAO.delete(account1);
-            agreementDAO.delete(agreement1);
             bankDAO.delete(bank1);
             userDAO.delete(user1);
             userRoleDAO.delete(userRole1);
-            currencyDAO.delete(currency1);
 
 
         } finally {
@@ -71,15 +66,6 @@ public class CardDaoTest
             }
             if (agreementDAO != null) {
                 agreementDAO.closeConnection();
-            }
-            if (currencyDAO != null) {
-                currencyDAO.closeConnection();
-            }
-            if (accountDAO != null) {
-                accountDAO.closeConnection();
-            }
-            if (cardDAO != null) {
-                cardDAO.closeConnection();
             }
         }
 
@@ -122,48 +108,21 @@ public class CardDaoTest
             agreement.setValidFromDate(format.parse("10.01.1907"));
         } catch (ParseException e) {
             //it is not possible
-            ;
+
         }
         try {
             agreement.setValidToDate(format.parse("10.01.1917"));
         } catch (ParseException e) {
             //it is not possible
-            ;
+
         }
         agreement.setBank(bank1);
         agreement.setClient(user1);
 
+
         agreement1 = agreementDAO.insert(agreement);
-
-        Currency currency = new Currency();
-        currency = new Currency();
-        currency.setCode("643");
-        currency.setMnemoCode("RUR");
-        currency.setName("Russian rubble");
-        currency1 = currencyDAO.insert(currency);
-
-        Account account = new Account();
-        account.setNumber("197777719");
-        account.setAmount(19999);
-        account.setAgreement(agreement1);
-        account.setCurrency(currency1);
-
-        account1 = accountDAO.insert(account);
-
-        Card card = new Card();
-        card.setNumber("122333444555");
-        card.setName("Aliaksandr Pilipenka");
-        try {
-            card.setValidToDate(format.parse("10.01.2017"));
-        } catch (ParseException e) {
-            //it is not possible
-            ;
-        }
-        card.setAccount(account1);
-        card1 = cardDAO.insert(card);
-
-        Card card2 = cardDAO.findEntityById(card1.getId());
-        assertEquals(card1, card2);
+        Agreement agreement2 = agreementDAO.findEntityById(agreement1.getId());
+        assertEquals(agreement1, agreement2);
 
 
     }
@@ -171,19 +130,19 @@ public class CardDaoTest
     @Test
     public void test2FindByEntity() throws SQLException, NamingException, ClassNotFoundException {
 
-        List<Card> cardList1 = new ArrayList<Card>();
-        cardList1.add(card1);
+        List<Agreement> agreementList1 = new ArrayList<>();
+        agreementList1.add(agreement1);
 
-        List<Card> cardList2 = cardDAO.findEntityByEntity(card1);
-        assertEquals(cardList1, cardList2);
+        List<Agreement> agreementList2 = agreementDAO.findEntityByEntity(agreement1);
+        assertEquals(agreementList1, agreementList2);
 
 
     }
 
     @Test
     public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
-        Card card2 = cardDAO.findEntityByPK(card1);
-        assertEquals(card1, card2);
+        Agreement agreement2 = agreementDAO.findEntityByPK(agreement1);
+        assertEquals(agreement1, agreement2);
 
     }
 
@@ -192,54 +151,56 @@ public class CardDaoTest
     public void test7Update() throws SQLException, NamingException, ClassNotFoundException {
 
 
-        card1.setNumber("19777911977989");
+        agreement1.setNumber("19777911977");
 
-        cardDAO.update(card1);
-        Card card2 = cardDAO.findEntityById(card1.getId());
+        agreementDAO.update(agreement1);
+        Agreement agreement2 = agreementDAO.findEntityById(agreement1.getId());
 
 
-        assertEquals(card1, card2);
+        assertEquals(agreement1, agreement2);
 
     }
 
 
     @Test
     public void test8DeleteById() throws SQLException, NamingException, ClassNotFoundException {
-        cardDAO.delete(card1.getId());
+        agreementDAO.delete(agreement1.getId());
 
 
-        Card card2 = cardDAO.findEntityById(card1.getId());
-        assertNull(card2);
+        Agreement agreement2 = agreementDAO.findEntityById(agreement1.getId());
+        assertNull(agreement2);
 
     }
 
     @Test
     public void test9DeleteByEntity() throws SQLException, NamingException, ParseException, ClassNotFoundException {
 
-
+        Agreement agreement = new Agreement();
         DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+        agreement.setNumber("19777791");
 
-        Card card = new Card();
-        card.setNumber("122333444555");
-        card.setName("Aliaksandr Pilipenka");
         try {
-            card.setValidToDate(format.parse("10.01.2017"));
+            agreement.setValidFromDate(format.parse("10.01.1907"));
         } catch (ParseException e) {
             //it is not possible
-            ;
+
         }
-        card.setAccount(account1);
-        card1 = cardDAO.insert(card);
+        try {
+            agreement.setValidToDate(format.parse("10.01.1917"));
+        } catch (ParseException e) {
+            //it is not possible
 
-        cardDAO.delete(card1);
+        }
+        agreement.setBank(bank1);
+        agreement.setClient(user1);
 
-        List<Card> cardList1 = new ArrayList<Card>();
-        cardList1.add(card1);
+        agreement1 = agreementDAO.insert(agreement);
 
+        agreementDAO.delete(agreement1);
 
-        List<Card> accountList2 = cardDAO.findEntityByEntity(card1);
+        List<Agreement> agreementList2 = agreementDAO.findEntityByEntity(agreement);
 
-        assertEquals(accountList2.size(), 0);
+        assertEquals(agreementList2.size(), 0);
 
 
     }

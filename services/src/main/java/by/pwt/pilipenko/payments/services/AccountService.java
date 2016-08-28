@@ -3,6 +3,7 @@ package by.pwt.pilipenko.payments.services;
 import by.pwt.pilipenko.payments.dao.BaseDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.plipenko.payments.model.entities.Account;
+
 import javax.naming.NamingException;
 import java.sql.SQLException;
 import java.util.List;
@@ -21,7 +22,7 @@ public class AccountService extends AbstractEntityService<Account> {
     }
 
     public BaseDAO<Account> getEntityDAO() throws NamingException, SQLException, ClassNotFoundException {
-       return DaoFactoryFactory.getInstance().createAccountDAO();
+        return DaoFactoryFactory.getInstance().createAccountDAO();
     }
 
 }

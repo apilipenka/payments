@@ -1,4 +1,4 @@
-package by.pwt.plipenko.payments.jdbc;
+package by.pwt.plipenko.payments.dao.jdbc;
 
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.dao.jdbc.BankDAO;
@@ -19,7 +19,7 @@ public class BankDaoTest
         extends Assert {
 
     private static BankDAO bankDAO;
-    private static Bank bank;
+    private static Bank bank1;
 
     @BeforeClass
     public static void intit() throws NamingException, ClassNotFoundException, SQLException {
@@ -39,14 +39,14 @@ public class BankDaoTest
     @Test
     public void test1FindById() throws SQLException, NamingException, ClassNotFoundException {
 
-        bank = new Bank();
+        Bank bank = new Bank();
         bank.setName("Agroprom");
         bank.setUNN("121313");
-        Bank bank1 = bankDAO.insert(bank);
+        bank1 = bankDAO.insert(bank);
 
 
         Bank bank2 = bankDAO.findEntityById(bank.getId());
-        assertEquals(bank, bank2);
+        assertEquals(bank1, bank2);
 
 
     }
@@ -54,11 +54,11 @@ public class BankDaoTest
     @Test
     public void test2FindByEntity() throws SQLException, NamingException, ClassNotFoundException {
 
-        List<Bank> bankList1 = new ArrayList<Bank>();
-        bankList1.add(bank);
+        List<Bank> bankList1 = new ArrayList<>();
+        bankList1.add(bank1);
 
 
-        List<Bank> bankList2 = bankDAO.findEntityByEntity(bank);
+        List<Bank> bankList2 = bankDAO.findEntityByEntity(bank1);
         assertEquals(bankList1, bankList2);
 
 
@@ -68,10 +68,10 @@ public class BankDaoTest
     public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
 
 
-        Bank bank2 = bankDAO.findEntityByPK(bank);
-        assertEquals(bank, bank2);
+        Bank bank2 = bankDAO.findEntityByPK(bank1);
+        assertEquals(bank1, bank2);
 
-        assertEquals(bank, bank);
+        assertEquals(bank1, bank1);
 
 
     }
@@ -81,11 +81,11 @@ public class BankDaoTest
     public void test7Update() throws SQLException, NamingException, ClassNotFoundException {
 
 
-        bank.setName("AgropromBank");
-        bankDAO.update(bank);
-        Bank bank2 = bankDAO.findEntityById(bank.getId());
+        bank1.setName("AgropromBank");
+        bankDAO.update(bank1);
+        Bank bank2 = bankDAO.findEntityById(bank1.getId());
 
-        assertEquals(bank, bank2);
+        assertEquals(bank1, bank2);
 
 
     }
@@ -95,9 +95,9 @@ public class BankDaoTest
     public void test8DeleteById() throws SQLException, NamingException, ClassNotFoundException {
 
 
-        bankDAO.delete(bank.getId());
+        bankDAO.delete(bank1.getId());
 
-        Bank bank2 = bankDAO.findEntityById(bank.getId());
+        Bank bank2 = bankDAO.findEntityById(bank1.getId());
 
         assertNull(bank2);
 
@@ -107,16 +107,12 @@ public class BankDaoTest
     @Test
     public void test9DeleteByEntity() throws SQLException, NamingException, ClassNotFoundException {
 
-        bank = new Bank();
+        Bank bank = new Bank();
         bank.setName("agroprom");
         bank.setUNN("121313");
-        Bank bank1 = bankDAO.insert(bank);
+        bank1 = bankDAO.insert(bank);
 
         bankDAO.delete(bank);
-
-        List<Bank> bankList1 = new ArrayList<Bank>();
-        bankList1.add(bank);
-
 
         List<Bank> bankList2 = bankDAO.findEntityByEntity(bank);
 

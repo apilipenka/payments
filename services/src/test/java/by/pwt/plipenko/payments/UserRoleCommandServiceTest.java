@@ -3,9 +3,7 @@ package by.pwt.plipenko.payments;
 import by.pwt.pilipenko.payments.services.CommandService;
 import by.pwt.pilipenko.payments.services.UserRoleCommandService;
 import by.pwt.pilipenko.payments.services.UserRoleService;
-import by.pwt.pilipenko.payments.services.UserService;
 import by.pwt.plipenko.payments.model.entities.Command;
-import by.pwt.plipenko.payments.model.entities.User;
 import by.pwt.plipenko.payments.model.entities.UserRole;
 import by.pwt.plipenko.payments.model.entities.UserRoleCommand;
 import org.junit.*;
@@ -13,8 +11,6 @@ import org.junit.runners.MethodSorters;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,12 +21,12 @@ import java.util.List;
 public class UserRoleCommandServiceTest
         extends Assert {
 
+    protected static UserRoleCommandService userRoleCommandService;
     private static UserRoleService userRoleService;
     private static UserRole userRole1;
     private static UserRole userRole2;
     private static CommandService commandService;
     private static Command command1;
-    protected static UserRoleCommandService userRoleCommandService;
     private static UserRoleCommand userRoleCommand1;
 
     @BeforeClass
@@ -71,7 +67,6 @@ public class UserRoleCommandServiceTest
         UserRoleCommand userRoleCommand = new UserRoleCommand();
         userRoleCommand.setUserRole(userRole1);
         userRoleCommand.setCommand(command1);
-
 
 
         userRoleCommand1 = userRoleCommandService.insertEntity(userRoleCommand);

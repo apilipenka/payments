@@ -1,9 +1,7 @@
 package by.pwt.plipenko.payments;
 
 import by.pwt.pilipenko.payments.services.*;
-import by.pwt.pilipenko.payments.services.UserService;
 import by.pwt.plipenko.payments.model.entities.*;
-import by.pwt.plipenko.payments.model.entities.User;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 
@@ -149,7 +147,7 @@ public class CardServiceTest
     @Test
     public void test2FindByEntity() throws Exception {
 
-        List<Card> cardList1 = new ArrayList<Card>();
+        List<Card> cardList1 = new ArrayList<>();
         cardList1.add(card1);
 
 
@@ -177,7 +175,7 @@ public class CardServiceTest
         cardService.updateEntity(card1);
         Card card2 = cardService.getEntity(card1.getId());
 
-        assertEquals(card1,card2);
+        assertEquals(card1, card2);
 
 
     }
@@ -186,7 +184,7 @@ public class CardServiceTest
     @Test
     public void test8DeleteById() throws Exception {
 
-       cardService.deleteEntity(card1.getId());
+        cardService.deleteEntity(card1.getId());
 
 
         Card card2 = cardService.getEntity(card1.getId());

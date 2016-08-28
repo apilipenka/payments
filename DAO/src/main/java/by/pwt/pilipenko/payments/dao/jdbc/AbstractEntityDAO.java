@@ -124,8 +124,7 @@ public abstract class AbstractEntityDAO<T extends Entity> implements BaseDAO<T> 
                 entity = getEntity(resultSet);
             }
 
-        }
-        finally {
+        } finally {
             closeResultSet(resultSet);
             closeStatement(statement);
         }
@@ -145,8 +144,7 @@ public abstract class AbstractEntityDAO<T extends Entity> implements BaseDAO<T> 
                 entity1 = getEntity(resultSet);
             }
 
-        }
-        finally {
+        } finally {
             closeResultSet(resultSet);
             closeStatement(statement);
         }
@@ -163,8 +161,7 @@ public abstract class AbstractEntityDAO<T extends Entity> implements BaseDAO<T> 
             resultSet = statement.executeQuery();
             entities = getEntities(resultSet);
 
-        }
-        finally {
+        } finally {
             closeResultSet(resultSet);
             closeStatement(statement);
         }
@@ -180,8 +177,7 @@ public abstract class AbstractEntityDAO<T extends Entity> implements BaseDAO<T> 
             resultSet = statement.executeQuery(selectStatement);
             entities = getEntities(resultSet);
 
-        }
-        finally {
+        } finally {
             closeResultSet(resultSet);
             closeStatement(statement);
         }
@@ -226,10 +222,6 @@ public abstract class AbstractEntityDAO<T extends Entity> implements BaseDAO<T> 
 
     public Connection getConnection() {
         return connection;
-    }
-
-    public void setConnection(Connection connection) {
-        this.connection = connection;
     }
 
     protected abstract PreparedStatement prepareSelectByPKStatement(T entity, PreparedStatement statement)

@@ -28,7 +28,8 @@ public interface BaseDAO<E extends Entity> {
 
     void closeConnection() throws SQLException;
 
-    void setConnection(Connection connection) throws SQLException;
     Connection getConnection() throws SQLException;
+
+
 
 }

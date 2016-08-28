@@ -13,7 +13,7 @@ public class CommandService extends AbstractEntityService<Command> {
     public List<Command> searchEntityByName(String name) throws SQLException, NamingException, ClassNotFoundException {
 
         Command entity = new Command();
-        if (name != null && name != "") {
+        if (name != null && !name.equals("")) {
             entity.setCommand(name);
         }
 

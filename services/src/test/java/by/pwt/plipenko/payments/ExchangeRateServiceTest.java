@@ -2,8 +2,8 @@ package by.pwt.plipenko.payments;
 
 import by.pwt.pilipenko.payments.services.CurrencyService;
 import by.pwt.pilipenko.payments.services.ExchangeRateService;
-import by.pwt.plipenko.payments.model.entities.ExchangeRate;
 import by.pwt.plipenko.payments.model.entities.Currency;
+import by.pwt.plipenko.payments.model.entities.ExchangeRate;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 
@@ -108,7 +108,7 @@ public class ExchangeRateServiceTest
         List<ExchangeRate> exchangeRateList1 = new ArrayList<ExchangeRate>();
         exchangeRateList1.add(exchangeRate1);
 
-        List<ExchangeRate> exchangeRateList2 = exchangeRateService.searchEntityParent(exchangeRate1.getCurrency().getId(),exchangeRate1.getTargetCurrency().getId());
+        List<ExchangeRate> exchangeRateList2 = exchangeRateService.searchEntityParent(exchangeRate1.getCurrency().getId(), exchangeRate1.getTargetCurrency().getId());
         assertEquals(exchangeRateList1, exchangeRateList2);
 
 

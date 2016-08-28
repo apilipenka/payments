@@ -3,31 +3,26 @@ package by.pwt.pilipenko.payments.dao;
 import by.pwt.pilipenko.payments.dao.jdbc.DAOFactory;
 
 import javax.naming.NamingException;
+import java.sql.SQLException;
 
 /**
  * Created by apilipenka on 8/19/2016.
  */
 public class DaoFactoryFactory {
-    private static AbstractDAOFactory instance;
+    private static ThreadLocal<BaseDAOFactory> instance = new ThreadLocal<>();
 
+    public static BaseDAOFactory getInstance() throws NamingException, ClassNotFoundException, SQLException {
 
-    public DaoFactoryFactory() {
-    }
-
-    public DaoFactoryFactory(AbstractDAOFactory instance) {
-        this.instance = instance;
-    }
-
-    public static AbstractDAOFactory getInstance() throws NamingException, ClassNotFoundException {
-
-        AbstractDAOFactory localInstance = instance;
+        BaseDAOFactory localInstance = instance.get();
 
         if (localInstance == null) {
 
             synchronized (DaoFactoryFactory.class) {
-                localInstance = instance;
+                localInstance = instance.get();
                 if (localInstance == null) {
-                    instance = localInstance = new DAOFactory();
+                    instance.set(new DAOFactory());
+                    localInstance = instance.get();
+
                 }
 
             }
