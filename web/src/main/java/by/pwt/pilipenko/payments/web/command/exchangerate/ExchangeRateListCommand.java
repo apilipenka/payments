@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class ExchangeRateListCommand implements ActionCommand {
     @Override
-    public String execute(HttpServletRequest request) throws SQLException, NamingException, ClassNotFoundException {
+    public String execute(HttpServletRequest request) throws Exception {
         String page = ConfigurationManager.getProperty("path.page.echangeRateList");
 
         ExchangeRateService exchangeRateService = new ExchangeRateService();

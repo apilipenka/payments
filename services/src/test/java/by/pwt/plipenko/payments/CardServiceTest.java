@@ -159,7 +159,7 @@ public class CardServiceTest
 
 
     @Test
-    public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
+    public void test6FindEntityByPK() throws Exception {
 
         Card card2 = cardService.getEntityByPK(card1);
         assertEquals(card1, card2);

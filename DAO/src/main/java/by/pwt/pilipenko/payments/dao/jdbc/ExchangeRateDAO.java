@@ -84,7 +84,10 @@ public class ExchangeRateDAO extends AbstractEntityDAO<ExchangeRate> {
     protected PreparedStatement prepareSelectByParentStatement(ExchangeRate entity, PreparedStatement statement)
             throws SQLException {
 
-        statement.setInt(1, entity.getCurrency().getId());
+        if (entity.getCurrency() != null)
+            statement.setInt(1, entity.getCurrency().getId());
+        else
+            statement.setNull(1, java.sql.Types.INTEGER);
         if (entity.getTargetCurrency() != null) {
             statement.setInt(2, entity.getTargetCurrency().getId());
         } else {

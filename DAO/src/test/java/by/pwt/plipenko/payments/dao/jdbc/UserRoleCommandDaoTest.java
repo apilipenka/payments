@@ -42,24 +42,13 @@ public class UserRoleCommandDaoTest
 
     @AfterClass
     public static void tearDownToHexStringData() throws SQLException, NamingException {
-        try {
+
             userRoleDAO.delete(userRole1);
             userRoleDAO.delete(userRole3);
             commandDAO.delete(command1);
 
 
-        } finally {
-            if (userRoleDAO != null) {
-                userRoleDAO.closeConnection();
 
-            }
-            if (commandDAO != null) {
-                commandDAO.closeConnection();
-            }
-            if (userRoleCommandDAO != null) {
-                userRoleCommandDAO.closeConnection();
-            }
-        }
 
     }
 

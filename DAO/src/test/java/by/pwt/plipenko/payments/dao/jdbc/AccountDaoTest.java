@@ -48,34 +48,12 @@ public class AccountDaoTest
 
     @AfterClass
     public static void tearDownToHexStringData() throws SQLException, NamingException {
-        try {
+
             agreementDAO.delete(agreement1);
             bankDAO.delete(bank1);
             userDAO.delete(user1);
             userRoleDAO.delete(userRole1);
             currencyDAO.delete(currency1);
-
-
-        } finally {
-            if (bankDAO != null) {
-                bankDAO.closeConnection();
-            }
-            if (userRoleDAO != null) {
-                userRoleDAO.closeConnection();
-            }
-            if (userDAO != null) {
-                userDAO.closeConnection();
-            }
-            if (agreementDAO != null) {
-                agreementDAO.closeConnection();
-            }
-            if (currencyDAO != null) {
-                currencyDAO.closeConnection();
-            }
-            if (accountDAO != null) {
-                accountDAO.closeConnection();
-            }
-        }
 
     }
 

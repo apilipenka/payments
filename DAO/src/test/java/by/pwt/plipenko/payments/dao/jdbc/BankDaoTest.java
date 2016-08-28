@@ -31,7 +31,6 @@ public class BankDaoTest
     @AfterClass
     public static void tearDownToHexStringData() throws SQLException {
 
-        bankDAO.closeConnection();
         bankDAO = null;
 
     }

@@ -1,6 +1,7 @@
 package by.pwt.plipenko.payments.model.entities;
 
 import java.util.*;
+import by.pwt.plipenko.payments.model.exceptions.RateNotFoundException;
 
 public class Currency extends Entity {
 
@@ -68,6 +69,15 @@ public class Currency extends Entity {
         return null;
     }
 
+    public float getRate(Date date, Currency targetCurrency) throws RateNotFoundException {
+        for (ExchangeRate exchangeRate: rates) {
+            if (exchangeRate.getRateDate().equals(date) && exchangeRate.getCurrency().equals(targetCurrency)) {
+                return exchangeRate.getRate();
+            }
+        }
+        throw new RateNotFoundException();
+    }
+
     public void addExchangeRate(ExchangeRate exchangeRate) {
         rates.add(exchangeRate);
     }
@@ -113,5 +123,7 @@ public class Currency extends Entity {
     public String toString() {
         return "currency [id=" + getId() + ", mnemoCode=" + mnemoCode + ", code=" + code + ", name=" + name + ", rates=" + rates + "]";
     }
+
+
 
 }

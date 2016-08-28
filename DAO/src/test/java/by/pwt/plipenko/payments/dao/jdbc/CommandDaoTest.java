@@ -31,7 +31,6 @@ public class CommandDaoTest
     @AfterClass
     public static void tearDownToHexStringData() throws SQLException {
 
-        commandDAO.closeConnection();
         commandDAO = null;
 
     }

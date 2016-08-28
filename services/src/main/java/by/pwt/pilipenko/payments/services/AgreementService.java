@@ -17,7 +17,6 @@ public class AgreementService extends AbstractEntityService<Agreement> {
         }
         BaseDAO<Agreement> agreementDAO = getEntityDAO();
         List<Agreement> list = getEntityDAO().findEntityByEntity(entity);
-        agreementDAO.closeConnection();
         return list;
     }
 

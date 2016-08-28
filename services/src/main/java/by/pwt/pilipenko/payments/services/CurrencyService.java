@@ -3,10 +3,13 @@ package by.pwt.pilipenko.payments.services;
 import by.pwt.pilipenko.payments.dao.BaseDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.plipenko.payments.model.entities.Currency;
+import by.pwt.plipenko.payments.model.entities.ExchangeRate;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class CurrencyService extends AbstractEntityService<Currency> {
 
@@ -22,7 +25,6 @@ public class CurrencyService extends AbstractEntityService<Currency> {
 
         BaseDAO<Currency> currencyDAO = getEntityDAO();
         List<Currency> list = currencyDAO.findEntityByEntity(entity);
-        currencyDAO.closeConnection();
 
         return list;
 

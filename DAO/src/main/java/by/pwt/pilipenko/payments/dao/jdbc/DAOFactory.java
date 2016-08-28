@@ -83,7 +83,7 @@ public class DAOFactory extends AbstractDAOFactory {
 
     public UserDAO createUserDAO() throws SQLException {
         UserDAO userDAO;
-        userDAO = new UserDAO(getDataSource().getConnection(), "user", "users");
+        userDAO = new UserDAO(getConnection(), "user", "users");
 
         return userDAO;
 
@@ -91,7 +91,7 @@ public class DAOFactory extends AbstractDAOFactory {
 
     public TypeDAO createTypeDAO(String entityName, String tableName) throws SQLException {
         TypeDAO typeDAO;
-        typeDAO = new TypeDAO(getDataSource().getConnection(), entityName, tableName);
+        typeDAO = new TypeDAO(getConnection(), entityName, tableName);
 
         return typeDAO;
     }
@@ -99,7 +99,7 @@ public class DAOFactory extends AbstractDAOFactory {
 
     public BankDAO createBankDAO() throws SQLException {
         BankDAO bankDAO;
-        bankDAO = new BankDAO(getDataSource().getConnection(), "bank", "banks");
+        bankDAO = new BankDAO(getConnection(), "bank", "banks");
 
         return bankDAO;
     }
@@ -107,51 +107,51 @@ public class DAOFactory extends AbstractDAOFactory {
 
     public CurrencyDAO createCurrencyDAO() throws SQLException {
         CurrencyDAO currencyDAO;
-        currencyDAO = new CurrencyDAO(getDataSource().getConnection(), "currency", "currencies");
+        currencyDAO = new CurrencyDAO(getConnection(), "currency", "currencies");
         return currencyDAO;
     }
 
     public ExchangeRateDAO createExchangeRateDAO() throws SQLException {
         ExchangeRateDAO exchangeRateDAO;
-        exchangeRateDAO = new ExchangeRateDAO(getDataSource().getConnection(), "exchangerate", "exchange_rates");
+        exchangeRateDAO = new ExchangeRateDAO(getConnection(), "exchangerate", "exchange_rates");
         return exchangeRateDAO;
     }
 
     public AgreementDAO createAgreementDAO() throws SQLException {
         AgreementDAO agreementDAO;
-        agreementDAO = new AgreementDAO(getDataSource().getConnection(), "agreement", "agreements");
+        agreementDAO = new AgreementDAO(getConnection(), "agreement", "agreements");
         return agreementDAO;
     }
 
     public AccountDAO createAccountDAO() throws SQLException {
         AccountDAO accountDAO;
-        accountDAO = new AccountDAO(getDataSource().getConnection(), "account", "accounts");
+        accountDAO = new AccountDAO(getConnection(), "account", "accounts");
         return accountDAO;
     }
 
     public CardDAO createCardDAO() throws SQLException {
         CardDAO cardDAO;
-        cardDAO = new CardDAO(getDataSource().getConnection(), "card", "cards");
+        cardDAO = new CardDAO(getConnection(), "card", "cards");
         return cardDAO;
     }
 
 
     public UserRoleDAO createUserRoleDAO() throws SQLException {
         UserRoleDAO userRoleDAO;
-        userRoleDAO = new UserRoleDAO(getDataSource().getConnection(), "userrole", "user_roles");
+        userRoleDAO = new UserRoleDAO(getConnection(), "userrole", "user_roles");
         return userRoleDAO;
     }
 
     public CommandDAO createCommandDAO() throws SQLException {
         CommandDAO commandDAO;
-        commandDAO = new CommandDAO(getDataSource().getConnection(), "command", "commands");
+        commandDAO = new CommandDAO(getConnection(), "command", "commands");
         return commandDAO;
     }
 
     @Override
     public UserRoleCommandDAO createUserRoleCommandDAO() throws SQLException {
         UserRoleCommandDAO userRoleCommandDAO;
-        userRoleCommandDAO = new UserRoleCommandDAO(getDataSource().getConnection(), "userrolecommand", "user_role_commands");
+        userRoleCommandDAO = new UserRoleCommandDAO(getConnection(), "userrolecommand", "user_role_commands");
         return userRoleCommandDAO;
     }
 

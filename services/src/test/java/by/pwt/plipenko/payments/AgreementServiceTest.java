@@ -126,7 +126,7 @@ public class AgreementServiceTest
 
 
     @Test
-    public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
+    public void test6FindEntityByPK() throws Exception {
 
         Agreement agreement2 = agreementService.getEntityByPK(agreement1);
         assertEquals(agreement1, agreement2);

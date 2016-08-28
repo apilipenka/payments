@@ -86,7 +86,7 @@ public class UserServiceTest
 
 
     @Test
-    public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
+    public void test6FindEntityByPK() throws Exception {
 
         User user2 = userService.getEntityByPK(user1);
         assertEquals(user1, user2);

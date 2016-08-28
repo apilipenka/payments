@@ -30,7 +30,6 @@ public class UserRoleCommandService extends AbstractEntityService<UserRoleComman
         BaseDAO<UserRoleCommand> userRoleCommandDAO = getEntityDAO();
 
         List<UserRoleCommand> list = getEntityDAO().findEntityByEntity(entity);
-        userRoleCommandDAO.closeConnection();
         return list;
     }
 

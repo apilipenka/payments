@@ -31,7 +31,6 @@ public class CurrencyDaoTest
     @AfterClass
     public static void tearDownToHexStringData() throws SQLException {
 
-        currencyDAO.closeConnection();
         currencyDAO = null;
 
     }

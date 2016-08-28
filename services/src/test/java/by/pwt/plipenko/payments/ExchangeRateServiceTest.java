@@ -79,7 +79,7 @@ public class ExchangeRateServiceTest
     }
 
     @Test
-    public void test2FindByEntity() throws SQLException, NamingException, ClassNotFoundException {
+    public void test2FindByEntity() throws Exception {
 
         List<ExchangeRate> exchangeRateList1 = new ArrayList<ExchangeRate>();
         exchangeRateList1.add(exchangeRate1);
@@ -94,7 +94,7 @@ public class ExchangeRateServiceTest
 
 
     @Test
-    public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
+    public void test6FindEntityByPK() throws Exception {
 
         ExchangeRate exchangeRate2 = exchangeRateService.getEntityByPK(exchangeRate1);
         assertEquals(exchangeRate1, exchangeRate2);
@@ -105,7 +105,7 @@ public class ExchangeRateServiceTest
     @Test
     public void test61FindEntityByParent() throws Exception {
 
-        List<ExchangeRate> exchangeRateList1 = new ArrayList<ExchangeRate>();
+        List<ExchangeRate> exchangeRateList1 = new ArrayList<>();
         exchangeRateList1.add(exchangeRate1);
 
         List<ExchangeRate> exchangeRateList2 = exchangeRateService.searchEntityParent(exchangeRate1.getCurrency().getId(), exchangeRate1.getTargetCurrency().getId());
@@ -114,6 +114,29 @@ public class ExchangeRateServiceTest
 
     }
 
+    @Test
+    public void test62FindEntityByParent() throws Exception {
+
+        List<ExchangeRate> exchangeRateList1 = new ArrayList<>();
+        exchangeRateList1.add(exchangeRate1);
+
+        List<ExchangeRate> exchangeRateList2 = exchangeRateService.searchEntityParent(exchangeRate1.getCurrency().getId(), null);
+        assertEquals(exchangeRateList1, exchangeRateList2);
+
+
+    }
+
+    @Test
+    public void test63FindEntityByParent() throws Exception {
+
+        List<ExchangeRate> exchangeRateList1 = new ArrayList<>();
+        exchangeRateList1.add(exchangeRate1);
+
+        List<ExchangeRate> exchangeRateList2 = exchangeRateService.searchEntityParent(null, exchangeRate1.getTargetCurrency().getId());
+        assertEquals(exchangeRateList1, exchangeRateList2);
+
+
+    }
 
     @Test
     public void test7Update() throws Exception {

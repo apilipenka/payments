@@ -19,7 +19,6 @@ public class BankService extends AbstractEntityService<Bank> {
 
         BaseDAO<Bank> bankDAO = getEntityDAO();
         List<Bank> list = bankDAO.findEntityByEntity(entity);
-        bankDAO.closeConnection();
 
         return list;
 

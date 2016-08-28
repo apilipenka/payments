@@ -32,7 +32,6 @@ public class UserRoleDaoTest
     @AfterClass
     public static void tearDownToHexStringData() throws SQLException {
 
-        userRoleDAO.closeConnection();
         userRoleDAO = null;
 
     }

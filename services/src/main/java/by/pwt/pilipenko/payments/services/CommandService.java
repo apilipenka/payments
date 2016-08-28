@@ -20,7 +20,6 @@ public class CommandService extends AbstractEntityService<Command> {
         BaseDAO<Command> commandDAO = getEntityDAO();
 
         List<Command> list = getEntityDAO().findEntityByEntity(entity);
-        commandDAO.closeConnection();
         return list;
     }
 

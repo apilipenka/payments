@@ -1,7 +1,9 @@
 package by.pwt.plipenko.payments;
 
 import by.pwt.pilipenko.payments.services.*;
+import by.pwt.pilipenko.payments.services.exceptions.AccountNotFoundException;
 import by.pwt.plipenko.payments.model.entities.*;
+import by.pwt.plipenko.payments.model.exceptions.InsufficientFundsException;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 
@@ -11,6 +13,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,6 +36,8 @@ public class AccountServiceTest
     private static Currency currency1;
     private static AccountService accountService;
     private static Account account1;
+    private static ExchangeRateService exchangeRateService;
+    private static ExchangeRate exchangeRate1;
 
     @BeforeClass
     public static void init() throws NamingException, ClassNotFoundException, SQLException {
@@ -42,6 +48,7 @@ public class AccountServiceTest
         agreementService = new AgreementService();
         accountService = new AccountService();
         currencyService = new CurrencyService();
+        exchangeRateService = new ExchangeRateService();
     }
 
     @AfterClass
@@ -50,6 +57,7 @@ public class AccountServiceTest
         bankService.deleteEntity(bank1.getId());
         userService.deleteEntity(user1.getId());
         userRoleService.deleteEntity(userRole1.getId());
+        exchangeRateService.deleteEntity(exchangeRate1.getId());
         currencyService.deleteEntity(currency1.getId());
 
         bankService = null;
@@ -58,6 +66,7 @@ public class AccountServiceTest
         agreementService = null;
         accountService = null;
         currencyService = null;
+        exchangeRateService = null;
     }
 
     @Test
@@ -94,13 +103,13 @@ public class AccountServiceTest
             agreement.setValidFromDate(format.parse("10.01.1907"));
         } catch (ParseException e) {
             //it is not possible
-            ;
+
         }
         try {
             agreement.setValidToDate(format.parse("10.01.1917"));
         } catch (ParseException e) {
             //it is not possible
-            ;
+
         }
         agreement.setBank(bank1);
         agreement.setClient(user1);
@@ -112,6 +121,14 @@ public class AccountServiceTest
         currency.setMnemoCode("RUR");
         currency.setName("Russian rubble");
         currency1 = currencyService.insertEntity(currency);
+
+        ExchangeRate exchangeRate = new ExchangeRate();
+        exchangeRate.setCurrency(currency1);
+        exchangeRate.setTargetCurrency(currency1);
+        exchangeRate.setRate(1);
+
+        exchangeRate.setRateDate(format.parse(format.format(Calendar.getInstance().getTime())));
+        exchangeRate1 = exchangeRateService.insertEntity(exchangeRate);
 
         Account account = new Account();
         account.setNumber("197777719");
@@ -129,7 +146,7 @@ public class AccountServiceTest
     @Test
     public void test2FindByEntity() throws Exception {
 
-        List<Account> accountList1 = new ArrayList<Account>();
+        List<Account> accountList1 = new ArrayList<>();
         accountList1.add(account1);
 
 
@@ -141,7 +158,7 @@ public class AccountServiceTest
 
 
     @Test
-    public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
+    public void test3FindEntityByPK() throws Exception {
 
         Account account2 = accountService.getEntityByPK(account1);
         assertEquals(account1, account2);
@@ -151,9 +168,9 @@ public class AccountServiceTest
 
 
     @Test
-    public void test7Update() throws Exception {
+    public void test4Update() throws Exception {
 
-        account1.setNumber("010203");
+        account1.setAmount(100);
         accountService.updateEntity(account1);
         Account account2 = accountService.getEntity(account1.getId());
 
@@ -162,6 +179,59 @@ public class AccountServiceTest
 
     }
 
+    @Test(expected = AccountNotFoundException.class)
+    public void test61AddMoney() throws Exception {
+
+        accountService.addMoney("Breeeeeeeed",200);
+        Account account2 = accountService.getEntity(account1.getId());
+        assertEquals(account1, account2);
+
+    }
+
+    @Test
+    public void test62AddMoney() throws Exception {
+
+        accountService.addMoney(account1.getNumber(),200);
+        Account account2 = accountService.getEntity(account1.getId());
+        assertEquals(account1.getAmount(), account2.getAmount(),200);
+
+    }
+
+    @Test
+    public void test63getMoney() throws Exception {
+
+        accountService.addMoney(account1.getNumber(),200);
+        Account account2 = accountService.getEntity(account1.getId());
+        assertEquals(account1.getAmount()+200, account2.getAmount(),200);
+
+    }
+
+    @Test(expected = InsufficientFundsException.class)
+    public void test64getMoney() throws Exception {
+
+        accountService.getMoney(account1.getNumber(),1300);
+        Account account2 = accountService.getEntity(account1.getId());
+        assertEquals(account1.getAmount()+200, account2.getAmount(),200);
+
+    }
+
+    @Test
+    public void test63transferMoney() throws Exception {
+
+        account1 = accountService.getEntity(account1.getId());
+        account1.setAmount(100);
+        accountService.updateEntity(account1);
+        Account account2 = accountService.getEntity(account1.getId());
+        account2.setNumber("123321567");
+        account2.setAmount(0);
+        account2 = accountService.insertEntity(account2);
+        accountService.transferMoney(account1.getNumber(),account2.getNumber(),60);
+        account1 = accountService.getEntity(account1.getId());
+        account2 = accountService.getEntity(account2.getId());
+        assertEquals(40, account1.getAmount(),0);
+        assertEquals(60, account2.getAmount(),0);
+
+    }
 
     @Test
     public void test8DeleteById() throws Exception {

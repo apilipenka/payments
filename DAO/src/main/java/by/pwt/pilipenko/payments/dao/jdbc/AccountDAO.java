@@ -4,12 +4,16 @@ import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.plipenko.payments.model.entities.Account;
 import by.pwt.plipenko.payments.model.entities.Agreement;
 import by.pwt.plipenko.payments.model.entities.Currency;
+import by.pwt.plipenko.payments.model.entities.ExchangeRate;
 
 import javax.naming.NamingException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class AccountDAO extends AbstractEntityDAO<Account> {
 
@@ -35,6 +39,15 @@ public class AccountDAO extends AbstractEntityDAO<Account> {
         CurrencyDAO currencyDAO = DaoFactoryFactory.getInstance().createCurrencyDAO();
         Currency currency = currencyDAO.findEntityById(currencyId);
         account.setCurrency(currency);
+
+
+        ExchangeRate exchangeRate = new ExchangeRate();
+        exchangeRate.setCurrency(currency);
+        ExchangeRateDAO exchangeRateDAO = DaoFactoryFactory.getInstance().createExchangeRateDAO();
+        List<ExchangeRate> list = exchangeRateDAO.findEntityByParent(exchangeRate);
+        Set<ExchangeRate> set = new HashSet<>();
+        set.addAll(list);
+        currency.setRates(set);
 
         return account;
     }

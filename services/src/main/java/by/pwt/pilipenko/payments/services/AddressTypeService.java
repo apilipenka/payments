@@ -21,7 +21,6 @@ public class AddressTypeService extends AbstractEntityService<Type> {
 
         BaseDAO<Type> addressTypeDAO = getEntityDAO();
         List<Type> list = addressTypeDAO.findEntityByEntity(entity);
-        addressTypeDAO.closeConnection();
         return list;
     }
 

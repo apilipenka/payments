@@ -23,7 +23,6 @@ public class UserService extends AbstractEntityService<User> {
         BaseDAO<User> userDAO = getEntityDAO();
 
         List<User> list = getEntityDAO().findEntityByEntity(entity);
-        userDAO.closeConnection();
         return list;
     }
 

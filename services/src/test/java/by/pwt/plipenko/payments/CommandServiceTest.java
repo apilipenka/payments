@@ -65,7 +65,7 @@ public class CommandServiceTest
 
 
     @Test
-    public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
+    public void test6FindEntityByPK() throws Exception {
 
         Command command2 = commandService.getEntityByPK(command1);
         assertEquals(command1, command2);

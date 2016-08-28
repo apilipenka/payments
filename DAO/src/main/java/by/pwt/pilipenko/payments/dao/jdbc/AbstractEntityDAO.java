@@ -221,6 +221,7 @@ public abstract class AbstractEntityDAO<T extends Entity> implements BaseDAO<T> 
     }
 
     public Connection getConnection() {
+
         return connection;
     }
 

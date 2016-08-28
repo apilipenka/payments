@@ -63,7 +63,7 @@ public class UserRoleServiceTest
 
 
     @Test
-    public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
+    public void test6FindEntityByPK() throws Exception {
 
         UserRole userRole2 = userRoleService.getEntityByPK(userRole1);
         assertEquals(userRole1, userRole2);

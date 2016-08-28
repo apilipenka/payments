@@ -9,6 +9,7 @@ public interface BaseDAOFactory {
 
 
         public abstract void beginTransaction() throws SQLException;
+        public abstract void endTransaction() throws SQLException;
 
         public abstract void commit() throws SQLException;
 

@@ -20,7 +20,6 @@ public class CardService extends AbstractEntityService<Card> {
         BaseDAO<Card> cardDAO = getEntityDAO();
 
         List<Card> list = getEntityDAO().findEntityByEntity(entity);
-        cardDAO.closeConnection();
         return list;
     }
 

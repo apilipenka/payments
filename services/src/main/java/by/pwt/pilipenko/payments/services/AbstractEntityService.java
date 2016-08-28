@@ -17,7 +17,6 @@ public abstract class AbstractEntityService<T extends Entity> {
     public List<T> getAllEntities() throws SQLException, NamingException, ClassNotFoundException {
         BaseDAO<T> entityDAO = getEntityDAO();
         List<T> list = entityDAO.findAll();
-        entityDAO.closeConnection();
         return list;
     }
 
@@ -26,22 +25,19 @@ public abstract class AbstractEntityService<T extends Entity> {
     public T getEntity(int id) throws Exception {
         BaseDAO<T> entityDAO = getEntityDAO();
         T entity = entityDAO.findEntityById(id);
-        entityDAO.closeConnection();
         return entity;
 
     }
 
-    public T getEntityByPK(T entity) throws SQLException, NamingException, ClassNotFoundException {
+    public T getEntityByPK(T entity) throws Exception {
         BaseDAO<T> entityDAO = getEntityDAO();
         entity = entityDAO.findEntityByPK(entity);
-        entityDAO.closeConnection();
         return entity;
     }
 
     public boolean updateEntity(T entity) throws SQLException, NamingException, ClassNotFoundException {
         BaseDAO<T> entityDAO = getEntityDAO();
         boolean result = entityDAO.update(entity);
-        entityDAO.closeConnection();
         return result;
 
     }
@@ -49,7 +45,6 @@ public abstract class AbstractEntityService<T extends Entity> {
     public T insertEntity(T entity) throws SQLException, NamingException, ClassNotFoundException {
         BaseDAO<T> entityDAO = getEntityDAO();
         entity = entityDAO.insert(entity);
-        entityDAO.closeConnection();
         return entity;
 
     }
@@ -57,7 +52,6 @@ public abstract class AbstractEntityService<T extends Entity> {
     public boolean deleteEntity(int id) throws SQLException, NamingException, ClassNotFoundException {
         BaseDAO<T> entityDAO = getEntityDAO();
         boolean result = entityDAO.delete(id);
-        entityDAO.closeConnection();
         return result;
 
     }

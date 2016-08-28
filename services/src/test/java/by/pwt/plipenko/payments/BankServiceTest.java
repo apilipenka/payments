@@ -63,7 +63,7 @@ public class BankServiceTest
 
 
     @Test
-    public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
+    public void test6FindEntityByPK() throws Exception {
 
         Bank bank2 = bankService.getEntityByPK(bank1);
         assertEquals(bank1, bank2);

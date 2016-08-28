@@ -19,7 +19,6 @@ public class UserRoleService extends AbstractEntityService<UserRole> {
 
         BaseDAO<UserRole> userRoleTypeDAO = getEntityDAO();
         List<UserRole> list = userRoleTypeDAO.findEntityByEntity(entity);
-        userRoleTypeDAO.closeConnection();
 
         return list;
 

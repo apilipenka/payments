@@ -38,18 +38,11 @@ public class ExchangeRateDaoTest
 
     @AfterClass
     public static void tearDownToHexStringData() throws SQLException, NamingException {
-        try {
+
             currencyDAO.delete(currency1);
 
 
-        } finally {
-            if (currencyDAO != null) {
-                currencyDAO.closeConnection();
-            }
-            if (exchangeRateDAO != null) {
-                exchangeRateDAO.closeConnection();
-            }
-        }
+
 
     }
 

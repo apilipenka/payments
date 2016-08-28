@@ -43,12 +43,6 @@ public class UserDaoTest
 
         userRoleDAO.delete(userRole1);
 
-        userDAO.closeConnection();
-        userDAO = null;
-
-        userRoleDAO.closeConnection();
-        userRoleDAO = null;
-
 
     }
 

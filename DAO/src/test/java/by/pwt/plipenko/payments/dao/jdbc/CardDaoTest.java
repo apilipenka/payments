@@ -50,40 +50,16 @@ public class CardDaoTest
 
     @AfterClass
     public static void tearDownToHexStringData() throws SQLException, NamingException {
-        try {
+
             accountDAO.delete(account1);
             agreementDAO.delete(agreement1);
             bankDAO.delete(bank1);
             userDAO.delete(user1);
             userRoleDAO.delete(userRole1);
             currencyDAO.delete(currency1);
-
-
-        } finally {
-            if (bankDAO != null) {
-                bankDAO.closeConnection();
-            }
-            if (userRoleDAO != null) {
-                userRoleDAO.closeConnection();
-            }
-            if (userDAO != null) {
-                userDAO.closeConnection();
-            }
-            if (agreementDAO != null) {
-                agreementDAO.closeConnection();
-            }
-            if (currencyDAO != null) {
-                currencyDAO.closeConnection();
-            }
-            if (accountDAO != null) {
-                accountDAO.closeConnection();
-            }
-            if (cardDAO != null) {
-                cardDAO.closeConnection();
-            }
-        }
-
     }
+
+
 
     @Test
     public void test1FindById() throws SQLException, NamingException, ParseException, ClassNotFoundException {

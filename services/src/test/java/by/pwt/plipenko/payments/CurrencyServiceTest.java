@@ -64,7 +64,7 @@ public class CurrencyServiceTest
 
 
     @Test
-    public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
+    public void test6FindEntityByPK() throws Exception {
 
         Currency currency2 = currencyService.getEntityByPK(currency1);
         assertEquals(currency1, currency2);
