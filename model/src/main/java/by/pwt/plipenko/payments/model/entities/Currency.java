@@ -1,8 +1,6 @@
 package by.pwt.plipenko.payments.model.entities;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Currency extends Entity {
 
@@ -12,11 +10,11 @@ public class Currency extends Entity {
     private String name;
 
 
-    private Map<Date, ExchangeRate> rates;
+    private Set<ExchangeRate> rates;
 
     public Currency() {
         super();
-        rates = new HashMap<Date, ExchangeRate>();
+        rates = new HashSet<>();
     }
 
     public Currency(int id, String mnemoCode, String code, String name) {
@@ -25,7 +23,7 @@ public class Currency extends Entity {
         this.code = code;
         this.name = name;
 
-        rates = new HashMap<Date, ExchangeRate>();
+        rates = new HashSet<>();
 
     }
 
@@ -53,22 +51,25 @@ public class Currency extends Entity {
         this.name = name;
     }
 
-    public Map<Date, ExchangeRate> getRates() {
+    public Set<ExchangeRate> getRates() {
         return rates;
     }
 
-    public void setRates(Map<Date, ExchangeRate> rates) {
+    public void setRates(Set<ExchangeRate> rates) {
         this.rates = rates;
     }
 
-    public ExchangeRate getExchangeRate(Date date) {
-        if (rates != null)
-            return rates.get(date);
+    public ExchangeRate getExchangeRate(Date date, Currency targetCurrency) {
+        for (ExchangeRate exchangeRate: rates) {
+            if (exchangeRate.getRateDate().equals(date) && exchangeRate.getCurrency().equals(targetCurrency)) {
+                return exchangeRate;
+            }
+        }
         return null;
     }
 
-    public void addExchangeRate(Date date, ExchangeRate exchangeRate) {
-        rates.put(date, exchangeRate);
+    public void addExchangeRate(ExchangeRate exchangeRate) {
+        rates.add(exchangeRate);
     }
 
     @Override

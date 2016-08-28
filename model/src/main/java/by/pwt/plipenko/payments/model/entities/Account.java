@@ -1,6 +1,7 @@
 package by.pwt.plipenko.payments.model.entities;
 
 import by.pwt.plipenko.payments.model.VO.AccountVO;
+import by.pwt.plipenko.payments.model.exceptions.InsufficientFundsException;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -19,7 +20,7 @@ public class Account extends Entity {
 
     public Account() {
         super();
-        cards = new HashSet<Card>();
+        cards = new HashSet<>();
     }
 
     public Account(int id, String number, double amount, Agreement agreement, Currency currency) {
@@ -29,7 +30,7 @@ public class Account extends Entity {
         this.agreement = agreement;
         this.currency = currency;
 
-        cards = new HashSet<Card>();
+        cards = new HashSet<>();
 
 
     }
@@ -118,8 +119,11 @@ public class Account extends Entity {
         this.amount += amount;
     }
 
-    public void getMoney(double amount) {
-        this.amount -= amount;
+    public void getMoney(double amount) throws InsufficientFundsException {
+        if (this.amount - amount >= 0)
+            this.amount -= amount;
+        else
+            throw new InsufficientFundsException("Insufficient funds");
     }
 
     public Set<Card> getCards() {
@@ -140,7 +144,7 @@ public class Account extends Entity {
     }
 
     public List<Card> findAccounts(Card card) {
-        List<Card> finded = new ArrayList<Card>();
+        List<Card> finded = new ArrayList<>();
         for (Card icard : cards) {
             if ((card.getNumber() != null && card.getNumber().equals(icard.getNumber())))
                 finded.add(icard);
