@@ -1,14 +1,13 @@
 package by.pwt.pilipenko.payments.dao;
 
-import by.pwt.plipenko.payments.model.entities.Entity;
+import by.pwt.pilipenko.payments.model.entities.AbstractEntity;
 
 import javax.naming.NamingException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
 
-public interface BaseDAO<E extends Entity> {
+public interface BaseDAO<E extends AbstractEntity> {
 
     boolean update(E entity) throws SQLException, NamingException;
 
@@ -26,9 +25,9 @@ public interface BaseDAO<E extends Entity> {
 
     E insert(E entity) throws SQLException, NamingException;
 
-    void closeConnection() throws SQLException;
+    //void closeConnection() throws SQLException;
 
-    Connection getConnection() throws SQLException;
+    //Connection getConnection() throws SQLException;
 
 
 

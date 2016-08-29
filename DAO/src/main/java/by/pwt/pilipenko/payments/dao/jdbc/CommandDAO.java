@@ -1,6 +1,6 @@
 package by.pwt.pilipenko.payments.dao.jdbc;
 
-import by.pwt.plipenko.payments.model.entities.Command;
+import by.pwt.pilipenko.payments.model.entities.Command;
 
 import javax.naming.NamingException;
 import java.sql.Connection;

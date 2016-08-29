@@ -1,9 +1,6 @@
 package by.pwt.pilipenko.payments.services;
 
-import by.pwt.plipenko.payments.model.entities.User;
-
-import javax.naming.NamingException;
-import java.sql.SQLException;
+import by.pwt.pilipenko.payments.model.entities.User;
 
 
 public class LoginLogic {

@@ -1,8 +1,8 @@
 package by.pwt.pilipenko.payments.dao.jdbc;
 
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
-import by.pwt.plipenko.payments.model.entities.Account;
-import by.pwt.plipenko.payments.model.entities.Card;
+import by.pwt.pilipenko.payments.model.entities.Account;
+import by.pwt.pilipenko.payments.model.entities.Card;
 
 import javax.naming.NamingException;
 import java.sql.Connection;

@@ -5,9 +5,9 @@ package by.pwt.pilipenko.payments.dao.jdbc;
  */
 
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
-import by.pwt.plipenko.payments.model.entities.Command;
-import by.pwt.plipenko.payments.model.entities.UserRole;
-import by.pwt.plipenko.payments.model.entities.UserRoleCommand;
+import by.pwt.pilipenko.payments.model.entities.Command;
+import by.pwt.pilipenko.payments.model.entities.UserRole;
+import by.pwt.pilipenko.payments.model.entities.UserRoleCommand;
 
 import javax.naming.NamingException;
 import java.sql.Connection;

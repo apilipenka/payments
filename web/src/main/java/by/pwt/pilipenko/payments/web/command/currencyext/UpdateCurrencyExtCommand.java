@@ -3,7 +3,7 @@ package by.pwt.pilipenko.payments.web.command.currencyext;
 import by.pwt.pilipenko.payments.dao.resources.ConfigurationManager;
 import by.pwt.pilipenko.payments.services.CurrencyService;
 import by.pwt.pilipenko.payments.web.command.ActionCommand;
-import by.pwt.plipenko.payments.model.entities.Currency;
+import by.pwt.pilipenko.payments.model.entities.Currency;
 
 import javax.servlet.http.HttpServletRequest;
 

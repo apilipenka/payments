@@ -1,6 +1,6 @@
 package by.pwt.pilipenko.payments.dao.jdbc;
 
-import by.pwt.plipenko.payments.model.entities.UserRole;
+import by.pwt.pilipenko.payments.model.entities.UserRole;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

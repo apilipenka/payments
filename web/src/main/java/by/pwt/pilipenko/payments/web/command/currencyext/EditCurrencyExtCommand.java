@@ -5,8 +5,8 @@ import by.pwt.pilipenko.payments.dao.resources.ConfigurationManager;
 import by.pwt.pilipenko.payments.services.CurrencyService;
 import by.pwt.pilipenko.payments.services.ExchangeRateService;
 import by.pwt.pilipenko.payments.web.command.ActionCommand;
-import by.pwt.plipenko.payments.model.VO.ExchangeRateVO;
-import by.pwt.plipenko.payments.model.entities.ExchangeRate;
+import by.pwt.pilipenko.payments.model.VO.ExchangeRateVO;
+import by.pwt.pilipenko.payments.model.entities.ExchangeRate;
 
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;

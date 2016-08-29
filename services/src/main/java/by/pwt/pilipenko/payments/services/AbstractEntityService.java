@@ -2,13 +2,13 @@ package by.pwt.pilipenko.payments.services;
 
 
 import by.pwt.pilipenko.payments.dao.BaseDAO;
-import by.pwt.plipenko.payments.model.entities.Entity;
+import by.pwt.pilipenko.payments.model.entities.AbstractEntity;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
 import java.util.List;
 
-public abstract class AbstractEntityService<T extends Entity> {
+public abstract class AbstractEntityService<T extends AbstractEntity> {
 
     public AbstractEntityService() {
         super();

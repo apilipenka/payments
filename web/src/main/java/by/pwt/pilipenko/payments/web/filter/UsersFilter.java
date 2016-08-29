@@ -1,8 +1,8 @@
 package by.pwt.pilipenko.payments.web.filter;
 
 import by.pwt.pilipenko.payments.services.UserService;
-import by.pwt.plipenko.payments.model.VO.UserVO;
-import by.pwt.plipenko.payments.model.entities.User;
+import by.pwt.pilipenko.payments.model.VO.UserVO;
+import by.pwt.pilipenko.payments.model.entities.User;
 
 import javax.naming.NamingException;
 import javax.servlet.*;

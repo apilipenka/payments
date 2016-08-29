@@ -2,9 +2,9 @@ package by.pwt.pilipenko.payments.web.command.account;
 
 import by.pwt.pilipenko.payments.services.AgreementService;
 import by.pwt.pilipenko.payments.services.CurrencyService;
-import by.pwt.plipenko.payments.model.VO.AgreementVO;
-import by.pwt.plipenko.payments.model.entities.Agreement;
-import by.pwt.plipenko.payments.model.entities.Currency;
+import by.pwt.pilipenko.payments.model.VO.AgreementVO;
+import by.pwt.pilipenko.payments.model.entities.Agreement;
+import by.pwt.pilipenko.payments.model.entities.Currency;
 
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;

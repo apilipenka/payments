@@ -2,7 +2,7 @@ package by.pwt.pilipenko.payments.dao.jdbc;
 
 import by.pwt.pilipenko.payments.dao.BaseDAO;
 import by.pwt.pilipenko.payments.dao.resources.QueriesManager;
-import by.pwt.plipenko.payments.model.entities.Entity;
+import by.pwt.pilipenko.payments.model.entities.AbstractEntity;
 
 import javax.naming.NamingException;
 import java.sql.*;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class AbstractEntityDAO<T extends Entity> implements BaseDAO<T> {
+public abstract class AbstractEntityDAO<T extends AbstractEntity> implements BaseDAO<T> {
 
     private Connection connection;
     private String selectStatement = null;

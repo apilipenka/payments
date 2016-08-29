@@ -6,7 +6,7 @@ import by.pwt.pilipenko.payments.services.CommandService;
 import by.pwt.pilipenko.payments.services.UserRoleCommandService;
 import by.pwt.pilipenko.payments.services.UserRoleService;
 import by.pwt.pilipenko.payments.web.command.ActionCommand;
-import by.pwt.plipenko.payments.model.entities.UserRoleCommand;
+import by.pwt.pilipenko.payments.model.entities.UserRoleCommand;
 
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
