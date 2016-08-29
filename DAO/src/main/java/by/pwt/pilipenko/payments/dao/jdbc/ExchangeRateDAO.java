@@ -1,5 +1,6 @@
 package by.pwt.pilipenko.payments.dao.jdbc;
 
+import by.pwt.pilipenko.payments.dao.BaseDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.dao.resources.QueriesManager;
 import by.pwt.pilipenko.payments.model.entities.Currency;
@@ -33,10 +34,10 @@ public class ExchangeRateDAO extends AbstractEntityDAO<ExchangeRate> {
         exchangeRate.setRate(resultSet.getFloat("rate"));
         int currencyId = resultSet.getInt("currency_id");
         int targetCurrencyId = resultSet.getInt("target_currency_id");
-        CurrencyDAO currencyDao = DaoFactoryFactory.getInstance().createCurrencyDAO();
-        Currency currency = currencyDao.findEntityById(currencyId);
+        BaseDAO currencyDao = DaoFactoryFactory.getInstance().createCurrencyDAO();
+        Currency currency = (Currency) currencyDao.findEntityById(currencyId);
         exchangeRate.setCurrency(currency);
-        currency = currencyDao.findEntityById(targetCurrencyId);
+        currency = (Currency) currencyDao.findEntityById(targetCurrencyId);
         exchangeRate.setTargetCurrency(currency);
 
         return exchangeRate;

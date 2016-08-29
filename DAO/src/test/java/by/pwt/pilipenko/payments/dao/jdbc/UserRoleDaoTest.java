@@ -1,5 +1,6 @@
 package by.pwt.pilipenko.payments.dao.jdbc;
 
+import by.pwt.pilipenko.payments.dao.BaseDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.model.entities.UserRole;
 import org.junit.*;
@@ -17,7 +18,7 @@ import java.util.List;
 public class UserRoleDaoTest
         extends Assert {
 
-    private static UserRoleDAO userRoleDAO;
+    private static BaseDAO userRoleDAO;
     private static UserRole userRole1;
 
     @BeforeClass
@@ -41,10 +42,10 @@ public class UserRoleDaoTest
         UserRole userRole = new UserRole();
         userRole.setName("Agroprom");
         userRole.setDescription("Test role");
-        userRole1 = userRoleDAO.insert(userRole);
+        userRole1 = (UserRole) userRoleDAO.insert(userRole);
 
 
-        UserRole userRole2 = userRoleDAO.findEntityById(userRole.getId());
+        UserRole userRole2 = (UserRole) userRoleDAO.findEntityById(userRole.getId());
         assertEquals(userRole, userRole2);
 
 
@@ -67,7 +68,7 @@ public class UserRoleDaoTest
     public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
 
 
-        UserRole userRole2 = userRoleDAO.findEntityByPK(userRole1);
+        UserRole userRole2 = (UserRole) userRoleDAO.findEntityByPK(userRole1);
         assertEquals(userRole1, userRole2);
 
 
@@ -80,7 +81,7 @@ public class UserRoleDaoTest
 
         userRole1.setDescription("Test role for update");
         userRoleDAO.update(userRole1);
-        UserRole userRole2 = userRoleDAO.findEntityById(userRole1.getId());
+        UserRole userRole2 = (UserRole) userRoleDAO.findEntityById(userRole1.getId());
 
         assertEquals(userRole1, userRole2);
 
@@ -94,7 +95,7 @@ public class UserRoleDaoTest
 
         userRoleDAO.delete(userRole1.getId());
 
-        UserRole userRole2 = userRoleDAO.findEntityById(userRole1.getId());
+        UserRole userRole2 = (UserRole) userRoleDAO.findEntityById(userRole1.getId());
 
         assertNull(userRole2);
 
@@ -107,7 +108,7 @@ public class UserRoleDaoTest
         UserRole userRole = new UserRole();
         userRole.setName("agroprom");
         userRole.setDescription("Test role");
-        userRole1 = userRoleDAO.insert(userRole);
+        userRole1 = (UserRole) userRoleDAO.insert(userRole);
 
         userRoleDAO.delete(userRole1);
 

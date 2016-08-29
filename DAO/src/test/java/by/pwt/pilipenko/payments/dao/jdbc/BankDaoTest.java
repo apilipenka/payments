@@ -1,5 +1,6 @@
 package by.pwt.pilipenko.payments.dao.jdbc;
 
+import by.pwt.pilipenko.payments.dao.BaseDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.model.entities.Bank;
 import org.junit.*;
@@ -17,7 +18,7 @@ import java.util.List;
 public class BankDaoTest
         extends Assert {
 
-    private static BankDAO bankDAO;
+    private static BaseDAO bankDAO;
     private static Bank bank1;
 
     @BeforeClass
@@ -40,10 +41,10 @@ public class BankDaoTest
         Bank bank = new Bank();
         bank.setName("Agroprom");
         bank.setUNN("121313");
-        bank1 = bankDAO.insert(bank);
+        bank1 = (Bank) bankDAO.insert(bank);
 
 
-        Bank bank2 = bankDAO.findEntityById(bank.getId());
+        Bank bank2 = (Bank) bankDAO.findEntityById(bank.getId());
         assertEquals(bank1, bank2);
 
 
@@ -66,7 +67,7 @@ public class BankDaoTest
     public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
 
 
-        Bank bank2 = bankDAO.findEntityByPK(bank1);
+        Bank bank2 = (Bank) bankDAO.findEntityByPK(bank1);
         assertEquals(bank1, bank2);
 
         assertEquals(bank1, bank1);
@@ -81,7 +82,7 @@ public class BankDaoTest
 
         bank1.setName("AgropromBank");
         bankDAO.update(bank1);
-        Bank bank2 = bankDAO.findEntityById(bank1.getId());
+        Bank bank2 = (Bank) bankDAO.findEntityById(bank1.getId());
 
         assertEquals(bank1, bank2);
 
@@ -95,7 +96,7 @@ public class BankDaoTest
 
         bankDAO.delete(bank1.getId());
 
-        Bank bank2 = bankDAO.findEntityById(bank1.getId());
+        Bank bank2 = (Bank) bankDAO.findEntityById(bank1.getId());
 
         assertNull(bank2);
 
@@ -108,7 +109,7 @@ public class BankDaoTest
         Bank bank = new Bank();
         bank.setName("agroprom");
         bank.setUNN("121313");
-        bank1 = bankDAO.insert(bank);
+        bank1 = (Bank) bankDAO.insert(bank);
 
         bankDAO.delete(bank);
 

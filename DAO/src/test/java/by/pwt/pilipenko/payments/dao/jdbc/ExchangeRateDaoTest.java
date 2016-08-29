@@ -1,5 +1,6 @@
 package by.pwt.pilipenko.payments.dao.jdbc;
 
+import by.pwt.pilipenko.payments.dao.BaseDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.model.entities.Currency;
 import by.pwt.pilipenko.payments.model.entities.ExchangeRate;
@@ -21,8 +22,8 @@ import java.util.List;
 public class ExchangeRateDaoTest
         extends Assert {
 
-    private static ExchangeRateDAO exchangeRateDAO;
-    private static CurrencyDAO currencyDAO;
+    private static BaseDAO exchangeRateDAO;
+    private static BaseDAO currencyDAO;
     private static Currency currency1;
     private static ExchangeRate exchangeRate1;
 
@@ -51,7 +52,7 @@ public class ExchangeRateDaoTest
         currency.setCode("977");
         currency.setMnemoCode("AWP");
         currency.setName("Tests currency");
-        currency1 = currencyDAO.insert(currency);
+        currency1 = (Currency) currencyDAO.insert(currency);
 
         ExchangeRate exchangeRate = new ExchangeRate();
         exchangeRate.setCurrency(currency1);
@@ -68,8 +69,8 @@ public class ExchangeRateDaoTest
         }
 
 
-        exchangeRate1 = exchangeRateDAO.insert(exchangeRate);
-        ExchangeRate exchangeRate2 = exchangeRateDAO.findEntityById(exchangeRate1.getId());
+        exchangeRate1 = (ExchangeRate) exchangeRateDAO.insert(exchangeRate);
+        ExchangeRate exchangeRate2 = (ExchangeRate) exchangeRateDAO.findEntityById(exchangeRate1.getId());
         assertEquals(exchangeRate1, exchangeRate2);
 
 
@@ -89,7 +90,7 @@ public class ExchangeRateDaoTest
 
     @Test
     public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
-        ExchangeRate exchangeRate2 = exchangeRateDAO.findEntityByPK(exchangeRate1);
+        ExchangeRate exchangeRate2 = (ExchangeRate) exchangeRateDAO.findEntityByPK(exchangeRate1);
         assertEquals(exchangeRate1, exchangeRate2);
 
     }
@@ -102,7 +103,7 @@ public class ExchangeRateDaoTest
         exchangeRate1.setRate(300);
 
         exchangeRateDAO.update(exchangeRate1);
-        ExchangeRate exchangeRate2 = exchangeRateDAO.findEntityById(exchangeRate1.getId());
+        ExchangeRate exchangeRate2 = (ExchangeRate) exchangeRateDAO.findEntityById(exchangeRate1.getId());
 
 
         assertEquals(exchangeRate1, exchangeRate2);
@@ -115,7 +116,7 @@ public class ExchangeRateDaoTest
         exchangeRateDAO.delete(exchangeRate1.getId());
 
 
-        ExchangeRate exchangeRate2 = exchangeRateDAO.findEntityById(exchangeRate1.getId());
+        ExchangeRate exchangeRate2 = (ExchangeRate) exchangeRateDAO.findEntityById(exchangeRate1.getId());
         assertNull(exchangeRate2);
 
     }
@@ -137,7 +138,7 @@ public class ExchangeRateDaoTest
 
         }
 
-        exchangeRate1 = exchangeRateDAO.insert(exchangeRate);
+        exchangeRate1 = (ExchangeRate) exchangeRateDAO.insert(exchangeRate);
 
         exchangeRateDAO.delete(exchangeRate1);
 

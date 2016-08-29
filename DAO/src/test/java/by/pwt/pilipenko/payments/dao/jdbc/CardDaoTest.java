@@ -1,5 +1,6 @@
 package by.pwt.pilipenko.payments.dao.jdbc;
 
+import by.pwt.pilipenko.payments.dao.BaseDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.model.entities.*;
 import org.junit.*;
@@ -20,13 +21,13 @@ import java.util.List;
 public class CardDaoTest
         extends Assert {
 
-    private static AccountDAO accountDAO;
-    private static AgreementDAO agreementDAO;
-    private static BankDAO bankDAO;
-    private static UserDAO userDAO;
-    private static UserRoleDAO userRoleDAO;
-    private static CurrencyDAO currencyDAO;
-    private static CardDAO cardDAO;
+    private static BaseDAO accountDAO;
+    private static BaseDAO agreementDAO;
+    private static BaseDAO bankDAO;
+    private static BaseDAO userDAO;
+    private static BaseDAO userRoleDAO;
+    private static BaseDAO currencyDAO;
+    private static BaseDAO cardDAO;
     private static Bank bank1;
     private static User user1;
     private static UserRole userRole1;
@@ -67,7 +68,7 @@ public class CardDaoTest
         bank.setName("Test bank");
         bank.setUNN("19777791");
         bank.setName("Tests bank");
-        bank1 = bankDAO.insert(bank);
+        bank1 = (Bank) bankDAO.insert(bank);
 
         User user = new User();
         user.setPersonalNumber("1234567890");
@@ -82,11 +83,11 @@ public class CardDaoTest
         userRole.setName("Test");
         userRole.setName("Test user");
 
-        userRole1 = userRoleDAO.insert(userRole);
+        userRole1 = (UserRole) userRoleDAO.insert(userRole);
 
         user.setUserRole(userRole1);
 
-        user1 = userDAO.insert(user);
+        user1 = (User) userDAO.insert(user);
 
 
         Agreement agreement = new Agreement();
@@ -108,13 +109,13 @@ public class CardDaoTest
         agreement.setBank(bank1);
         agreement.setClient(user1);
 
-        agreement1 = agreementDAO.insert(agreement);
+        agreement1 = (Agreement) agreementDAO.insert(agreement);
 
         Currency currency = new Currency();
         currency.setCode("643");
         currency.setMnemoCode("RUR");
         currency.setName("Russian rubble");
-        currency1 = currencyDAO.insert(currency);
+        currency1 = (Currency) currencyDAO.insert(currency);
 
         Account account = new Account();
         account.setNumber("197777719");
@@ -122,7 +123,7 @@ public class CardDaoTest
         account.setAgreement(agreement1);
         account.setCurrency(currency1);
 
-        account1 = accountDAO.insert(account);
+        account1 = (Account) accountDAO.insert(account);
 
         Card card = new Card();
         card.setNumber("122333444555");
@@ -134,9 +135,9 @@ public class CardDaoTest
 
         }
         card.setAccount(account1);
-        card1 = cardDAO.insert(card);
+        card1 = (Card) cardDAO.insert(card);
 
-        Card card2 = cardDAO.findEntityById(card1.getId());
+        Card card2 = (Card) cardDAO.findEntityById(card1.getId());
         assertEquals(card1, card2);
 
 
@@ -156,7 +157,7 @@ public class CardDaoTest
 
     @Test
     public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
-        Card card2 = cardDAO.findEntityByPK(card1);
+        Card card2 = (Card) cardDAO.findEntityByPK(card1);
         assertEquals(card1, card2);
 
     }
@@ -169,7 +170,7 @@ public class CardDaoTest
         card1.setNumber("19777911977989");
 
         cardDAO.update(card1);
-        Card card2 = cardDAO.findEntityById(card1.getId());
+        Card card2 = (Card) cardDAO.findEntityById(card1.getId());
 
 
         assertEquals(card1, card2);
@@ -182,7 +183,7 @@ public class CardDaoTest
         cardDAO.delete(card1.getId());
 
 
-        Card card2 = cardDAO.findEntityById(card1.getId());
+        Card card2 = (Card) cardDAO.findEntityById(card1.getId());
         assertNull(card2);
 
     }
@@ -203,7 +204,7 @@ public class CardDaoTest
 
         }
         card.setAccount(account1);
-        card1 = cardDAO.insert(card);
+        card1 = (Card) cardDAO.insert(card);
 
         cardDAO.delete(card1);
 

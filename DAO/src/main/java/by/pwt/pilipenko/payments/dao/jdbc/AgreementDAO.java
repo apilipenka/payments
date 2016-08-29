@@ -1,5 +1,6 @@
 package by.pwt.pilipenko.payments.dao.jdbc;
 
+import by.pwt.pilipenko.payments.dao.BaseDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.model.entities.Agreement;
 import by.pwt.pilipenko.payments.model.entities.Bank;
@@ -27,13 +28,13 @@ public class AgreementDAO extends AbstractEntityDAO<Agreement> {
         agreement.setValidToDate(resultSet.getDate("valid_to_date"));
 
         int bankId = resultSet.getInt("bank_id");
-        BankDAO bankDao = DaoFactoryFactory.getInstance().createBankDAO();
-        Bank bank = bankDao.findEntityById(bankId);
+        BaseDAO bankDao = DaoFactoryFactory.getInstance().createBankDAO();
+        Bank bank = (Bank) bankDao.findEntityById(bankId);
         agreement.setBank(bank);
 
         int clientId = resultSet.getInt("user_id");
-        UserDAO userDAO = DaoFactoryFactory.getInstance().createUserDAO();
-        User user = userDAO.findEntityById(clientId);
+        BaseDAO userDAO = DaoFactoryFactory.getInstance().createUserDAO();
+        User user = (User) userDAO.findEntityById(clientId);
         agreement.setClient(user);
 
         return agreement;

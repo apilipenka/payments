@@ -1,5 +1,6 @@
 package by.pwt.pilipenko.payments.dao.jdbc;
 
+import by.pwt.pilipenko.payments.dao.BaseDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.model.entities.User;
 import by.pwt.pilipenko.payments.model.entities.UserRole;
@@ -31,7 +32,7 @@ public class UserDAO extends AbstractEntityDAO<User> {
         user.setBirthDate(birthDate);
 
         int roleId = resultSet.getInt("user_role_id");
-        UserRoleDAO typeDao = DaoFactoryFactory.getInstance().createUserRoleDAO();
+        BaseDAO typeDao = DaoFactoryFactory.getInstance().createUserRoleDAO();
         UserRole userRole = (UserRole) typeDao.findEntityById(roleId);
         user.setUserRole(userRole);
 

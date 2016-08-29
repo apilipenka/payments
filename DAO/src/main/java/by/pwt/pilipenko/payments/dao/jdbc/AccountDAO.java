@@ -1,5 +1,6 @@
 package by.pwt.pilipenko.payments.dao.jdbc;
 
+import by.pwt.pilipenko.payments.dao.BaseDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.model.entities.Account;
 import by.pwt.pilipenko.payments.model.entities.Agreement;
@@ -31,20 +32,20 @@ public class AccountDAO extends AbstractEntityDAO<Account> {
 
         int agrremntId = resultSet.getInt("agreement_id");
 
-        AgreementDAO agrremntDao = DaoFactoryFactory.getInstance().createAgreementDAO();
-        Agreement bank = agrremntDao.findEntityById(agrremntId);
+        BaseDAO agreemntDao = DaoFactoryFactory.getInstance().createAgreementDAO();
+        Agreement bank = (Agreement) agreemntDao.findEntityById(agrremntId);
         account.setAgreement(bank);
 
         int currencyId = resultSet.getInt("currency_id");
-        CurrencyDAO currencyDAO = DaoFactoryFactory.getInstance().createCurrencyDAO();
-        Currency currency = currencyDAO.findEntityById(currencyId);
+        BaseDAO currencyDAO = DaoFactoryFactory.getInstance().createCurrencyDAO();
+        Currency currency = (Currency) currencyDAO.findEntityById(currencyId);
         account.setCurrency(currency);
 
 
         ExchangeRate exchangeRate = new ExchangeRate();
         exchangeRate.setCurrency(currency);
-        ExchangeRateDAO exchangeRateDAO = DaoFactoryFactory.getInstance().createExchangeRateDAO();
-        List<ExchangeRate> list = exchangeRateDAO.findEntityByParent(exchangeRate);
+        BaseDAO exchangeRateDAO = DaoFactoryFactory.getInstance().createExchangeRateDAO();
+        List<ExchangeRate> list = ((ExchangeRateDAO)exchangeRateDAO).findEntityByParent(exchangeRate);
         Set<ExchangeRate> set = new HashSet<>();
         set.addAll(list);
         currency.setRates(set);

@@ -1,5 +1,6 @@
 package by.pwt.pilipenko.payments.dao.jdbc;
 
+import by.pwt.pilipenko.payments.dao.BaseDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.model.entities.Account;
 import by.pwt.pilipenko.payments.model.entities.Card;
@@ -26,8 +27,8 @@ public class CardDAO extends AbstractEntityDAO<Card> {
         card.setValidToDate(resultSet.getDate("valid_to_date"));
 
         int accountId = resultSet.getInt("accounts_id");
-        AccountDAO accountDAO = DaoFactoryFactory.getInstance().createAccountDAO();
-        Account account = accountDAO.findEntityById(accountId);
+        BaseDAO accountDAO = DaoFactoryFactory.getInstance().createAccountDAO();
+        Account account = (Account) accountDAO.findEntityById(accountId);
         card.setAccount(account);
 
         return card;

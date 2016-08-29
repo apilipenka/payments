@@ -4,6 +4,7 @@ package by.pwt.pilipenko.payments.dao.jdbc;
  * Created by apilipenka on 8/22/2016.
  */
 
+import by.pwt.pilipenko.payments.dao.BaseDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.model.entities.Command;
 import by.pwt.pilipenko.payments.model.entities.UserRole;
@@ -28,12 +29,12 @@ public class UserRoleCommandDAO extends AbstractEntityDAO<UserRoleCommand> {
         userRoleCommand.setId(resultSet.getInt("id"));
 
         int roleId = resultSet.getInt("user_role_id");
-        UserRoleDAO typeDao = DaoFactoryFactory.getInstance().createUserRoleDAO();
+        BaseDAO typeDao = DaoFactoryFactory.getInstance().createUserRoleDAO();
         UserRole userRole = (UserRole) typeDao.findEntityById(roleId);
         userRoleCommand.setUserRole(userRole);
 
         int commandId = resultSet.getInt("command_id");
-        CommandDAO commandDAO = DaoFactoryFactory.getInstance().createCommandDAO();
+        BaseDAO commandDAO = DaoFactoryFactory.getInstance().createCommandDAO();
         Command command = (Command) commandDAO.findEntityById(commandId);
         userRoleCommand.setCommand(command);
 

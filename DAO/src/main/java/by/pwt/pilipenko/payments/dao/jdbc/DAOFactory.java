@@ -1,5 +1,6 @@
 package by.pwt.pilipenko.payments.dao.jdbc;
 
+import by.pwt.pilipenko.payments.dao.BaseDAO;
 import org.apache.commons.dbcp2.DriverManagerConnectionFactory;
 import org.apache.commons.dbcp2.PoolableConnection;
 import org.apache.commons.dbcp2.PoolableConnectionFactory;
@@ -66,17 +67,17 @@ public class DAOFactory extends AbstractDAOFactory {
     }
 
 
-    public TypeDAO createAddressTypeDAO() throws SQLException {
+    public BaseDAO createAddressTypeDAO() throws SQLException {
 
         return createTypeDAO("type", "address_types");
     }
 
-    public TypeDAO createPhoneTypeDAO() throws SQLException {
+    public BaseDAO createPhoneTypeDAO() throws SQLException {
 
         return createTypeDAO("type", "phone_types");
     }
 
-    public TypeDAO createDocumentTypeDAO() throws SQLException {
+    public BaseDAO createDocumentTypeDAO() throws SQLException {
 
         return createTypeDAO("type", "document_types");
     }
@@ -89,7 +90,7 @@ public class DAOFactory extends AbstractDAOFactory {
 
     }
 
-    public TypeDAO createTypeDAO(String entityName, String tableName) throws SQLException {
+    public BaseDAO createTypeDAO(String entityName, String tableName) throws SQLException {
         TypeDAO typeDAO;
         typeDAO = new TypeDAO(getConnection(), entityName, tableName);
 
@@ -97,7 +98,7 @@ public class DAOFactory extends AbstractDAOFactory {
     }
 
 
-    public BankDAO createBankDAO() throws SQLException {
+    public BaseDAO createBankDAO() throws SQLException {
         BankDAO bankDAO;
         bankDAO = new BankDAO(getConnection(), "bank", "banks");
 
@@ -105,19 +106,19 @@ public class DAOFactory extends AbstractDAOFactory {
     }
 
 
-    public CurrencyDAO createCurrencyDAO() throws SQLException {
+    public BaseDAO createCurrencyDAO() throws SQLException {
         CurrencyDAO currencyDAO;
         currencyDAO = new CurrencyDAO(getConnection(), "currency", "currencies");
         return currencyDAO;
     }
 
-    public ExchangeRateDAO createExchangeRateDAO() throws SQLException {
+    public BaseDAO createExchangeRateDAO() throws SQLException {
         ExchangeRateDAO exchangeRateDAO;
         exchangeRateDAO = new ExchangeRateDAO(getConnection(), "exchangerate", "exchange_rates");
         return exchangeRateDAO;
     }
 
-    public AgreementDAO createAgreementDAO() throws SQLException {
+    public BaseDAO createAgreementDAO() throws SQLException {
         AgreementDAO agreementDAO;
         agreementDAO = new AgreementDAO(getConnection(), "agreement", "agreements");
         return agreementDAO;
@@ -129,27 +130,27 @@ public class DAOFactory extends AbstractDAOFactory {
         return accountDAO;
     }
 
-    public CardDAO createCardDAO() throws SQLException {
+    public BaseDAO createCardDAO() throws SQLException {
         CardDAO cardDAO;
         cardDAO = new CardDAO(getConnection(), "card", "cards");
         return cardDAO;
     }
 
 
-    public UserRoleDAO createUserRoleDAO() throws SQLException {
+    public BaseDAO createUserRoleDAO() throws SQLException {
         UserRoleDAO userRoleDAO;
         userRoleDAO = new UserRoleDAO(getConnection(), "userrole", "user_roles");
         return userRoleDAO;
     }
 
-    public CommandDAO createCommandDAO() throws SQLException {
+    public BaseDAO createCommandDAO() throws SQLException {
         CommandDAO commandDAO;
         commandDAO = new CommandDAO(getConnection(), "command", "commands");
         return commandDAO;
     }
 
     @Override
-    public UserRoleCommandDAO createUserRoleCommandDAO() throws SQLException {
+    public BaseDAO createUserRoleCommandDAO() throws SQLException {
         UserRoleCommandDAO userRoleCommandDAO;
         userRoleCommandDAO = new UserRoleCommandDAO(getConnection(), "userrolecommand", "user_role_commands");
         return userRoleCommandDAO;
