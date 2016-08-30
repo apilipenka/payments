@@ -1,5 +1,9 @@
 package by.pwt.pilipenko.payments.model.entities;
 
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public class Type extends AbstractEntity {
     private static final long serialVersionUID = 3392012103334697756L;
     private String name;
@@ -15,6 +19,7 @@ public class Type extends AbstractEntity {
         this.description = dsecription;
     }
 
+    @Column(name="name", columnDefinition = "VARCHAR2(45) NOT NULL UNIQUE")
     public String getName() {
         return name;
     }
@@ -23,6 +28,7 @@ public class Type extends AbstractEntity {
         this.name = name;
     }
 
+    @Column(name="description", columnDefinition = "VARCHAR2(200)")
     public String getDescription() {
         return description;
     }

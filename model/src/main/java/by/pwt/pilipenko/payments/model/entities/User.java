@@ -2,6 +2,8 @@ package by.pwt.pilipenko.payments.model.entities;
 
 import by.pwt.pilipenko.payments.model.VO.UserVO;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;

@@ -13,6 +13,8 @@
         <property name="hibernate.hbm2ddl.auto">validate</property>
 
         <mapping class="by.pwt.pilipenko.payments.model.entities.Command"/>
+        <mapping class="by.pwt.pilipenko.payments.model.entities.UserRole"/>
+
 
     </session-factory>
 </hibernate-configuration>

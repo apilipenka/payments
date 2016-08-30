@@ -1,5 +1,6 @@
 package by.pwt.pilipenko.payments.model.entities;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -8,9 +9,16 @@ import java.util.Set;
 /**
  * Created by apilipenka on 8/5/2016.
  */
+
+@Entity
+@Table(name="user_roles")
 public class UserRole extends Type {
 
     private static final long serialVersionUID = -2060426102854785438L;
+
+
+
+
     Set<Command> commands;
 
     public UserRole() {
@@ -30,16 +38,28 @@ public class UserRole extends Type {
         return result;
     }
 
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_role_commands", catalog = "payments", joinColumns = {
+            @JoinColumn(name = "user_role_id", nullable = false, updatable = false) },
+            inverseJoinColumns = { @JoinColumn(name = "command_id",
+                    nullable = false, updatable = false) })
     public Set<Command> getCommands() {
         return commands;
     }
+
+
 
     public void setCommands(Set<Command> commands) {
         this.commands = commands;
     }
 
-    public void addRolePermissions(Set<Command> commands) {
+    public void addCommands(Set<Command> commands) {
         this.commands.addAll(commands);
+    }
+
+    public void addCommand(Command command) {
+        this.commands.add(command);
     }
 
     public List<Command> findAccounts(Command command) {

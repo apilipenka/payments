@@ -4,13 +4,17 @@ import java.util.*;
 
 import by.pwt.pilipenko.payments.model.exceptions.RateNotFoundException;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="currencies")
 public class Currency extends AbstractEntity {
 
     private static final long serialVersionUID = -6049197255924255456L;
+
     private String mnemoCode;
     private String code;
     private String name;
-
 
     private Set<ExchangeRate> rates;
 
@@ -29,6 +33,7 @@ public class Currency extends AbstractEntity {
 
     }
 
+    @Column(name="mnemo_code", columnDefinition = "VARCHAR2(45) NOT NULL")
     public String getMnemoCode() {
         return mnemoCode;
     }
@@ -37,6 +42,7 @@ public class Currency extends AbstractEntity {
         this.mnemoCode = mnemoCode;
     }
 
+    @Column(name="code", columnDefinition = "VARCHAR2(45) NOT NULL")
     public String getCode() {
         return code;
     }
@@ -45,10 +51,9 @@ public class Currency extends AbstractEntity {
         this.code = code;
     }
 
-    public String getName() {
+    @Column(name="name", columnDefinition = "VARCHAR2(200) NOT NULL")public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -57,10 +62,12 @@ public class Currency extends AbstractEntity {
         return rates;
     }
 
+
     public void setRates(Set<ExchangeRate> rates) {
         this.rates = rates;
     }
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,  mappedBy = "currencies")
     public ExchangeRate getExchangeRate(Date date, Currency targetCurrency) {
         for (ExchangeRate exchangeRate: rates) {
             if (exchangeRate.getRateDate().equals(date) && exchangeRate.getCurrency().equals(targetCurrency)) {

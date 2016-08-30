@@ -23,10 +23,10 @@ public class CommandDaoTest
     private static Command command1;
 
     @BeforeClass
-    public static void intit() throws NamingException, ClassNotFoundException, SQLException {
-
-        factory =  new DAOFactory();
-        commandDAO = (CommandDAO)factory.createCommandDAO();
+    public static void init() throws NamingException, ClassNotFoundException, SQLException {
+        DaoFactoryFactory.setDaoType("hibernate");
+        factory = (DAOFactory) DaoFactoryFactory.getInstance();
+        commandDAO = (CommandDAO) factory.createCommandDAO();
 
     }
 
@@ -48,12 +48,12 @@ public class CommandDaoTest
         command.setComment("Edit tests");
 
         factory.beginTransaction();
-        command1 = (Command) commandDAO.insert(command);
+        command1 = commandDAO.insert(command);
         factory.commit();
 
 
 
-        Command command2 = (Command) commandDAO.findEntityById(command1.getId());
+        Command command2 = commandDAO.findEntityById(command1.getId());
         assertEquals(command, command2);
 
 
@@ -76,7 +76,7 @@ public class CommandDaoTest
     public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
 
 
-        Command command2 = (Command) commandDAO.findEntityByPK(command1);
+        Command command2 = commandDAO.findEntityByPK(command1);
         assertEquals(command1, command2);
 
 
@@ -91,7 +91,7 @@ public class CommandDaoTest
         factory.beginTransaction();
         commandDAO.update(command1);
         factory.commit();
-        Command command2 = (Command) commandDAO.findEntityById(command1.getId());
+        Command command2 = commandDAO.findEntityById(command1.getId());
 
         assertEquals(command1, command2);
 
@@ -106,7 +106,7 @@ public class CommandDaoTest
         commandDAO.delete(command1.getId());
         factory.commit();
 
-        Command command2 = (Command) commandDAO.findEntityById(command1.getId());
+        Command command2 = commandDAO.findEntityById(command1.getId());
 
         assertNull(command2);
 

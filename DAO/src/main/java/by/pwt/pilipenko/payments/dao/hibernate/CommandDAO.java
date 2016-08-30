@@ -1,41 +1,23 @@
 package by.pwt.pilipenko.payments.dao.hibernate;
 
-import by.pwt.pilipenko.payments.dao.BaseDAO;
-import by.pwt.pilipenko.payments.dao.jdbc.AbstractEntityDAO;
-import by.pwt.pilipenko.payments.model.entities.Bank;
 import by.pwt.pilipenko.payments.model.entities.Command;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
 import javax.naming.NamingException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class CommandDAO implements BaseDAO<Command> {
-    Session session;
+public class CommandDAO extends AbstractEntityDAO<Command> {
 
-    public CommandDAO() {
-    }
 
     public CommandDAO(Session session) {
-        this.session = session;
+        super(session);
     }
-
-    public Session getSession() {
-        return session;
-    }
-
-    public void setSession(Session session) {
-        this.session = session;
-    }
-
 
     @Override
     public boolean update(Command entity) throws SQLException, NamingException {
-        session.saveOrUpdate(entity);
+        getSession().saveOrUpdate(entity);
         return true;
     }
 
@@ -43,7 +25,7 @@ public class CommandDAO implements BaseDAO<Command> {
     public boolean delete(int id) throws SQLException, NamingException, ClassNotFoundException {
 
         Command command = findEntityById(id);
-        session.delete(command);
+        getSession().delete(command);
 
         return false;
     }
@@ -51,7 +33,7 @@ public class CommandDAO implements BaseDAO<Command> {
     @Override
     public boolean delete(Command entity) throws SQLException, NamingException {
 
-        Query query = session.createQuery("delete from Command where command = :command");
+        Query query = getSession().createQuery("delete from Command where command = :command");
         query.setParameter("command", entity.getCommand());
         int result = query.executeUpdate();
 
@@ -95,7 +77,7 @@ public class CommandDAO implements BaseDAO<Command> {
 
     @Override
     public Command insert(Command entity) throws SQLException, NamingException {
-        session.save(entity);
-        return (Command) entity;
+        getSession().save(entity);
+        return entity;
     }
 }

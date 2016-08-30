@@ -2,10 +2,13 @@ package by.pwt.pilipenko.payments.model.entities;
 
 import by.pwt.pilipenko.payments.model.VO.ExchangeRateVO;
 
+import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@Entity
+@Table(name="exchange_rates")
 public class ExchangeRate extends AbstractEntity {
 
     private static final long serialVersionUID = 873223002647108557L;
@@ -25,6 +28,8 @@ public class ExchangeRate extends AbstractEntity {
         this.targetCurrency = targetCurrency;
     }
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "rate_date", nullable = false, length = 10)
     public Date getRateDate() {
         return rateDate;
     }
@@ -33,6 +38,8 @@ public class ExchangeRate extends AbstractEntity {
         this.rateDate = rateDate;
     }
 
+
+    @Column(name = "rate")
     public float getRate() {
         return rate;
     }
@@ -41,14 +48,19 @@ public class ExchangeRate extends AbstractEntity {
         this.rate = rate;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "currency_id", nullable = false)
     public Currency getCurrency() {
         return currency;
     }
+
 
     public void setCurrency(Currency currency) {
         this.currency = currency;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "target_currency_id", nullable = false)
     public Currency getTargetCurrency() {
         return targetCurrency;
     }

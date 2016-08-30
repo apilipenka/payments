@@ -80,7 +80,7 @@ public class DAOFactory extends AbstractDAOFactory {
 
     @Override
     public BaseDAO createUserRoleDAO() throws SQLException {
-        return null;
+        return new UserRoleDAO(getSession());
     }
 
     @Override

@@ -22,8 +22,8 @@ public class CommandDaoTest
     private static Command command1;
 
     @BeforeClass
-    public static void intit() throws NamingException, ClassNotFoundException, SQLException {
-
+    public static void init() throws NamingException, ClassNotFoundException, SQLException {
+        DaoFactoryFactory.setDaoType("jdbc");
         commandDAO = DaoFactoryFactory.getInstance().createCommandDAO();
 
     }
