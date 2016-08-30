@@ -11,7 +11,7 @@ public interface BaseDAO<E extends AbstractEntity> {
 
     boolean update(E entity) throws SQLException, NamingException;
 
-    boolean delete(int id) throws SQLException, NamingException;
+    boolean delete(int id) throws SQLException, NamingException, ClassNotFoundException;
 
     boolean delete(E entity) throws SQLException, NamingException;
 

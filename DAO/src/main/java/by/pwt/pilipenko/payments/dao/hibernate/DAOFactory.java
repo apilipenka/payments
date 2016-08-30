@@ -15,7 +15,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
-public class DAOFactory extends by.pwt.pilipenko.payments.dao.hibernate.AbstractDAOFactory {
+public class DAOFactory extends AbstractDAOFactory {
 
 
     public DAOFactory() throws NamingException, ClassNotFoundException, SQLException {
@@ -85,7 +85,7 @@ public class DAOFactory extends by.pwt.pilipenko.payments.dao.hibernate.Abstract
 
     @Override
     public BaseDAO createCommandDAO() throws SQLException {
-        return null;
+        return new CommandDAO(getSession());
     }
 
     @Override
