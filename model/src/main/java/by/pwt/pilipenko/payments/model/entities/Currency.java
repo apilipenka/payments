@@ -61,14 +61,6 @@ public class Currency extends AbstractEntity {
         this.name = name;
     }
 
-    /*@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "exchange_rates", catalog = "payments"
-            , joinColumns = {
-            @JoinColumn(name = "id", nullable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "currency_id",
-                    nullable = false)}
-    )*/
-
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "currency")
     public Set<ExchangeRate> getRates() {
         return rates;

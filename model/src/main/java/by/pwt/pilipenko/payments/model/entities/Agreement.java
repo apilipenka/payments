@@ -2,10 +2,13 @@ package by.pwt.pilipenko.payments.model.entities;
 
 import by.pwt.pilipenko.payments.model.VO.AgreementVO;
 
+import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+@Entity
+@Table(name = "agreements")
 public class Agreement extends AbstractEntity {
 
     private static final long serialVersionUID = -4425454817261521342L;
@@ -34,6 +37,7 @@ public class Agreement extends AbstractEntity {
 
     }
 
+    @Column(name = "number", columnDefinition = "VARCHAR2(45) NOT NULL UNIQUE")
     public String getNumber() {
         return number;
     }
@@ -42,6 +46,8 @@ public class Agreement extends AbstractEntity {
         this.number = number;
     }
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "valid_from_date", nullable = false, length = 10)
     public Date getValidFromDate() {
         return validFromDate;
     }
@@ -50,6 +56,8 @@ public class Agreement extends AbstractEntity {
         this.validFromDate = validFromDate;
     }
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "valid_to_date", nullable = false, length = 10)
     public Date getValidToDate() {
         return validToDate;
     }
@@ -58,6 +66,8 @@ public class Agreement extends AbstractEntity {
         this.validToDate = validToDate;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "bank_id", nullable = false)
     public Bank getBank() {
         return bank;
     }
@@ -66,6 +76,8 @@ public class Agreement extends AbstractEntity {
         this.bank = bank;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
     public User getClient() {
         return client;
     }
@@ -129,6 +141,7 @@ public class Agreement extends AbstractEntity {
                 + validToDate + ", bank=" + bank + ", client=" + client + ", accounts=" + accounts + "]";
     }
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "agreement")
     public Set<Account> getAccounts() {
         return accounts;
     }

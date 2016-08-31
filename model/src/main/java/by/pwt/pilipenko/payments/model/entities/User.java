@@ -2,10 +2,13 @@ package by.pwt.pilipenko.payments.model.entities;
 
 import by.pwt.pilipenko.payments.model.VO.UserVO;
 
+import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+@Entity
+@Table(name = "users")
 public class User extends AbstractEntity {
     private static final long serialVersionUID = 2450506525357642771L;
     private Set<Agreement> agreements;
@@ -37,6 +40,7 @@ public class User extends AbstractEntity {
 
     }
 
+    @Column(name = "number", columnDefinition = "VARCHAR2(45) NOT NULL")
     public String getLogin() {
         return login;
     }
@@ -44,7 +48,7 @@ public class User extends AbstractEntity {
     public void setLogin(String login) {
         this.login = login;
     }
-
+    @Column(name = "first_name", columnDefinition = "VARCHAR2(100) NOT NULL")
     public String getFirstName() {
         return firstName;
     }
@@ -52,7 +56,7 @@ public class User extends AbstractEntity {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-
+    @Column(name = "last_name", columnDefinition = "VARCHAR2(100) NOT NULL")
     public String getLastName() {
         return lastName;
     }
@@ -60,7 +64,7 @@ public class User extends AbstractEntity {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
+    @Column(name = "password", columnDefinition = "VARCHAR2(100) NOT NULL")
     public String getPassword() {
         return password;
     }
@@ -68,7 +72,7 @@ public class User extends AbstractEntity {
     public void setPassword(String password) {
         this.password = password;
     }
-
+    @Column(name = "personal_number", columnDefinition = "VARCHAR2(100) NOT NULL UNIQUE")
     public String getPersonalNumber() {
         return personalNumber;
     }
@@ -77,6 +81,12 @@ public class User extends AbstractEntity {
         this.personalNumber = personalNumber;
     }
 
+    @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @JoinTable(name = "user_role", joinColumns = {
+            @JoinColumn(name = "user_role_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "id",
+                    nullable = false, updatable = false)}
+    )
     public UserRole getUserRole() {
         return userRole;
     }
@@ -172,6 +182,8 @@ public class User extends AbstractEntity {
                 + ", password=" + password + ", personalNumber=" + personalNumber + ", userRole=" + userRole + ", birthDate=" + birthDate + ", agreements=" + agreements + "]";
     }
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "birth_date", nullable = false, length = 10)
     public Date getBirthDate() {
         return birthDate;
     }
@@ -180,6 +192,8 @@ public class User extends AbstractEntity {
         this.birthDate = birthDate;
     }
 
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
     public Set<Agreement> getAgreements() {
         return agreements;
     }

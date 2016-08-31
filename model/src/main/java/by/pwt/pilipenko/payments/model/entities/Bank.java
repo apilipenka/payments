@@ -2,9 +2,7 @@ package by.pwt.pilipenko.payments.model.entities;
 
 import by.pwt.pilipenko.payments.model.VO.BankVO;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -86,6 +84,8 @@ public class Bank extends AbstractEntity {
         this.UNN = UNN;
     }
 
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "bank")
     public Set<Agreement> getAgreements() {
         return agreements;
     }
@@ -114,4 +114,7 @@ public class Bank extends AbstractEntity {
         bankVO.setName(name);
         return bankVO;
     }
+
+
+
 }

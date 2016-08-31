@@ -28,23 +28,22 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   KEY `fk_Accounts_Agreements1_idx` (`agreement_id`),
   CONSTRAINT `fk_Accounts_Agreements1` FOREIGN KEY (`agreement_id`) REFERENCES `agreements` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_Accounts_Currencies1` FOREIGN KEY (`currency_id`) REFERENCES `currencies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8;
 
--- Dumping data for table payments.accounts: ~0 rows (approximately)
+-- Dumping data for table payments.accounts: ~1 rows (approximately)
 DELETE FROM `accounts`;
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
 INSERT INTO `accounts` (`id`, `number`, `amount`, `currency_id`, `agreement_id`) VALUES
-  (1, '13', 12, 3, 1);
+	(1, '13', 12, 3, 1);
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 
 
 -- Dumping structure for table payments.agreements
 CREATE TABLE IF NOT EXISTS `agreements` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `number` varchar(45) DEFAULT NULL,
+  `number` varchar(45) NOT NULL,
   `valid_from_date` date DEFAULT NULL,
   `valid_to_date` date DEFAULT NULL,
-  `end_date` date DEFAULT NULL,
   `bank_id` int(11) NOT NULL,
   `user_ID` int(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -53,13 +52,13 @@ CREATE TABLE IF NOT EXISTS `agreements` (
   KEY `fk_Agreements_Users1_idx` (`user_ID`),
   CONSTRAINT `fk_Agreements_Banks1` FOREIGN KEY (`bank_id`) REFERENCES `banks` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_Agreements_Users1` FOREIGN KEY (`user_ID`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=utf8;
 
--- Dumping data for table payments.agreements: ~0 rows (approximately)
+-- Dumping data for table payments.agreements: ~1 rows (approximately)
 DELETE FROM `agreements`;
 /*!40000 ALTER TABLE `agreements` DISABLE KEYS */;
-INSERT INTO `agreements` (`id`, `number`, `valid_from_date`, `valid_to_date`, `end_date`, `bank_id`, `user_ID`) VALUES
-  (1, '12', '2016-08-15', '2016-12-15', NULL, 1, 1);
+INSERT INTO `agreements` (`id`, `number`, `valid_from_date`, `valid_to_date`, `bank_id`, `user_ID`) VALUES
+	(1, '12', '2016-08-15', '2016-12-15', 1, 1);
 /*!40000 ALTER TABLE `agreements` ENABLE KEYS */;
 
 
@@ -70,14 +69,14 @@ CREATE TABLE IF NOT EXISTS `banks` (
   `unn` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNN_UNIQUE` (`unn`)
-) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=173 DEFAULT CHARSET=utf8;
 
--- Dumping data for table payments.banks: ~4 rows (approximately)
+-- Dumping data for table payments.banks: ~2 rows (approximately)
 DELETE FROM `banks`;
 /*!40000 ALTER TABLE `banks` DISABLE KEYS */;
 INSERT INTO `banks` (`id`, `name`, `unn`) VALUES
-  (1, 'Agorprom', '123341'),
-  (2, 'belarus', '123456');
+	(1, 'Agorprom', '123341'),
+	(2, 'belarus', '123456');
 /*!40000 ALTER TABLE `banks` ENABLE KEYS */;
 
 
@@ -92,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `cards` (
   UNIQUE KEY `number_UNIQUE` (`number`),
   KEY `fk_Cards_Accounts1_idx` (`accounts_id`),
   CONSTRAINT `fk_Cards_Accounts1` FOREIGN KEY (`accounts_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table payments.cards: ~0 rows (approximately)
 DELETE FROM `cards`;
@@ -109,14 +108,14 @@ CREATE TABLE IF NOT EXISTS `commands` (
   `comment` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `COMMAND_UNIQUE` (`command`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=179 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table payments.commands: ~2 rows (approximately)
 DELETE FROM `commands`;
 /*!40000 ALTER TABLE `commands` DISABLE KEYS */;
 INSERT INTO `commands` (`id`, `command`, `url`, `label`, `comment`) VALUES
-  (1, 'USERLIST', '/jsp/user-list.jsp', 'Edit users', 'Edit users'),
-  (2, 'COMMANDLIST', '/jsp/command-list.jsp', 'Edit commands', 'Edit commands');
+	(1, 'USERLIST', '/jsp/user-list.jsp', 'Edit users', 'Edit users'),
+	(2, 'COMMANDLIST', '/jsp/command-list.jsp', 'Edit commands', 'Edit commands');
 /*!40000 ALTER TABLE `commands` ENABLE KEYS */;
 
 
@@ -128,13 +127,13 @@ CREATE TABLE IF NOT EXISTS `currencies` (
   `name` varchar(200) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `currency_uk` (`mnemo_code`,`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=233 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table payments.currencies: ~1 rows (approximately)
 DELETE FROM `currencies`;
 /*!40000 ALTER TABLE `currencies` DISABLE KEYS */;
 INSERT INTO `currencies` (`id`, `code`, `mnemo_code`, `name`) VALUES
-  (3, '933', 'BYN', '&#1053;&#1086;&#1074;&#1099;&#1081; &#1073;&#1077;&#1083;&#1086;&#1088;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081; &#1088;&#1091;&#1073;&#1083;&#1100;');
+	(3, '933', 'BYN', '&#1053;&#1086;&#1074;&#1099;&#1081; &#1073;&#1077;&#1083;&#1086;&#1088;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081; &#1088;&#1091;&#1073;&#1083;&#1100;');
 /*!40000 ALTER TABLE `currencies` ENABLE KEYS */;
 
 
@@ -142,20 +141,20 @@ INSERT INTO `currencies` (`id`, `code`, `mnemo_code`, `name`) VALUES
 CREATE TABLE IF NOT EXISTS `exchange_rates` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `rate_date` date NOT NULL,
-  `rate` float NOT NULL,
+  `rate` float NOT NULL DEFAULT '0',
   `currency_id` int(11) NOT NULL,
   `target_currency_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `exchange_rate_uk` (`currency_id`,`target_currency_id`,`rate_date`),
   KEY `fk_exchange_rates_Curremcies1_idx` (`currency_id`),
   CONSTRAINT `fk_exchange_rates_Curremcies1` FOREIGN KEY (`currency_id`) REFERENCES `currencies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table payments.exchange_rates: ~1 rows (approximately)
 DELETE FROM `exchange_rates`;
 /*!40000 ALTER TABLE `exchange_rates` DISABLE KEYS */;
 INSERT INTO `exchange_rates` (`id`, `rate_date`, `rate`, `currency_id`, `target_currency_id`) VALUES
-  (1, '1977-01-10', 1, 3, NULL);
+	(1, '1977-01-10', 1, 3, NULL);
 /*!40000 ALTER TABLE `exchange_rates` ENABLE KEYS */;
 
 
@@ -173,13 +172,13 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `personal_number_UNIQUE` (`personal_number`),
   KEY `FK_users_user_role_commands` (`user_role_id`),
   CONSTRAINT `FK_users_user_role_commands` FOREIGN KEY (`user_role_id`) REFERENCES `user_roles` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=146 DEFAULT CHARSET=utf8;
 
--- Dumping data for table payments.users: ~0 rows (approximately)
+-- Dumping data for table payments.users: ~1 rows (approximately)
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `personal_number`, `first_name`, `last_name`, `birth_date`, `login`, `password`, `user_role_id`) VALUES
-  (1, 'admin', 'admin', 'admin', '1977-01-10', 'admin', 'admin', 1);
+	(1, 'admin', 'admin', 'admin', '1977-01-10', 'admin', 'admin', 1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 
@@ -190,14 +189,14 @@ CREATE TABLE IF NOT EXISTS `user_roles` (
   `description` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=154 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=333 DEFAULT CHARSET=utf8;
 
--- Dumping data for table payments.user_roles: ~5 rows (approximately)
+-- Dumping data for table payments.user_roles: ~2 rows (approximately)
 DELETE FROM `user_roles`;
 /*!40000 ALTER TABLE `user_roles` DISABLE KEYS */;
 INSERT INTO `user_roles` (`id`, `name`, `description`) VALUES
-  (1, 'ADMIN', 'ADMIN'),
-  (2, 'MANAGER', 'Manager');
+	(1, 'ADMIN', 'ADMIN'),
+	(2, 'MANAGER', 'Manager');
 /*!40000 ALTER TABLE `user_roles` ENABLE KEYS */;
 
 
@@ -212,14 +211,14 @@ CREATE TABLE IF NOT EXISTS `user_role_commands` (
   KEY `fk_Commands_has_Ueser_Roles_Commands_idx` (`command_ID`),
   CONSTRAINT `fk_Commands_has_Ueser_Roles_Commands` FOREIGN KEY (`command_ID`) REFERENCES `commands` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_Commands_has_Ueser_Roles_Ueser_Roles1` FOREIGN KEY (`user_role_id`) REFERENCES `user_roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table payments.user_role_commands: ~2 rows (approximately)
 DELETE FROM `user_role_commands`;
 /*!40000 ALTER TABLE `user_role_commands` DISABLE KEYS */;
 INSERT INTO `user_role_commands` (`command_ID`, `user_role_id`, `id`) VALUES
-  (1, 2, 1),
-  (2, 1, 2);
+	(1, 2, 1),
+	(2, 1, 2);
 /*!40000 ALTER TABLE `user_role_commands` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

@@ -3,11 +3,13 @@ package by.pwt.pilipenko.payments.model.entities;
 import by.pwt.pilipenko.payments.model.VO.AccountVO;
 import by.pwt.pilipenko.payments.model.exceptions.InsufficientFundsException;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
+@Entity
+@Table(name = "accounts")
 public class Account extends AbstractEntity {
 
     private static final long serialVersionUID = -8860337032933235611L;
@@ -34,7 +36,7 @@ public class Account extends AbstractEntity {
 
 
     }
-
+    @Column(name = "number", columnDefinition = "VARCHAR2(45) NOT NULL UNIQUE")
     public String getNumber() {
         return number;
     }
@@ -42,7 +44,7 @@ public class Account extends AbstractEntity {
     public void setNumber(String number) {
         this.number = number;
     }
-
+    @Column(name = "amount")
     public double getAmount() {
         return amount;
     }
@@ -51,6 +53,8 @@ public class Account extends AbstractEntity {
         this.amount = amount;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "agreement_id", nullable = false)
     public Agreement getAgreement() {
         return agreement;
     }
@@ -59,6 +63,12 @@ public class Account extends AbstractEntity {
         this.agreement = agreement;
     }
 
+    @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @JoinTable(name = "currencies", joinColumns = {
+            @JoinColumn(name = "currency_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "id",
+                    nullable = false, updatable = false)}
+    )
     public Currency getCurrency() {
         return currency;
     }
@@ -125,7 +135,7 @@ public class Account extends AbstractEntity {
         else
             throw new InsufficientFundsException("Insufficient funds");
     }
-
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
     public Set<Card> getCards() {
         return cards;
     }

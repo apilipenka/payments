@@ -15,6 +15,11 @@
         <mapping class="by.pwt.pilipenko.payments.model.entities.UserRole"/>
         <mapping class="by.pwt.pilipenko.payments.model.entities.ExchangeRate"/>
         <mapping class="by.pwt.pilipenko.payments.model.entities.Currency"/>
+        <mapping class="by.pwt.pilipenko.payments.model.entities.Bank"/>
+        <mapping class="by.pwt.pilipenko.payments.model.entities.Agreement"/>
+        <mapping class="by.pwt.pilipenko.payments.model.entities.User"/>
+        <mapping class="by.pwt.pilipenko.payments.model.entities.Account"/>
+        <mapping class="by.pwt.pilipenko.payments.model.entities.Card"/>
     </session-factory>
 </hibernate-configuration>
 
