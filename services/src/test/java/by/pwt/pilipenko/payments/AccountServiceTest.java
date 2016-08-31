@@ -181,7 +181,7 @@ public class AccountServiceTest
     @Test(expected = AccountNotFoundException.class)
     public void test61AddMoney() throws Exception {
 
-        accountService.addMoney("Breeeeeeeed",200);
+        accountService.addMoney("Breeeeeeeed", 200);
         Account account2 = accountService.getEntity(account1.getId());
         assertEquals(account1, account2);
 
@@ -190,27 +190,27 @@ public class AccountServiceTest
     @Test
     public void test62AddMoney() throws Exception {
 
-        accountService.addMoney(account1.getNumber(),200);
+        accountService.addMoney(account1.getNumber(), 200);
         Account account2 = accountService.getEntity(account1.getId());
-        assertEquals(account1.getAmount(), account2.getAmount(),200);
+        assertEquals(account1.getAmount(), account2.getAmount(), 200);
 
     }
 
     @Test
     public void test63getMoney() throws Exception {
 
-        accountService.addMoney(account1.getNumber(),200);
+        accountService.addMoney(account1.getNumber(), 200);
         Account account2 = accountService.getEntity(account1.getId());
-        assertEquals(account1.getAmount()+200, account2.getAmount(),200);
+        assertEquals(account1.getAmount() + 200, account2.getAmount(), 200);
 
     }
 
     @Test(expected = InsufficientFundsException.class)
     public void test64getMoney() throws Exception {
 
-        accountService.getMoney(account1.getNumber(),1300);
+        accountService.getMoney(account1.getNumber(), 1300);
         Account account2 = accountService.getEntity(account1.getId());
-        assertEquals(account1.getAmount()+200, account2.getAmount(),200);
+        assertEquals(account1.getAmount() + 200, account2.getAmount(), 200);
 
     }
 
@@ -224,11 +224,11 @@ public class AccountServiceTest
         account2.setNumber("123321567");
         account2.setAmount(0);
         account2 = accountService.insertEntity(account2);
-        accountService.transferMoney(account1.getNumber(),account2.getNumber(),60);
+        accountService.transferMoney(account1.getNumber(), account2.getNumber(), 60);
         account1 = accountService.getEntity(account1.getId());
         account2 = accountService.getEntity(account2.getId());
-        assertEquals(40, account1.getAmount(),0);
-        assertEquals(60, account2.getAmount(),0);
+        assertEquals(40, account1.getAmount(), 0);
+        assertEquals(60, account2.getAmount(), 0);
 
     }
 

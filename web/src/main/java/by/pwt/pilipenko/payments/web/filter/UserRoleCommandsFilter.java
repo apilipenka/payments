@@ -1,8 +1,8 @@
 package by.pwt.pilipenko.payments.web.filter;
 
-import by.pwt.pilipenko.payments.services.UserRoleCommandService;
 import by.pwt.pilipenko.payments.model.VO.UserRoleCommandVO;
 import by.pwt.pilipenko.payments.model.entities.UserRoleCommand;
+import by.pwt.pilipenko.payments.services.UserRoleCommandService;
 
 import javax.naming.NamingException;
 import javax.servlet.*;

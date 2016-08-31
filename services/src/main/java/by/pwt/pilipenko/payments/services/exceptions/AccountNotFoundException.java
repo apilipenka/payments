@@ -6,10 +6,10 @@ package by.pwt.pilipenko.payments.services.exceptions;
 public class AccountNotFoundException extends Exception {
     private Exception exception;
 
-    public AccountNotFoundException() {}
+    public AccountNotFoundException() {
+    }
 
-    public AccountNotFoundException(String message)
-    {
+    public AccountNotFoundException(String message) {
         super(message);
     }
 

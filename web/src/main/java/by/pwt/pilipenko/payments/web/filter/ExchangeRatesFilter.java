@@ -1,8 +1,8 @@
 package by.pwt.pilipenko.payments.web.filter;
 
-import by.pwt.pilipenko.payments.services.ExchangeRateService;
 import by.pwt.pilipenko.payments.model.VO.ExchangeRateVO;
 import by.pwt.pilipenko.payments.model.entities.ExchangeRate;
+import by.pwt.pilipenko.payments.services.ExchangeRateService;
 
 import javax.naming.NamingException;
 import javax.servlet.*;

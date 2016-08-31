@@ -23,7 +23,7 @@ public class UserRoleDaoTest
 
     @BeforeClass
     public static void intit() throws NamingException, ClassNotFoundException, SQLException {
-
+        DaoFactoryFactory.setDaoType("jdbc");
         userRoleDAO = DaoFactoryFactory.getInstance().createUserRoleDAO();
 
 

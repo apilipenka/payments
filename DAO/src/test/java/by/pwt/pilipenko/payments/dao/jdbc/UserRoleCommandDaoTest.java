@@ -3,8 +3,8 @@ package by.pwt.pilipenko.payments.dao.jdbc;
 import by.pwt.pilipenko.payments.dao.BaseDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.model.entities.Command;
-import by.pwt.pilipenko.payments.model.entities.UserRoleCommand;
 import by.pwt.pilipenko.payments.model.entities.UserRole;
+import by.pwt.pilipenko.payments.model.entities.UserRoleCommand;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 
@@ -31,7 +31,7 @@ public class UserRoleCommandDaoTest
 
     @BeforeClass
     public static void intit() throws NamingException, ClassNotFoundException, SQLException {
-
+        DaoFactoryFactory.setDaoType("jdbc");
         userRoleDAO = DaoFactoryFactory.getInstance().createUserRoleDAO();
         commandDAO = DaoFactoryFactory.getInstance().createCommandDAO();
         userRoleCommandDAO = DaoFactoryFactory.getInstance().createUserRoleCommandDAO();
@@ -41,11 +41,9 @@ public class UserRoleCommandDaoTest
     @AfterClass
     public static void tearDownToHexStringData() throws SQLException, NamingException {
 
-            userRoleDAO.delete(userRole1);
-            userRoleDAO.delete(userRole3);
-            commandDAO.delete(command1);
-
-
+        userRoleDAO.delete(userRole1);
+        userRoleDAO.delete(userRole3);
+        commandDAO.delete(command1);
 
 
     }

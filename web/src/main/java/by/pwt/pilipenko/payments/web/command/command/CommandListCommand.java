@@ -1,10 +1,10 @@
 package by.pwt.pilipenko.payments.web.command.command;
 
 import by.pwt.pilipenko.payments.dao.resources.ConfigurationManager;
-import by.pwt.pilipenko.payments.services.CommandService;
-import by.pwt.pilipenko.payments.web.command.ActionCommand;
 import by.pwt.pilipenko.payments.model.VO.CommandVO;
 import by.pwt.pilipenko.payments.model.entities.Command;
+import by.pwt.pilipenko.payments.services.CommandService;
+import by.pwt.pilipenko.payments.web.command.ActionCommand;
 
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;

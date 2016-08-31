@@ -1,9 +1,9 @@
 package by.pwt.pilipenko.payments;
 
-import by.pwt.pilipenko.payments.services.CurrencyService;
-import by.pwt.pilipenko.payments.services.ExchangeRateService;
 import by.pwt.pilipenko.payments.model.entities.Currency;
 import by.pwt.pilipenko.payments.model.entities.ExchangeRate;
+import by.pwt.pilipenko.payments.services.CurrencyService;
+import by.pwt.pilipenko.payments.services.ExchangeRateService;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 

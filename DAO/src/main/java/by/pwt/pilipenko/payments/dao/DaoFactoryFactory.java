@@ -21,8 +21,9 @@ public class DaoFactoryFactory {
 
     public static void setDaoType(String pDaoType) throws SQLException, NamingException, ClassNotFoundException {
         synchronized (DaoFactoryFactory.class) {
-            DaoFactoryFactory.daoType = DAOType.valueOf(pDaoType.toUpperCase());;
-            if (daoType==DAOType.HIBERNATE)
+            DaoFactoryFactory.daoType = DAOType.valueOf(pDaoType.toUpperCase());
+            ;
+            if (daoType == DAOType.HIBERNATE)
                 instance.set(new by.pwt.pilipenko.payments.dao.hibernate.DAOFactory());
             else
                 instance.set(new by.pwt.pilipenko.payments.dao.jdbc.DAOFactory());
@@ -38,7 +39,7 @@ public class DaoFactoryFactory {
             synchronized (DaoFactoryFactory.class) {
                 localInstance = instance.get();
                 if (localInstance == null) {
-                    if (daoType==DAOType.HIBERNATE)
+                    if (daoType == DAOType.HIBERNATE)
                         instance.set(new by.pwt.pilipenko.payments.dao.hibernate.DAOFactory());
                     else
                         instance.set(new by.pwt.pilipenko.payments.dao.jdbc.DAOFactory());

@@ -1,11 +1,11 @@
 package by.pwt.pilipenko.payments.web.command.card;
 
 import by.pwt.pilipenko.payments.dao.resources.ConfigurationManager;
+import by.pwt.pilipenko.payments.model.entities.Account;
+import by.pwt.pilipenko.payments.model.entities.Card;
 import by.pwt.pilipenko.payments.services.AccountService;
 import by.pwt.pilipenko.payments.services.CardService;
 import by.pwt.pilipenko.payments.web.command.ActionCommand;
-import by.pwt.pilipenko.payments.model.entities.Account;
-import by.pwt.pilipenko.payments.model.entities.Card;
 
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;

@@ -38,7 +38,7 @@ public class CardDaoTest
 
     @BeforeClass
     public static void init() throws NamingException, ClassNotFoundException, SQLException {
-
+        DaoFactoryFactory.setDaoType("jdbc");
         bankDAO = DaoFactoryFactory.getInstance().createBankDAO();
         userRoleDAO = DaoFactoryFactory.getInstance().createUserRoleDAO();
         userDAO = DaoFactoryFactory.getInstance().createUserDAO();
@@ -51,14 +51,13 @@ public class CardDaoTest
     @AfterClass
     public static void tearDownToHexStringData() throws SQLException, NamingException {
 
-            accountDAO.delete(account1);
-            agreementDAO.delete(agreement1);
-            bankDAO.delete(bank1);
-            userDAO.delete(user1);
-            userRoleDAO.delete(userRole1);
-            currencyDAO.delete(currency1);
+        accountDAO.delete(account1);
+        agreementDAO.delete(agreement1);
+        bankDAO.delete(bank1);
+        userDAO.delete(user1);
+        userRoleDAO.delete(userRole1);
+        currencyDAO.delete(currency1);
     }
-
 
 
     @Test

@@ -18,7 +18,6 @@ import java.util.List;
 public class UserRoleDaoTest
         extends Assert {
 
-    private static DAOFactory factory;
     private static UserRoleDAO userRoleDAO;
     private static CommandDAO commandDAO;
     private static UserRole userRole1;
@@ -28,17 +27,25 @@ public class UserRoleDaoTest
     @BeforeClass
     public static void init() throws NamingException, ClassNotFoundException, SQLException {
         DaoFactoryFactory.setDaoType("hibernate");
-        factory = (DAOFactory) DaoFactoryFactory.getInstance();
-        userRoleDAO = (UserRoleDAO) factory.createUserRoleDAO();
-        commandDAO = (CommandDAO) factory.createCommandDAO();
+        userRoleDAO = (UserRoleDAO) DaoFactoryFactory.getInstance().createUserRoleDAO();
+        commandDAO = (CommandDAO) DaoFactoryFactory.getInstance().createCommandDAO();
 
     }
 
     @AfterClass
-    public static void tearDownToHexStringData() throws SQLException {
-
-        userRoleDAO = null;
-        factory = null;
+    public static void tearDownToHexStringData() throws SQLException, NamingException, ClassNotFoundException {
+        try {
+            DaoFactoryFactory.getInstance().beginTransaction();
+            commandDAO.delete(command1);
+            DaoFactoryFactory.getInstance().commit();
+        } catch (SQLException | NamingException | ClassNotFoundException e) {
+            DaoFactoryFactory.getInstance().rollback();
+            throw e;
+        }
+        finally {
+            userRoleDAO = null;
+            commandDAO = null;
+        }
 
     }
 
@@ -56,27 +63,28 @@ public class UserRoleDaoTest
         command.setLabel("Edit tests");
         command.setComment("Edit tests");
 
+        try {
+            DaoFactoryFactory.getInstance().beginTransaction();
+            command1 = commandDAO.insert(command);
+            userRole.addCommand(command1);
+            userRole1 = userRoleDAO.insert(userRole);
+            DaoFactoryFactory.getInstance().commit();
 
 
-
-        factory.beginTransaction();
-        command1 = commandDAO.insert(command);
-        userRole.addCommand(command1);
-        userRole1 = userRoleDAO.insert(userRole);
-        factory.commit();
-
-
-        UserRole userRole2 = userRoleDAO.findEntityById(userRole.getId());
-        assertEquals(userRole, userRole2);
-
+            UserRole userRole2 = userRoleDAO.findEntityById(userRole.getId());
+            assertEquals(userRole, userRole2);
+        } catch (SQLException | NamingException | ClassNotFoundException e) {
+            DaoFactoryFactory.getInstance().rollback();
+            throw e;
+        }
 
     }
 
-  @Test
+    @Test
     public void test2FindByEntity() throws SQLException, NamingException, ClassNotFoundException {
 
         List<UserRole> userRoleList1 = new ArrayList<>();
-      userRoleList1.add(userRole1);
+        userRoleList1.add(userRole1);
 
 
         List<UserRole> userRoleList2 = userRoleDAO.findEntityByEntity(userRole1);
@@ -96,35 +104,41 @@ public class UserRoleDaoTest
     }
 
 
-     @Test
+    @Test
     public void test7Update() throws SQLException, NamingException, ClassNotFoundException {
 
 
-       userRole1.setDescription("Test role for update");
-         factory.beginTransaction();
-         userRoleDAO.update(userRole1);
-         factory.commit();
-         UserRole userRole2 = userRoleDAO.findEntityById(userRole1.getId());
+        userRole1.setDescription("Test role for update");
+        try {
+            DaoFactoryFactory.getInstance().beginTransaction();
+            userRoleDAO.update(userRole1);
+            DaoFactoryFactory.getInstance().commit();
+            UserRole userRole2 = userRoleDAO.findEntityById(userRole1.getId());
 
-         assertEquals(userRole1, userRole2);
+            assertEquals(userRole1, userRole2);
 
-
-
+        } catch (SQLException | NamingException | ClassNotFoundException e) {
+            DaoFactoryFactory.getInstance().rollback();
+            throw e;
+        }
     }
 
 
     @Test
     public void test8DeleteById() throws SQLException, NamingException, ClassNotFoundException {
+        try {
+            DaoFactoryFactory.getInstance().beginTransaction();
+            userRoleDAO.delete(userRole1.getId());
+            DaoFactoryFactory.getInstance().commit();
 
-        factory.beginTransaction();
-        userRoleDAO.delete(userRole1.getId());
-        factory.commit();
+            UserRole userRole2 = userRoleDAO.findEntityById(userRole1.getId());
 
-        UserRole userRole2 = userRoleDAO.findEntityById(userRole1.getId());
+            assertNull(userRole2);
 
-        assertNull(userRole2);
-
-
+        } catch (SQLException | NamingException | ClassNotFoundException e) {
+            DaoFactoryFactory.getInstance().rollback();
+            throw e;
+        }
     }
 
     @Test
@@ -136,23 +150,26 @@ public class UserRoleDaoTest
 
         userRole.addCommand(command1);
 
-        factory.beginTransaction();
+        try {
+            DaoFactoryFactory.getInstance().beginTransaction();
 
 
+            commandDAO.insert(command1);
+            UserRole userRole2 = userRoleDAO.insert(userRole);
 
-        commandDAO.insert(command1);
-        UserRole userRole2 = userRoleDAO.insert(userRole);
+            ((DAOFactory) DaoFactoryFactory.getInstance()).getSession().flush();
 
-        factory.getSession().flush();
+            userRoleDAO.delete(userRole2);
 
-        userRoleDAO.delete(userRole2);
+            DaoFactoryFactory.getInstance().commit();
 
-        factory.commit();
+            List<UserRole> userRoleList2 = userRoleDAO.findEntityByEntity(userRole);
 
-        List<UserRole> userRoleList2 = userRoleDAO.findEntityByEntity(userRole);
-
-        assertEquals(userRoleList2.size(), 0);
-
+            assertEquals(userRoleList2.size(), 0);
+        } catch (SQLException | NamingException | ClassNotFoundException e) {
+            DaoFactoryFactory.getInstance().rollback();
+            throw e;
+        }
 
     }
 

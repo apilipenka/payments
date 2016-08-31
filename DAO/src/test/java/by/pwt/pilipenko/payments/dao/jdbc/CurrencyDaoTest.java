@@ -23,7 +23,7 @@ public class CurrencyDaoTest
 
     @BeforeClass
     public static void intit() throws NamingException, ClassNotFoundException, SQLException {
-
+        DaoFactoryFactory.setDaoType("jdbc");
         currencyDAO = DaoFactoryFactory.getInstance().createCurrencyDAO();
 
     }

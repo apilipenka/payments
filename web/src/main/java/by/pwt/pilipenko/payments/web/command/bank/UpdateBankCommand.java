@@ -1,9 +1,9 @@
 package by.pwt.pilipenko.payments.web.command.bank;
 
 import by.pwt.pilipenko.payments.dao.resources.ConfigurationManager;
+import by.pwt.pilipenko.payments.model.entities.Bank;
 import by.pwt.pilipenko.payments.services.BankService;
 import by.pwt.pilipenko.payments.web.command.ActionCommand;
-import by.pwt.pilipenko.payments.model.entities.Bank;
 
 import javax.servlet.http.HttpServletRequest;
 

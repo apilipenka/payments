@@ -1,13 +1,13 @@
 package by.pwt.pilipenko.payments;
 
+import by.pwt.pilipenko.payments.model.entities.Agreement;
 import by.pwt.pilipenko.payments.model.entities.Bank;
 import by.pwt.pilipenko.payments.model.entities.User;
+import by.pwt.pilipenko.payments.model.entities.UserRole;
 import by.pwt.pilipenko.payments.services.AgreementService;
 import by.pwt.pilipenko.payments.services.BankService;
 import by.pwt.pilipenko.payments.services.UserRoleService;
 import by.pwt.pilipenko.payments.services.UserService;
-import by.pwt.pilipenko.payments.model.entities.Agreement;
-import by.pwt.pilipenko.payments.model.entities.UserRole;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 

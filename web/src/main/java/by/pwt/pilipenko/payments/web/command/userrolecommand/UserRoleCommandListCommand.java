@@ -1,10 +1,10 @@
 package by.pwt.pilipenko.payments.web.command.userrolecommand;
 
 import by.pwt.pilipenko.payments.dao.resources.ConfigurationManager;
-import by.pwt.pilipenko.payments.services.UserRoleCommandService;
-import by.pwt.pilipenko.payments.web.command.ActionCommand;
 import by.pwt.pilipenko.payments.model.VO.UserRoleCommandVO;
 import by.pwt.pilipenko.payments.model.entities.UserRoleCommand;
+import by.pwt.pilipenko.payments.services.UserRoleCommandService;
+import by.pwt.pilipenko.payments.web.command.ActionCommand;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;

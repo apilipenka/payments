@@ -1,15 +1,10 @@
 package by.pwt.pilipenko.payments.dao.hibernate;
 
-import by.pwt.pilipenko.payments.dao.BaseDAO;
-import by.pwt.pilipenko.payments.dao.hibernate.AbstractEntityDAO;
 import by.pwt.pilipenko.payments.model.entities.Bank;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
 import javax.naming.NamingException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 

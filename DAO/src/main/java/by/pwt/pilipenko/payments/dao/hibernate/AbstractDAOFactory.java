@@ -13,7 +13,6 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import javax.sql.DataSource;
 import java.sql.SQLException;
 
 
@@ -21,11 +20,10 @@ import java.sql.SQLException;
  * Created by apilipenka on 8/19/2016.
  */
 abstract class AbstractDAOFactory implements BaseDAOFactory {
-    private Session session;
-    private Transaction transaction;
-
     private static Logger log = Logger.getLogger(AbstractDAOFactory.class);
     private final ThreadLocal<Session> sessions = new ThreadLocal<>();
+    private Session session;
+    private Transaction transaction;
     private SessionFactory sessionFactory = null;
 
 
@@ -35,7 +33,6 @@ abstract class AbstractDAOFactory implements BaseDAOFactory {
         if (localInstance == null) {
 
             synchronized (AbstractDAOFactory.class) {
-
 
 
                 localInstance = session;
@@ -54,7 +51,7 @@ abstract class AbstractDAOFactory implements BaseDAOFactory {
                         System.exit(0);
                     }
 
-                    session=sessionFactory.openSession();
+                    session = sessionFactory.openSession();
                     localInstance = session;
 
                 }
@@ -76,14 +73,11 @@ abstract class AbstractDAOFactory implements BaseDAOFactory {
     }
 
     public void beginTransaction() throws SQLException {
-        transaction = session.beginTransaction();
+        transaction = getSession().beginTransaction();
     }
 
-    public void endTransaction() throws SQLException {}
-
-
-
-
+    public void endTransaction() throws SQLException {
+    }
 
 
 }

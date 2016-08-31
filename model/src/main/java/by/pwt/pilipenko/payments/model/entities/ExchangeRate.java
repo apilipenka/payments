@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
-@Table(name="exchange_rates")
+@Table(name = "exchange_rates")
 public class ExchangeRate extends AbstractEntity {
 
     private static final long serialVersionUID = 873223002647108557L;

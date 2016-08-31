@@ -30,5 +30,4 @@ public interface BaseDAO<E extends AbstractEntity> {
     //Connection getConnection() throws SQLException;
 
 
-
 }

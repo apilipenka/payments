@@ -19,7 +19,7 @@ public class Type extends AbstractEntity {
         this.description = dsecription;
     }
 
-    @Column(name="name", columnDefinition = "VARCHAR2(45) NOT NULL UNIQUE")
+    @Column(name = "name", columnDefinition = "VARCHAR2(45) NOT NULL UNIQUE")
     public String getName() {
         return name;
     }
@@ -28,7 +28,7 @@ public class Type extends AbstractEntity {
         this.name = name;
     }
 
-    @Column(name="description", columnDefinition = "VARCHAR2(200)")
+    @Column(name = "description", columnDefinition = "VARCHAR2(200)")
     public String getDescription() {
         return description;
     }

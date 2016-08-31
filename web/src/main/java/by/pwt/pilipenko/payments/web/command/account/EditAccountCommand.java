@@ -1,9 +1,9 @@
 package by.pwt.pilipenko.payments.web.command.account;
 
 import by.pwt.pilipenko.payments.dao.resources.ConfigurationManager;
+import by.pwt.pilipenko.payments.model.entities.Account;
 import by.pwt.pilipenko.payments.services.AccountService;
 import by.pwt.pilipenko.payments.web.command.ActionCommand;
-import by.pwt.pilipenko.payments.model.entities.Account;
 
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;

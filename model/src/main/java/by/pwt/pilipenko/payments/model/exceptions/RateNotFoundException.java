@@ -6,10 +6,10 @@ package by.pwt.pilipenko.payments.model.exceptions;
 public class RateNotFoundException extends Exception {
     private Exception exception;
 
-    public RateNotFoundException() {}
+    public RateNotFoundException() {
+    }
 
-    public RateNotFoundException(String message)
-    {
+    public RateNotFoundException(String message) {
         super(message);
     }
 

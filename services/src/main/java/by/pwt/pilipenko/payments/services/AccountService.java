@@ -2,8 +2,8 @@ package by.pwt.pilipenko.payments.services;
 
 import by.pwt.pilipenko.payments.dao.BaseDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
-import by.pwt.pilipenko.payments.services.exceptions.AccountNotFoundException;
 import by.pwt.pilipenko.payments.model.entities.Account;
+import by.pwt.pilipenko.payments.services.exceptions.AccountNotFoundException;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
@@ -28,12 +28,11 @@ public class AccountService extends AbstractEntityService<Account> {
         Account account = new Account();
         account.setNumber(accountNumber);
         Account account1 = this.getEntityByPK(account);
-        if (account1!=null) {
+        if (account1 != null) {
             account1.getMoney(amount);
             this.updateEntity(account1);
-        }
-        else
-            throw new AccountNotFoundException("Account "+accountNumber+" not found");
+        } else
+            throw new AccountNotFoundException("Account " + accountNumber + " not found");
 
     }
 
@@ -41,12 +40,11 @@ public class AccountService extends AbstractEntityService<Account> {
         Account account = new Account();
         account.setNumber(accountNumber);
         Account account1 = this.getEntityByPK(account);
-        if (account1!=null) {
+        if (account1 != null) {
             account1.addMoney(amount);
             this.updateEntity(account1);
-        }
-        else
-            throw new AccountNotFoundException("Account "+accountNumber+" not found");
+        } else
+            throw new AccountNotFoundException("Account " + accountNumber + " not found");
 
     }
 
@@ -54,19 +52,19 @@ public class AccountService extends AbstractEntityService<Account> {
         Account account = new Account();
         account.setNumber(creditAccountNumber);
         Account creditAccount = this.getEntityByPK(account);
-        if (creditAccount==null)
-            throw new AccountNotFoundException("Account "+creditAccountNumber+" not found");
+        if (creditAccount == null)
+            throw new AccountNotFoundException("Account " + creditAccountNumber + " not found");
         account.setNumber(debitAccountNumber);
         Account debitAccount = this.getEntityByPK(account);
-        if (debitAccount==null)
-            throw new AccountNotFoundException("Account "+debitAccountNumber+" not found");
+        if (debitAccount == null)
+            throw new AccountNotFoundException("Account " + debitAccountNumber + " not found");
         try {
             DaoFactoryFactory.getInstance().beginTransaction();
             creditAccount.getMoney(amount);
             this.updateEntity(creditAccount);
             DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
 
-            debitAccount.addMoney(debitAccount.getCurrency().getRate(format.parse(format.format(Calendar.getInstance().getTime())),creditAccount.getCurrency())*amount);
+            debitAccount.addMoney(debitAccount.getCurrency().getRate(format.parse(format.format(Calendar.getInstance().getTime())), creditAccount.getCurrency()) * amount);
             this.updateEntity(debitAccount);
             DaoFactoryFactory.getInstance().commit();
             DaoFactoryFactory.getInstance().endTransaction();

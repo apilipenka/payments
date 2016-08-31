@@ -1,7 +1,7 @@
 package by.pwt.pilipenko.payments;
 
-import by.pwt.pilipenko.payments.services.BankService;
 import by.pwt.pilipenko.payments.model.entities.Bank;
+import by.pwt.pilipenko.payments.services.BankService;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 

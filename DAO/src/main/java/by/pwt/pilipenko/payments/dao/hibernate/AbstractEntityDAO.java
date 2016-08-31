@@ -56,5 +56,4 @@ public abstract class AbstractEntityDAO<T extends AbstractEntity> implements Bas
     }
 
 
-
 }

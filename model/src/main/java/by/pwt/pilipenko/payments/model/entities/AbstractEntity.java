@@ -19,7 +19,7 @@ public abstract class AbstractEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id", columnDefinition = "INTEGER(11) NOT NULL UNIQUE")
+    @Column(name = "id", columnDefinition = "INTEGER(11) NOT NULL UNIQUE")
     public int getId() {
         return id;
     }

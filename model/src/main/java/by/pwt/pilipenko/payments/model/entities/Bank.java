@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name="banks")
+@Table(name = "banks")
 public class Bank extends AbstractEntity {
     private static final long serialVersionUID = 4713651234377737733L;
     private Set<Agreement> agreements;
@@ -30,7 +30,7 @@ public class Bank extends AbstractEntity {
         agreements = new HashSet<Agreement>();
     }
 
-    @Column(name="name", unique = false, nullable = true, length=100)
+    @Column(name = "name", unique = false, nullable = true, length = 100)
     public String getName() {
         return name;
     }
@@ -77,7 +77,7 @@ public class Bank extends AbstractEntity {
         return "Bank [id=" + getId() + ", name=" + name + ", UNN=" + UNN + "]";
     }
 
-    @Column(name="unn", unique = true, nullable = false, length=45)
+    @Column(name = "unn", unique = true, nullable = false, length = 45)
     public String getUNN() {
         return UNN;
     }

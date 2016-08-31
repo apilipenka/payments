@@ -45,7 +45,7 @@ public class AccountDAO extends AbstractEntityDAO<Account> {
         ExchangeRate exchangeRate = new ExchangeRate();
         exchangeRate.setCurrency(currency);
         BaseDAO exchangeRateDAO = DaoFactoryFactory.getInstance().createExchangeRateDAO();
-        List<ExchangeRate> list = ((ExchangeRateDAO)exchangeRateDAO).findEntityByParent(exchangeRate);
+        List<ExchangeRate> list = ((ExchangeRateDAO) exchangeRateDAO).findEntityByParent(exchangeRate);
         Set<ExchangeRate> set = new HashSet<>();
         set.addAll(list);
         currency.setRates(set);

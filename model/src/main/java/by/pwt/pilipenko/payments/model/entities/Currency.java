@@ -1,13 +1,14 @@
 package by.pwt.pilipenko.payments.model.entities;
 
-import java.util.*;
-
 import by.pwt.pilipenko.payments.model.exceptions.RateNotFoundException;
 
 import javax.persistence.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name="currencies")
+@Table(name = "currencies")
 public class Currency extends AbstractEntity {
 
     private static final long serialVersionUID = -6049197255924255456L;
@@ -33,7 +34,7 @@ public class Currency extends AbstractEntity {
 
     }
 
-    @Column(name="mnemo_code", columnDefinition = "VARCHAR2(45) NOT NULL")
+    @Column(name = "mnemo_code", columnDefinition = "VARCHAR2(45) NOT NULL")
     public String getMnemoCode() {
         return mnemoCode;
     }
@@ -42,7 +43,7 @@ public class Currency extends AbstractEntity {
         this.mnemoCode = mnemoCode;
     }
 
-    @Column(name="code", columnDefinition = "VARCHAR2(45) NOT NULL")
+    @Column(name = "code", columnDefinition = "VARCHAR2(45) NOT NULL")
     public String getCode() {
         return code;
     }
@@ -51,20 +52,24 @@ public class Currency extends AbstractEntity {
         this.code = code;
     }
 
-    @Column(name="name", columnDefinition = "VARCHAR2(200) NOT NULL")public String getName() {
+    @Column(name = "name", columnDefinition = "VARCHAR2(200) NOT NULL")
+    public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
 
-    @OneToMany(cascade=CascadeType.PERSIST , fetch = FetchType.LAZY)
+    /*@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "exchange_rates", catalog = "payments"
             , joinColumns = {
-            @JoinColumn(name = "id", nullable = false, updatable = false) },
-            inverseJoinColumns = { @JoinColumn(name = "currency_id",
-                    nullable = false, updatable = false) }
-    )
+            @JoinColumn(name = "id", nullable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "currency_id",
+                    nullable = false)}
+    )*/
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "currency")
     public Set<ExchangeRate> getRates() {
         return rates;
     }
@@ -74,9 +79,9 @@ public class Currency extends AbstractEntity {
         this.rates = rates;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,  mappedBy = "currencies")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "currencies")
     public ExchangeRate getExchangeRate(Date date, Currency targetCurrency) {
-        for (ExchangeRate exchangeRate: rates) {
+        for (ExchangeRate exchangeRate : rates) {
             if (exchangeRate.getRateDate().equals(date) && exchangeRate.getCurrency().equals(targetCurrency)) {
                 return exchangeRate;
             }
@@ -85,7 +90,7 @@ public class Currency extends AbstractEntity {
     }
 
     public float getRate(Date date, Currency targetCurrency) throws RateNotFoundException {
-        for (ExchangeRate exchangeRate: rates) {
+        for (ExchangeRate exchangeRate : rates) {
             if (exchangeRate.getRateDate().equals(date) && exchangeRate.getCurrency().equals(targetCurrency)) {
                 return exchangeRate.getRate();
             }
@@ -138,7 +143,6 @@ public class Currency extends AbstractEntity {
     public String toString() {
         return "currency [id=" + getId() + ", mnemoCode=" + mnemoCode + ", code=" + code + ", name=" + name + ", rates=" + rates + "]";
     }
-
 
 
 }

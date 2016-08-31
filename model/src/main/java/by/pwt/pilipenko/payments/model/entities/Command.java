@@ -10,7 +10,7 @@ import javax.persistence.Table;
  * Created by apilipenka on 8/5/2016.
  */
 @Entity
-@Table(name="commands")
+@Table(name = "commands")
 public class Command extends AbstractEntity {
 
     private static final long serialVersionUID = -8644285246360859740L;
@@ -31,7 +31,7 @@ public class Command extends AbstractEntity {
         this.comment = comment;
     }
 
-    @Column(name="command", columnDefinition = "VARCHAR2(45) NOT NULL UNIQUE")
+    @Column(name = "command", columnDefinition = "VARCHAR2(45) NOT NULL UNIQUE")
     public String getCommand() {
         return command;
     }
@@ -40,7 +40,7 @@ public class Command extends AbstractEntity {
         this.command = command;
     }
 
-    @Column(name="url",  columnDefinition = "VARCHAR2(200) NOT NULL")
+    @Column(name = "url", columnDefinition = "VARCHAR2(200) NOT NULL")
     public String getUrl() {
         return url;
     }
@@ -49,7 +49,7 @@ public class Command extends AbstractEntity {
         this.url = url;
     }
 
-    @Column(name="label", columnDefinition = "VARCHAR2(45) NOT NULL")
+    @Column(name = "label", columnDefinition = "VARCHAR2(45) NOT NULL")
     public String getLabel() {
         return label;
     }
@@ -58,7 +58,7 @@ public class Command extends AbstractEntity {
         this.label = label;
     }
 
-    @Column(name="comment", columnDefinition = "VARCHAR2(200)")
+    @Column(name = "comment", columnDefinition = "VARCHAR2(200)")
     public String getComment() {
         return comment;
     }

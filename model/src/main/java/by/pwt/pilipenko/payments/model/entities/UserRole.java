@@ -11,12 +11,10 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name="user_roles")
+@Table(name = "user_roles")
 public class UserRole extends Type {
 
     private static final long serialVersionUID = -2060426102854785438L;
-
-
 
 
     Set<Command> commands;
@@ -39,16 +37,15 @@ public class UserRole extends Type {
     }
 
 
-    @ManyToMany( cascade=CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     @JoinTable(name = "user_role_commands", catalog = "payments", joinColumns = {
-            @JoinColumn(name = "user_role_id", nullable = false, updatable = false) },
-            inverseJoinColumns = { @JoinColumn(name = "command_id",
-                    nullable = false, updatable = false) }
-            )
+            @JoinColumn(name = "user_role_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "command_id",
+                    nullable = false, updatable = false)}
+    )
     public Set<Command> getCommands() {
         return commands;
     }
-
 
 
     public void setCommands(Set<Command> commands) {

@@ -1,6 +1,5 @@
 package by.pwt.pilipenko.payments.dao.hibernate;
 
-import by.pwt.pilipenko.payments.dao.BaseDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.model.entities.Command;
 import org.junit.*;
@@ -18,15 +17,14 @@ import java.util.List;
 public class CommandDaoTest
         extends Assert {
 
-    private static DAOFactory factory;
+    //private static DAOFactory factory;
     private static CommandDAO commandDAO;
     private static Command command1;
 
     @BeforeClass
     public static void init() throws NamingException, ClassNotFoundException, SQLException {
         DaoFactoryFactory.setDaoType("hibernate");
-        factory = (DAOFactory) DaoFactoryFactory.getInstance();
-        commandDAO = (CommandDAO) factory.createCommandDAO();
+        commandDAO = (CommandDAO) DaoFactoryFactory.getInstance().createCommandDAO();
 
     }
 
@@ -34,7 +32,6 @@ public class CommandDaoTest
     public static void tearDownToHexStringData() throws SQLException {
 
         commandDAO = null;
-        factory = null;
 
     }
 
@@ -47,14 +44,16 @@ public class CommandDaoTest
         command.setLabel("Edit tests");
         command.setComment("Edit tests");
 
-        factory.beginTransaction();
-        command1 = commandDAO.insert(command);
-        factory.commit();
-
-
-
-        Command command2 = commandDAO.findEntityById(command1.getId());
-        assertEquals(command, command2);
+        try {
+            DaoFactoryFactory.getInstance().beginTransaction();
+            command1 = commandDAO.insert(command);
+            DaoFactoryFactory.getInstance().commit();
+            Command command2 = commandDAO.findEntityById(command1.getId());
+            assertEquals(command, command2);
+        } catch (SQLException | NamingException | ClassNotFoundException e) {
+            DaoFactoryFactory.getInstance().rollback();
+            throw e;
+        }
 
 
     }
@@ -86,30 +85,37 @@ public class CommandDaoTest
     @Test
     public void test7Update() throws SQLException, NamingException, ClassNotFoundException {
 
+        try {
+            command1.setComment("Test role for update");
+            DaoFactoryFactory.getInstance().beginTransaction();
+            commandDAO.update(command1);
+            DaoFactoryFactory.getInstance().commit();
+            Command command2 = commandDAO.findEntityById(command1.getId());
 
-        command1.setComment("Test role for update");
-        factory.beginTransaction();
-        commandDAO.update(command1);
-        factory.commit();
-        Command command2 = commandDAO.findEntityById(command1.getId());
-
-        assertEquals(command1, command2);
-
+            assertEquals(command1, command2);
+        } catch (SQLException | NamingException | ClassNotFoundException e) {
+            DaoFactoryFactory.getInstance().rollback();
+            throw e;
+        }
 
     }
 
 
     @Test
     public void test8DeleteById() throws SQLException, NamingException, ClassNotFoundException {
+        try {
+            DaoFactoryFactory.getInstance().beginTransaction();
+            commandDAO.delete(command1.getId());
+            DaoFactoryFactory.getInstance().commit();
 
-        factory.beginTransaction();
-        commandDAO.delete(command1.getId());
-        factory.commit();
+            Command command2 = commandDAO.findEntityById(command1.getId());
 
-        Command command2 = commandDAO.findEntityById(command1.getId());
+            assertNull(command2);
 
-        assertNull(command2);
-
+        } catch (SQLException | NamingException | ClassNotFoundException e) {
+            DaoFactoryFactory.getInstance().rollback();
+            throw e;
+        }
 
     }
 
@@ -121,16 +127,21 @@ public class CommandDaoTest
         command.setUrl("/jsp/test-list.jsp");
         command.setLabel("Edit tests");
         command.setComment("Edit tests");
-        factory.beginTransaction();
-        command1 = (Command) commandDAO.insert(command);
 
-        commandDAO.delete(command);
-        factory.commit();
+        try {
+            DaoFactoryFactory.getInstance().beginTransaction();
+            command1 = (Command) commandDAO.insert(command);
 
-        List<Command> commandList2 = commandDAO.findEntityByEntity(command);
+            commandDAO.delete(command);
+            DaoFactoryFactory.getInstance().commit();
 
-        assertEquals(commandList2.size(), 0);
+            List<Command> commandList2 = commandDAO.findEntityByEntity(command);
 
+            assertEquals(commandList2.size(), 0);
+        } catch (SQLException | NamingException | ClassNotFoundException e) {
+            DaoFactoryFactory.getInstance().rollback();
+            throw e;
+        }
 
     }
 

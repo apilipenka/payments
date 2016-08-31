@@ -1,7 +1,6 @@
 package by.pwt.pilipenko.payments.dao.jdbc;
 
 import by.pwt.pilipenko.payments.dao.BaseDAOFactory;
-import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -14,9 +13,13 @@ abstract class AbstractDAOFactory implements BaseDAOFactory {
     private DataSource dataSource;
     private Connection connection;
 
-    DataSource getDataSource() { return dataSource; }
+    DataSource getDataSource() {
+        return dataSource;
+    }
 
-    void setDataSource(DataSource dataSource) { this.dataSource = dataSource; }
+    void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     public Connection getConnection() throws SQLException {
         Connection localInstance = connection;
@@ -26,7 +29,7 @@ abstract class AbstractDAOFactory implements BaseDAOFactory {
             synchronized (AbstractDAOFactory.class) {
                 localInstance = connection;
                 if (localInstance == null) {
-                    connection=dataSource.getConnection();
+                    connection = dataSource.getConnection();
                     localInstance = connection;
 
                 }
@@ -37,6 +40,10 @@ abstract class AbstractDAOFactory implements BaseDAOFactory {
 
         return localInstance;
 
+    }
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
     }
 
     public void commit() throws SQLException {
@@ -54,12 +61,6 @@ abstract class AbstractDAOFactory implements BaseDAOFactory {
     public void endTransaction() throws SQLException {
         connection.setAutoCommit(true);
     }
-
-    public void setConnection(Connection connection) {
-        this.connection = connection;
-    }
-
-
 
 
 }

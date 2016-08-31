@@ -23,7 +23,7 @@ public class BankDaoTest
 
     @BeforeClass
     public static void intit() throws NamingException, ClassNotFoundException, SQLException {
-
+        DaoFactoryFactory.setDaoType("jdbc");
         bankDAO = DaoFactoryFactory.getInstance().createBankDAO();
 
     }

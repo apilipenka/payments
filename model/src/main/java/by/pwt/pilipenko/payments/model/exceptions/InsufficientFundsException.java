@@ -6,10 +6,10 @@ package by.pwt.pilipenko.payments.model.exceptions;
 public class InsufficientFundsException extends Exception {
     private Exception exception;
 
-    public InsufficientFundsException() {}
+    public InsufficientFundsException() {
+    }
 
-    public InsufficientFundsException(String message)
-    {
+    public InsufficientFundsException(String message) {
         super(message);
     }
 

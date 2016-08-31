@@ -1,18 +1,8 @@
 package by.pwt.pilipenko.payments.dao.hibernate;
 
 import by.pwt.pilipenko.payments.dao.BaseDAO;
-import org.apache.commons.dbcp2.DriverManagerConnectionFactory;
-import org.apache.commons.dbcp2.PoolableConnection;
-import org.apache.commons.dbcp2.PoolableConnectionFactory;
-import org.apache.commons.dbcp2.PoolingDataSource;
-import org.apache.commons.pool2.ObjectPool;
-import org.apache.commons.pool2.impl.AbandonedConfig;
-import org.apache.commons.pool2.impl.GenericObjectPool;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.sql.DataSource;
 import java.sql.SQLException;
 
 public class DAOFactory extends AbstractDAOFactory {
@@ -55,12 +45,12 @@ public class DAOFactory extends AbstractDAOFactory {
 
     @Override
     public BaseDAO createCurrencyDAO() throws SQLException {
-        return null;
+        return new CurrencyDAO(getSession());
     }
 
     @Override
     public BaseDAO createExchangeRateDAO() throws SQLException {
-        return null;
+        return new ExchangeRateDAO(getSession());
     }
 
     @Override

@@ -4,10 +4,8 @@ import by.pwt.pilipenko.payments.dao.resources.ConfigurationManager;
 import by.pwt.pilipenko.payments.dao.resources.MessageManager;
 import by.pwt.pilipenko.payments.services.LoginLogic;
 
-import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.sql.SQLException;
 
 
 public class LoginCommand implements ActionCommand {

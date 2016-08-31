@@ -1,13 +1,13 @@
 package by.pwt.pilipenko.payments.web.command.agreement;
 
 import by.pwt.pilipenko.payments.dao.resources.ConfigurationManager;
+import by.pwt.pilipenko.payments.model.entities.Agreement;
+import by.pwt.pilipenko.payments.model.entities.Bank;
+import by.pwt.pilipenko.payments.model.entities.User;
 import by.pwt.pilipenko.payments.services.AgreementService;
 import by.pwt.pilipenko.payments.services.BankService;
 import by.pwt.pilipenko.payments.services.UserService;
 import by.pwt.pilipenko.payments.web.command.ActionCommand;
-import by.pwt.pilipenko.payments.model.entities.Agreement;
-import by.pwt.pilipenko.payments.model.entities.Bank;
-import by.pwt.pilipenko.payments.model.entities.User;
 
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
