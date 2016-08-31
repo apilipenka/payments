@@ -39,7 +39,7 @@ public class UserRole extends Type {
     }
 
 
-    @ManyToMany(cascade=CascadeType.PERSIST , fetch = FetchType.LAZY)
+    @ManyToMany( cascade=CascadeType.REMOVE, fetch = FetchType.LAZY)
     @JoinTable(name = "user_role_commands", catalog = "payments", joinColumns = {
             @JoinColumn(name = "user_role_id", nullable = false, updatable = false) },
             inverseJoinColumns = { @JoinColumn(name = "command_id",

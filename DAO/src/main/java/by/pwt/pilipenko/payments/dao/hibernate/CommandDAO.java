@@ -16,21 +16,6 @@ public class CommandDAO extends AbstractEntityDAO<Command> {
     }
 
     @Override
-    public boolean update(Command entity) throws SQLException, NamingException {
-        getSession().saveOrUpdate(entity);
-        return true;
-    }
-
-    @Override
-    public boolean delete(int id) throws SQLException, NamingException, ClassNotFoundException {
-
-        Command command = findEntityById(id);
-        getSession().delete(command);
-
-        return false;
-    }
-
-    @Override
     public boolean delete(Command entity) throws SQLException, NamingException {
 
         Query query = getSession().createQuery("delete from Command where command = :command");
@@ -40,13 +25,6 @@ public class CommandDAO extends AbstractEntityDAO<Command> {
         return true;
     }
 
-    @Override
-    public Command findEntityById(int id) throws SQLException, NamingException, ClassNotFoundException {
-
-        Command command = (Command) getSession().get(Command.class, id);
-        return command;
-
-    }
 
     @Override
     public List<Command> findEntityByEntity(Command entity) throws SQLException, NamingException, ClassNotFoundException {
@@ -75,9 +53,4 @@ public class CommandDAO extends AbstractEntityDAO<Command> {
 
     }
 
-    @Override
-    public Command insert(Command entity) throws SQLException, NamingException {
-        getSession().save(entity);
-        return entity;
-    }
 }

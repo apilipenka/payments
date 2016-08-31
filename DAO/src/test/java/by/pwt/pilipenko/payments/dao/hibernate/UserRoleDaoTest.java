@@ -22,6 +22,7 @@ public class UserRoleDaoTest
     private static UserRoleDAO userRoleDAO;
     private static CommandDAO commandDAO;
     private static UserRole userRole1;
+    private static Command command1;
 
 
     @BeforeClass
@@ -48,10 +49,19 @@ public class UserRoleDaoTest
         userRole.setName("Agroprom");
         userRole.setDescription("Test role");
 
-        Command command = commandDAO.findEntityById(26);
-        userRole.addCommand(command);
+
+        Command command = new Command();
+        command.setCommand("TESTLIST");
+        command.setUrl("/jsp/test-list.jsp");
+        command.setLabel("Edit tests");
+        command.setComment("Edit tests");
+
+
+
 
         factory.beginTransaction();
+        command1 = commandDAO.insert(command);
+        userRole.addCommand(command1);
         userRole1 = userRoleDAO.insert(userRole);
         factory.commit();
 
@@ -124,31 +134,19 @@ public class UserRoleDaoTest
         userRole.setName("agroprom");
         userRole.setDescription("Test role");
 
-        Command command = commandDAO.findEntityById(26);
-        userRole.addCommand(command);
-
-
-        Command command11 = new Command();
-        command11.setCommand("TESTLIST");
-        command11.setUrl("/jsp/test-list.jsp");
-        command11.setLabel("Edit tests");
-        command11.setComment("Edit tests");
-        userRole.addCommand(command11);
+        userRole.addCommand(command1);
 
         factory.beginTransaction();
 
 
 
-        //commandDAO.insert(command11);
-
-
-
-
-
+        commandDAO.insert(command1);
         UserRole userRole2 = userRoleDAO.insert(userRole);
-        //factory.commit();
-        //factory.beginTransaction();
+
+        factory.getSession().flush();
+
         userRoleDAO.delete(userRole2);
+
         factory.commit();
 
         List<UserRole> userRoleList2 = userRoleDAO.findEntityByEntity(userRole);

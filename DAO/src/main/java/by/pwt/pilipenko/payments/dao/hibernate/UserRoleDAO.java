@@ -16,32 +16,12 @@ public class UserRoleDAO extends AbstractEntityDAO<UserRole> {
 
 
     @Override
-    public boolean update(UserRole entity) throws SQLException, NamingException {
-        getSession().saveOrUpdate(entity);
-        return true;
-    }
-
-    @Override
-    public boolean delete(int id) throws SQLException, NamingException, ClassNotFoundException {
-        UserRole userRole = findEntityById(id);
-        getSession().delete(userRole);
-
-        return true;
-    }
-
-    @Override
     public boolean delete(UserRole entity) throws SQLException, NamingException {
         Query query = getSession().createQuery("delete from UserRole where name = :name");
         query.setParameter("name", entity.getName());
         int result = query.executeUpdate();
 
         return true;
-    }
-
-    @Override
-    public UserRole findEntityById(int id) throws SQLException, NamingException, ClassNotFoundException {
-        UserRole userRole = (UserRole) getSession().get(UserRole.class, id);
-        return userRole;
     }
 
     @Override
@@ -68,9 +48,4 @@ public class UserRoleDAO extends AbstractEntityDAO<UserRole> {
         return list;
     }
 
-    @Override
-    public UserRole insert(UserRole entity) throws SQLException, NamingException {
-        getSession().save(entity);
-        return entity;
-    }
 }

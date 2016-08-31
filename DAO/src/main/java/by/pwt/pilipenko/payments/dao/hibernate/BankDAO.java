@@ -1,8 +1,9 @@
 package by.pwt.pilipenko.payments.dao.hibernate;
 
 import by.pwt.pilipenko.payments.dao.BaseDAO;
-import by.pwt.pilipenko.payments.dao.jdbc.AbstractEntityDAO;
+import by.pwt.pilipenko.payments.dao.hibernate.AbstractEntityDAO;
 import by.pwt.pilipenko.payments.model.entities.Bank;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import javax.naming.NamingException;
@@ -12,64 +13,44 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class BankDAO implements BaseDAO<Bank> {
+public class BankDAO extends AbstractEntityDAO<Bank> {
 
-
-    Session session;
-
-    public BankDAO() {
-    }
 
     public BankDAO(Session session) {
-        this.session = session;
-    }
-
-    public Session getSession() {
-        return session;
-    }
-
-    public void setSession(Session session) {
-        this.session = session;
-    }
-
-    @Override
-    public boolean update(Bank entity) throws SQLException, NamingException {
-        return false;
-    }
-
-    @Override
-    public boolean delete(int id) throws SQLException, NamingException {
-        return false;
+        super(session);
     }
 
     @Override
     public boolean delete(Bank entity) throws SQLException, NamingException {
-        return false;
-    }
+        Query query = getSession().createQuery("delete from Bank where unn = :name");
+        query.setParameter("unn", entity.getName());
+        int result = query.executeUpdate();
 
-    @Override
-    public Bank findEntityById(int id) throws SQLException, NamingException, ClassNotFoundException {
-        return null;
+        return true;
     }
 
     @Override
     public List<Bank> findEntityByEntity(Bank entity) throws SQLException, NamingException, ClassNotFoundException {
-        return null;
+        Query query = getSession().createQuery("from Bank where unn=COALESCE(:unn, unn)");
+        query.setParameter("unn", entity.getUNN());
+        List<Bank> list = (List<Bank>) query.list();
+        return list;
     }
 
     @Override
     public Bank findEntityByPK(Bank entity) throws SQLException, NamingException, ClassNotFoundException {
-        return null;
+        Query query = getSession().createQuery("from Bank where unn=:name");
+        query.setParameter("unn", entity.getUNN());
+        Bank bank = (Bank) query.uniqueResult();
+        return bank;
     }
 
     @Override
     public List<Bank> findAll() throws SQLException, NamingException, ClassNotFoundException {
-        return null;
+        List<Bank> list;
+
+        list = (List<Bank>) getSession().createQuery("from Bank").list();
+        return list;
     }
 
-    @Override
-    public Bank insert(Bank entity) throws SQLException, NamingException {
-        session.save(entity);
-        return entity;
-    }
 }
