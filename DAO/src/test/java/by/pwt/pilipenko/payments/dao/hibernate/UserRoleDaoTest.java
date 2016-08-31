@@ -48,7 +48,7 @@ public class UserRoleDaoTest
         userRole.setName("Agroprom");
         userRole.setDescription("Test role");
 
-        Command command = commandDAO.findEntityById(24);
+        Command command = commandDAO.findEntityById(26);
         userRole.addCommand(command);
 
         factory.beginTransaction();
@@ -124,13 +124,30 @@ public class UserRoleDaoTest
         userRole.setName("agroprom");
         userRole.setDescription("Test role");
 
-        Command command = commandDAO.findEntityById(24);
+        Command command = commandDAO.findEntityById(26);
         userRole.addCommand(command);
 
+
+        Command command11 = new Command();
+        command11.setCommand("TESTLIST");
+        command11.setUrl("/jsp/test-list.jsp");
+        command11.setLabel("Edit tests");
+        command11.setComment("Edit tests");
+        userRole.addCommand(command11);
+
         factory.beginTransaction();
+
+
+
+        //commandDAO.insert(command11);
+
+
+
+
+
         UserRole userRole2 = userRoleDAO.insert(userRole);
-        factory.commit();
-        factory.beginTransaction();
+        //factory.commit();
+        //factory.beginTransaction();
         userRoleDAO.delete(userRole2);
         factory.commit();
 

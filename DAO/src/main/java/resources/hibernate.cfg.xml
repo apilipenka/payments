@@ -14,6 +14,8 @@
 
         <mapping class="by.pwt.pilipenko.payments.model.entities.Command"/>
         <mapping class="by.pwt.pilipenko.payments.model.entities.UserRole"/>
+        <mapping class="by.pwt.pilipenko.payments.model.entities.ExchangeRate"/>
+        <mapping class="by.pwt.pilipenko.payments.model.entities.Currency"/>
 
 
     </session-factory>
