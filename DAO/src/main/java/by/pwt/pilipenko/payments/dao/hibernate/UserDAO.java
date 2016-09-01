@@ -30,8 +30,7 @@ public class UserDAO extends AbstractEntityDAO<User> {
     public List<User> findEntityByEntity(User entity) throws SQLException, NamingException, ClassNotFoundException {
         Query query = getSession().createQuery("from User where personalNumber=COALESCE(:personalNumber, personalNumber)");
         query.setParameter("personalNumber", entity.getPersonalNumber());
-        List<User> list = (List<User>) query.list();
-        return list;
+        return (List<User>) query.list();
     }
 
     @Override
@@ -39,8 +38,7 @@ public class UserDAO extends AbstractEntityDAO<User> {
 
         Query query = getSession().createQuery("from User where personalNumber=:personalNumber");
         query.setParameter("personalNumber", entity.getPersonalNumber());
-        User user = (User) query.uniqueResult();
-        return user;
+        return (User) query.uniqueResult();
     }
 
     @Override

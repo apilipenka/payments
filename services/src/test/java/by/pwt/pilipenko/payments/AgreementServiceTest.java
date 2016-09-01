@@ -91,13 +91,11 @@ public class AgreementServiceTest
             agreement.setValidFromDate(format.parse("10.01.1907"));
         } catch (ParseException e) {
             //it is not possible
-            ;
         }
         try {
             agreement.setValidToDate(format.parse("10.01.1917"));
         } catch (ParseException e) {
             //it is not possible
-            ;
         }
         agreement.setBank(bank1);
         agreement.setClient(user1);

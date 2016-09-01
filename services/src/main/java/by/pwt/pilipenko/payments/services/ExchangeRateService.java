@@ -1,8 +1,8 @@
 package by.pwt.pilipenko.payments.services;
 
 import by.pwt.pilipenko.payments.dao.BaseDAO;
+import by.pwt.pilipenko.payments.dao.BaseExchangeRateDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
-import by.pwt.pilipenko.payments.dao.jdbc.ExchangeRateDAO;
 import by.pwt.pilipenko.payments.model.entities.Currency;
 import by.pwt.pilipenko.payments.model.entities.ExchangeRate;
 
@@ -68,7 +68,7 @@ public class ExchangeRateService extends AbstractEntityService<ExchangeRate> {
 
 
         BaseDAO<ExchangeRate> exchangeRateDAO = getEntityDAO();
-        List<ExchangeRate> list = ((ExchangeRateDAO) exchangeRateDAO).findEntityByParent(entity);
+        List<ExchangeRate> list = ((BaseExchangeRateDAO) exchangeRateDAO).findEntityByParent(entity);
 
         return list;
 

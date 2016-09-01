@@ -220,9 +220,13 @@ public class AccountServiceTest
         account1 = accountService.getEntity(account1.getId());
         account1.setAmount(100);
         accountService.updateEntity(account1);
-        Account account2 = accountService.getEntity(account1.getId());
+        Account account2 = new Account(); //accountService.getEntity(account1.getId());
+
         account2.setNumber("123321567");
         account2.setAmount(0);
+        account2.setAgreement(agreement1);
+        account2.setCurrency(currency1);
+
         account2 = accountService.insertEntity(account2);
         accountService.transferMoney(account1.getNumber(), account2.getNumber(), 60);
         account1 = accountService.getEntity(account1.getId());

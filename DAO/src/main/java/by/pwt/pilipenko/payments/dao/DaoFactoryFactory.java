@@ -22,7 +22,6 @@ public class DaoFactoryFactory {
     public static void setDaoType(String pDaoType) throws SQLException, NamingException, ClassNotFoundException {
         synchronized (DaoFactoryFactory.class) {
             DaoFactoryFactory.daoType = DAOType.valueOf(pDaoType.toUpperCase());
-            ;
             if (daoType == DAOType.HIBERNATE)
                 instance.set(new by.pwt.pilipenko.payments.dao.hibernate.DAOFactory());
             else

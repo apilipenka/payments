@@ -30,8 +30,7 @@ public class AccountDAO extends AbstractEntityDAO<Account> {
     public List<Account> findEntityByEntity(Account entity) throws SQLException, NamingException, ClassNotFoundException {
         Query query = getSession().createQuery("from Account where number=COALESCE(:number, number)");
         query.setParameter("number", entity.getNumber());
-        List<Account> list = (List<Account>) query.list();
-        return list;
+        return (List<Account>) query.list();
     }
 
     @Override
@@ -39,8 +38,7 @@ public class AccountDAO extends AbstractEntityDAO<Account> {
 
         Query query = getSession().createQuery("from Account where number=:number");
         query.setParameter("number", entity.getNumber());
-        Account account = (Account) query.uniqueResult();
-        return account;
+        return (Account) query.uniqueResult();
     }
 
     @Override

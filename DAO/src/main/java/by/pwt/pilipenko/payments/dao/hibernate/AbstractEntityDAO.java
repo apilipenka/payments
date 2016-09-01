@@ -15,11 +15,11 @@ import java.sql.SQLException;
 public abstract class AbstractEntityDAO<T extends AbstractEntity> implements BaseDAO<T> {
     private Session session;
 
-    public AbstractEntityDAO(Session session) {
+    AbstractEntityDAO(Session session) {
         this.session = session;
     }
 
-    public Session getSession() {
+    Session getSession() {
         return session;
     }
 

@@ -99,13 +99,11 @@ public class CardServiceTest
             agreement.setValidFromDate(format.parse("10.01.1907"));
         } catch (ParseException e) {
             //it is not possible
-            ;
         }
         try {
             agreement.setValidToDate(format.parse("10.01.1917"));
         } catch (ParseException e) {
             //it is not possible
-            ;
         }
         agreement.setBank(bank1);
         agreement.setClient(user1);
@@ -132,7 +130,6 @@ public class CardServiceTest
             card.setValidToDate(format.parse("10.01.2017"));
         } catch (ParseException e) {
             //it is not possible
-            ;
         }
         card.setAccount(account1);
 

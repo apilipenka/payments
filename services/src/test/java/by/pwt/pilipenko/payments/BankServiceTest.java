@@ -39,6 +39,9 @@ public class BankServiceTest
         Bank bank = new Bank();
         bank.setName("Agroprom");
         bank.setUNN("123456123");
+
+
+
         bank1 = bankService.insertEntity(bank);
 
 
@@ -51,7 +54,7 @@ public class BankServiceTest
     @Test
     public void test2FindByEntity() throws SQLException, NamingException, ClassNotFoundException {
 
-        List<Bank> bankList1 = new ArrayList<Bank>();
+        List<Bank> bankList1 = new ArrayList<>();
         bankList1.add(bank1);
 
 

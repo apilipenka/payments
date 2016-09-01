@@ -67,7 +67,7 @@ public class UserRoleCommandServiceTest
         UserRoleCommand userRoleCommand = new UserRoleCommand();
         userRoleCommand.setUserRole(userRole1);
         userRoleCommand.setCommand(command1);
-
+        userRole.addCommand(command1);
 
         userRoleCommand1 = userRoleCommandService.insertEntity(userRoleCommand);
 

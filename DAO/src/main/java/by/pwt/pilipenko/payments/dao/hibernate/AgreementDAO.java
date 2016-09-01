@@ -30,8 +30,7 @@ public class AgreementDAO extends AbstractEntityDAO<Agreement> {
     public List<Agreement> findEntityByEntity(Agreement entity) throws SQLException, NamingException, ClassNotFoundException {
         Query query = getSession().createQuery("from Agreement where number=COALESCE(:number, number)");
         query.setParameter("number", entity.getNumber());
-        List<Agreement> list = (List<Agreement>) query.list();
-        return list;
+        return (List<Agreement>) query.list();
     }
 
     @Override
@@ -39,8 +38,7 @@ public class AgreementDAO extends AbstractEntityDAO<Agreement> {
 
         Query query = getSession().createQuery("from Agreement where number=:number");
         query.setParameter("number", entity.getNumber());
-        Agreement agreement = (Agreement) query.uniqueResult();
-        return agreement;
+        return (Agreement) query.uniqueResult();
     }
 
     @Override

@@ -25,9 +25,4 @@ public interface BaseDAO<E extends AbstractEntity> {
 
     E insert(E entity) throws SQLException, NamingException;
 
-    //void closeConnection() throws SQLException;
-
-    //Connection getConnection() throws SQLException;
-
-
 }

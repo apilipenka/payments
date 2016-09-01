@@ -13,6 +13,8 @@ abstract class AbstractDAOFactory implements BaseDAOFactory {
     private DataSource dataSource;
     private Connection connection;
 
+    private static ThreadLocal<Boolean> flags = new ThreadLocal<>();
+
     DataSource getDataSource() {
         return dataSource;
     }
@@ -21,7 +23,7 @@ abstract class AbstractDAOFactory implements BaseDAOFactory {
         this.dataSource = dataSource;
     }
 
-    public Connection getConnection() throws SQLException {
+    Connection getConnection() throws SQLException {
         Connection localInstance = connection;
 
         if (localInstance == null) {
@@ -31,7 +33,7 @@ abstract class AbstractDAOFactory implements BaseDAOFactory {
                 if (localInstance == null) {
                     connection = dataSource.getConnection();
                     localInstance = connection;
-
+                    flags.set(new Boolean(false));
                 }
 
             }
@@ -42,25 +44,39 @@ abstract class AbstractDAOFactory implements BaseDAOFactory {
 
     }
 
-    public void setConnection(Connection connection) {
+    void setConnection(Connection connection) {
         this.connection = connection;
     }
 
     public void commit() throws SQLException {
         connection.commit();
+        flags.set(new Boolean(false));
     }
 
     public void rollback() throws SQLException {
         connection.rollback();
+        flags.set(new Boolean(false));
     }
 
     public void beginTransaction() throws SQLException {
         connection.setAutoCommit(false);
+        flags.set(new Boolean(true));
     }
 
     public void endTransaction() throws SQLException {
         connection.setAutoCommit(true);
+        flags.set(new Boolean(false));
     }
+
+
+    public boolean isParentTransactionStarted() {
+        Boolean flag = flags.get();
+        if (flag!=null)
+            return flags.get().booleanValue();
+        flags.set(new Boolean(false));
+        return false;
+    }
+
 
 
 }

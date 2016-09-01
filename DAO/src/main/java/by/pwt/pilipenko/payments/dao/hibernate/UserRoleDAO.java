@@ -28,16 +28,14 @@ public class UserRoleDAO extends AbstractEntityDAO<UserRole> {
     public List<UserRole> findEntityByEntity(UserRole entity) throws SQLException, NamingException, ClassNotFoundException {
         Query query = getSession().createQuery("from UserRole where name=COALESCE(:name, name)");
         query.setParameter("name", entity.getName());
-        List<UserRole> list = (List<UserRole>) query.list();
-        return list;
+        return (List<UserRole>) query.list();
     }
 
     @Override
     public UserRole findEntityByPK(UserRole entity) throws SQLException, NamingException, ClassNotFoundException {
         Query query = getSession().createQuery("from UserRole where name=:name");
         query.setParameter("name", entity.getName());
-        UserRole userRole = (UserRole) query.uniqueResult();
-        return userRole;
+        return (UserRole) query.uniqueResult();
     }
 
     @Override

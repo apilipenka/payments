@@ -42,8 +42,7 @@ public class AccountListCommand implements ActionCommand {
                 accountVOList.add(account.createAccountVO());
             }
 
-            if (accountVOList != null)
-                request.setAttribute("accountList", accountVOList);
+            request.setAttribute("accountList", accountVOList);
         }
         return page;
     }

@@ -65,7 +65,6 @@ public class ExchangeRateServiceTest
             exchangeRate.setRateDate(format.parse("10.01.1907"));
         } catch (ParseException e) {
             //it is not possible
-            ;
         }
 
         exchangeRate.setCurrency(currency1);

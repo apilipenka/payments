@@ -145,7 +145,7 @@ public class Account extends AbstractEntity {
     }
 
     public void addCards(Set<Card> cards) {
-        cards.addAll(cards);
+        this.cards.addAll(cards);
     }
 
 
@@ -154,12 +154,12 @@ public class Account extends AbstractEntity {
     }
 
     public List<Card> findAccounts(Card card) {
-        List<Card> finded = new ArrayList<>();
+        List<Card> list = new ArrayList<>();
         for (Card icard : cards) {
             if ((card.getNumber() != null && card.getNumber().equals(icard.getNumber())))
-                finded.add(icard);
+                list.add(icard);
         }
-        return finded;
+        return list;
     }
 
 

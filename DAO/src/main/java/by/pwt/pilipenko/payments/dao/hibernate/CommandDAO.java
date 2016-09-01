@@ -30,8 +30,7 @@ public class CommandDAO extends AbstractEntityDAO<Command> {
     public List<Command> findEntityByEntity(Command entity) throws SQLException, NamingException, ClassNotFoundException {
         Query query = getSession().createQuery("from Command where command=COALESCE(:command, command)");
         query.setParameter("command", entity.getCommand());
-        List<Command> list = (List<Command>) query.list();
-        return list;
+        return (List<Command>) query.list();
     }
 
     @Override
@@ -39,8 +38,7 @@ public class CommandDAO extends AbstractEntityDAO<Command> {
 
         Query query = getSession().createQuery("from Command where command=:command");
         query.setParameter("command", entity.getCommand());
-        Command command = (Command) query.uniqueResult();
-        return command;
+        return (Command) query.uniqueResult();
     }
 
     @Override

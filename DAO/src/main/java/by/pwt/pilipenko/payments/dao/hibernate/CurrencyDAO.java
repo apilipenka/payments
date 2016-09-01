@@ -29,8 +29,7 @@ public class CurrencyDAO extends AbstractEntityDAO<Currency> {
     public List<Currency> findEntityByEntity(Currency entity) throws SQLException, NamingException, ClassNotFoundException {
         Query query = getSession().createQuery("from Currency where mnemoCode = :mnemoCode");
         query.setParameter("mnemoCode", entity.getMnemoCode());
-        List<Currency> list = (List<Currency>) query.list();
-        return list;
+        return (List<Currency>) query.list();
     }
 
     @Override
@@ -38,8 +37,7 @@ public class CurrencyDAO extends AbstractEntityDAO<Currency> {
 
         Query query = getSession().createQuery("from Currency where mnemoCode = :mnemoCode");
         query.setParameter("mnemoCode", entity.getMnemoCode());
-        Currency command = (Currency) query.uniqueResult();
-        return command;
+        return (Currency) query.uniqueResult();
     }
 
     @Override

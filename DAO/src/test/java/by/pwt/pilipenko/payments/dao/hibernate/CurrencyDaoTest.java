@@ -125,7 +125,7 @@ public class CurrencyDaoTest
             currencyDAO.delete(currency1.getId());
             DaoFactoryFactory.getInstance().commit();
 
-            Currency currency2 = (Currency) currencyDAO.findEntityById(currency1.getId());
+            Currency currency2 = currencyDAO.findEntityById(currency1.getId());
 
             assertNull(currency2);
         } catch (SQLException | NamingException | ClassNotFoundException e) {

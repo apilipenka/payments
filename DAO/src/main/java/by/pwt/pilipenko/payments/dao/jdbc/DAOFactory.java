@@ -50,7 +50,7 @@ public class DAOFactory extends AbstractDAOFactory {
 
 
             poolableConnectionFactory.setPool(connectionPool);
-            setDataSource((DataSource) new PoolingDataSource<>(connectionPool));
+            setDataSource(new PoolingDataSource<>(connectionPool));
             setConnection(getDataSource().getConnection());
 
         }

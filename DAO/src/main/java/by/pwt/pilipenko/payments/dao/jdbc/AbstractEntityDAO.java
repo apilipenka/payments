@@ -22,7 +22,7 @@ public abstract class AbstractEntityDAO<T extends AbstractEntity> implements Bas
     private String updateStatement = null;
     private String insertStatement = null;
 
-    public AbstractEntityDAO(Connection connection, String entityName, String tableName) {
+    AbstractEntityDAO(Connection connection, String entityName, String tableName) {
         super();
         this.connection = connection;
 
@@ -220,7 +220,7 @@ public abstract class AbstractEntityDAO<T extends AbstractEntity> implements Bas
         return entities;
     }
 
-    public Connection getConnection() {
+    Connection getConnection() {
 
         return connection;
     }

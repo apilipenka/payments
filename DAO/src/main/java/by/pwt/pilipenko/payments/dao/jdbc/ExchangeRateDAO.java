@@ -1,6 +1,7 @@
 package by.pwt.pilipenko.payments.dao.jdbc;
 
 import by.pwt.pilipenko.payments.dao.BaseDAO;
+import by.pwt.pilipenko.payments.dao.BaseExchangeRateDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.dao.resources.QueriesManager;
 import by.pwt.pilipenko.payments.model.entities.Currency;
@@ -13,7 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class ExchangeRateDAO extends AbstractEntityDAO<ExchangeRate> {
+public class ExchangeRateDAO extends AbstractEntityDAO<ExchangeRate> implements BaseExchangeRateDAO<ExchangeRate> {
 
     private String selectByParentStatement = null;
 
@@ -82,7 +83,7 @@ public class ExchangeRateDAO extends AbstractEntityDAO<ExchangeRate> {
         return statement;
     }
 
-    protected PreparedStatement prepareSelectByParentStatement(ExchangeRate entity, PreparedStatement statement)
+    private PreparedStatement prepareSelectByParentStatement(ExchangeRate entity, PreparedStatement statement)
             throws SQLException {
 
         if (entity.getCurrency() != null)

@@ -30,8 +30,7 @@ public class CardDAO extends AbstractEntityDAO<Card> {
     public List<Card> findEntityByEntity(Card entity) throws SQLException, NamingException, ClassNotFoundException {
         Query query = getSession().createQuery("from Card where number=COALESCE(:number, number)");
         query.setParameter("number", entity.getNumber());
-        List<Card> list = (List<Card>) query.list();
-        return list;
+        return (List<Card>) query.list();
     }
 
     @Override
@@ -39,8 +38,7 @@ public class CardDAO extends AbstractEntityDAO<Card> {
 
         Query query = getSession().createQuery("from Card where number=:number");
         query.setParameter("number", entity.getNumber());
-        Card card = (Card) query.uniqueResult();
-        return card;
+        return (Card) query.uniqueResult();
     }
 
     @Override

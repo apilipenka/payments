@@ -6,41 +6,45 @@ import java.sql.SQLException;
 public interface BaseDAOFactory {
 
 
-    public abstract void beginTransaction() throws SQLException;
+    void beginTransaction() throws SQLException;
 
-    public abstract void endTransaction() throws SQLException;
+    void endTransaction() throws SQLException;
 
-    public abstract void commit() throws SQLException;
+    void commit() throws SQLException;
 
-    public abstract void rollback() throws SQLException;
+    void rollback() throws SQLException;
 
-    public abstract BaseDAO createAddressTypeDAO() throws SQLException;
+    boolean isParentTransactionStarted();
 
-    public abstract BaseDAO createPhoneTypeDAO() throws SQLException;
+    BaseDAO createAddressTypeDAO() throws SQLException;
 
-    public abstract BaseDAO createDocumentTypeDAO() throws SQLException;
+    BaseDAO createPhoneTypeDAO() throws SQLException;
 
-    public abstract BaseDAO createUserDAO() throws SQLException;
+    BaseDAO createDocumentTypeDAO() throws SQLException;
 
-    public abstract BaseDAO createTypeDAO(String entityName, String tableName) throws SQLException;
+    BaseDAO createUserDAO() throws SQLException;
+
+    BaseDAO createTypeDAO(String entityName, String tableName) throws SQLException;
 
 
-    public abstract BaseDAO createBankDAO() throws SQLException;
+    BaseDAO createBankDAO() throws SQLException;
 
 
-    public abstract BaseDAO createCurrencyDAO() throws SQLException;
+    BaseDAO createCurrencyDAO() throws SQLException;
 
-    public abstract BaseDAO createExchangeRateDAO() throws SQLException;
+    BaseDAO createExchangeRateDAO() throws SQLException;
 
-    public abstract BaseDAO createAgreementDAO() throws SQLException;
+    BaseDAO createAgreementDAO() throws SQLException;
 
-    public abstract BaseDAO createAccountDAO() throws SQLException;
+    BaseDAO createAccountDAO() throws SQLException;
 
-    public abstract BaseDAO createCardDAO() throws SQLException;
+    BaseDAO createCardDAO() throws SQLException;
 
-    public abstract BaseDAO createUserRoleDAO() throws SQLException;
+    BaseDAO createUserRoleDAO() throws SQLException;
 
-    public abstract BaseDAO createCommandDAO() throws SQLException;
+    BaseDAO createCommandDAO() throws SQLException;
 
-    public abstract BaseDAO createUserRoleCommandDAO() throws SQLException;
+    BaseDAO createUserRoleCommandDAO() throws SQLException;
+
+
 }
