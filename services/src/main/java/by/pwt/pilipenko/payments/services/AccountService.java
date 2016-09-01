@@ -49,6 +49,7 @@ public class AccountService extends AbstractEntityService<Account> {
     }
 
     public void transferMoney(String creditAccountNumber, String debitAccountNumber, double amount) throws Exception {
+
         Account account = new Account();
         account.setNumber(creditAccountNumber);
         Account creditAccount = this.getEntityByPK(account);

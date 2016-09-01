@@ -70,6 +70,9 @@ public class AccountServiceTest
 
     @Test
     public void test1GetEntity() throws Exception {
+        /*Account acc = new Account();
+        acc.setNumber("197777719");
+        acc = accountService.getEntityByPK(acc);*/
 
         Bank bank = new Bank();
         bank.setName("Agroprom");
@@ -217,18 +220,18 @@ public class AccountServiceTest
     @Test
     public void test63transferMoney() throws Exception {
 
-        account1 = accountService.getEntity(account1.getId());
-        account1.setAmount(100);
-        accountService.updateEntity(account1);
-        Account account2 = new Account(); //accountService.getEntity(account1.getId());
+        Account account3 = accountService.getEntity(account1.getId());
+        account3.setAmount(100);
+        accountService.updateEntity(account3);
 
+        Account account2 = new Account(); //accountService.getEntity(account1.getId());
         account2.setNumber("123321567");
         account2.setAmount(0);
         account2.setAgreement(agreement1);
         account2.setCurrency(currency1);
 
         account2 = accountService.insertEntity(account2);
-        accountService.transferMoney(account1.getNumber(), account2.getNumber(), 60);
+        accountService.transferMoney(account3.getNumber(), account2.getNumber(), 60);
         account1 = accountService.getEntity(account1.getId());
         account2 = accountService.getEntity(account2.getId());
         assertEquals(40, account1.getAmount(), 0);

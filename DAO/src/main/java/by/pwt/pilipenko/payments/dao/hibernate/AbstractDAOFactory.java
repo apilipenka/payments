@@ -50,7 +50,8 @@ abstract class AbstractDAOFactory implements BaseDAOFactory {
                         flags.set(new Boolean(false));
                     } catch (Throwable ex) {
                         log.error("Initial SessionFactory creation failed. " + ex);
-                        System.exit(0);
+                        //System.exit(0);
+                        throw ex;
                     }
 
 

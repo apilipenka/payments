@@ -48,7 +48,7 @@ public class ExchangeRate extends AbstractEntity {
         this.rate = rate;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "currency_id", nullable = false)
     public Currency getCurrency() {
         return currency;
@@ -59,7 +59,7 @@ public class ExchangeRate extends AbstractEntity {
         this.currency = currency;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "target_currency_id", nullable = false)
     public Currency getTargetCurrency() {
         return targetCurrency;
@@ -111,8 +111,8 @@ public class ExchangeRate extends AbstractEntity {
 
     @Override
     public String toString() {
-        return "ExchangeRate [id=" + getId() + ", rateDate=" + rateDate + ", rate=" + rate + ", currency=" + currency
-                + "]";
+        return "ExchangeRate [id=" + getId() + ", rateDate=" + rateDate + ", rate=" + rate + ", currency=" + currency.getMnemoCode()
+                + ", targetCurrency=" + targetCurrency.getMnemoCode() + "]";
     }
 
     public ExchangeRateVO createExchangeRateVO() {

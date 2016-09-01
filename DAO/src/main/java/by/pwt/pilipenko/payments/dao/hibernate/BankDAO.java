@@ -23,6 +23,8 @@ class BankDAO extends AbstractEntityDAO<Bank> {
         return result == 1;
     }
 
+
+
     @Override
     public List<Bank> findEntityByEntity(Bank entity) throws SQLException, NamingException, ClassNotFoundException {
         Query query = getSession().createQuery("from Bank where name=COALESCE(:name, name) and unn=COALESCE(:unn, unn)");

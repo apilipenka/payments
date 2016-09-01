@@ -58,7 +58,7 @@ public class AddExchangeRateCommand implements ActionCommand {
             ExchangeRateService exchangeRateService = new ExchangeRateService();
 
             exchangeRate1 = exchangeRateService.insertEntity(exchangeRate);
-            page = ConfigurationManager.getProperty("path.page.echangeRateList");
+            page = ConfigurationManager.getProperty("path.page.exchangeRateList");
 
             request.getSession().setAttribute("success", "true");
 

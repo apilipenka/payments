@@ -23,6 +23,7 @@ public class AccountDaoTest
     private static AccountDAO accountDAO;
     private static CurrencyDAO currencyDAO;
     private static AgreementDAO agreementDAO;
+    private static ExchangeRateDAO exchangeRateDAO;
     private static BankDAO bankDAO;
     private static UserDAO userDAO;
     private static UserRoleDAO userRoleDAO;
@@ -33,6 +34,7 @@ public class AccountDaoTest
     private static Agreement agreement1;
     private static Account account1;
     private static Currency currency1;
+    private static ExchangeRate exchangeRate1;
 
     @BeforeClass
     public static void init() throws NamingException, ClassNotFoundException, SQLException {
@@ -45,6 +47,7 @@ public class AccountDaoTest
         agreementDAO = (AgreementDAO) DaoFactoryFactory.getInstance().createAgreementDAO();
         currencyDAO = (CurrencyDAO) DaoFactoryFactory.getInstance().createCurrencyDAO();
         accountDAO = (AccountDAO) DaoFactoryFactory.getInstance().createAccountDAO();
+        exchangeRateDAO = (ExchangeRateDAO) DaoFactoryFactory.getInstance().createExchangeRateDAO();
 
     }
 
@@ -56,6 +59,7 @@ public class AccountDaoTest
             bankDAO.delete(bank1);
             userDAO.delete(user1);
             userRoleDAO.delete(userRole1);
+            exchangeRateDAO.delete(exchangeRate1);
             currencyDAO.delete(currency1);
             DaoFactoryFactory.getInstance().commit();
         } catch (SQLException | NamingException | ClassNotFoundException e) {
@@ -121,6 +125,15 @@ public class AccountDaoTest
             currency.setName("Russian rubble");
             currency1 = currencyDAO.insert(currency);
 
+            ExchangeRate exchangeRate = new ExchangeRate();
+            exchangeRate.setRateDate(format.parse("10.01.1907"));
+            exchangeRate.setRate(1);
+            exchangeRate.setCurrency(currency1);
+            exchangeRate.setTargetCurrency(currency1);
+            currency1.addExchangeRate(exchangeRate);
+
+            exchangeRate1 = exchangeRateDAO.insert(exchangeRate);
+
             Account account = new Account();
             account.setNumber("197777719");
             account.setAmount(19999);
@@ -153,6 +166,9 @@ public class AccountDaoTest
 
     @Test
     public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
+
+
+
         Account account2 = accountDAO.findEntityByPK(account1);
         assertEquals(account1, account2);
 

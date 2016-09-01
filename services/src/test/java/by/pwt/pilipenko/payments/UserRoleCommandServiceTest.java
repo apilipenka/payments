@@ -49,6 +49,7 @@ public class UserRoleCommandServiceTest
     }
 
     @Test
+    @Ignore
     public void test1GetEntity() throws Exception {
 
         UserRole userRole = new UserRole();
@@ -78,6 +79,7 @@ public class UserRoleCommandServiceTest
     }
 
     @Test
+    @Ignore
     public void test2FindByEntity() throws Exception {
 
         List<UserRoleCommand> userRoleCommandList1 = new ArrayList<UserRoleCommand>();
@@ -92,6 +94,7 @@ public class UserRoleCommandServiceTest
 
 
     @Test
+    @Ignore
     public void test6FindEntityByPK() throws Exception {
 
         UserRoleCommand userRoleCommand2 = userRoleCommandService.getEntityByPK(userRoleCommand1);
@@ -102,6 +105,7 @@ public class UserRoleCommandServiceTest
 
 
     @Test
+    @Ignore
     public void test7Update() throws Exception {
 
         UserRole userRole = new UserRole();
@@ -120,6 +124,7 @@ public class UserRoleCommandServiceTest
 
 
     @Test
+    @Ignore
     public void test8DeleteById() throws Exception {
 
         userRoleCommandService.deleteEntity(userRoleCommand1.getId());

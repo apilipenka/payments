@@ -62,7 +62,7 @@ public class UpdateExchangeRateCommand implements ActionCommand {
             if (flag) {
                 request.getSession().setAttribute("success", "true");
 
-                page = ConfigurationManager.getProperty("path.page.echangeRateList");
+                page = ConfigurationManager.getProperty("path.page.exchangeRateList");
 
                 request.getSession().setAttribute("message", "The exchange reate has been successfully updated.");
             }

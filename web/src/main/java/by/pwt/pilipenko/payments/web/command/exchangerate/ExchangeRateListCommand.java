@@ -16,18 +16,18 @@ import java.util.List;
 public class ExchangeRateListCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws Exception {
-        String page = ConfigurationManager.getProperty("path.page.echangeRateList");
+        String page = ConfigurationManager.getProperty("path.page.exchangeRateList");
 
         ExchangeRateService exchangeRateService = new ExchangeRateService();
-        Object name = request.getAttribute("echangeRateName");
+        Object name = request.getAttribute("exchangeRateName");
 
-        List<ExchangeRate> exchangeRateList = new ArrayList<ExchangeRate>();
+        List<ExchangeRate> exchangeRateList;
 
 
         if (name != null) {
             exchangeRateList = exchangeRateService.searchEntityByName(name.toString());
         } else {
-            name = request.getParameter("echangeRateName");
+            name = request.getParameter("exchangeRateName");
             if (name != null) {
                 exchangeRateList = exchangeRateService.searchEntityByName(name.toString());
             } else {
@@ -37,7 +37,7 @@ public class ExchangeRateListCommand implements ActionCommand {
 
 
         if (exchangeRateList != null) {
-            List<ExchangeRateVO> userVOList = new ArrayList<ExchangeRateVO>();
+            List<ExchangeRateVO> userVOList = new ArrayList<>();
 
             for (ExchangeRate exchangeRate : exchangeRateList) {
                 userVOList.add(exchangeRate.createExchangeRateVO());

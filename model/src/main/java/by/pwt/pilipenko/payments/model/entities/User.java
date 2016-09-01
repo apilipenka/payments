@@ -85,7 +85,7 @@ public class User extends AbstractEntity {
         this.personalNumber = personalNumber;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_role_id", nullable = false, updatable = false)
     public UserRole getUserRole() {
         return userRole;
@@ -193,7 +193,7 @@ public class User extends AbstractEntity {
     }
 
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
+    @OneToMany(mappedBy = "client")
     public Set<Agreement> getAgreements() {
         return agreements;
     }

@@ -60,8 +60,7 @@ public class Currency extends AbstractEntity {
     public void setName(String name) {
         this.name = name;
     }
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "currency")
+    @OneToMany(mappedBy = "currency", fetch=FetchType.EAGER)
     public Set<ExchangeRate> getRates() {
         return rates;
     }
@@ -71,7 +70,7 @@ public class Currency extends AbstractEntity {
         this.rates = rates;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "currencies")
+
     public ExchangeRate getExchangeRate(Date date, Currency targetCurrency) {
         for (ExchangeRate exchangeRate : rates) {
             if (exchangeRate.getRateDate().equals(date) && exchangeRate.getCurrency().equals(targetCurrency)) {

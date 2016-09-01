@@ -37,6 +37,12 @@ public abstract class AbstractEntityDAO<T extends AbstractEntity> implements Bas
 
     }
 
+    public T loadEntity(int id) throws SQLException, NamingException, ClassNotFoundException {
+
+        return (T) getSession().load(getPersistentClass(), id);
+
+    }
+
     public boolean update(T entity) throws SQLException, NamingException {
         getSession().saveOrUpdate(entity);
         return true;

@@ -57,7 +57,7 @@ public class Card extends AbstractEntity {
         this.validToDate = validToDate;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "accounts_id", nullable = false)
     public Account getAccount() {
         return account;

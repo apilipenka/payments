@@ -28,6 +28,12 @@ public abstract class AbstractEntityService<T extends AbstractEntity> {
 
     }
 
+    public T loadEntity(int id) throws Exception {
+        BaseDAO<T> entityDAO = getEntityDAO();
+        return entityDAO.loadEntity(id);
+
+    }
+
     public T getEntityByPK(T entity) throws Exception {
         BaseDAO<T> entityDAO = getEntityDAO();
         entity = entityDAO.findEntityByPK(entity);

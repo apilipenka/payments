@@ -66,7 +66,7 @@ public class Agreement extends AbstractEntity {
         this.validToDate = validToDate;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "bank_id", nullable = false)
     public Bank getBank() {
         return bank;
@@ -76,7 +76,7 @@ public class Agreement extends AbstractEntity {
         this.bank = bank;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     public User getClient() {
         return client;
@@ -138,10 +138,10 @@ public class Agreement extends AbstractEntity {
     @Override
     public String toString() {
         return "Agreement [id=" + getId() + ", number=" + number + ", validFromDate=" + validFromDate + ", validToDate="
-                + validToDate + ", bank=" + bank + ", client=" + client + ", accounts=" + accounts + "]";
+                + validToDate + ", bank=" + bank.getName() + ", client=" + client.getLogin() + ", accounts=" + accounts + "]";
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "agreement")
+    @OneToMany(mappedBy = "agreement")
     public Set<Account> getAccounts() {
         return accounts;
     }

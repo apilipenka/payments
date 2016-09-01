@@ -111,6 +111,10 @@ public abstract class AbstractEntityDAO<T extends AbstractEntity> implements Bas
         }
     }
 
+    public T loadEntity(int id) throws Exception {
+        return null;
+    }
+
     public T findEntityById(int id) throws SQLException, NamingException, ClassNotFoundException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;

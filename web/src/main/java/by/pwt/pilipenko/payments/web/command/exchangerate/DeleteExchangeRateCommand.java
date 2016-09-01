@@ -28,7 +28,7 @@ public class DeleteExchangeRateCommand implements ActionCommand {
 
             request.getSession().setAttribute("success", "true");
 
-            page = ConfigurationManager.getProperty("path.page.echangeRateList");
+            page = ConfigurationManager.getProperty("path.page.exchangeRateList");
 
             request.getSession().setAttribute("message", "The exchange rate has been successfully deleted.");
 
@@ -36,7 +36,7 @@ public class DeleteExchangeRateCommand implements ActionCommand {
             e.printStackTrace();
         } catch (Exception e) {
             error = e.getMessage();
-            page = ConfigurationManager.getProperty("path.page.echangeRateList");
+            page = ConfigurationManager.getProperty("path.page.exchangeRateList");
             request.setAttribute("error", error);
             request.setAttribute("command", "EXCHANGERATELIST");
             request.getSession().setAttribute("success", "false");

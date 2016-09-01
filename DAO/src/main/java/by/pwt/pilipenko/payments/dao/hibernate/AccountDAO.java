@@ -1,5 +1,6 @@
 package by.pwt.pilipenko.payments.dao.hibernate;
 
+import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.model.entities.Account;
 import org.hibernate.Query;
 import org.hibernate.Session;

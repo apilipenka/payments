@@ -36,8 +36,8 @@ public class UserDAO extends AbstractEntityDAO<User> {
     @Override
     public User findEntityByPK(User entity) throws SQLException, NamingException, ClassNotFoundException {
 
-        Query query = getSession().createQuery("from User where personalNumber=:personalNumber");
-        query.setParameter("personalNumber", entity.getPersonalNumber());
+        Query query = getSession().createQuery("from User where login=:login");
+        query.setParameter("login", entity.getLogin());
         return (User) query.uniqueResult();
     }
 
