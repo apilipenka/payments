@@ -24,11 +24,11 @@ public class ExchangeRateListCommand implements ActionCommand {
         List<ExchangeRate> exchangeRateList;
 
 
-        if (name != null) {
+        if (name != null && ! name.equals("")) {
             exchangeRateList = exchangeRateService.searchEntityByName(name.toString());
         } else {
             name = request.getParameter("exchangeRateName");
-            if (name != null) {
+            if (name != null && ! name.equals("")) {
                 exchangeRateList = exchangeRateService.searchEntityByName(name.toString());
             } else {
                 exchangeRateList = exchangeRateService.getAllEntities();
