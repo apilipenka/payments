@@ -30,7 +30,7 @@ public class DAOFactory extends AbstractDAOFactory {
 
     @Override
     public BaseDAO createUserDAO() throws SQLException {
-        return null;
+        return new UserDAO(getSession());
     }
 
     @Override

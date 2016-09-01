@@ -40,7 +40,7 @@ public class User extends AbstractEntity {
 
     }
 
-    @Column(name = "number", columnDefinition = "VARCHAR2(45) NOT NULL")
+    @Column(name = "login", columnDefinition = "VARCHAR2(45) NOT NULL")
     public String getLogin() {
         return login;
     }
@@ -81,12 +81,8 @@ public class User extends AbstractEntity {
         this.personalNumber = personalNumber;
     }
 
-    @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    @JoinTable(name = "user_role", joinColumns = {
-            @JoinColumn(name = "user_role_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "id",
-                    nullable = false, updatable = false)}
-    )
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_role_id", nullable = false, updatable = false)
     public UserRole getUserRole() {
         return userRole;
     }

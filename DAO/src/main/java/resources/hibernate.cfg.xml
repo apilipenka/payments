@@ -20,6 +20,7 @@
         <mapping class="by.pwt.pilipenko.payments.model.entities.User"/>
         <mapping class="by.pwt.pilipenko.payments.model.entities.Account"/>
         <mapping class="by.pwt.pilipenko.payments.model.entities.Card"/>
+
     </session-factory>
 </hibernate-configuration>
 

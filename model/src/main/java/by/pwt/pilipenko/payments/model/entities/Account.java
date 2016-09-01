@@ -63,12 +63,8 @@ public class Account extends AbstractEntity {
         this.agreement = agreement;
     }
 
-    @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    @JoinTable(name = "currencies", joinColumns = {
-            @JoinColumn(name = "currency_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "id",
-                    nullable = false, updatable = false)}
-    )
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "currency_id", nullable = false, updatable = false)
     public Currency getCurrency() {
         return currency;
     }
