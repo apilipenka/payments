@@ -37,7 +37,7 @@ public class ExchangeRateServiceTest
     }
 
     @AfterClass
-    public static void tearDownToHexStringData() throws SQLException, ClassNotFoundException, NamingException {
+    public static void close() throws SQLException, ClassNotFoundException, NamingException {
         currencyService.deleteEntity(currency1.getId());
 
 

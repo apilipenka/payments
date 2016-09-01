@@ -40,7 +40,7 @@ public class DAOFactory extends AbstractDAOFactory {
 
     @Override
     public BaseDAO createBankDAO() throws SQLException {
-        return null;
+        return new BankDAO(getSession());
     }
 
     @Override
@@ -55,17 +55,17 @@ public class DAOFactory extends AbstractDAOFactory {
 
     @Override
     public BaseDAO createAgreementDAO() throws SQLException {
-        return null;
+        return new AgreementDAO(getSession());
     }
 
     @Override
     public BaseDAO createAccountDAO() throws SQLException {
-        return null;
+        return new AccountDAO(getSession());
     }
 
     @Override
     public BaseDAO createCardDAO() throws SQLException {
-        return null;
+        return new CardDAO(getSession());
     }
 
     @Override

@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 @Entity
 @Table(name = "cards")
 public class Card extends AbstractEntity {
@@ -27,6 +28,7 @@ public class Card extends AbstractEntity {
         this.validToDate = validToDate;
         this.account = account;
     }
+
     @Column(name = "number", columnDefinition = "VARCHAR2(45) NOT NULL UNIQUE")
     public String getNumber() {
         return number;
@@ -35,6 +37,7 @@ public class Card extends AbstractEntity {
     public void setNumber(String number) {
         this.number = number;
     }
+
     @Column(name = "name", columnDefinition = "VARCHAR2(100) NOT NULL")
     public String getName() {
         return name;
@@ -43,6 +46,7 @@ public class Card extends AbstractEntity {
     public void setName(String name) {
         this.name = name;
     }
+
     @Temporal(TemporalType.DATE)
     @Column(name = "valid_to_date", nullable = false, length = 10)
     public Date getValidToDate() {
@@ -52,6 +56,7 @@ public class Card extends AbstractEntity {
     public void setValidToDate(Date validToDate) {
         this.validToDate = validToDate;
     }
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accounts_id", nullable = false)
     public Account getAccount() {

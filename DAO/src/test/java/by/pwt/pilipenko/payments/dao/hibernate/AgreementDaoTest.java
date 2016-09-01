@@ -1,6 +1,8 @@
 package by.pwt.pilipenko.payments.dao.hibernate;
 
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
+import by.pwt.pilipenko.payments.model.entities.Agreement;
+import by.pwt.pilipenko.payments.model.entities.Bank;
 import by.pwt.pilipenko.payments.model.entities.User;
 import by.pwt.pilipenko.payments.model.entities.UserRole;
 import org.junit.*;
@@ -18,21 +20,25 @@ import java.util.List;
  * Unit test for simple App.
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class UserDaoTest
+public class AgreementDaoTest
         extends Assert {
 
+    private static AgreementDAO agreementDAO;
+    private static BankDAO bankDAO;
     private static UserDAO userDAO;
     private static UserRoleDAO userRoleDAO;
-    //private static User user;
+    private static Bank bank1;
     private static User user1;
     private static UserRole userRole1;
+    private static Agreement agreement1;
 
     @BeforeClass
     public static void init() throws NamingException, ClassNotFoundException, SQLException {
         DaoFactoryFactory.setDaoType("hibernate");
-        userDAO = (UserDAO) DaoFactoryFactory.getInstance().createUserDAO();
+        bankDAO = (BankDAO) DaoFactoryFactory.getInstance().createBankDAO();
         userRoleDAO = (UserRoleDAO) DaoFactoryFactory.getInstance().createUserRoleDAO();
-
+        userDAO = (UserDAO) DaoFactoryFactory.getInstance().createUserDAO();
+        agreementDAO = (AgreementDAO) DaoFactoryFactory.getInstance().createAgreementDAO();
 
     }
 
@@ -40,20 +46,26 @@ public class UserDaoTest
     public static void close() throws SQLException, NamingException, ClassNotFoundException {
         try {
             DaoFactoryFactory.getInstance().beginTransaction();
+            bankDAO.delete(bank1);
+            userDAO.delete(user1);
             userRoleDAO.delete(userRole1);
             DaoFactoryFactory.getInstance().commit();
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException | NamingException | ClassNotFoundException e) {
             DaoFactoryFactory.getInstance().rollback();
             throw e;
         }
-
     }
 
     @Test
     public void test1FindById() throws SQLException, NamingException, ParseException, ClassNotFoundException {
 
-        User user = new User();
+        Bank bank = new Bank();
+        bank.setName("Test bank");
+        bank.setUNN("19777791");
+        bank.setName("Tests bank");
+        bank1 = bankDAO.insert(bank);
 
+        User user = new User();
         user.setPersonalNumber("1234567890");
         user.setFirstName("Alexander");
         user.setLastName("Pilipenko");
@@ -66,17 +78,38 @@ public class UserDaoTest
         userRole.setName("Test");
         userRole.setName("Test user");
 
+        userRole1 = userRoleDAO.insert(userRole);
+
+        user.setUserRole(userRole1);
+
+        user1 = userDAO.insert(user);
+
+
+        Agreement agreement = new Agreement();
+
+        agreement.setNumber("19777791");
+
+        try {
+            agreement.setValidFromDate(format.parse("10.01.1907"));
+        } catch (ParseException e) {
+            //it is not possible
+
+        }
+        try {
+            agreement.setValidToDate(format.parse("10.01.1917"));
+        } catch (ParseException e) {
+            //it is not possible
+
+        }
+        agreement.setBank(bank1);
+        agreement.setClient(user1);
+
         try {
             DaoFactoryFactory.getInstance().beginTransaction();
-            userRole1 = userRoleDAO.insert(userRole);
-
-            user.setUserRole(userRole1);
-
-            user1 = userDAO.insert(user);
+            agreement1 = agreementDAO.insert(agreement);
+            Agreement agreement2 = agreementDAO.findEntityById(agreement1.getId());
+            assertEquals(agreement1, agreement2);
             DaoFactoryFactory.getInstance().commit();
-
-            User user2 = userDAO.findEntityById(user.getId());
-            assertEquals(user1, user2);
         } catch (SQLException | NamingException | ClassNotFoundException e) {
             DaoFactoryFactory.getInstance().rollback();
             throw e;
@@ -86,23 +119,19 @@ public class UserDaoTest
     @Test
     public void test2FindByEntity() throws SQLException, NamingException, ClassNotFoundException {
 
-        List<User> userList1 = new ArrayList<>();
-        userList1.add(user1);
+        List<Agreement> agreementList1 = new ArrayList<>();
+        agreementList1.add(agreement1);
 
-
-        List<User> userList2 = userDAO.findEntityByEntity(user1);
-        assertEquals(userList1, userList2);
+        List<Agreement> agreementList2 = agreementDAO.findEntityByEntity(agreement1);
+        assertEquals(agreementList1, agreementList2);
 
 
     }
 
     @Test
     public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
-
-
-        User user2 = userDAO.findEntityByPK(user1);
-        assertEquals(user1, user2);
-
+        Agreement agreement2 = agreementDAO.findEntityByPK(agreement1);
+        assertEquals(agreement1, agreement2);
 
     }
 
@@ -111,17 +140,16 @@ public class UserDaoTest
     public void test7Update() throws SQLException, NamingException, ClassNotFoundException {
 
 
-        user1.setLogin("TestUserTest");
+        agreement1.setNumber("19777911977");
         try {
             DaoFactoryFactory.getInstance().beginTransaction();
-            userDAO.update(user1);
-            User user2 = userDAO.findEntityById(user1.getId());
+            agreementDAO.update(agreement1);
             DaoFactoryFactory.getInstance().commit();
-            assertEquals(user1, user2);
-        } catch (SQLException | NamingException |
-                ClassNotFoundException e)
+            Agreement agreement2 = agreementDAO.findEntityById(agreement1.getId());
 
-        {
+
+            assertEquals(agreement1, agreement2);
+        } catch (SQLException | NamingException | ClassNotFoundException e) {
             DaoFactoryFactory.getInstance().rollback();
             throw e;
         }
@@ -131,50 +159,59 @@ public class UserDaoTest
 
     @Test
     public void test8DeleteById() throws SQLException, NamingException, ClassNotFoundException {
-
         try {
             DaoFactoryFactory.getInstance().beginTransaction();
-            userDAO.delete(user1.getId());
+            agreementDAO.delete(agreement1.getId());
             DaoFactoryFactory.getInstance().commit();
-            User user2 = userDAO.findEntityById(user1.getId());
 
-            assertNull(user2);
+            Agreement agreement2 = agreementDAO.findEntityById(agreement1.getId());
+            assertNull(agreement2);
         } catch (SQLException | NamingException | ClassNotFoundException e) {
             DaoFactoryFactory.getInstance().rollback();
             throw e;
         }
-
 
     }
 
     @Test
     public void test9DeleteByEntity() throws SQLException, NamingException, ParseException, ClassNotFoundException {
 
-        User user = new User();
-
-        user.setPersonalNumber("1234567890");
-        user.setFirstName("Alexander");
-        user.setLastName("Pilipenko");
+        Agreement agreement = new Agreement();
         DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-        user.setBirthDate(format.parse("10.01.1977"));
-        user.setLogin("apilipenka");
-        user.setPassword("123456");
+        agreement.setNumber("19777791");
 
-        user.setUserRole(userRole1);
         try {
+            agreement.setValidFromDate(format.parse("10.01.1907"));
+        } catch (ParseException e) {
+            //it is not possible
+
+        }
+        try {
+            agreement.setValidToDate(format.parse("10.01.1917"));
+        } catch (ParseException e) {
+            //it is not possible
+
+        }
+        agreement.setBank(bank1);
+        agreement.setClient(user1);
+
+        try {
+
             DaoFactoryFactory.getInstance().beginTransaction();
-            user1 = userDAO.insert(user);
+            agreement1 = agreementDAO.insert(agreement);
+
+            agreementDAO.delete(agreement1);
             DaoFactoryFactory.getInstance().commit();
-            userDAO.delete(user1);
 
-            List<User> userList2 = userDAO.findEntityByEntity(user1);
 
-            assertEquals(userList2.size(), 0);
+            List<Agreement> agreementList2 = agreementDAO.findEntityByEntity(agreement);
 
+            assertEquals(agreementList2.size(), 0);
         } catch (SQLException | NamingException | ClassNotFoundException e) {
             DaoFactoryFactory.getInstance().rollback();
             throw e;
         }
+
     }
 
 

@@ -38,7 +38,7 @@ public class UserRoleCommandServiceTest
     }
 
     @AfterClass
-    public static void tearDownToHexStringData() throws SQLException, ClassNotFoundException, NamingException {
+    public static void close() throws SQLException, ClassNotFoundException, NamingException {
         userRoleService.deleteEntity(userRole1.getId());
         userRoleService.deleteEntity(userRole2.getId());
         commandService.deleteEntity(command1.getId());

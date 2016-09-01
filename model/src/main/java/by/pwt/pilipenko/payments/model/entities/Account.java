@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 @Entity
 @Table(name = "accounts")
 public class Account extends AbstractEntity {
@@ -36,6 +37,7 @@ public class Account extends AbstractEntity {
 
 
     }
+
     @Column(name = "number", columnDefinition = "VARCHAR2(45) NOT NULL UNIQUE")
     public String getNumber() {
         return number;
@@ -44,6 +46,7 @@ public class Account extends AbstractEntity {
     public void setNumber(String number) {
         this.number = number;
     }
+
     @Column(name = "amount")
     public double getAmount() {
         return amount;
@@ -131,6 +134,7 @@ public class Account extends AbstractEntity {
         else
             throw new InsufficientFundsException("Insufficient funds");
     }
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
     public Set<Card> getCards() {
         return cards;

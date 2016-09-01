@@ -28,7 +28,7 @@ public class ExchangeRateDaoTest
     private static ExchangeRate exchangeRate1;
 
     @BeforeClass
-    public static void intit() throws NamingException, ClassNotFoundException, SQLException {
+    public static void init() throws NamingException, ClassNotFoundException, SQLException {
         DaoFactoryFactory.setDaoType("jdbc");
         currencyDAO = DaoFactoryFactory.getInstance().createCurrencyDAO();
         exchangeRateDAO = DaoFactoryFactory.getInstance().createExchangeRateDAO();
@@ -36,7 +36,7 @@ public class ExchangeRateDaoTest
     }
 
     @AfterClass
-    public static void tearDownToHexStringData() throws SQLException, NamingException {
+    public static void close() throws SQLException, NamingException {
 
         currencyDAO.delete(currency1);
 

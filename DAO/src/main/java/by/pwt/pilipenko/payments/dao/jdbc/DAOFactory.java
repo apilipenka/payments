@@ -82,7 +82,7 @@ public class DAOFactory extends AbstractDAOFactory {
         return createTypeDAO("type", "document_types");
     }
 
-    public UserDAO createUserDAO() throws SQLException {
+    public BaseDAO createUserDAO() throws SQLException {
         UserDAO userDAO;
         userDAO = new UserDAO(getConnection(), "user", "users");
 

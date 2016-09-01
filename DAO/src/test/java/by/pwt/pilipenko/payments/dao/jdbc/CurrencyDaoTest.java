@@ -22,14 +22,14 @@ public class CurrencyDaoTest
     private static Currency currency1;
 
     @BeforeClass
-    public static void intit() throws NamingException, ClassNotFoundException, SQLException {
+    public static void init() throws NamingException, ClassNotFoundException, SQLException {
         DaoFactoryFactory.setDaoType("jdbc");
         currencyDAO = DaoFactoryFactory.getInstance().createCurrencyDAO();
 
     }
 
     @AfterClass
-    public static void tearDownToHexStringData() throws SQLException {
+    public static void close() throws SQLException {
 
         currencyDAO = null;
 

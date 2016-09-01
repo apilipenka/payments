@@ -30,7 +30,7 @@ public class UserRoleCommandDaoTest
     private static UserRoleCommand userRoleCommand1;
 
     @BeforeClass
-    public static void intit() throws NamingException, ClassNotFoundException, SQLException {
+    public static void init() throws NamingException, ClassNotFoundException, SQLException {
         DaoFactoryFactory.setDaoType("jdbc");
         userRoleDAO = DaoFactoryFactory.getInstance().createUserRoleDAO();
         commandDAO = DaoFactoryFactory.getInstance().createCommandDAO();
@@ -39,7 +39,7 @@ public class UserRoleCommandDaoTest
     }
 
     @AfterClass
-    public static void tearDownToHexStringData() throws SQLException, NamingException {
+    public static void close() throws SQLException, NamingException {
 
         userRoleDAO.delete(userRole1);
         userRoleDAO.delete(userRole3);

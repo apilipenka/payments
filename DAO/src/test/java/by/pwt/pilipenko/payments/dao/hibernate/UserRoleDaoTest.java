@@ -33,7 +33,7 @@ public class UserRoleDaoTest
     }
 
     @AfterClass
-    public static void tearDownToHexStringData() throws SQLException, NamingException, ClassNotFoundException {
+    public static void close() throws SQLException, NamingException, ClassNotFoundException {
         try {
             DaoFactoryFactory.getInstance().beginTransaction();
             commandDAO.delete(command1);
@@ -41,8 +41,7 @@ public class UserRoleDaoTest
         } catch (SQLException | NamingException | ClassNotFoundException e) {
             DaoFactoryFactory.getInstance().rollback();
             throw e;
-        }
-        finally {
+        } finally {
             userRoleDAO = null;
             commandDAO = null;
         }

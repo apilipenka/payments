@@ -29,7 +29,7 @@ public class CommandDaoTest
     }
 
     @AfterClass
-    public static void tearDownToHexStringData() throws SQLException {
+    public static void close() throws SQLException {
 
         commandDAO = null;
 
@@ -130,7 +130,7 @@ public class CommandDaoTest
 
         try {
             DaoFactoryFactory.getInstance().beginTransaction();
-            command1 = (Command) commandDAO.insert(command);
+            command1 = commandDAO.insert(command);
 
             commandDAO.delete(command);
             DaoFactoryFactory.getInstance().commit();

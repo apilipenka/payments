@@ -49,7 +49,7 @@ public class AccountDaoTest
     }
 
     @AfterClass
-    public static void tearDownToHexStringData() throws SQLException, NamingException {
+    public static void close() throws SQLException, NamingException {
 
         agreementDAO.delete(agreement1);
         bankDAO.delete(bank1);

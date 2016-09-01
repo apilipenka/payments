@@ -1,6 +1,5 @@
 package by.pwt.pilipenko.payments.dao.hibernate;
 
-import by.pwt.pilipenko.payments.dao.BaseDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.model.entities.Currency;
 import by.pwt.pilipenko.payments.model.entities.ExchangeRate;
@@ -23,26 +22,23 @@ public class ExchangeRateDaoTest
         extends Assert {
 
 
-    private static DAOFactory factory;
-    private static BaseDAO exchangeRateDAO;
-    private static BaseDAO currencyDAO;
+    private static CurrencyDAO currencyDAO;
+    private static ExchangeRateDAO exchangeRateDAO;
     private static Currency currency1;
     private static ExchangeRate exchangeRate1;
 
     @BeforeClass
-    public static void intit() throws NamingException, ClassNotFoundException, SQLException {
+    public static void init() throws NamingException, ClassNotFoundException, SQLException {
 
         DaoFactoryFactory.setDaoType("hibernate");
-        //factory = (DAOFactory) DaoFactoryFactory.getInstance();
 
-
-        currencyDAO = DaoFactoryFactory.getInstance().createCurrencyDAO();
-        exchangeRateDAO = DaoFactoryFactory.getInstance().createExchangeRateDAO();
+        currencyDAO = (CurrencyDAO) DaoFactoryFactory.getInstance().createCurrencyDAO();
+        exchangeRateDAO = (ExchangeRateDAO) DaoFactoryFactory.getInstance().createExchangeRateDAO();
 
     }
 
     @AfterClass
-    public static void tearDownToHexStringData() throws SQLException, NamingException, ClassNotFoundException {
+    public static void close() throws SQLException, NamingException, ClassNotFoundException {
 
         try {
             DaoFactoryFactory.getInstance().beginTransaction();
@@ -51,12 +47,10 @@ public class ExchangeRateDaoTest
         } catch (SQLException | NamingException | ClassNotFoundException e) {
             DaoFactoryFactory.getInstance().rollback();
             throw e;
-        }
-        finally {
+        } finally {
             currencyDAO = null;
             exchangeRateDAO = null;
         }
-
 
 
     }
@@ -84,15 +78,15 @@ public class ExchangeRateDaoTest
 
         try {
             DaoFactoryFactory.getInstance().beginTransaction();
-            currency1 = (Currency) currencyDAO.insert(currency);
+            currency1 = currencyDAO.insert(currency);
             ((DAOFactory) DaoFactoryFactory.getInstance()).getSession().flush();
             exchangeRate.setCurrency(currency1);
             exchangeRate.setTargetCurrency(currency1);
-            exchangeRate1 = (ExchangeRate) exchangeRateDAO.insert(exchangeRate);
+            exchangeRate1 = exchangeRateDAO.insert(exchangeRate);
 
             DaoFactoryFactory.getInstance().commit();
 
-            ExchangeRate exchangeRate2 = (ExchangeRate) exchangeRateDAO.findEntityById(exchangeRate1.getId());
+            ExchangeRate exchangeRate2 = exchangeRateDAO.findEntityById(exchangeRate1.getId());
             assertEquals(exchangeRate1, exchangeRate2);
 
         } catch (SQLException | NamingException | ClassNotFoundException e) {
@@ -116,7 +110,7 @@ public class ExchangeRateDaoTest
 
     @Test
     public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
-        ExchangeRate exchangeRate2 = (ExchangeRate) exchangeRateDAO.findEntityByPK(exchangeRate1);
+        ExchangeRate exchangeRate2 = exchangeRateDAO.findEntityByPK(exchangeRate1);
         assertEquals(exchangeRate1, exchangeRate2);
 
     }
@@ -131,7 +125,7 @@ public class ExchangeRateDaoTest
             DaoFactoryFactory.getInstance().beginTransaction();
             exchangeRateDAO.update(exchangeRate1);
             DaoFactoryFactory.getInstance().commit();
-            ExchangeRate exchangeRate2 = (ExchangeRate) exchangeRateDAO.findEntityById(exchangeRate1.getId());
+            ExchangeRate exchangeRate2 = exchangeRateDAO.findEntityById(exchangeRate1.getId());
 
 
             assertEquals(exchangeRate1, exchangeRate2);
@@ -154,7 +148,7 @@ public class ExchangeRateDaoTest
             throw e;
         }
 
-        ExchangeRate exchangeRate2 = (ExchangeRate) exchangeRateDAO.findEntityById(exchangeRate1.getId());
+        ExchangeRate exchangeRate2 = exchangeRateDAO.findEntityById(exchangeRate1.getId());
         assertNull(exchangeRate2);
 
     }
@@ -177,7 +171,7 @@ public class ExchangeRateDaoTest
         }
         try {
             DaoFactoryFactory.getInstance().beginTransaction();
-            exchangeRate1 = (ExchangeRate) exchangeRateDAO.insert(exchangeRate);
+            exchangeRate1 = exchangeRateDAO.insert(exchangeRate);
 
             exchangeRateDAO.delete(exchangeRate1);
             DaoFactoryFactory.getInstance().commit();

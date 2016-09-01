@@ -39,8 +39,8 @@ public class UserDAO extends AbstractEntityDAO<User> {
 
         Query query = getSession().createQuery("from User where personalNumber=:personalNumber");
         query.setParameter("personalNumber", entity.getPersonalNumber());
-        User command = (User) query.uniqueResult();
-        return command;
+        User user = (User) query.uniqueResult();
+        return user;
     }
 
     @Override

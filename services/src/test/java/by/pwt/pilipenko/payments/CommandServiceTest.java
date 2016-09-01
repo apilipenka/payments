@@ -28,7 +28,7 @@ public class CommandServiceTest
     }
 
     @AfterClass
-    public static void tearDownToHexStringData() throws SQLException {
+    public static void close() throws SQLException {
         commandService = null;
 
     }

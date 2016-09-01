@@ -48,7 +48,7 @@ public class CardServiceTest
     }
 
     @AfterClass
-    public static void tearDownToHexStringData() throws SQLException, ClassNotFoundException, NamingException {
+    public static void close() throws SQLException, ClassNotFoundException, NamingException {
         accountService.deleteEntity(account1.getId());
         agreementService.deleteEntity(agreement1.getId());
         bankService.deleteEntity(bank1.getId());

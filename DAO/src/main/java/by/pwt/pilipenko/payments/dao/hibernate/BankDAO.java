@@ -17,7 +17,7 @@ public class BankDAO extends AbstractEntityDAO<Bank> {
 
     @Override
     public boolean delete(Bank entity) throws SQLException, NamingException {
-        Query query = getSession().createQuery("delete from Bank where unn = :name");
+        Query query = getSession().createQuery("delete from Bank where unn = :unn");
         query.setParameter("unn", entity.getName());
         int result = query.executeUpdate();
 
@@ -34,7 +34,7 @@ public class BankDAO extends AbstractEntityDAO<Bank> {
 
     @Override
     public Bank findEntityByPK(Bank entity) throws SQLException, NamingException, ClassNotFoundException {
-        Query query = getSession().createQuery("from Bank where unn=:name");
+        Query query = getSession().createQuery("from Bank where unn=:unn");
         query.setParameter("unn", entity.getUNN());
         Bank bank = (Bank) query.uniqueResult();
         return bank;

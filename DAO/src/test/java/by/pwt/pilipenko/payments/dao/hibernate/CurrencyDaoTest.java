@@ -1,6 +1,5 @@
 package by.pwt.pilipenko.payments.dao.hibernate;
 
-import by.pwt.pilipenko.payments.dao.BaseDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.model.entities.Currency;
 import by.pwt.pilipenko.payments.model.entities.ExchangeRate;
@@ -22,20 +21,20 @@ import java.util.List;
 public class CurrencyDaoTest
         extends Assert {
 
-    private static BaseDAO currencyDAO;
-    private static BaseDAO exchangeRateDAO;
+    private static CurrencyDAO currencyDAO;
+    private static ExchangeRateDAO exchangeRateDAO;
     private static Currency currency1;
     private static ExchangeRate exchangeRate1;
 
     @BeforeClass
-    public static void intit() throws NamingException, ClassNotFoundException, SQLException {
+    public static void init() throws NamingException, ClassNotFoundException, SQLException {
         DaoFactoryFactory.setDaoType("hibernate");
-        currencyDAO = DaoFactoryFactory.getInstance().createCurrencyDAO();
-        exchangeRateDAO = DaoFactoryFactory.getInstance().createCurrencyDAO();
+        currencyDAO = (CurrencyDAO) DaoFactoryFactory.getInstance().createCurrencyDAO();
+        exchangeRateDAO = (ExchangeRateDAO) DaoFactoryFactory.getInstance().createExchangeRateDAO();
     }
 
     @AfterClass
-    public static void tearDownToHexStringData() throws SQLException {
+    public static void close() throws SQLException {
 
         currencyDAO = null;
         exchangeRateDAO = null;
@@ -51,11 +50,9 @@ public class CurrencyDaoTest
         currency.setName("Russian rubble");
 
 
-
         try {
             DaoFactoryFactory.getInstance().beginTransaction();
-            currency1 = (Currency) currencyDAO.insert(currency);
-            //DaoFactoryFactory.getInstance().commit();
+            currency1 = currencyDAO.insert(currency);
 
             ExchangeRate exchangeRate = new ExchangeRate();
             exchangeRate.setRate(100);
@@ -65,12 +62,12 @@ public class CurrencyDaoTest
             exchangeRate.setRateDate(format.parse("10.01.1977"));
 
             currency1.addExchangeRate(exchangeRate);
-            //DaoFactoryFactory.getInstance().beginTransaction();
-            exchangeRate1 = (ExchangeRate) exchangeRateDAO.insert(exchangeRate);
+            exchangeRate1 = exchangeRateDAO.insert(exchangeRate);
+
             DaoFactoryFactory.getInstance().commit();
 
 
-            Currency currency2 = (Currency) currencyDAO.findEntityById(currency1.getId());
+            Currency currency2 = currencyDAO.findEntityById(currency1.getId());
             assertEquals(currency1, currency2);
         } catch (SQLException | NamingException | ClassNotFoundException e) {
             DaoFactoryFactory.getInstance().rollback();
@@ -94,7 +91,7 @@ public class CurrencyDaoTest
     @Test
     public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
 
-        Currency currency2 = (Currency) currencyDAO.findEntityByPK(currency1);
+        Currency currency2 = currencyDAO.findEntityByPK(currency1);
         assertEquals(currency1, currency2);
 
     }
@@ -109,7 +106,7 @@ public class CurrencyDaoTest
             currencyDAO.update(currency1);
             DaoFactoryFactory.getInstance().commit();
 
-            Currency currency2 = (Currency) currencyDAO.findEntityById(currency1.getId());
+            Currency currency2 = currencyDAO.findEntityById(currency1.getId());
 
             assertEquals(currency1, currency2);
         } catch (SQLException | NamingException | ClassNotFoundException e) {
@@ -148,7 +145,7 @@ public class CurrencyDaoTest
             currency.setName("Russian rubble");
 
             DaoFactoryFactory.getInstance().beginTransaction();
-            currency1 = (Currency) currencyDAO.insert(currency);
+            currency1 = currencyDAO.insert(currency);
 
             ExchangeRate exchangeRate = new ExchangeRate();
             exchangeRate.setRate(100);
@@ -158,7 +155,7 @@ public class CurrencyDaoTest
             exchangeRate.setRateDate(format.parse("10.01.1977"));
 
             currency1.addExchangeRate(exchangeRate);
-            exchangeRate1 = (ExchangeRate) exchangeRateDAO.insert(exchangeRate);
+            exchangeRate1 = exchangeRateDAO.insert(exchangeRate);
 
             ((DAOFactory) DaoFactoryFactory.getInstance()).getSession().flush();
 

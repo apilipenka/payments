@@ -49,7 +49,7 @@ public class CardDaoTest
     }
 
     @AfterClass
-    public static void tearDownToHexStringData() throws SQLException, NamingException {
+    public static void close() throws SQLException, NamingException {
 
         accountDAO.delete(account1);
         agreementDAO.delete(agreement1);

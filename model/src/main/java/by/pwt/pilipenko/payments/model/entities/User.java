@@ -48,6 +48,7 @@ public class User extends AbstractEntity {
     public void setLogin(String login) {
         this.login = login;
     }
+
     @Column(name = "first_name", columnDefinition = "VARCHAR2(100) NOT NULL")
     public String getFirstName() {
         return firstName;
@@ -56,6 +57,7 @@ public class User extends AbstractEntity {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+
     @Column(name = "last_name", columnDefinition = "VARCHAR2(100) NOT NULL")
     public String getLastName() {
         return lastName;
@@ -64,6 +66,7 @@ public class User extends AbstractEntity {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
     @Column(name = "password", columnDefinition = "VARCHAR2(100) NOT NULL")
     public String getPassword() {
         return password;
@@ -72,6 +75,7 @@ public class User extends AbstractEntity {
     public void setPassword(String password) {
         this.password = password;
     }
+
     @Column(name = "personal_number", columnDefinition = "VARCHAR2(100) NOT NULL UNIQUE")
     public String getPersonalNumber() {
         return personalNumber;

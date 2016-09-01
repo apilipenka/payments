@@ -34,7 +34,7 @@ public class AgreementDaoTest
     private static Agreement agreement1;
 
     @BeforeClass
-    public static void intit() throws NamingException, ClassNotFoundException, SQLException {
+    public static void init() throws NamingException, ClassNotFoundException, SQLException {
         DaoFactoryFactory.setDaoType("jdbc");
         bankDAO = DaoFactoryFactory.getInstance().createBankDAO();
         userRoleDAO = DaoFactoryFactory.getInstance().createUserRoleDAO();
@@ -44,7 +44,7 @@ public class AgreementDaoTest
     }
 
     @AfterClass
-    public static void tearDownToHexStringData() throws SQLException, NamingException {
+    public static void close() throws SQLException, NamingException {
         bankDAO.delete(bank1);
         userDAO.delete(user1);
         userRoleDAO.delete(userRole1);

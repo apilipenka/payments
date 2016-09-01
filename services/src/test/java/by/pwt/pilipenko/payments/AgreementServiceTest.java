@@ -45,7 +45,7 @@ public class AgreementServiceTest
     }
 
     @AfterClass
-    public static void tearDownToHexStringData() throws SQLException, ClassNotFoundException, NamingException {
+    public static void close() throws SQLException, ClassNotFoundException, NamingException {
         bankService.deleteEntity(bank1.getId());
         userService.deleteEntity(user1.getId());
         userRoleService.deleteEntity(userRole1.getId());

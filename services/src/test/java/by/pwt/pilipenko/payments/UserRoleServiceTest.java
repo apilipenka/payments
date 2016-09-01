@@ -28,7 +28,7 @@ public class UserRoleServiceTest
     }
 
     @AfterClass
-    public static void tearDownToHexStringData() throws SQLException {
+    public static void close() throws SQLException {
         userRoleService = null;
 
     }
