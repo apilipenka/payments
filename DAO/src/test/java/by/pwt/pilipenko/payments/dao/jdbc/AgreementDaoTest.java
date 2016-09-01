@@ -1,6 +1,5 @@
 package by.pwt.pilipenko.payments.dao.jdbc;
 
-import by.pwt.pilipenko.payments.dao.BaseDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.model.entities.Agreement;
 import by.pwt.pilipenko.payments.model.entities.Bank;
@@ -24,10 +23,10 @@ import java.util.List;
 public class AgreementDaoTest
         extends Assert {
 
-    private static BaseDAO agreementDAO;
-    private static BaseDAO bankDAO;
-    private static BaseDAO userDAO;
-    private static BaseDAO userRoleDAO;
+    private static AgreementDAO agreementDAO;
+    private static BankDAO bankDAO;
+    private static UserDAO userDAO;
+    private static UserRoleDAO userRoleDAO;
     private static Bank bank1;
     private static User user1;
     private static UserRole userRole1;
@@ -36,10 +35,10 @@ public class AgreementDaoTest
     @BeforeClass
     public static void init() throws NamingException, ClassNotFoundException, SQLException {
         DaoFactoryFactory.setDaoType("jdbc");
-        bankDAO = DaoFactoryFactory.getInstance().createBankDAO();
-        userRoleDAO = DaoFactoryFactory.getInstance().createUserRoleDAO();
-        userDAO = DaoFactoryFactory.getInstance().createUserDAO();
-        agreementDAO = DaoFactoryFactory.getInstance().createAgreementDAO();
+        bankDAO = (BankDAO) DaoFactoryFactory.getInstance().createBankDAO();
+        userRoleDAO = (UserRoleDAO) DaoFactoryFactory.getInstance().createUserRoleDAO();
+        userDAO = (UserDAO) DaoFactoryFactory.getInstance().createUserDAO();
+        agreementDAO = (AgreementDAO) DaoFactoryFactory.getInstance().createAgreementDAO();
 
     }
 
@@ -57,7 +56,7 @@ public class AgreementDaoTest
         bank.setName("Test bank");
         bank.setUNN("19777791");
         bank.setName("Tests bank");
-        bank1 = (Bank) bankDAO.insert(bank);
+        bank1 = bankDAO.insert(bank);
 
         User user = new User();
         user.setPersonalNumber("1234567890");
@@ -72,11 +71,11 @@ public class AgreementDaoTest
         userRole.setName("Test");
         userRole.setName("Test user");
 
-        userRole1 = (UserRole) userRoleDAO.insert(userRole);
+        userRole1 = userRoleDAO.insert(userRole);
 
         user.setUserRole(userRole1);
 
-        user1 = (User) userDAO.insert(user);
+        user1 = userDAO.insert(user);
 
 
         Agreement agreement = new Agreement();
@@ -99,8 +98,8 @@ public class AgreementDaoTest
         agreement.setClient(user1);
 
 
-        agreement1 = (Agreement) agreementDAO.insert(agreement);
-        Agreement agreement2 = (Agreement) agreementDAO.findEntityById(agreement1.getId());
+        agreement1 = agreementDAO.insert(agreement);
+        Agreement agreement2 = agreementDAO.findEntityById(agreement1.getId());
         assertEquals(agreement1, agreement2);
 
 
@@ -120,7 +119,7 @@ public class AgreementDaoTest
 
     @Test
     public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
-        Agreement agreement2 = (Agreement) agreementDAO.findEntityByPK(agreement1);
+        Agreement agreement2 = agreementDAO.findEntityByPK(agreement1);
         assertEquals(agreement1, agreement2);
 
     }
@@ -133,7 +132,7 @@ public class AgreementDaoTest
         agreement1.setNumber("19777911977");
 
         agreementDAO.update(agreement1);
-        Agreement agreement2 = (Agreement) agreementDAO.findEntityById(agreement1.getId());
+        Agreement agreement2 = agreementDAO.findEntityById(agreement1.getId());
 
 
         assertEquals(agreement1, agreement2);
@@ -146,7 +145,7 @@ public class AgreementDaoTest
         agreementDAO.delete(agreement1.getId());
 
 
-        Agreement agreement2 = (Agreement) agreementDAO.findEntityById(agreement1.getId());
+        Agreement agreement2 = agreementDAO.findEntityById(agreement1.getId());
         assertNull(agreement2);
 
     }
@@ -173,7 +172,7 @@ public class AgreementDaoTest
         agreement.setBank(bank1);
         agreement.setClient(user1);
 
-        agreement1 = (Agreement) agreementDAO.insert(agreement);
+        agreement1 = agreementDAO.insert(agreement);
 
         agreementDAO.delete(agreement1);
 

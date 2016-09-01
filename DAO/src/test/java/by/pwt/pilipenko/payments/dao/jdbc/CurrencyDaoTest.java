@@ -1,6 +1,5 @@
 package by.pwt.pilipenko.payments.dao.jdbc;
 
-import by.pwt.pilipenko.payments.dao.BaseDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.model.entities.Currency;
 import org.junit.*;
@@ -18,13 +17,13 @@ import java.util.List;
 public class CurrencyDaoTest
         extends Assert {
 
-    private static BaseDAO currencyDAO;
+    private static CurrencyDAO currencyDAO;
     private static Currency currency1;
 
     @BeforeClass
     public static void init() throws NamingException, ClassNotFoundException, SQLException {
         DaoFactoryFactory.setDaoType("jdbc");
-        currencyDAO = DaoFactoryFactory.getInstance().createCurrencyDAO();
+        currencyDAO = (CurrencyDAO) DaoFactoryFactory.getInstance().createCurrencyDAO();
 
     }
 
@@ -42,10 +41,10 @@ public class CurrencyDaoTest
         currency.setCode("643");
         currency.setMnemoCode("RUR");
         currency.setName("Russian rubble");
-        currency1 = (Currency) currencyDAO.insert(currency);
+        currency1 = currencyDAO.insert(currency);
 
 
-        Currency currency2 = (Currency) currencyDAO.findEntityById(currency.getId());
+        Currency currency2 = currencyDAO.findEntityById(currency.getId());
         assertEquals(currency1, currency2);
 
 
@@ -68,7 +67,7 @@ public class CurrencyDaoTest
     public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
 
 
-        Currency currency2 = (Currency) currencyDAO.findEntityByPK(currency1);
+        Currency currency2 = currencyDAO.findEntityByPK(currency1);
         assertEquals(currency1, currency2);
 
 
@@ -81,7 +80,7 @@ public class CurrencyDaoTest
 
         currency1.setName("Russian rubble test");
         currencyDAO.update(currency1);
-        Currency currency2 = (Currency) currencyDAO.findEntityById(currency1.getId());
+        Currency currency2 = currencyDAO.findEntityById(currency1.getId());
 
         assertEquals(currency1, currency2);
 
@@ -95,7 +94,7 @@ public class CurrencyDaoTest
 
         currencyDAO.delete(currency1.getId());
 
-        Currency currency2 = (Currency) currencyDAO.findEntityById(currency1.getId());
+        Currency currency2 = currencyDAO.findEntityById(currency1.getId());
 
         assertNull(currency2);
 
@@ -109,7 +108,7 @@ public class CurrencyDaoTest
         currency.setCode("643");
         currency.setMnemoCode("RUR");
         currency.setName("Russian rubble");
-        currency1 = (Currency) currencyDAO.insert(currency);
+        currency1 = currencyDAO.insert(currency);
 
         currencyDAO.delete(currency1);
 

@@ -1,4 +1,4 @@
-package by.pwt.pilipenko.payments.dao.jdbc;
+package by.pwt.pilipenko.payments.dao.hibernate;
 
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.model.entities.Bank;
@@ -22,7 +22,7 @@ public class BankDaoTest
 
     @BeforeClass
     public static void init() throws NamingException, ClassNotFoundException, SQLException {
-        DaoFactoryFactory.setDaoType("jdbc");
+        DaoFactoryFactory.setDaoType("hibernate");
         bankDAO = (BankDAO) DaoFactoryFactory.getInstance().createBankDAO();
 
     }
@@ -40,12 +40,18 @@ public class BankDaoTest
         Bank bank = new Bank();
         bank.setName("Agroprom");
         bank.setUNN("121313");
-        bank1 = bankDAO.insert(bank);
+        try {
+            DaoFactoryFactory.getInstance().beginTransaction();
+            bank1 = bankDAO.insert(bank);
+            DaoFactoryFactory.getInstance().commit();
 
 
-        Bank bank2 = bankDAO.findEntityById(bank.getId());
-        assertEquals(bank1, bank2);
-
+            Bank bank2 = bankDAO.findEntityById(bank.getId());
+            assertEquals(bank1, bank2);
+        } catch (SQLException | NamingException | ClassNotFoundException e) {
+            DaoFactoryFactory.getInstance().rollback();
+            throw e;
+        }
 
     }
 
@@ -80,11 +86,17 @@ public class BankDaoTest
 
 
         bank1.setName("AgropromBank");
-        bankDAO.update(bank1);
-        Bank bank2 = bankDAO.findEntityById(bank1.getId());
+        try {
+            DaoFactoryFactory.getInstance().beginTransaction();
+            bankDAO.update(bank1);
+            DaoFactoryFactory.getInstance().commit();
+            Bank bank2 = bankDAO.findEntityById(bank1.getId());
 
-        assertEquals(bank1, bank2);
-
+            assertEquals(bank1, bank2);
+        } catch (SQLException | NamingException | ClassNotFoundException e) {
+            DaoFactoryFactory.getInstance().rollback();
+            throw e;
+        }
 
     }
 
@@ -92,13 +104,17 @@ public class BankDaoTest
     @Test
     public void test8DeleteById() throws SQLException, NamingException, ClassNotFoundException {
 
+        try {
+            DaoFactoryFactory.getInstance().beginTransaction();
+            bankDAO.delete(bank1.getId());
+            DaoFactoryFactory.getInstance().commit();
+            Bank bank2 = bankDAO.findEntityById(bank1.getId());
 
-        bankDAO.delete(bank1.getId());
-
-        Bank bank2 = bankDAO.findEntityById(bank1.getId());
-
-        assertNull(bank2);
-
+            assertNull(bank2);
+        } catch (SQLException | NamingException | ClassNotFoundException e) {
+            DaoFactoryFactory.getInstance().rollback();
+            throw e;
+        }
 
     }
 
@@ -108,14 +124,19 @@ public class BankDaoTest
         Bank bank = new Bank();
         bank.setName("agroprom");
         bank.setUNN("121313");
-        bank1 = bankDAO.insert(bank);
+        try {
+            DaoFactoryFactory.getInstance().beginTransaction();
+            bank1 = bankDAO.insert(bank);
 
-        bankDAO.delete(bank);
+            bankDAO.delete(bank);
+            DaoFactoryFactory.getInstance().commit();
+            List<Bank> bankList2 = bankDAO.findEntityByEntity(bank);
 
-        List<Bank> bankList2 = bankDAO.findEntityByEntity(bank);
-
-        assertEquals(bankList2.size(), 0);
-
+            assertEquals(0, bankList2.size());
+        } catch (SQLException | NamingException | ClassNotFoundException e) {
+            DaoFactoryFactory.getInstance().rollback();
+            throw e;
+        }
 
     }
 

@@ -1,6 +1,5 @@
 package by.pwt.pilipenko.payments.dao.jdbc;
 
-import by.pwt.pilipenko.payments.dao.BaseDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.model.entities.Command;
 import by.pwt.pilipenko.payments.model.entities.UserRole;
@@ -21,9 +20,9 @@ import java.util.List;
 public class UserRoleCommandDaoTest
         extends Assert {
 
-    private static BaseDAO userRoleCommandDAO;
-    private static BaseDAO userRoleDAO;
-    private static BaseDAO commandDAO;
+    private static UserRoleCommandDAO userRoleCommandDAO;
+    private static UserRoleDAO userRoleDAO;
+    private static CommandDAO commandDAO;
     private static UserRole userRole1;
     private static UserRole userRole3;
     private static Command command1;
@@ -32,9 +31,9 @@ public class UserRoleCommandDaoTest
     @BeforeClass
     public static void init() throws NamingException, ClassNotFoundException, SQLException {
         DaoFactoryFactory.setDaoType("jdbc");
-        userRoleDAO = DaoFactoryFactory.getInstance().createUserRoleDAO();
-        commandDAO = DaoFactoryFactory.getInstance().createCommandDAO();
-        userRoleCommandDAO = DaoFactoryFactory.getInstance().createUserRoleCommandDAO();
+        userRoleDAO = (UserRoleDAO) DaoFactoryFactory.getInstance().createUserRoleDAO();
+        commandDAO = (CommandDAO) DaoFactoryFactory.getInstance().createCommandDAO();
+        userRoleCommandDAO = (UserRoleCommandDAO) DaoFactoryFactory.getInstance().createUserRoleCommandDAO();
 
     }
 
@@ -56,21 +55,21 @@ public class UserRoleCommandDaoTest
         userRole.setDescription("Test userRole");
 
 
-        userRole1 = (UserRole) userRoleDAO.insert(userRole);
+        userRole1 = userRoleDAO.insert(userRole);
 
         Command command = new Command();
         command.setCommand("TESTLIST");
         command.setUrl("/jsp/test-list.jsp");
         command.setLabel("Edit tests");
         command.setComment("Edit tests");
-        command1 = (Command) commandDAO.insert(command);
+        command1 = commandDAO.insert(command);
 
         UserRoleCommand userRoleCommand = new UserRoleCommand();
         userRoleCommand.setUserRole(userRole1);
         userRoleCommand.setCommand(command1);
 
-        userRoleCommand1 = (UserRoleCommand) userRoleCommandDAO.insert(userRoleCommand);
-        UserRoleCommand userRoleCommand2 = (UserRoleCommand) userRoleCommandDAO.findEntityById(userRoleCommand1.getId());
+        userRoleCommand1 = userRoleCommandDAO.insert(userRoleCommand);
+        UserRoleCommand userRoleCommand2 = userRoleCommandDAO.findEntityById(userRoleCommand1.getId());
         assertEquals(userRoleCommand1, userRoleCommand2);
 
 
@@ -90,7 +89,7 @@ public class UserRoleCommandDaoTest
 
     @Test
     public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
-        UserRoleCommand userRoleCommand2 = (UserRoleCommand) userRoleCommandDAO.findEntityByPK(userRoleCommand1);
+        UserRoleCommand userRoleCommand2 = userRoleCommandDAO.findEntityByPK(userRoleCommand1);
         assertEquals(userRoleCommand1, userRoleCommand2);
 
     }
@@ -103,12 +102,12 @@ public class UserRoleCommandDaoTest
         userRole3.setName("Test3");
         userRole3.setDescription("Test userRole3");
 
-        userRole3 = (UserRole) userRoleDAO.insert(userRole3);
+        userRole3 = userRoleDAO.insert(userRole3);
 
         userRoleCommand1.setUserRole(userRole3);
 
         userRoleCommandDAO.update(userRoleCommand1);
-        UserRoleCommand userRoleCommand2 = (UserRoleCommand) userRoleCommandDAO.findEntityById(userRoleCommand1.getId());
+        UserRoleCommand userRoleCommand2 = userRoleCommandDAO.findEntityById(userRoleCommand1.getId());
 
 
         assertEquals(userRoleCommand1, userRoleCommand2);
@@ -121,7 +120,7 @@ public class UserRoleCommandDaoTest
         userRoleCommandDAO.delete(userRoleCommand1.getId());
 
 
-        UserRoleCommand userRoleCommand2 = (UserRoleCommand) userRoleCommandDAO.findEntityById(userRoleCommand1.getId());
+        UserRoleCommand userRoleCommand2 = userRoleCommandDAO.findEntityById(userRoleCommand1.getId());
         assertNull(userRoleCommand2);
 
     }
@@ -133,7 +132,7 @@ public class UserRoleCommandDaoTest
         userRoleCommand.setUserRole(userRole1);
         userRoleCommand.setCommand(command1);
 
-        userRoleCommand1 = (UserRoleCommand) userRoleCommandDAO.insert(userRoleCommand);
+        userRoleCommand1 = userRoleCommandDAO.insert(userRoleCommand);
 
         userRoleCommandDAO.delete(userRoleCommand1);
 

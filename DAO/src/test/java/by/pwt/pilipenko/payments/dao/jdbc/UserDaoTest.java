@@ -1,6 +1,5 @@
 package by.pwt.pilipenko.payments.dao.jdbc;
 
-import by.pwt.pilipenko.payments.dao.BaseDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
 import by.pwt.pilipenko.payments.model.entities.User;
 import by.pwt.pilipenko.payments.model.entities.UserRole;
@@ -22,17 +21,16 @@ import java.util.List;
 public class UserDaoTest
         extends Assert {
 
-    private static BaseDAO userDAO;
-    private static BaseDAO userRoleDAO;
-    //private static User user;
+    private static UserDAO userDAO;
+    private static UserRoleDAO userRoleDAO;
     private static User user1;
     private static UserRole userRole1;
 
     @BeforeClass
     public static void init() throws NamingException, ClassNotFoundException, SQLException {
         DaoFactoryFactory.setDaoType("jdbc");
-        userDAO = DaoFactoryFactory.getInstance().createUserDAO();
-        userRoleDAO = DaoFactoryFactory.getInstance().createUserRoleDAO();
+        userDAO = (UserDAO) DaoFactoryFactory.getInstance().createUserDAO();
+        userRoleDAO = (UserRoleDAO) DaoFactoryFactory.getInstance().createUserRoleDAO();
 
 
     }
@@ -62,14 +60,14 @@ public class UserDaoTest
         userRole.setName("Test");
         userRole.setName("Test user");
 
-        userRole1 = (UserRole) userRoleDAO.insert(userRole);
+        userRole1 = userRoleDAO.insert(userRole);
 
         user.setUserRole(userRole1);
 
-        user1 = (User) userDAO.insert(user);
+        user1 = userDAO.insert(user);
 
 
-        User user2 = (User) userDAO.findEntityById(user.getId());
+        User user2 = userDAO.findEntityById(user.getId());
         assertEquals(user1, user2);
 
     }
@@ -91,7 +89,7 @@ public class UserDaoTest
     public void test6FindEntityByPK() throws SQLException, NamingException, ClassNotFoundException {
 
 
-        User user2 = (User) userDAO.findEntityByPK(user1);
+        User user2 = userDAO.findEntityByPK(user1);
         assertEquals(user1, user2);
 
 
@@ -104,7 +102,7 @@ public class UserDaoTest
 
         user1.setLogin("TestUserTest");
         userDAO.update(user1);
-        User user2 = (User) userDAO.findEntityById(user1.getId());
+        User user2 = userDAO.findEntityById(user1.getId());
 
         assertEquals(user1, user2);
 
@@ -118,7 +116,7 @@ public class UserDaoTest
 
         userDAO.delete(user1.getId());
 
-        User user2 = (User) userDAO.findEntityById(user1.getId());
+        User user2 = userDAO.findEntityById(user1.getId());
 
         assertNull(user2);
 
@@ -140,7 +138,7 @@ public class UserDaoTest
 
         user.setUserRole(userRole1);
 
-        user1 = (User) userDAO.insert(user);
+        user1 = userDAO.insert(user);
 
         userDAO.delete(user1);
 

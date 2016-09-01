@@ -8,36 +8,33 @@ import javax.naming.NamingException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class BankDAO extends AbstractEntityDAO<Bank> {
+class BankDAO extends AbstractEntityDAO<Bank> {
 
 
-    public BankDAO(Session session) {
+    BankDAO(Session session) {
         super(session);
     }
 
     @Override
     public boolean delete(Bank entity) throws SQLException, NamingException {
         Query query = getSession().createQuery("delete from Bank where unn = :unn");
-        query.setParameter("unn", entity.getName());
+        query.setParameter("unn", entity.getUNN());
         int result = query.executeUpdate();
-
-        return true;
+        return result == 1;
     }
 
     @Override
     public List<Bank> findEntityByEntity(Bank entity) throws SQLException, NamingException, ClassNotFoundException {
         Query query = getSession().createQuery("from Bank where unn=COALESCE(:unn, unn)");
         query.setParameter("unn", entity.getUNN());
-        List<Bank> list = (List<Bank>) query.list();
-        return list;
+        return (List<Bank>) query.list();
     }
 
     @Override
     public Bank findEntityByPK(Bank entity) throws SQLException, NamingException, ClassNotFoundException {
         Query query = getSession().createQuery("from Bank where unn=:unn");
         query.setParameter("unn", entity.getUNN());
-        Bank bank = (Bank) query.uniqueResult();
-        return bank;
+        return (Bank) query.uniqueResult();
     }
 
     @Override
