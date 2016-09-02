@@ -66,7 +66,7 @@ public class Account extends AbstractEntity {
         this.agreement = agreement;
     }
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "currency_id", nullable = false, updatable = false)
     public Currency getCurrency() {
         return currency;
@@ -135,7 +135,7 @@ public class Account extends AbstractEntity {
             throw new InsufficientFundsException("Insufficient funds");
     }
 
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy = "account")
+    @OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.LAZY, mappedBy = "account")
     public Set<Card> getCards() {
         return cards;
     }

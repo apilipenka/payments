@@ -85,7 +85,7 @@ public class Bank extends AbstractEntity {
     }
 
 
-    @OneToMany(mappedBy = "bank")
+    @OneToMany(mappedBy = "bank", fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
     public Set<Agreement> getAgreements() {
         return agreements;
     }

@@ -1,5 +1,7 @@
 package by.pwt.pilipenko.payments;
 
+import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
+import by.pwt.pilipenko.payments.dao.hibernate.DAOFactory;
 import by.pwt.pilipenko.payments.model.entities.*;
 import by.pwt.pilipenko.payments.model.exceptions.InsufficientFundsException;
 import by.pwt.pilipenko.payments.services.*;
@@ -231,7 +233,13 @@ public class AccountServiceTest
         account2.setCurrency(currency1);
 
         account2 = accountService.insertEntity(account2);
-        accountService.transferMoney(account3.getNumber(), account2.getNumber(), 60);
+
+        ((DAOFactory) DaoFactoryFactory.getInstance()).getSession().clear();
+
+        Account account4 = accountService.getEntity(account3.getId());
+        Account account5 = accountService.getEntity(account2.getId());
+
+        accountService.transferMoney(account4.getNumber(), account5.getNumber(), 60);
         account1 = accountService.getEntity(account1.getId());
         account2 = accountService.getEntity(account2.getId());
         assertEquals(40, account1.getAmount(), 0);

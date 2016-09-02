@@ -141,7 +141,7 @@ public class Agreement extends AbstractEntity {
                 + validToDate + ", bank=" + bank.getName() + ", client=" + client.getLogin() + ", accounts=" + accounts + "]";
     }
 
-    @OneToMany(mappedBy = "agreement")
+    @OneToMany(mappedBy = "agreement", fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
     public Set<Account> getAccounts() {
         return accounts;
     }

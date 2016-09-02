@@ -57,7 +57,7 @@ public abstract class AbstractEntityDAO<T extends AbstractEntity> implements Bas
     }
 
     public T insert(T entity) throws SQLException, NamingException {
-        getSession().save(entity);
+        getSession().persist(entity); //.save(entity);
         return entity;
     }
 
