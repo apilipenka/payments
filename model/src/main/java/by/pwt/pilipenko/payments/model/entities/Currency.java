@@ -60,7 +60,7 @@ public class Currency extends AbstractEntity {
     public void setName(String name) {
         this.name = name;
     }
-    @OneToMany(mappedBy = "currency", fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "currency", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
     public Set<ExchangeRate> getRates() {
         return rates;
     }

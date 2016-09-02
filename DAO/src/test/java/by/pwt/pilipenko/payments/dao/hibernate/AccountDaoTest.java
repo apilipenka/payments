@@ -75,7 +75,7 @@ public class AccountDaoTest
         bank.setName("Test bank");
         bank.setUNN("19777791");
         bank.setName("Tests bank");
-        bank1 = bankDAO.insert(bank);
+
 
         User user = new User();
         user.setPersonalNumber("1234567890");
@@ -92,11 +92,15 @@ public class AccountDaoTest
         try {
             DaoFactoryFactory.getInstance().beginTransaction();
             userRole1 = userRoleDAO.insert(userRole);
-
             user.setUserRole(userRole1);
+
 
             user1 = userDAO.insert(user);
 
+
+
+
+            bank1 = bankDAO.insert(bank);
 
             Agreement agreement = new Agreement();
 
@@ -114,8 +118,9 @@ public class AccountDaoTest
                 //it is not possible
 
             }
-            agreement.setBank(bank1);
+
             agreement.setClient(user1);
+            agreement.setBank(bank1);
 
             agreement1 = agreementDAO.insert(agreement);
 

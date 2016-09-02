@@ -66,7 +66,7 @@ public class Account extends AbstractEntity {
         this.agreement = agreement;
     }
 
-    @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "currency_id", nullable = false, updatable = false)
     public Currency getCurrency() {
         return currency;

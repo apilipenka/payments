@@ -63,7 +63,7 @@ public class AgreementDaoTest
         bank.setName("Test bank");
         bank.setUNN("19777791");
         bank.setName("Tests bank");
-        bank1 = bankDAO.insert(bank);
+
 
         User user = new User();
         user.setPersonalNumber("1234567890");
@@ -78,11 +78,11 @@ public class AgreementDaoTest
         userRole.setName("Test");
         userRole.setName("Test user");
 
-        userRole1 = userRoleDAO.insert(userRole);
 
-        user.setUserRole(userRole1);
 
-        user1 = userDAO.insert(user);
+
+
+
 
 
         Agreement agreement = new Agreement();
@@ -101,11 +101,16 @@ public class AgreementDaoTest
             //it is not possible
 
         }
-        agreement.setBank(bank1);
-        agreement.setClient(user1);
+
 
         try {
             DaoFactoryFactory.getInstance().beginTransaction();
+            bank1 = bankDAO.insert(bank);
+            userRole1 = userRoleDAO.insert(userRole);
+            user.setUserRole(userRole1);
+            user1 = userDAO.insert(user);
+            agreement.setBank(bank1);
+            agreement.setClient(user1);
             agreement1 = agreementDAO.insert(agreement);
             Agreement agreement2 = agreementDAO.findEntityById(agreement1.getId());
             assertEquals(agreement1, agreement2);

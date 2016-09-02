@@ -134,6 +134,9 @@ public class AccountServiceTest
         exchangeRate.setRateDate(format.parse(format.format(Calendar.getInstance().getTime())));
         exchangeRate1 = exchangeRateService.insertEntity(exchangeRate);
 
+        currency1.addExchangeRate(exchangeRate1);
+        currencyService.updateEntity(currency1);
+
         Account account = new Account();
         account.setNumber("197777719");
         account.setAmount(19999);
@@ -222,9 +225,8 @@ public class AccountServiceTest
     @Test
     public void test63transferMoney() throws Exception {
 
-        Account account3 = accountService.getEntity(account1.getId());
-        account3.setAmount(100);
-        accountService.updateEntity(account3);
+        account1.setAmount(100);
+        accountService.updateEntity(account1);
 
         Account account2 = new Account(); //accountService.getEntity(account1.getId());
         account2.setNumber("123321567");
@@ -234,12 +236,7 @@ public class AccountServiceTest
 
         account2 = accountService.insertEntity(account2);
 
-        ((DAOFactory) DaoFactoryFactory.getInstance()).getSession().clear();
-
-        Account account4 = accountService.getEntity(account3.getId());
-        Account account5 = accountService.getEntity(account2.getId());
-
-        accountService.transferMoney(account4.getNumber(), account5.getNumber(), 60);
+        accountService.transferMoney(account1.getNumber(), account2.getNumber(), 60);
         account1 = accountService.getEntity(account1.getId());
         account2 = accountService.getEntity(account2.getId());
         assertEquals(40, account1.getAmount(), 0);
@@ -252,11 +249,9 @@ public class AccountServiceTest
 
         accountService.deleteEntity(account1.getId());
 
-
         Account account2 = accountService.getEntity(account1.getId());
 
         assertNull(account2);
-
 
     }
 

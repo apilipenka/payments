@@ -61,9 +61,9 @@ public class CurrencyDaoTest
             DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
             exchangeRate.setRateDate(format.parse("10.01.1977"));
 
-            currency1.addExchangeRate(exchangeRate);
             exchangeRate1 = exchangeRateDAO.insert(exchangeRate);
-
+            currency1.addExchangeRate(exchangeRate1);
+            currencyDAO.update(currency1);
             DaoFactoryFactory.getInstance().commit();
 
 

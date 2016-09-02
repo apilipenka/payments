@@ -1,8 +1,12 @@
 package by.pwt.pilipenko.payments.model.entities;
 
 import by.pwt.pilipenko.payments.model.VO.ExchangeRateVO;
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -49,6 +53,7 @@ public class ExchangeRate extends AbstractEntity {
     }
 
     @ManyToOne
+    @Cascade(CascadeType.SAVE_UPDATE)
     @JoinColumn(name = "currency_id", nullable = false)
     public Currency getCurrency() {
         return currency;
