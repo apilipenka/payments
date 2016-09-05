@@ -293,6 +293,11 @@ public enum CommandEnum {
             this.command = new AccountListCommand();
         }
     },
+    ACCOUNTLISTWITHPAGINATION {
+        {
+            this.command = new AccountListWithPaginationCommand();
+        }
+    },
     EDITACCOUNT {
         {
             this.command = new EditAccountCommand();

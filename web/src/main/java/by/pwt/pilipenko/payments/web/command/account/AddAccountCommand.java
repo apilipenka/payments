@@ -30,9 +30,9 @@ public class AddAccountCommand implements ActionCommand {
 
             AgreementService agreementService = new AgreementService();
 
-            Agreement agreemnet = null;
+            Agreement agreement = null;
             try {
-                agreemnet = agreementService.getEntity(Integer.parseInt(agreementstr));
+                agreement = agreementService.getEntity(Integer.parseInt(agreementstr));
             } catch (Exception e) {
                 throw e;
             }
@@ -51,7 +51,7 @@ public class AddAccountCommand implements ActionCommand {
 
             account.setNumber(number);
             account.setAmount(new Double(amount));
-            account.setAgreement(agreemnet);
+            account.setAgreement(agreement);
             account.setCurrency(currency);
 
             AccountService accountService = new AccountService();

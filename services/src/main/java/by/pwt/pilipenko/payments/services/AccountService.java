@@ -2,6 +2,7 @@ package by.pwt.pilipenko.payments.services;
 
 import by.pwt.pilipenko.payments.dao.BaseDAO;
 import by.pwt.pilipenko.payments.dao.DaoFactoryFactory;
+import by.pwt.pilipenko.payments.dao.hibernate.AccountDAO;
 import by.pwt.pilipenko.payments.model.entities.Account;
 import by.pwt.pilipenko.payments.services.exceptions.AccountNotFoundException;
 
@@ -80,5 +81,19 @@ public class AccountService extends AbstractEntityService<Account> {
     public BaseDAO<Account> getEntityDAO() throws NamingException, SQLException, ClassNotFoundException {
         return DaoFactoryFactory.getInstance().createAccountDAO();
     }
+
+
+    public List<Account> searchEntityByNameWithPagination(String name, int page, int recordsPerPage) throws SQLException, NamingException, ClassNotFoundException {
+        Account entity = new Account();
+        if (name != null && !name.equals("")) {
+            entity.setNumber(name);
+        }
+        return ((AccountDAO) getEntityDAO()).findEntityByEntityWithPagination(entity, page, recordsPerPage);
+    }
+
+    public List<Account> getAllEntitiesWithPagination(int page, int recordsPerPage) throws SQLException, NamingException, ClassNotFoundException {
+        return ((AccountDAO) getEntityDAO()).findAllWithPagination(page, recordsPerPage);
+    }
+
 
 }
