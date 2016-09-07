@@ -20,7 +20,7 @@ public class AccountListWithPaginationCommand implements ActionCommand {
         AccountService accountService = new AccountService();
         Object pg = request.getAttribute("pg");
         Object rpp = request.getAttribute("rpp");
-        Object name = request.getAttribute("accountName");
+        String name = (String)request.getAttribute("accountName");
 
         List<Account> accountList;
 
@@ -49,7 +49,7 @@ public class AccountListWithPaginationCommand implements ActionCommand {
                 accountList = accountService.searchEntityByNameWithPagination(name.toString(),new Integer(pg.toString()), new Integer(rpp.toString()));
 
 
-                request.setAttribute("accountName", name.toString());
+                request.setAttribute("accountName", name);
             } else {
                 accountList = accountService.getAllEntitiesWithPagination(new Integer(pg.toString()), new Integer(rpp.toString()));
             }

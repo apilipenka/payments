@@ -61,7 +61,7 @@ public class UpdateAccountCommand implements ActionCommand {
             if (flag) {
                 request.getSession().setAttribute("success", "true");
 
-                page = ConfigurationManager.getProperty("path.page.accountlist");
+                page = ConfigurationManager.getProperty("path.page.accountlistp")+"?pg=1&rpp=1";
 
                 request.getSession().setAttribute("message", "The account has been successfully updated.");
             }

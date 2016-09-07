@@ -15,7 +15,7 @@
     <!--Search Form -->
     <form action="controller" method="get" id="seachAccountForm" role="form">
         <input type="hidden" id="command" name="command" value="ACCOUNTLISTWITHPAGINATION">
-        <input type="hidden" id="pg" name="pg" value="0">
+        <input type="hidden" id="pg" name="pg" value="1">
         <input type="hidden" id="rpp" name="rpp" value="1">
 
         <div class="form-group col-xs-5">
@@ -36,61 +36,73 @@
     </c:if>
     <form action="controller" method="post" id="accountForm" role="form">
         <input type="hidden" id="accountID" name="accountID">
-        <input type="hidden" id="action" name="action">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <td>#</td>
+                <td>Number</td>
+                <td>Amount</td>
+                <td>Agreement</td>
+                <td>Currency</td>
+                <td></td>
+            </tr>
+            </thead>
+            <c:forEach var="account" items="${accountList}">
+                <c:set var="classSucess" value=""/>
+                <c:if test="${accountID == account.id}">
+                    <c:set var="classSucess" value="info"/>
+                </c:if>
+                <tr class="${classSucess}">
+                    <td>
+                        <a href="controller?accountID=${account.id}&command=EDITACCOUNT&source=accountlist">${account.id}</a>
+                    </td>
+                    <td>${account.number}</td>
+                    <td>${account.amount}</td>
+                    <td>${account.getAgreementNumber()}</td>
+                    <td>${account.getCurrencyMnemocode()}</td>
+                    <td>
+                        <a href="${pageContext.request.contextPath}/controller?command=REMOVEACCOUNT&accountID=${account.id}">
+                            <span class="glyphicon glyphicon-trash"/>
+                        </a>
+
+                    </td>
+                </tr>
+
+            </c:forEach>
+            <tr/>
+            <tr class="thead">
+                <td>
+                    <c:if test="${pg > 1}">
+                        <a href="${pageContext.request.contextPath}/controller?command=ACCOUNTLISTWITHPAGINATION&pg=1&rpp=${rpp}" > &lt;&lt; &nbsp; First page</a>
+                    </c:if>
+                </td>
+                <td>
+                    <c:if test="${pg > 1}">
+                    <a href="${pageContext.request.contextPath}/controller?command=ACCOUNTLISTWITHPAGINATION&pg=${pg-1}&rpp=${rpp}">&lt; &nbsp; Prev page</a>
+                </c:if>
+                </td>
+                <td>Page&nbsp;${pg}</td>
+                <td><a href="${pageContext.request.contextPath}/controller?command=ACCOUNTLISTWITHPAGINATION&pg=${pg+1}&rpp=${rpp}">Next page &nbsp; &gt;</a></td>
+                <td>Last page &nbsp; &gt;&gt;</td>
+                <td>
+                    <select name="rpp"
+                            id="rpp" class="form-control">
+                            <option value="1" ${rpp == 1 ? 'selected="selected"' : ''}>1 record per page</option>
+                            <option value="5" ${rpp == 5 ? 'selected="selected"' : ''}>5 records per page</option>
+                            <option value="10" ${rpp == 10 ? 'selected="selected"' : ''}>10 records per page</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
         <c:choose>
             <c:when test="${not empty accountList}">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <td>#</td>
-                        <td>Number</td>
-                        <td>Amount</td>
-                        <td>Agreement</td>
-                        <td>Currency</td>
-                        <td></td>
-                    </tr>
-                    </thead>
-                    <c:forEach var="account" items="${accountList}">
-                        <c:set var="classSucess" value=""/>
-                        <c:if test="${accountID == account.id}">
-                            <c:set var="classSucess" value="info"/>
-                        </c:if>
-                        <tr class="${classSucess}">
-                            <td>
-                                <a href="controller?accountID=${account.id}&command=EDITACCOUNT&source=accountlist">${account.id}</a>
-                            </td>
-                            <td>${account.number}</td>
-                            <td>${account.amount}</td>
-                            <td>${account.getAgreementNumber()}</td>
-                            <td>${account.getCurrencyMnemocode()}</td>
-                            <td>
-                                <a href="${pageContext.request.contextPath}/controller?command=REMOVEACCOUNT&accountID=${account.id}">
-                                    <span class="glyphicon glyphicon-trash"/>
-                                </a>
-
-                            </td>
-                        </tr>
-                    </c:forEach>
-                    <tr/>
-                    <tr class="thead">
-                        <td>
-                            first page
-
-
-                        </td>
-                        <td> next page </td>
-                        <td>${pg}</td>
-                        <td>next page</td>
-                        <td>last page</td>
-                        <td>rpp</td>
-                    </tr>
-                </table>
+        <input type="hidden" id="action" name="action">
 
             </c:when>
             <c:otherwise>
                 <br>
                 <div class="alert alert-info">
-                    No agreement found matching your search criteria
+                    No account found matching your search criteria
                 </div>
             </c:otherwise>
         </c:choose>

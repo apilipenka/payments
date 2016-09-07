@@ -34,7 +34,7 @@
                 </li>
                 <li><a href="${pageContext.request.contextPath}/controller?command=ACCOUNTLIST">Edit account</a>
                 </li>
-                <li><a href="${pageContext.request.contextPath}/controller?command=ACCOUNTLISTWITHPAGINATION&pg=0&rpp=5">Edit account with pagination</a>
+                <li><a href="${pageContext.request.contextPath}/controller?command=ACCOUNTLISTWITHPAGINATION&pg=1&rpp=1">Edit account with pagination</a>
                 </li>
                 <li><a href="${pageContext.request.contextPath}/controller?command=CARDLIST">Edit card</a>
                 </li>
