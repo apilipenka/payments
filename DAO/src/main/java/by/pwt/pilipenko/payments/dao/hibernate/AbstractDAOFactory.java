@@ -19,35 +19,35 @@ import java.sql.SQLException;
 /**
  * Created by apilipenka on 8/19/2016.
  */
-abstract class AbstractDAOFactory implements BaseDAOFactory {
+public abstract class AbstractDAOFactory implements BaseDAOFactory {
     private static Logger log = Logger.getLogger(AbstractDAOFactory.class);
     private final ThreadLocal<Session> sessions = new ThreadLocal<>();
     private static ThreadLocal<Boolean> flags = new ThreadLocal<>();
-    private Session session;
+    //private Session session;
     private Transaction transaction;
-    private SessionFactory sessionFactory = null;
 
 
     public Session getSession() throws SQLException {
-        Session localInstance = session;
+        Session localInstance = sessions.get();
 
         if (localInstance == null) {
 
             synchronized (AbstractDAOFactory.class) {
 
 
-                localInstance = session;
+                localInstance =  sessions.get();
                 if (localInstance == null) {
-
+                    Session session = null;
                     try {
                         Configuration configuration = new Configuration();
                         configuration.configure();
 
                         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
                                 configuration.getProperties()).build();
-                        sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+                        SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
                         session = sessionFactory.openSession();
-                        flags.set(new Boolean(false));
+                        sessions.set(session);
+                        flags.set(Boolean.FALSE);
                     } catch (Throwable ex) {
                         log.error("Initial SessionFactory creation failed. " + ex);
                         //System.exit(0);
@@ -69,29 +69,42 @@ abstract class AbstractDAOFactory implements BaseDAOFactory {
 
     public void commit() throws SQLException {
         transaction.commit();
-        flags.set(new Boolean(false));
+        flags.set(Boolean.FALSE);
     }
 
     public void rollback() throws SQLException {
         transaction.rollback();
-        flags.set(new Boolean(false));
+        flags.set(Boolean.FALSE);
     }
 
     public void beginTransaction() throws SQLException {
         transaction = getSession().beginTransaction();
-        flags.set(new Boolean(true));
+        flags.set(Boolean.TRUE);
     }
 
     public void endTransaction() throws SQLException {
-        flags.set(new Boolean(false));
+        //getSession().close();
+        //sessions.set(null);
+        flags.set(Boolean.FALSE);
     }
 
     public boolean isParentTransactionStarted () {
         Boolean flag = flags.get();
         if (flag!=null)
-            return flags.get().booleanValue();
-        flags.set(new Boolean(false));
+            return flags.get();
+        flags.set(Boolean.FALSE);
         return false;
+    }
+
+    public void closeSession() throws SQLException {
+        Session session = sessions.get();
+        if (session!=null) {
+            if (getSession().isOpen())
+                getSession().close();
+            sessions.set(null);
+        }
+
+        flags.set(Boolean.FALSE);
     }
 
 }

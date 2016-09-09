@@ -16,38 +16,66 @@ public abstract class AbstractEntityService<T extends AbstractEntity> {
     }
 
     public List<T> getAllEntities() throws SQLException, NamingException, ClassNotFoundException {
-        BaseDAO<T> entityDAO = getEntityDAO();
-        return entityDAO.findAll();
+        boolean flag = DaoFactoryFactory.getInstance().isParentTransactionStarted();
+        try {
+            if (!flag)
+                DaoFactoryFactory.getInstance().beginTransaction();
+            BaseDAO<T> entityDAO = getEntityDAO();
+            return entityDAO.findAll();
+        } finally {
+            if (!flag)
+                DaoFactoryFactory.getInstance().commit();
+        }
     }
 
     public abstract List<T> searchEntityByName(String name) throws Exception;
 
     public T getEntity(int id) throws Exception {
-        BaseDAO<T> entityDAO = getEntityDAO();
-        return entityDAO.findEntityById(id);
-
+        boolean flag = DaoFactoryFactory.getInstance().isParentTransactionStarted();
+        try {
+            if (!flag)
+                DaoFactoryFactory.getInstance().beginTransaction();
+            BaseDAO<T> entityDAO = getEntityDAO();
+            return entityDAO.findEntityById(id);
+        } finally {
+            if (!flag)
+                DaoFactoryFactory.getInstance().commit();
+        }
     }
 
     public T loadEntity(int id) throws Exception {
-        BaseDAO<T> entityDAO = getEntityDAO();
-        return entityDAO.loadEntity(id);
-
+        boolean flag = DaoFactoryFactory.getInstance().isParentTransactionStarted();
+        try {
+            if (!flag)
+                DaoFactoryFactory.getInstance().beginTransaction();
+            BaseDAO<T> entityDAO = getEntityDAO();
+            return entityDAO.loadEntity(id);
+        } finally {
+            if (!flag)
+                DaoFactoryFactory.getInstance().commit();
+        }
     }
 
     public T getEntityByPK(T entity) throws Exception {
-        BaseDAO<T> entityDAO = getEntityDAO();
-        entity = entityDAO.findEntityByPK(entity);
-        return entity;
+        boolean flag = DaoFactoryFactory.getInstance().isParentTransactionStarted();
+        try {
+            if (!flag)
+                DaoFactoryFactory.getInstance().beginTransaction();
+            BaseDAO<T> entityDAO = getEntityDAO();
+            entity = entityDAO.findEntityByPK(entity);
+            return entity;
+        } finally {
+            if (!flag)
+                DaoFactoryFactory.getInstance().commit();
+        }
     }
 
     public boolean updateEntity(T entity) throws ClassNotFoundException, NamingException, SQLException {
 
         BaseDAO<T> entityDAO = getEntityDAO();
         boolean result;
-
+        boolean flag = DaoFactoryFactory.getInstance().isParentTransactionStarted();
         try {
-            boolean flag = DaoFactoryFactory.getInstance().isParentTransactionStarted();
-
             if (!flag)
                 DaoFactoryFactory.getInstance().beginTransaction();
             result = entityDAO.update(entity);
@@ -56,7 +84,7 @@ public abstract class AbstractEntityService<T extends AbstractEntity> {
                 DaoFactoryFactory.getInstance().commit();
 
         } catch (SQLException | NamingException e) {
-            if (!DaoFactoryFactory.getInstance().isParentTransactionStarted())
+            if (!flag)
                 DaoFactoryFactory.getInstance().rollback();
             throw e;
         }
@@ -67,16 +95,15 @@ public abstract class AbstractEntityService<T extends AbstractEntity> {
 
     public T insertEntity(T entity) throws SQLException, NamingException, ClassNotFoundException {
         BaseDAO<T> entityDAO = getEntityDAO();
+        boolean flag = DaoFactoryFactory.getInstance().isParentTransactionStarted();
         try {
-            boolean flag = DaoFactoryFactory.getInstance().isParentTransactionStarted();
-
             if (!flag)
                 DaoFactoryFactory.getInstance().beginTransaction();
             entity = entityDAO.insert(entity);
             if (!flag)
                 DaoFactoryFactory.getInstance().commit();
         } catch (SQLException | NamingException e) {
-            if (!DaoFactoryFactory.getInstance().isParentTransactionStarted())
+            if (!flag)
                 DaoFactoryFactory.getInstance().rollback();
             throw e;
         }
@@ -87,16 +114,15 @@ public abstract class AbstractEntityService<T extends AbstractEntity> {
     public boolean deleteEntity(int id) throws SQLException, NamingException, ClassNotFoundException {
         BaseDAO<T> entityDAO = getEntityDAO();
         boolean result;
+        boolean flag = DaoFactoryFactory.getInstance().isParentTransactionStarted();
         try {
-            boolean flag = DaoFactoryFactory.getInstance().isParentTransactionStarted();
-
             if (!flag)
                 DaoFactoryFactory.getInstance().beginTransaction();
             result = entityDAO.delete(id);
             if (!flag)
                 DaoFactoryFactory.getInstance().commit();
         } catch (SQLException | NamingException e) {
-            if (!DaoFactoryFactory.getInstance().isParentTransactionStarted())
+            if (!flag)
                 DaoFactoryFactory.getInstance().rollback();
             throw e;
         }

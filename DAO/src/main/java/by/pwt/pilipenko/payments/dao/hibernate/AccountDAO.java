@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import javax.naming.NamingException;
@@ -66,14 +67,8 @@ public class AccountDAO extends AbstractEntityDAO<Account> {
             List<Account> accounts = cr.list();
 
             if (accounts.isEmpty()) {
-                if (log.isDebugEnabled()) {
-                    log.debug("Admin users are not exist");
-                }
                 return null;
             } else {
-                if (log.isDebugEnabled()) {
-                    log.debug("Found " + accounts.size() + " Admin users");
-                }
                 return accounts;
             }
         } catch (RuntimeException ex) {
@@ -91,19 +86,37 @@ public class AccountDAO extends AbstractEntityDAO<Account> {
             List<Account> accounts = cr.list();
 
             if (accounts.isEmpty()) {
-                if (log.isDebugEnabled()) {
-                    log.debug("Admin users are not exist");
-                }
                 return null;
             } else {
-                if (log.isDebugEnabled()) {
-                    log.debug("Found " + accounts.size() + " Admin users");
-                }
                 return accounts;
             }
         } catch (RuntimeException ex) {
             log.error(ex);
             return null;
+        }
+    }
+
+    public long getRecordsCountEntityByEntity(Account entity) {
+        try {
+
+            //return (Number) session.createCriteria("Book").setProjection(Projections.rowCount()).uniqueResult();
+
+            Criteria cr = getSession().createCriteria(Account.class);
+            cr.add(Restrictions.like("number", entity.getNumber()+"%"));
+            return (long) cr.setProjection(Projections.rowCount()).uniqueResult();
+        } catch (RuntimeException ex) {
+            log.error(ex);
+            return 0;
+        }
+    }
+
+    public long getAllRecordsCount() {
+        try {
+            Criteria cr = getSession().createCriteria(Account.class);
+            return (long) cr.setProjection(Projections.rowCount()).uniqueResult();
+        } catch (RuntimeException ex) {
+            log.error(ex);
+            return 0;
         }
     }
 

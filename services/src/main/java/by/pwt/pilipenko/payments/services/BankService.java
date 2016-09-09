@@ -11,17 +11,22 @@ import java.util.List;
 public class BankService extends AbstractEntityService<Bank> {
 
     public List<Bank> searchEntityByName(String name) throws SQLException, NamingException, ClassNotFoundException {
+        boolean flag = DaoFactoryFactory.getInstance().isParentTransactionStarted();
+        try {
+            if (!flag)
+                DaoFactoryFactory.getInstance().beginTransaction();
+            Bank entity = new Bank();
+            if (name != null && !name.equals("")) {
+                entity.setName(name);
+            }
 
-        Bank entity = new Bank();
-        if (name != null && !name.equals("")) {
-            entity.setName(name);
+            BaseDAO<Bank> bankDAO = getEntityDAO();
+
+            return bankDAO.findEntityByEntity(entity);
+        } finally {
+            if (!flag)
+                DaoFactoryFactory.getInstance().commit();
         }
-
-        BaseDAO<Bank> bankDAO = getEntityDAO();
-        List<Bank> list = bankDAO.findEntityByEntity(entity);
-
-        return list;
-
     }
 
     @Override

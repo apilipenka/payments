@@ -23,35 +23,39 @@ public class AccountListWithPaginationCommand implements ActionCommand {
         String name = (String)request.getAttribute("accountName");
 
         List<Account> accountList;
+        long count = 0;
 
 
         if (pg==null) {
             pg = request.getParameter("pg");
         }
-        if (pg==null) {
-            pg = new Integer(0);
+        if (pg==null || pg.equals("")) {
+            pg = new Integer(1);
         }
 
         if (rpp==null) {
             rpp = request.getParameter("rpp");
         }
-        if (rpp==null) {
-            rpp = new Integer(0);
+        if (rpp==null || rpp.equals("")) {
+            rpp = new Integer(1);
         }
 
 
 
-        if (name != null) {
-            accountList = accountService.searchEntityByName(name.toString());
+        if (name != null && !name.equals("")) {
+            accountList = accountService.searchEntityByNameWithPagination(name.toString(),new Integer(pg.toString()), new Integer(rpp.toString()));
+            count =  accountService.getCountEntityByNameWithPagination(name.toString());
+            request.setAttribute("accountName",name);
         } else {
             name = request.getParameter("accountName");
-            if (name != null) {
+            if (name != null && !name.equals("")) {
                 accountList = accountService.searchEntityByNameWithPagination(name.toString(),new Integer(pg.toString()), new Integer(rpp.toString()));
-
+                count =  accountService.getCountEntityByNameWithPagination(name.toString());
 
                 request.setAttribute("accountName", name);
             } else {
                 accountList = accountService.getAllEntitiesWithPagination(new Integer(pg.toString()), new Integer(rpp.toString()));
+                count = accountService.getCountAllEntitiesWithPagination();
             }
         }
 
@@ -68,6 +72,9 @@ public class AccountListWithPaginationCommand implements ActionCommand {
 
             request.setAttribute("accountList", accountVOList);
         }
+        request.setAttribute("recordsCount",count);
+        request.setAttribute("maxPage", (int)Math.ceil((float)count/new Integer(rpp.toString())));
+
         return page;
     }
 }

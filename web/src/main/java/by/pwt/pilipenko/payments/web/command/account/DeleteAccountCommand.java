@@ -12,6 +12,10 @@ public class DeleteAccountCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         AccountService accountService = new AccountService();
         Object name = request.getAttribute("accountID");
+        Object accountName = request.getAttribute("accountName");
+        Object pg = request.getAttribute("pg");
+        Object rpp = request.getAttribute("rpp");
+
         String error = null;
         String page = null;
         try {
@@ -27,8 +31,9 @@ public class DeleteAccountCommand implements ActionCommand {
             }
 
             request.getSession().setAttribute("success", "true");
-
-            page = ConfigurationManager.getProperty("path.page.accountlistp")+"?pg=1&rpp=1";
+            request.setAttribute("command", "ACCOUNTLISTP");
+            page = ConfigurationManager.getProperty("path.page.accountlistp")+"?command=ACCOUNTLISTP&pg="+(pg!=null&&!pg.equals("")?pg:1)+"&rpp="+(rpp!=null&&!rpp.equals("")?rpp:1)+
+                    (accountName!=null&&!accountName.equals("")?"&accountName":"");
 
             request.getSession().setAttribute("message", "The account has been successfully deleted.");
 
@@ -36,9 +41,10 @@ public class DeleteAccountCommand implements ActionCommand {
             e.printStackTrace();
         } catch (Exception e) {
             error = e.getMessage();
-            page = ConfigurationManager.getProperty("path.page.accountlistp")+"?pg=1&rpp=1";
+            page = ConfigurationManager.getProperty("path.page.accountlistp")+"?command=ACCOUNTLISTP&pg="+(pg!=null&&!pg.equals("")?pg:1)+"&rpp="+(rpp!=null&&!rpp.equals("")?rpp:1)+
+                    (accountName!=null&&!accountName.equals("")?"&accountName":"");
             request.setAttribute("error", error);
-            request.setAttribute("command", "ACCOUNTLIST");
+            request.setAttribute("command", "ACCOUNTLISTP");
             request.getSession().setAttribute("success", "false");
         }
 

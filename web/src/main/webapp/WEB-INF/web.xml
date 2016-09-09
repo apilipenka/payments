@@ -21,7 +21,7 @@
         <location>/jsp/error/error.jsp</location>
     </error-page>
     <session-config>
-        <session-timeout>1</session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
 
     <resource-ref>
@@ -307,5 +307,21 @@
         <filter-name>ExchangeRatesExtFilter</filter-name>
         <url-pattern>/jsp/new-currencyext.jsp</url-pattern>
     </filter-mapping>
+
+    <filter>
+        <filter-name>SessionCloseFilter</filter-name>
+        <filter-class>
+            by.pwt.pilipenko.payments.web.filter.SessionCloseFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SessionCloseFilter</filter-name>
+        <url-pattern>/controller</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>SessionCloseFilter</filter-name>
+        <url-pattern>/jsp/*</url-pattern>
+    </filter-mapping>
+
 
 </web-app>

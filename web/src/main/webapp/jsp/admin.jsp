@@ -50,6 +50,8 @@
         </li>
     </ul>
 
+    ${sessionScope.user.getUserRole()}
+
 
 </div>
 </body>

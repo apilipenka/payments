@@ -11,12 +11,12 @@
 
 <body>
 <div class="container">
-    <h2>Cards</h2>
+    <h2>Accounts</h2>
     <!--Search Form -->
     <form action="controller" method="get" id="seachAccountForm" role="form">
         <input type="hidden" id="command" name="command" value="ACCOUNTLISTWITHPAGINATION">
         <input type="hidden" id="pg" name="pg" value="1">
-        <input type="hidden" id="rpp" name="rpp" value="1">
+        <input type="hidden" id="rpp" name="rpp" value=${rpp}>
 
         <div class="form-group col-xs-5">
             <input type="text" name="accountName" id="accountName" class="form-control"
@@ -34,7 +34,7 @@
                 ${message}
         </div>
     </c:if>
-    <form action="controller" method="post" id="accountForm" role="form">
+    <form action="controller" method="get" id="accountForm" role="form">
         <input type="hidden" id="accountID" name="accountID">
         <table class="table table-striped">
             <thead>
@@ -73,30 +73,39 @@
             <tr class="thead">
                 <td>
                     <c:if test="${pg > 1}">
-                        <a href="${pageContext.request.contextPath}/controller?command=ACCOUNTLISTWITHPAGINATION&pg=1&rpp=${rpp}" > &lt;&lt; &nbsp; First page</a>
+                        <a href="${pageContext.request.contextPath}/controller?command=ACCOUNTLISTWITHPAGINATION&pg=1&rpp=${rpp}<c:if test="${not empty accountName}">&accountName=${accountName}</c:if>">
+                            &lt;&lt; &nbsp; First page</a>
                     </c:if>
                 </td>
                 <td>
                     <c:if test="${pg > 1}">
-                    <a href="${pageContext.request.contextPath}/controller?command=ACCOUNTLISTWITHPAGINATION&pg=${pg-1}&rpp=${rpp}">&lt; &nbsp; Prev page</a>
+                        <a href="${pageContext.request.contextPath}/controller?command=ACCOUNTLISTWITHPAGINATION&pg=${pg-1}&rpp=${rpp}<c:if test="${not empty accountName}">&accountName=${accountName}</c:if>">
+                            &lt; &nbsp; Prev page</a>
+                    </c:if>
+                </td>
+                <td>Page&nbsp;${pg}&nbsp;from&nbsp;${maxPage}</td>
+                <td><c:if test="${pg < maxPage}">
+                    <a href="${pageContext.request.contextPath}/controller?command=ACCOUNTLISTWITHPAGINATION&pg=${pg+1}&rpp=${rpp}<c:if test="${not empty accountName}">&accountName=${accountName}</c:if>">Next
+                        page &nbsp; &gt;</a>
                 </c:if>
                 </td>
-                <td>Page&nbsp;${pg}</td>
-                <td><a href="${pageContext.request.contextPath}/controller?command=ACCOUNTLISTWITHPAGINATION&pg=${pg+1}&rpp=${rpp}">Next page &nbsp; &gt;</a></td>
-                <td>Last page &nbsp; &gt;&gt;</td>
+                <c:if test="${pg < maxPage}">
+                    <td><a href="${pageContext.request.contextPath}/controller?command=ACCOUNTLISTWITHPAGINATION&pg=${maxPage}&rpp=${rpp}<c:if test="${not empty accountName}">&accountName=${accountName}</c:if>">Last page &nbsp; &gt;&gt;</a></td>
+                </c:if>
                 <td>
-                    <select name="rpp"
-                            id="rpp" class="form-control">
-                            <option value="1" ${rpp == 1 ? 'selected="selected"' : ''}>1 record per page</option>
-                            <option value="5" ${rpp == 5 ? 'selected="selected"' : ''}>5 records per page</option>
-                            <option value="10" ${rpp == 10 ? 'selected="selected"' : ''}>10 records per page</option>
+
+                    <select onchange="document.location=this.options[this.selectedIndex].value" class="form-control">
+                        <option value="${pageContext.request.contextPath}/controller?command=ACCOUNTLISTWITHPAGINATION&rpp=1<c:if test="${not empty accountName}">&accountName=${accountName}</c:if>" ${rpp == 1 ? 'selected="selected"' : ''}>1 record per page</option>
+                        <option value="${pageContext.request.contextPath}/controller?command=ACCOUNTLISTWITHPAGINATION&rpp=5<c:if test="${not empty accountName}">&accountName=${accountName}</c:if>" ${rpp == 5 ? 'selected="selected"' : ''}>5 records per page</option>
+                        <option value="${pageContext.request.contextPath}/controller?command=ACCOUNTLISTWITHPAGINATION&rpp=10<c:if test="${not empty accountName}">&accountName=${accountName}</c:if>" ${rpp == 10 ? 'selected="selected"' : ''}>10 records per page</option>
                     </select>
                 </td>
+                <td></td>
             </tr>
         </table>
         <c:choose>
             <c:when test="${not empty accountList}">
-        <input type="hidden" id="action" name="action">
+                <input type="hidden" id="action" name="action">
 
             </c:when>
             <c:otherwise>
