@@ -58,8 +58,9 @@ public class AccountServiceTest
         bankService.deleteEntity(bank1.getId());
         userService.deleteEntity(user1.getId());
         userRoleService.deleteEntity(userRole1.getId());
-        exchangeRateService.deleteEntity(exchangeRate1.getId());
         currencyService.deleteEntity(currency1.getId());
+//        exchangeRateService.deleteEntity(exchangeRate1.getId());
+
 
         bankService = null;
         userService = null;

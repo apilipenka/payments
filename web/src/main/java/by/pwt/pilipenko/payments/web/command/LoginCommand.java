@@ -37,7 +37,7 @@ public class LoginCommand implements ActionCommand {
             session.setAttribute("user",user1);
             // определение пути к main.jsp
             page = ConfigurationManager.getProperty("path.page.main");
-        } else if (LoginLogic.checkUserLogin(login, pass)) {
+        } else if (LoginLogic.checkAdminLogin(login, pass)) {
             request.setAttribute("user", login);
             HttpSession session = request.getSession(true);
             session.setAttribute("userType", "CLIENT");
@@ -45,7 +45,7 @@ public class LoginCommand implements ActionCommand {
             session.setAttribute("user",user1);
             // определение пути к main.jsp
             page = ConfigurationManager.getProperty("path.page.user");
-        } else if (LoginLogic.checkManagerLogin(login, pass)) {
+        } else if (LoginLogic.checkAdminLogin(login, pass)) {
             request.setAttribute("user", login);
             HttpSession session = request.getSession(true);
             session.setAttribute("userType", "MANAGER");

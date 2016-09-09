@@ -9,12 +9,8 @@
 </head>
 <body>
 <div class="container">
-    <h3>Welcome, admin</h3>
+    <h3>Welcome</h3>
     <hr/>
-    ${user}, hello!
-    <hr/>
-    Links for admin...<br/>
-    Debug info - session = ${sessionScope}
     <br></br>
     <ul>
         <li class="dropdown" style="list-style: none;">
@@ -34,7 +30,9 @@
                 </li>
                 <li><a href="${pageContext.request.contextPath}/controller?command=ACCOUNTLIST">Edit account</a>
                 </li>
-                <li><a href="${pageContext.request.contextPath}/controller?command=ACCOUNTLISTWITHPAGINATION&pg=1&rpp=1">Edit account with pagination</a>
+                <li>
+                    <a href="${pageContext.request.contextPath}/controller?command=ACCOUNTLISTWITHPAGINATION&pg=1&rpp=1">Edit
+                        account with pagination</a>
                 </li>
                 <li><a href="${pageContext.request.contextPath}/controller?command=CARDLIST">Edit card</a>
                 </li>
@@ -50,8 +48,24 @@
         </li>
     </ul>
 
-    ${sessionScope.user.getUserRole()}
 
+    <br></br>
+    <ul>
+        <li class="dropdown" style="list-style: none;">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+
+
+                <c:forEach items="${sessionScope.user.getUserRole().getCommands()}" var="command">
+                    <li><a href="${pageContext.request.contextPath}/${command.getUrl()}">${command.getLabel()}</a>
+                    </li>
+                </c:forEach>
+                <li class="divider"></li>
+                <li><a href="${pageContext.request.contextPath}/controller?command=logout">Logout</a></li>
+
+            </ul>
+        </li>
+    </ul>
 
 </div>
 </body>

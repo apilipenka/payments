@@ -14,7 +14,7 @@ public class LoginLogic {
 
         User user1 = userService.getEntityByPK(user);
 
-        return user1 != null && user1.getPassword().equals(enterPass) && user1.getUserRole().getName().equalsIgnoreCase("ADMIN");
+        return user1 != null && user1.getPassword().equals(enterPass) ;
     }
 
     public static boolean checkManagerLogin(String enterLogin, String enterPass) throws Exception {

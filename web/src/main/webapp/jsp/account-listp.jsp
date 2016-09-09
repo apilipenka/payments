@@ -12,6 +12,22 @@
 <body>
 <div class="container">
     <h2>Accounts</h2>
+    <ul>
+        <li class="dropdown" style="list-style: none;">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+
+
+                <c:forEach items="${sessionScope.user.getUserRole().getCommands()}" var="command">
+                    <li><a href="${pageContext.request.contextPath}/${command.getUrl()}">${command.getLabel()}</a>
+                    </li>
+                </c:forEach>
+
+                <li class="divider"></li>
+                <li><a href="${pageContext.request.contextPath}/controller?command=logout">Logout</a></li>
+            </ul>
+        </li>
+    </ul>
     <!--Search Form -->
     <form action="controller" method="get" id="seachAccountForm" role="form">
         <input type="hidden" id="command" name="command" value="ACCOUNTLISTWITHPAGINATION">
